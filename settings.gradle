@@ -1,4 +1,4 @@
-rootProject.name = 'aaa-pp-19-ws'
+rootProject.name = 'gaming-pp-19-ws'
 
 
 include ':components', ':javafx'
