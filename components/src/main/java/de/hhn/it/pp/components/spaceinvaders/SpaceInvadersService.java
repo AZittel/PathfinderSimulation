@@ -1,0 +1,1 @@
+package de.hhn.it.pp.components.spaceinvaders;import de.hhn.it.pp.components.exceptions.IllegalParameterException;public interface SpaceInvadersService {    static void start() throws IllegalArgumentException{    }    static void colide() throws IllegalArgumentException{    }    static void shot() {    }}
