@@ -18,7 +18,7 @@ public class Minesweeper implements MinesweeperService{
     }
 
     @Override
-    public void reset() {
+    public void restart() {
 
     }
 }

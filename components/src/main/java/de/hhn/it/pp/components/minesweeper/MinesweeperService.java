@@ -32,7 +32,7 @@ public interface MinesweeperService {
     /**
      *  Resets the Game.
      */
-    void reset();
+    void restart();
 
 
 
