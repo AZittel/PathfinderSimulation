@@ -12,7 +12,7 @@ public interface MinesweeperService {
      * To start a Game u need to start the Menu and
      * choose the difficulty.
      */
-    void startMenu();
+    void createStartMenu();
 
     /**
      * Creates a field of buttons.
