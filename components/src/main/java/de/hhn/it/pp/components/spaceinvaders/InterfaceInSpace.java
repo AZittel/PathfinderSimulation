@@ -1,4 +1,1 @@
-package de.hhn.it.pp.components.spaceinvaders;
-
-public interface InterfaceInSpace {
-}
+package de.hhn.it.pp.components.spaceinvaders;public interface InterfaceInSpace {    void startGame();    void rockets();    void update();    void draw();    void shot();}
