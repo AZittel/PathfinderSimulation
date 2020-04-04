@@ -7,9 +7,8 @@ import javafx.stage.Stage;
 import java.util.Random;
 
 public class SpaceInvaders extends Application {
-    //Variables
-    private static final Random RDM = new Random();
-    static final Image Player_1 =new Image("java/de/hhn/it/pp/components/spaceinvaders/images/delorean.jpg");
+    //Images for the View (linked)
+    static final Image Player_1 = new Image("java/de/hhn/it/pp/components/spaceinvaders/images/delorean.jpg");
     static final Image Enemy_1 = new Image("java/de/hhn/it/pp/components/spaceinvaders/images/AlienEye1.png");
 
 
