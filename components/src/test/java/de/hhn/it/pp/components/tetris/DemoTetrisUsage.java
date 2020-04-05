@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.tetris;
 
-import tetris.logic.Tetromino;
+
+import de.hhn.it.pp.components.tetris.logic.Tetromino;
 
 /**
  * Demo class for the Java Tetris clone
