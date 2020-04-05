@@ -24,6 +24,9 @@ public class Board {
 
     private static BoardState boardState = BoardState.start;
 
+    /**
+     * This method is supposed to clear all Tetrominos from the Board
+     */
     private static void clear() {
         //TODO clear should reset the Game
     }
