@@ -44,7 +44,7 @@ public class Tetromino {
 
     public int[][][] buildBlock(){
         // TODO: actually make it work
-        int temp[][][] = new int[0][0][0];
+        int[][][] temp = new int[0][0][0];
         return temp;
     }
 
