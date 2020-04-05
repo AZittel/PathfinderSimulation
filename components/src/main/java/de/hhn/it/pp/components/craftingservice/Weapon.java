@@ -1,5 +1,11 @@
 package de.hhn.it.pp.components.craftingservice;
 
+/**
+ * @author Philipp Alessandrini, Oliver Koch
+ * @version 2020-04-05
+ *
+ * An abstract class for all the different weapon types.
+ */
 public abstract class Weapon extends Item {
     protected float craftingTime;
 

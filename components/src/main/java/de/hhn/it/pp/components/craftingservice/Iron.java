@@ -2,6 +2,12 @@ package de.hhn.it.pp.components.craftingservice;
 
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Alessandrini, Oliver Koch
+ * @version 2020-04-05
+ *
+ * A prototype class for iron, which is necessary for crafting weapons. It extends the class Resource.
+ */
 public class Iron extends Resource {
     private static ArrayList<Iron> allIron = new ArrayList<>();
 

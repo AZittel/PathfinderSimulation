@@ -2,6 +2,13 @@ package de.hhn.it.pp.components.craftingservice;
 
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Alessandrini, Oliver Koch
+ * @version 2020-04-05
+ *
+ * A prototype class for crafting patterns.
+ * Right now there are 3 different patterns(small weapons, large weapons, enchanted weapons).
+ */
 public class CraftingPattern {
     private static ArrayList<CraftingPattern> allCraftingPatterns = new ArrayList<>();
     private ArrayList<Item> neededItems = new ArrayList<>();

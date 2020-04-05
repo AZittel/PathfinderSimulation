@@ -2,6 +2,12 @@ package de.hhn.it.pp.components.craftingservice;
 
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Alessandrini, Oliver Koch
+ * @version 2020-04-05
+ *
+ * A prototype class for the weapon type sword. It extends the class Weapon.
+ */
 public class Sword extends Weapon {
     private static ArrayList<Sword> allSwords = new ArrayList<>();
 
