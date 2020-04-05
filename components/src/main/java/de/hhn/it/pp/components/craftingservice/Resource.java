@@ -7,6 +7,10 @@ package de.hhn.it.pp.components.craftingservice;
  * An abstract class for all crafting materials.
  */
 public abstract class Resource extends Item {
+    /**
+     * The constructor for resource.
+     * @param name The name of the resource.
+     */
     public Resource(String name) {
         super(name);
     }

@@ -9,8 +9,13 @@ import java.util.ArrayList;
  * A prototype class for iron, which is necessary for crafting weapons. It extends the class Resource.
  */
 public class Iron extends Resource {
+    /** A list which holds the whole iron. **/
     private static ArrayList<Iron> allIron = new ArrayList<>();
 
+    /**
+     * The constructor for iron.
+     * @param name The name.
+     */
     public Iron(String name) {
         super(name);
         allIron.add(this);

@@ -7,8 +7,13 @@ package de.hhn.it.pp.components.craftingservice;
  * An abstract class for all the different weapon types.
  */
 public abstract class Weapon extends Item {
+    /** The time it takes to craft the specific weapon.  **/
     protected float craftingTime;
 
+    /**The constructor for the weapon.
+     * @param name The name for the specific weapon.
+     * @param craftingTime The time it takes to craft the specific weapon.
+     */
     public Weapon(String name, float craftingTime) {
         super(name);
         this.craftingTime = craftingTime;

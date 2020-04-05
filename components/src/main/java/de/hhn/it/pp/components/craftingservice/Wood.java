@@ -9,8 +9,13 @@ import java.util.ArrayList;
  * A prototype class for wood, which is necessary for crafting weapons. It extends the class Resource.
  */
 public class Wood extends Resource {
+    /** A list which holds the whole wood. **/
     private static ArrayList<Wood> allWood = new ArrayList<>();
 
+    /**
+     * The constructor for wood.
+     * @param name The name.
+     */
     public Wood(String name) {
         super(name);
         allWood.add(this);

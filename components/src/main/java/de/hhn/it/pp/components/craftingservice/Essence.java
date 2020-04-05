@@ -9,8 +9,13 @@ import java.util.ArrayList;
  * A prototype class for magical essences, which can be used to enchant weapons. It extends the class Resource.
  */
 public class Essence extends Resource {
+    /** A list that contains all essences. **/
     private static ArrayList<Essence> allEssences = new ArrayList<>();
 
+    /**
+     * The constructor for the essence.
+     * @param name The name of the essence.
+     */
     public Essence(String name) {
         super(name);
         allEssences.add(this);
