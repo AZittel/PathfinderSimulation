@@ -1,8 +1,7 @@
 package de.hhn.it.pp.components.tetris.logic;
 
-import javafx.scene.paint.Color;
 
-import java.util.Random;
+import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -27,25 +26,25 @@ public class Tetromino {
         type = TetrominoType.randomize();
         switch (type){
             case I:
-                color = Color.AQUA;
+                color = Color.BLUE;
                 break;
             case O:
-                color = Color.CRIMSON;
+                color = Color.GREEN;
                 break;
             case Z:
-                color = Color.FORESTGREEN;
+                color = Color.ORANGE;
                 break;
             case S:
                 color = Color.YELLOW;
                 break;
             case T:
-                color = Color.SADDLEBROWN;
+                color = Color.GRAY;
                 break;
             case L:
                 color = Color.PINK;
                 break;
             case J:
-                color = Color.BLUEVIOLET;
+                color = Color.RED;
                 break;
         }
     }
