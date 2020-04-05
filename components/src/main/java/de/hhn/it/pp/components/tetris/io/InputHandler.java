@@ -1,4 +1,4 @@
-package tetris.io;
+package de.hhn.it.pp.components.tetris.io;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

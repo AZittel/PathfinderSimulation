@@ -1,4 +1,4 @@
-package tetris.io;
+package de.hhn.it.pp.components.tetris.io;
 
 /**
  * This Interface is an Interface for Tetris that shows all the
