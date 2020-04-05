@@ -1,0 +1,14 @@
+functional requirements:
+
+	-add inventory
+	-remove inventory
+	-edit inventory fields
+	-retrieve a list of inventorys
+	-add item
+	-remove item
+	-edit item fields
+	-retrieve a list of items
+
+nonfunctional requirements:
+	
+	-accessability the API shall be accessed via a webserver

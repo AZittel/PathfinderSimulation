@@ -1,1 +1,0 @@
-https://confluence-student.it.hs-heilbronn.de/display/PP20SS/05+MineSweeper
