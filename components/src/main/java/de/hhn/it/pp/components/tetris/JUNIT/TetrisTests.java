@@ -1,4 +1,4 @@
-package tetris.JUNIT;
+package de.hhn.it.pp.components.tetris.JUNIT;
 
 public class TetrisTests {
 

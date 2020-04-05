@@ -1,4 +1,4 @@
-package tetris.logic;
+package de.hhn.it.pp.components.tetris.logic;
 
 import javafx.scene.paint.Color;
 
