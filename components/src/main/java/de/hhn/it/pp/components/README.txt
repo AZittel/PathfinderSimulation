@@ -1,1 +1,1 @@
-Insert your micro team component package here.
+https://confluence-student.it.hs-heilbronn.de/display/PP20SS/01+Space+Invaders
