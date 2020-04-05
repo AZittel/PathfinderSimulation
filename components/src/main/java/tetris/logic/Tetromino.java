@@ -43,8 +43,17 @@ public class Tetromino {
     }
 
     public int[][][] buildBlock(){
+        // TODO: actually make it work
         int temp[][][] = new int[0][0][0];
         return temp;
+    }
+
+    public void rotate(){
+        rotation++;
+
+        if (rotation >= 4){
+            rotation = 0;
+        }
     }
 
     public enum TetrominoType{
