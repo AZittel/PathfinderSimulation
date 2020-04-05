@@ -6,6 +6,7 @@ import de.hhn.it.pp.components.tetris.logic.Tetromino;
 /**
  * Demo class for the Java Tetris clone
  */
+
 public class DemoTetrisUsage {
 
     public static void main(String[] args) {
