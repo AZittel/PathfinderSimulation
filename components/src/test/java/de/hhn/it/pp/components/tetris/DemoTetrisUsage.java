@@ -1,10 +1,10 @@
-package de.hhn.it.pp.components.tetris;
+/**package de.hhn.it.pp.components.tetris;
 
 import de.hhn.it.pp.components.tetris.logic.Tetromino;
 
-/**
+
  * Demo class for the Java Tetris clone
- */
+ *
 public class DemoTetrisUsage {
 
     public static void main(String[] args) {
@@ -23,3 +23,4 @@ public class DemoTetrisUsage {
         System.out.println("Tetromino (new) rotation: " + t2.getRotation());
     }
 }
+*/

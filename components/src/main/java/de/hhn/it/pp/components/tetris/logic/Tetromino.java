@@ -1,13 +1,13 @@
-package de.hhn.it.pp.components.tetris.logic;
+/**package de.hhn.it.pp.components.tetris.logic;
 
 import javafx.scene.paint.Color;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
+
  * This Class used to Create the individual Tetrominos
- */
+
 public class Tetromino {
 
     //private TetrominoType type;
@@ -55,6 +55,7 @@ public class Tetromino {
      * Used to actually build the Tetrominos on the Field
      * @return The Tetromino
      */
+    /**
     public int[][][] buildTetromino(){
         // TODO: actually make it work
         int[][][] temp = new int[0][0][0];
@@ -64,6 +65,7 @@ public class Tetromino {
     /**
      * Used to rotate the Tetromino in one direction.
      */
+    /**
     public void rotate(){
         rotation++;
 
@@ -75,13 +77,14 @@ public class Tetromino {
     /**
      * Used to organize the Tetromino Types
      */
+    /**
     public enum TetrominoType{
         I,O,Z,S,T,L,J;
 
         /**
          * Randomizes the Tetromino Type
          * @return a random Tetromino
-         */
+
         public static TetrominoType randomize(){
             return values()[ThreadLocalRandom.current().nextInt(0,values().length)];
         }
@@ -112,4 +115,4 @@ public class Tetromino {
         return size;
     }
 }
-
+*/
