@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Tetromino {
 
-    private TetrominoType type;
+    //private TetrominoType type;
     private int x = 0;
     private int y = 0;
     private int size = 0;
@@ -22,7 +22,7 @@ public class Tetromino {
     /**
      * Constructor for Tetrominos. Assigns a random Tetromino Type upon creation.
      * sets the Color accordingly.
-     */
+
     public Tetromino(){
         type = TetrominoType.randomize();
         switch (type){
@@ -49,6 +49,7 @@ public class Tetromino {
                 break;
         }
     }
+*/
 
     /**
      * Used to actually build the Tetrominos on the Field
@@ -86,9 +87,6 @@ public class Tetromino {
         }
     }
 
-    public TetrominoType getType() {
-        return type;
-    }
 
     public int[][][] getBounds() {
         return bounds;
