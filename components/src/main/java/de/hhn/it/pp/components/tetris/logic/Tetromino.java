@@ -3,6 +3,7 @@ package de.hhn.it.pp.components.tetris.logic;
 import javafx.scene.paint.Color;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This Class used to Create the individual Tetrominos
@@ -81,8 +82,7 @@ public class Tetromino {
          * @return a random Tetromino
          */
         public static TetrominoType randomize(){
-            Random rnd = new Random(values().length);
-            return values()[rnd.nextInt()];
+            return values()[ThreadLocalRandom.current().nextInt(0,values().length)];
         }
     }
 
