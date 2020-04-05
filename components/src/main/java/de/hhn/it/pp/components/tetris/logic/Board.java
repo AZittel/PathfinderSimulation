@@ -14,11 +14,11 @@ public class Board {
 
     private static boolean speedup = false;
 
-    private static ArrayList<Tetromino> tetrominos = new ArrayList<Tetromino>();
+   // private static ArrayList<Tetromino> tetrominos = new ArrayList<Tetromino>();
 
-    private static Tetromino currentTetromino;
+    //private static Tetromino currentTetromino;
 
-    private static Tetromino nextTetromino;
+    //private static Tetromino nextTetromino;
 
     private static int[][] map = new int[10][18];
 
@@ -38,9 +38,9 @@ public class Board {
         start, activeGame, pause, gameover
     }
 
-    public static ArrayList<Tetromino> getTetrominos() {
-        return tetrominos;
-    }
+    //public static ArrayList<Tetromino> getTetrominos() {
+      //  return tetrominos;
+    //}
 
     public static BoardState getBoardState() {
         return boardState;
@@ -62,11 +62,11 @@ public class Board {
         return map;
     }
 
-    public static Tetromino getCurrentTetromino() {
-        return currentTetromino;
-    }
+    //public static Tetromino getCurrentTetromino() {
+      //  return currentTetromino;
+    //}
 
-    public static Tetromino getNextTetromino() {
-        return nextTetromino;
+    //public static Tetromino getNextTetromino() {
+      //  return nextTetromino;
     }
-}
+//}
