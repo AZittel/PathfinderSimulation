@@ -3,13 +3,14 @@ package de.hhn.it.pp.components.tetris.logic;
 import javafx.scene.paint.Color;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This Class used to Create the individual Tetrominos
  */
 public class Tetromino {
 
-    private TetrominoType type;
+    //private TetrominoType type;
     private int x = 0;
     private int y = 0;
     private int size = 0;
@@ -21,7 +22,7 @@ public class Tetromino {
     /**
      * Constructor for Tetrominos. Assigns a random Tetromino Type upon creation.
      * sets the Color accordingly.
-     */
+
     public Tetromino(){
         type = TetrominoType.randomize();
         switch (type){
@@ -48,6 +49,7 @@ public class Tetromino {
                 break;
         }
     }
+*/
 
     /**
      * Used to actually build the Tetrominos on the Field
@@ -81,14 +83,10 @@ public class Tetromino {
          * @return a random Tetromino
          */
         public static TetrominoType randomize(){
-            Random rnd = new Random(values().length);
-            return values()[rnd.nextInt()];
+            return values()[ThreadLocalRandom.current().nextInt(0,values().length)];
         }
     }
 
-    public TetrominoType getType() {
-        return type;
-    }
 
     public int[][][] getBounds() {
         return bounds;
