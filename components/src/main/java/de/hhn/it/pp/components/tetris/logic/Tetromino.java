@@ -1,16 +1,15 @@
-/**package de.hhn.it.pp.components.tetris.logic;
+package de.hhn.it.pp.components.tetris.logic;
 
-import javafx.scene.paint.Color;
 
-import java.util.Random;
+import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-
+/**
  * This Class used to Create the individual Tetrominos
-
+ */
 public class Tetromino {
 
-    //private TetrominoType type;
+    private TetrominoType type;
     private int x = 0;
     private int y = 0;
     private int size = 0;
@@ -22,40 +21,38 @@ public class Tetromino {
     /**
      * Constructor for Tetrominos. Assigns a random Tetromino Type upon creation.
      * sets the Color accordingly.
-
+     */
     public Tetromino(){
         type = TetrominoType.randomize();
         switch (type){
             case I:
-                color = Color.AQUA;
+                color = Color.BLUE;
                 break;
             case O:
-                color = Color.CRIMSON;
+                color = Color.GREEN;
                 break;
             case Z:
-                color = Color.FORESTGREEN;
+                color = Color.ORANGE;
                 break;
             case S:
                 color = Color.YELLOW;
                 break;
             case T:
-                color = Color.SADDLEBROWN;
+                color = Color.GRAY;
                 break;
             case L:
                 color = Color.PINK;
                 break;
             case J:
-                color = Color.BLUEVIOLET;
+                color = Color.RED;
                 break;
         }
     }
-*/
 
     /**
      * Used to actually build the Tetrominos on the Field
      * @return The Tetromino
      */
-    /**
     public int[][][] buildTetromino(){
         // TODO: actually make it work
         int[][][] temp = new int[0][0][0];
@@ -65,7 +62,6 @@ public class Tetromino {
     /**
      * Used to rotate the Tetromino in one direction.
      */
-    /**
     public void rotate(){
         rotation++;
 
@@ -77,19 +73,21 @@ public class Tetromino {
     /**
      * Used to organize the Tetromino Types
      */
-    /**
     public enum TetrominoType{
         I,O,Z,S,T,L,J;
 
         /**
          * Randomizes the Tetromino Type
          * @return a random Tetromino
-
+         */
         public static TetrominoType randomize(){
             return values()[ThreadLocalRandom.current().nextInt(0,values().length)];
         }
     }
 
+    public TetrominoType getType() {
+        return type;
+    }
 
     public int[][][] getBounds() {
         return bounds;
@@ -115,4 +113,4 @@ public class Tetromino {
         return size;
     }
 }
-*/
+

@@ -26,4 +26,19 @@ public class Snake implements SnakeService {
   @Override
   public void move(int direction) throws IllegalArgumentException {
   }
+
+  @Override
+  public void collide() {
+
+  }
+
+  @Override
+  public void collect() {
+
+  }
+
+  @Override
+  public void spawn(int x, int y) {
+
+  }
 }
