@@ -14,7 +14,6 @@ public class DatabaseController {
     private static Connection connection;
 
     public DatabaseController(){
-
         try{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:components/src/main/java/de/hhn/it/pp/components/api/InventoryDatabase.db");
@@ -58,13 +57,10 @@ public class DatabaseController {
     }
 
     public static Collection<Inventory> retrieveInventories(){
-
         ArrayList<Inventory> result = new ArrayList<Inventory>();
-
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM INVENTORY;");
-
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("ID");
@@ -84,7 +80,6 @@ public class DatabaseController {
         catch (Exception exception) {
             exception.printStackTrace();
         }
-
         return result;
     }
 }
