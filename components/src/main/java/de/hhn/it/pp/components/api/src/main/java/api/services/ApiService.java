@@ -1,8 +1,8 @@
 package de.hhn.it.pp.components.api.src.main.java.api.services;
 
-import de.hhn.it.pp.components.api.src.main.java.api.models.*;
 import de.hhn.it.pp.components.api.src.main.java.api.databaseAccess.DatabaseController;
-import de.hhn.it.pp.components.api.src.main.java.api.services.AdminApiService;
+import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
+import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 
 import java.util.Collection;
 
@@ -29,7 +29,7 @@ public class ApiService {
      *
      * @param id id of the inventory to be removed
      */
-    public void removeInventory(Integer id){
+    public void removeInventory(int id){
 
     }
 
