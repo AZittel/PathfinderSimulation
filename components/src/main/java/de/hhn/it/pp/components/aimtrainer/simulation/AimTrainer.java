@@ -13,12 +13,22 @@ public class AimTrainer implements AimTrainerService {
     }
 
     @Override
-    public void showHighScoreList(){
+    public void createTarget(int xpos, int ypos, int lifetime){
 
     }
 
     @Override
-    public void exitGame(){
+    public void breakTarget(int xpos, int ypos){
+
+    }
+
+    @Override
+    public void addSessionScore(){
+
+    }
+
+    @Override
+    public void showHighscoreList(){
 
     }
 }

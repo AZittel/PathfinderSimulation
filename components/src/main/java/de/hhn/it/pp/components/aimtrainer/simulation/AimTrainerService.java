@@ -13,17 +13,33 @@ public interface AimTrainerService {
     void createMainMenu();
 
     /**
-     * Creates a window that plays the game.
+     *Creates a window to play the game.
      */
     void startGame();
 
     /**
-     *  Creates a window that shows all the highscores.
+     *Creates the targets.
+     * @param xpos position on x axis.
+     * @param ypos position on y axis.
+     * @param lifetime time until the target disappears.
      */
-    void showHighScoreList();
+    void createTarget(int xpos, int ypos, int lifetime);
 
     /**
-     * Closes the window of the game.
+     * Deletes the clicked targets.
+     * @param xpos position on x axis.
+     * @param ypos position on y axis.
      */
-    void exitGame();
+    void breakTarget(int xpos, int ypos);
+
+    /**
+     * Adds the score of the current session.
+     */
+    void addSessionScore();
+
+    /**
+     *  Creates a window that shows a list with all the highscores.
+     */
+    void showHighscoreList();
+
 }
