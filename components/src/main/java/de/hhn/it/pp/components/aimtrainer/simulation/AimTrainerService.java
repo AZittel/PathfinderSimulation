@@ -23,14 +23,14 @@ public interface AimTrainerService {
      * @param ypos position on y axis.
      * @param lifetime time until the target disappears.
      */
-    void createTarget(int xpos, int ypos, int lifetime);
+    void createTarget(double xpos, double ypos, int lifetime);
 
     /**
      * Deletes the clicked targets.
      * @param xpos position on x axis.
      * @param ypos position on y axis.
      */
-    void breakTarget(int xpos, int ypos);
+    void breakTarget(double xpos, double ypos);
 
     /**
      * Adds the score of the current session.

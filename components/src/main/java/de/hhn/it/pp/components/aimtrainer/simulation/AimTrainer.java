@@ -13,12 +13,12 @@ public class AimTrainer implements AimTrainerService {
     }
 
     @Override
-    public void createTarget(int xpos, int ypos, int lifetime){
+    public void createTarget(double xpos, double ypos, int lifetime){
 
     }
 
     @Override
-    public void breakTarget(int xpos, int ypos){
+    public void breakTarget(double xpos, double ypos){
 
     }
 
