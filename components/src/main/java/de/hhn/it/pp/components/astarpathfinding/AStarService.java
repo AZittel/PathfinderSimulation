@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.astarpathfinding.simulator;
+package de.hhn.it.pp.components.astarpathfinding;
 
 import java.awt.Point;
 

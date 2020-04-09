@@ -1,8 +1,9 @@
-package de.hhn.it.pp.components.astarpathfinding.simulator;
+package de.hhn.it.pp.components.astarpathfinding.provider;
 
+import de.hhn.it.pp.components.astarpathfinding.AStarService;
 import java.awt.Point;
 
-public class AStarPathfinding implements AStarService{
+public class AStarPathfinding implements AStarService {
 
   @Override
   public void setStartPoint(Point position) throws IllegalArgumentException {

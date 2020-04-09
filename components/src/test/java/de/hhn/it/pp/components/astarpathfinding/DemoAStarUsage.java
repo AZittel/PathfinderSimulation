@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.simulator.AStarPathfinding;
-import de.hhn.it.pp.components.astarpathfinding.simulator.AStarService;
+import de.hhn.it.pp.components.astarpathfinding.provider.AStarPathfinding;
 import java.awt.Point;
 
 public class DemoAStarUsage {
