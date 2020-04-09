@@ -31,7 +31,7 @@ public class DemoAStarUsage {
 
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
-      logger.info(">>> add obstacle");
+      logger.info(">>> add obstacle at: " + 3 + "|" + y);
       Point obstacle = new Point(3, y);
       service.placeObstacle(obstacle);
     }

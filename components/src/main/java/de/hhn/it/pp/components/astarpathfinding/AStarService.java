@@ -1,5 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.exceptions.InvalidStateException;
 import java.awt.Point;
 
 /**
@@ -9,41 +11,55 @@ import java.awt.Point;
 public interface AStarService {
 
   /**
-   * Sets the start point for the pathfinding algorithm
+   * Sets the start point for the pathfinding algorithm.
    *
    * @param position position on the grid
-   * @throws IllegalArgumentException if the position is invalid
+   * @return whether placing the start point was successful
+   * @throws IllegalParameterException if the position is invalid
+   * @throws InvalidStateException when trying to set the starting point during the visualization
    */
-  void setStartPoint(Point position) throws IllegalArgumentException;
+  boolean setStartPoint(Point position) throws IllegalParameterException, InvalidStateException;
 
   /**
-   * Sets the end point for the pathfinding algorithm
+   * Sets the end point for the pathfinding algorithm.
    *
    * @param position position on the grid
-   * @throws IllegalArgumentException if the position is invalid
+   * @return whether placing the end point was successful
+   * @throws IllegalParameterException if the position is invalid
+   * @throws InvalidStateException when trying to set the end point during the visualization
    */
-  void setEndPoint(Point position)throws IllegalArgumentException;
+  boolean setEndPoint(Point position) throws IllegalParameterException, InvalidStateException;
 
   /**
-   * Sets an obstacle at the given position
+   * Sets an obstacle at the given position.
    *
    * @param position position on the grid
-   * @throws IllegalArgumentException if the position is invalid
+   * @return whether placing the obstacle was successful
+   * @throws IllegalParameterException if the position is invalid
+   * @throws InvalidStateException when trying to place an obstacle during the visualization
    */
-  void placeObstacle(Point position)throws IllegalArgumentException;
+  boolean placeObstacle(Point position) throws IllegalParameterException, InvalidStateException;
 
   /**
-   * Starts the visualization of the pathfinding algorithm
+   * Starts the visualization of the pathfinding algorithm.
+   *
+   * @return whether starting the visualization was successful
+   * @throws InvalidStateException when trying to start the visualization during the visualization
    */
-  void startVisualization();
+  boolean startVisualization() throws InvalidStateException;
 
   /**
-   * Stops the visualization of the pathfinding algorithm
+   * Stops the visualization of the pathfinding algorithm.
+   *
+   * @return whether stopping the visualization was successful
+   * @throws InvalidStateException when trying to stop the visualization while the simulation is not
+   *     running
    */
-  void stopVisualization();
+  boolean stopVisualization() throws InvalidStateException;
 
   /**
-   * Resets the start and end point and removes the obstacles on the grid
+   * Stops the visualization if it is running and
+   * resets the start and end point and removes the obstacles on the grid.
    */
   void reset();
 
