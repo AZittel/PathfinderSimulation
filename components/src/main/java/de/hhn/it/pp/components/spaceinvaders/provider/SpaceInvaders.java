@@ -1,4 +1,8 @@
-package de.hhn.it.pp.components.SpaceInvaders;
+package de.hhn.it.pp.components.spaceinvaders.provider;
+
+import de.hhn.it.pp.components.spaceinvaders.Enemies;
+import de.hhn.it.pp.components.spaceinvaders.Field;
+import de.hhn.it.pp.components.spaceinvaders.Player;
 
 public class SpaceInvaders implements SpaceInvadersService {
 
@@ -17,4 +21,9 @@ public class SpaceInvaders implements SpaceInvadersService {
     public void createEnemies(int xPos, int yPos, int speed) {
         new Enemies();
     }
+
+    @Override
+    public void restart() {
+    }
+
 }

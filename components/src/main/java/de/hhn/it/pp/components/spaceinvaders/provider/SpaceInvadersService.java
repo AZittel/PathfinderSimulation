@@ -3,7 +3,7 @@
  * @Version 05.04.2020
  */
 
-package de.hhn.it.pp.components.SpaceInvaders;
+package de.hhn.it.pp.components.spaceinvaders.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
@@ -36,4 +36,9 @@ public interface SpaceInvadersService {
      * @throws IllegalArgumentException if the xPos, yPos or speed is invalid
      */
     void createEnemies(int xPos, int yPos, int speed) throws IllegalParameterException;
+
+    /**
+     *  Resets the Game.
+     */
+    void restart();
 }
