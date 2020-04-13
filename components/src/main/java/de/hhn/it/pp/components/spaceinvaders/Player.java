@@ -1,0 +1,38 @@
+package de.hhn.it.pp.components.spaceinvaders;
+
+public class Player {
+    int numLives;
+    int numShutDowns = 0;
+
+    /**
+     * Player died
+     */
+    void gameOver() {
+    }
+
+    /**
+     * Player move up
+     */
+    void playerMoveUp() {
+    }
+    /**
+     * Player move down
+     */
+    void playerMoveDown(){
+    }
+    /**
+     * Player move right
+     */
+    void playerMoveRight(){
+    }
+    /**
+     * Player move left
+     */
+    void playerMoveLeft(){
+    }
+    /**
+     * Player is shooting
+     */
+    void shot(){
+    }
+}
