@@ -1,9 +1,9 @@
 /**
- * @Author Darko Miklic, Marc Nauendorf
- * @Version 05.04.2020
+  @Author Darko Miklic, Marc Nauendorf
+ * @Version 13.04.2020
  */
 
-package de.hhn.it.pp.components.SpaceInvaders;
+package de.hhn.it.pp.components.spaceinvaders.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
@@ -22,18 +22,24 @@ public interface SpaceInvadersService {
 
     /**
      * Creates the player
-     * @param xPos for the position on the x axis
      * @param yPos for the position on the y axis
+     * @param xPos for the position on the x axis
      * @throws IllegalArgumentException if the width or height is invalid
      */
     void createPlayer(int xPos, int yPos) throws IllegalParameterException;
 
     /**
      * Creates the enemies
-     * @param xPos for the position on the x axis
-     * @param yPos for the position on the y axis
+     * @param xPosition for the position on the x axis
+     * @param yPosition for the position on the y axis
      * @param speed for the movement speed of the enemies
      * @throws IllegalArgumentException if the xPos, yPos or speed is invalid
      */
-    void createEnemies(int xPos, int yPos, int speed) throws IllegalParameterException;
+    void createEnemies(int xPosition, int yPosition, int speed) throws IllegalParameterException;
+
+    /**
+     *  Resets the Game.
+     */
+    void restart();
+
 }
