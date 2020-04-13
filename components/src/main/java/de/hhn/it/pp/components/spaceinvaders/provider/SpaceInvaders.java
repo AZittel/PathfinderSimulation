@@ -13,7 +13,7 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public void createPlayer(int xPos, int yPos) {
+    public void createPlayer(int speed, int xPos, int yPos) {
         new Player();
     }
 

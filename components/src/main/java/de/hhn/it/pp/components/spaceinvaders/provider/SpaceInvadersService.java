@@ -22,11 +22,13 @@ public interface SpaceInvadersService {
 
     /**
      * Creates the player
+     *
+     * @param speed
      * @param xPos for the position on the x axis
      * @param yPos for the position on the y axis
      * @throws IllegalArgumentException if the width or height is invalid
      */
-    void createPlayer(int xPos, int yPos) throws IllegalParameterException;
+    void createPlayer(int speed, int xPos, int yPos) throws IllegalParameterException;
 
     /**
      * Creates the enemies
