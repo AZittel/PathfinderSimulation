@@ -12,7 +12,7 @@ public class SpaceInvadersUsageDemo {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(SpaceInvadersUsageDemo.class);
 
-    public void main(String[] args) throws InterruptedException, IllegalParameterException {
+    public static void main(String[] args) throws InterruptedException, IllegalParameterException {
         logger.info("create SpaceInvaderService");
         SpaceInvadersService spaceInvadersService = new SpaceInvaders ();
         logger.info("" + spaceInvadersService);
