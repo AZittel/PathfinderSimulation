@@ -2,6 +2,13 @@ package de.hhn.it.pp.components.craftingservice;
 
 import de.hhn.it.pp.components.craftingservice.provider.*;
 
+/**
+ * A program demo to show off the basic feature of the crafting system
+ *
+ * @author Oliver Koch, Philipp Alessandrini
+ * @version 2020-04-09
+ */
+
 public class CraftingServiceUsageDemo {
 
     public static void main(String[] args) {
