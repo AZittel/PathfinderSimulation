@@ -1,10 +1,9 @@
-package de.hhn.it.pp.components.craftingservice;
+package de.hhn.it.pp.components.craftingservice.provider;
 
 /**
+ * An abstract class for various items.
  * @author Philipp Alessandrini, Oliver Koch
  * @version 2020-04-05
- *
- * An abstract class for various items.
  */
 public abstract class Item {
     protected String name;

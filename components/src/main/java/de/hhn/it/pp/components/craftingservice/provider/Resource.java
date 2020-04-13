@@ -1,12 +1,11 @@
-package de.hhn.it.pp.components.craftingservice;
+package de.hhn.it.pp.components.craftingservice.provider;
 
 /**
+ * An abstract class for all crafting materials.
  * @author Philipp Alessandrini, Oliver Koch
  * @version 2020-04-05
- *
- * An abstract class for all crafting materials.
  */
-public abstract class Resource extends Item {
+public class Resource extends Item {
     /**
      * The constructor for resource.
      * @param name The name of the resource.
