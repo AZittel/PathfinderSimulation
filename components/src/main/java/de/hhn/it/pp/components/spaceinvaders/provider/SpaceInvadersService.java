@@ -1,5 +1,5 @@
-/**
- * @Author Darko Miklic, Marc Nauendorf
+/*
+  @Author Darko Miklic, Marc Nauendorf
  * @Version 05.04.2020
  */
 
@@ -30,12 +30,12 @@ public interface SpaceInvadersService {
 
     /**
      * Creates the enemies
-     * @param xPosinvader for the position on the x axis
-     * @param yPosinvader for the position on the y axis
+     * @param xPosition for the position on the x axis
+     * @param yPosition for the position on the y axis
      * @param speed for the movement speed of the enemies
      * @throws IllegalArgumentException if the xPos, yPos or speed is invalid
      */
-    void createEnemies(int xPosinvader, int yPosinvader, int speed) throws IllegalParameterException;
+    void createEnemies(int xPosition, int yPosition, int speed) throws IllegalParameterException;
 
     /**
      *  Resets the Game.
