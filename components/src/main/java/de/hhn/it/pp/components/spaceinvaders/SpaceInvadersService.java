@@ -3,7 +3,7 @@
  * @Version 05.04.2020
  */
 
-package de.hhn.it.pp.components.SpaceInvaders;
+package de.hhn.it.pp.components.spaceinvaders;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 

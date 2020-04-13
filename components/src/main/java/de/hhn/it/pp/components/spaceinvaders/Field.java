@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.SpaceInvaders;
+package de.hhn.it.pp.components.spaceinvaders;
 
 public class Field {
     /**
