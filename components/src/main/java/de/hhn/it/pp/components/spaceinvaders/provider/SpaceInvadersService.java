@@ -22,25 +22,24 @@ public interface SpaceInvadersService {
 
     /**
      * Creates the player
-     *
-     * @param speed
-     * @param xPos for the position on the x axis
      * @param yPos for the position on the y axis
+     * @param xPos for the position on the x axis
      * @throws IllegalArgumentException if the width or height is invalid
      */
-    void createPlayer(int speed, int xPos, int yPos) throws IllegalParameterException;
+    void createPlayer(int xPos, int yPos) throws IllegalParameterException;
 
     /**
      * Creates the enemies
-     * @param xPos for the position on the x axis
-     * @param yPos for the position on the y axis
+     * @param xPosinvader for the position on the x axis
+     * @param yPosinvader for the position on the y axis
      * @param speed for the movement speed of the enemies
      * @throws IllegalArgumentException if the xPos, yPos or speed is invalid
      */
-    void createEnemies(int xPos, int yPos, int speed) throws IllegalParameterException;
+    void createEnemies(int xPosinvader, int yPosinvader, int speed) throws IllegalParameterException;
 
     /**
      *  Resets the Game.
      */
     void restart();
+
 }

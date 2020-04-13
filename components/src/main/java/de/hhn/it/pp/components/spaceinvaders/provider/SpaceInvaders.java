@@ -13,7 +13,7 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public void createPlayer(int speed, int xPos, int yPos) {
+    public void createPlayer(int speed, int xPos) {
         new Player();
     }
 
@@ -23,7 +23,6 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public void restart() {
-    }
+    public void restart() {}
 
 }
