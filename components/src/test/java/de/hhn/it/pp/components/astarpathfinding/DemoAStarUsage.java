@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.simulator.AStarPathfinding;
-import de.hhn.it.pp.components.astarpathfinding.simulator.AStarService;
+import de.hhn.it.pp.components.astarpathfinding.provider.AStarPathfinding;
 import java.awt.Point;
 
 public class DemoAStarUsage {
@@ -32,7 +31,7 @@ public class DemoAStarUsage {
 
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
-      logger.info(">>> add obstacle");
+      logger.info(">>> add obstacle at: " + 3 + "|" + y);
       Point obstacle = new Point(3, y);
       service.placeObstacle(obstacle);
     }
