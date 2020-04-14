@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.minesweeper;
+package de.hhn.it.pp.components.example.minesweeper;
 
 public class Minesweeper implements MinesweeperService{
 
