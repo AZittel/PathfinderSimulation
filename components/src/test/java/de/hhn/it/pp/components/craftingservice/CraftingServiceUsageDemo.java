@@ -6,7 +6,7 @@ import de.hhn.it.pp.components.craftingservice.provider.*;
  * A program demo to show off the basic feature of the crafting system
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-04-09
+ * @version 2020-04-15
  */
 
 public class CraftingServiceUsageDemo {
@@ -17,13 +17,13 @@ public class CraftingServiceUsageDemo {
         // create an inventory
         Inventory demoInventory = new Inventory(18);
         // create some crafting patterns
-        CraftingPattern largeIronSword = new CraftingPattern("Pattern: Large Iron Sword", 1.5f,
+        CraftingPattern largeIronSword = new CraftingPattern(1.5f,
                 new Resource("Small Wood Plank"), new Resource("Medium Iron Bar"),
                 new Resource("Medium Iron Bar"), new Weapon("Large Iron Sword"));
-        CraftingPattern fierySword = new CraftingPattern("Pattern: Fiery Sword", 2.5f,
+        CraftingPattern fierySword = new CraftingPattern(2.5f,
                 new Weapon("Large Iron Sword"), new Resource("Fiery Essence"),
                 new Weapon("Fiery Sword"));
-        CraftingPattern smallMagicalWand = new CraftingPattern("Small Magical Wand", 1.0f,
+        CraftingPattern smallMagicalWand = new CraftingPattern(1.0f,
                 new Resource("Small Wood Plank"), new Resource("Magical Essence"),
                 new Weapon("Small Magical Wand"));
 
