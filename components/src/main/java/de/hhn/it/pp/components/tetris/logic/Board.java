@@ -10,7 +10,7 @@ public class Board {
 
     private static int scoreToAdd = 0;
 
-    private static boolean spawnNewBlock = false;
+    private static boolean spawnNewTetromino = false;
 
     private static boolean speedup = false;
 
@@ -27,8 +27,49 @@ public class Board {
     /**
      * This method is supposed to clear all Tetrominos from the Board
      */
+
+    public void addTetromino(Tetromino tetromino) {
+        tetrominos.add(tetromino);
+    }
+
+    public void setCurrentTetromino(Tetromino tetromino){
+        tetromino = tetromino;
+    }
+
+    public void isSpeedUp (Boolean speedUp){
+    if(speedup= false){
+
+    }
+    else{
+
+    }
+    }
+
+    public void setSpeedup (Boolean speedUp){
+    if(speedup = false){
+
+    }
+    else{
+
+    }
+    }
+
+    public void isSpawnNewTetromino (Boolean spawnNewTetromino){
+        if(spawnNewTetromino = false){
+
+        }
+        else{
+
+        }
+    }
+
     private static void clear() {
-        //TODO clear should reset the Game
+        for (int x = 0; x < map.length; x++) {
+            for (int y = 0; y < map[x].length; y++) {
+                map[x][y] = 0;
+            }
+        }
+        score = 0;
     }
 
     /**
