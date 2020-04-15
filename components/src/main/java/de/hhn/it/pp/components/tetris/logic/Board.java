@@ -22,48 +22,19 @@ public class Board {
 
     private static int[][] map = new int[10][18];
 
-    private static BoardState boardState = BoardState.start;
+    public static BoardState boardState = BoardState.start;
 
     /**
-     * This method is supposed to clear all Tetrominos from the Board
+     * A Enum in which the Boardstates are described
      */
-
-    public void addTetromino(Tetromino tetromino) {
-        tetrominos.add(tetromino);
+    public enum BoardState {
+        start, activeGame, pause, gameover
     }
 
-    public void setCurrentTetromino(Tetromino tetromino){
-        tetromino = tetromino;
-    }
-
-    public void isSpeedUp (Boolean speedUp){
-    if(speedup= false){
-
-    }
-    else{
-
-    }
-    }
-
-    public void setSpeedup (Boolean speedUp){
-    if(speedup = false){
-
-    }
-    else{
-
-    }
-    }
-
-    public void isSpawnNewTetromino (Boolean spawnNewTetromino){
-        if(spawnNewTetromino = false){
-
-        }
-        else{
-
-        }
-    }
-
-    private static void clear() {
+    /**
+     * clears the board (remove all tetrominos)
+     */
+    public static void clear() {
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[x].length; y++) {
                 map[x][y] = 0;
@@ -72,11 +43,32 @@ public class Board {
         score = 0;
     }
 
-    /**
-     * A Enum in which the Boardstates are described
-     */
-    public enum BoardState{
-        start, activeGame, pause, gameover
+    public static void addTetromino(Tetromino tetromino) {
+        tetrominos.add(tetromino);
+    }
+
+    public static void setCurrentTetromino(Tetromino tetromino) {
+        currentTetromino = tetromino;
+    }
+
+    public static void setNextTetromino(Tetromino tetromino) {
+        nextTetromino = tetromino;
+    }
+
+    public static boolean isSpeedUp() {
+        return speedup;
+    }
+
+    public static void setSpeedup(boolean newValue) {
+        speedup = newValue;
+    }
+
+    public static boolean isSpawnNewTetromino() {
+        return spawnNewTetromino;
+    }
+
+    public static void setSpawnNewTetromino(boolean newValue) {
+        spawnNewTetromino = newValue;
     }
 
     public static ArrayList<Tetromino> getTetrominos() {
@@ -110,4 +102,5 @@ public class Board {
     public static Tetromino getNextTetromino() {
         return nextTetromino;
     }
+
 }

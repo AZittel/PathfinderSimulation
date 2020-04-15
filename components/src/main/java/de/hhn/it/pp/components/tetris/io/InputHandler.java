@@ -24,6 +24,7 @@ public class InputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (Board.boardState == Board.BoardState.start) {
+            // ENTER keystroke
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 Board.boardState = Board.BoardState.activeGame;
 
@@ -31,21 +32,26 @@ public class InputHandler implements KeyListener {
         }
 
         if (Board.boardState == Board.BoardState.activeGame) {
+            // SPACEBAR keystroke
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                //TODO
 
             }
 
+            // DOWN keystroke
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                Board.speedup = true;
+                Board.setSpeedup(true);
             }
 
+            // RIGHT keystroke
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                //TODO
+                //TODO write collision checks
+            // LEFT keystroke
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-               //TODO
+               //TODO write collision checks
             }
 
+            // ESCAPE keystroke
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 Board.boardState = Board.BoardState.pause;
 
@@ -55,6 +61,7 @@ public class InputHandler implements KeyListener {
                 Board.boardState = Board.BoardState.activeGame;
             }
 
+            // ENTER keystroke (set active game)
         } else if (Board.boardState == Board.BoardState.gameover) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 Board.boardState = Board.BoardState.activeGame;
@@ -65,8 +72,16 @@ public class InputHandler implements KeyListener {
 
     }
 
+    /**
+     * resets the gamespeed to normal value if down key is released
+     * @param keyEvent
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
-
+        if (Board.boardState == Board.BoardState.activeGame) {
+            if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
+                Board.setSpeedup(false);
+            }
+        }
     }
 }
