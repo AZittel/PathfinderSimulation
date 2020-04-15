@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The inventory class which implements the CraftingService to enable the feature for craftable items
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-04-09
+ * @version 2020-04-15
  */
 public class Inventory implements CraftingService {
     private ArrayList<Item> items = new ArrayList<>();
@@ -68,8 +68,8 @@ public class Inventory implements CraftingService {
             return true;
         } else {
             inventory.addAll(usedItems);
-            System.out.println("Items in inventory dont match the chosen pattern for '" +
-                    craftingPattern.getCraftedWeapon().getName() + "'\n");
+            System.out.println("Items in inventory dont match '" + craftingPattern.getClass().getSimpleName() +
+                    ": " + craftingPattern.getCraftedWeapon().getName() + "'!\n");
             return false;
         }
     }
