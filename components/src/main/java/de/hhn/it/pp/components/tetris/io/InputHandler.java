@@ -1,5 +1,7 @@
 package de.hhn.it.pp.components.tetris.io;
 
+import de.hhn.it.pp.components.tetris.logic.Board;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,12 +23,46 @@ public class InputHandler implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO if startButton is pressed, Board.boardState = Board.Boardstate.activeGame
-        // TODO if spaceButton is pressed, the Tetromino should rotate
-        // TODO if downButton is pressed, the Tetromino should speed up
-        // TODO if rightButton is pressed the Tetromino should move one space to the right
-        // TODO if leftButton is pressed the Tetromino should move one space to the right
-        // TODO if EscButton is pressed, Board.boardstate = Board.Boardstate.gameover
+        if (Board.boardState == Board.BoardState.start) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                Board.boardState = Board.BoardState.activeGame;
+
+            }
+        }
+
+        if (Board.boardState == Board.BoardState.activeGame) {
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+               //TODO
+
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                Board.speedup = true;
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                //TODO
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+               //TODO
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                Board.boardState = Board.BoardState.pause;
+
+            }
+        } else if (Board.boardState == Board.BoardState.pause) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                Board.boardState = Board.BoardState.activeGame;
+            }
+
+        } else if (Board.boardState == Board.BoardState.gameover) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                Board.boardState = Board.BoardState.activeGame;
+                Board.clear();
+            }
+
+        }
+
     }
 
     @Override
