@@ -1,7 +1,8 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.AStarPathfinding;
-import java.awt.Point;
+import de.hhn.it.pp.components.astarpathfinding.provider.Position;
+
 
 public class DemoAStarUsage {
   private static final org.slf4j.Logger logger =
@@ -15,7 +16,7 @@ public class DemoAStarUsage {
 
     // Add start point
     logger.info(">>> add start point");
-    Point start = new Point(0, 3);
+    Position start = new Position(0, 3);
     service.setStartPoint(start);
     logger.info("" + service);
 
@@ -23,7 +24,7 @@ public class DemoAStarUsage {
 
     // Add end point
     logger.info(">>> add end point");
-    Point end = new Point(5, 3);
+    Position end = new Position(5, 3);
     service.setEndPoint(end);
     logger.info("" + service);
 
@@ -32,7 +33,7 @@ public class DemoAStarUsage {
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
       logger.info(">>> add obstacle at: " + 3 + "|" + y);
-      Point obstacle = new Point(3, y);
+      Position obstacle = new Position(3, y);
       service.placeObstacle(obstacle);
     }
     logger.info("" + service);

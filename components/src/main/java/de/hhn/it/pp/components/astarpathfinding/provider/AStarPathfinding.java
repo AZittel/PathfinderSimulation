@@ -161,24 +161,21 @@ public class AStarPathfinding implements PathfindingService {
   }
 
   @Override
-  public boolean setStartPoint(Point position)
+  public void setStartPoint(Position position)
       throws IllegalParameterException, InvalidStateException {
 
-    return false;
   }
 
   @Override
-  public boolean setEndPoint(Point position)
+  public void setEndPoint(Position position)
       throws IllegalParameterException, InvalidStateException {
 
-    return false;
-  }
+}
 
   @Override
-  public boolean placeObstacle(Point position)
+  public void placeObstacle(Position position)
       throws IllegalParameterException, InvalidStateException {
 
-    return false;
   }
 
   @Override
