@@ -27,28 +27,28 @@ public class DemoAimTrainerUsage {
 
         //Create target to break
         logger.info(">>> Creating breakable target");
-        aimtrainerService.createTarget(Math.random(), Math.random(), 20);
+        //aimtrainerService.createTarget();
         logger.info("" + aimtrainerService);
 
         Thread.sleep(2000);
 
         //Break the target
         logger.info(">>> Target has been hit! Breaking target");
-        aimtrainerService.breakTarget(Math.random(), Math.random());
+        //aimtrainerService.breakTarget();
         logger.info("" + aimtrainerService);
 
         Thread.sleep(2000);
 
         //Add score of Session
         logger.info(">>> Adding Score of Session to Highscore-list");
-        aimtrainerService.addSessionScore();
+        //aimtrainerService.addSessionScore();
         logger.info("" + aimtrainerService);
 
         Thread.sleep(2000);
 
         //Show Highscore-list
         logger.info(">>> Displaying Highscore-list");
-        aimtrainerService.showHighscoreList();
+        //aimtrainerService.showHighSoreList();
         logger.info("" + aimtrainerService);
 
     }
