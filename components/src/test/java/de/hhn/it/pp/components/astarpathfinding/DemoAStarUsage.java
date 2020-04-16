@@ -1,16 +1,15 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.provider.AStarPathfindingAlgorithm;
-
+import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 
 public class DemoAStarUsage {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(DemoAStarUsage.class);
+      org.slf4j.LoggerFactory.getLogger(DemoAStarUsage.class);
 
   public static void main(String[] args) throws Exception {
     // Create the service
     logger.info(">>> create service");
-    PathfindingService service = new AStarPathfindingAlgorithm();
+    Pathfinder service = new Pathfinder();
     logger.info("" + service);
 
     // Add start point
@@ -57,10 +56,5 @@ public class DemoAStarUsage {
     logger.info(">>> reset");
     service.reset();
     logger.info("" + service);
-
-
-
   }
-
-
 }
