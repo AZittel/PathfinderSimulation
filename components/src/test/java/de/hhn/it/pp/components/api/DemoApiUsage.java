@@ -4,14 +4,14 @@ import de.hhn.it.pp.components.api.src.main.java.api.models.*;
 import de.hhn.it.pp.components.api.src.main.java.api.services.AdminApiService;
 import de.hhn.it.pp.components.api.src.main.java.api.services.ApiService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class DemoApiUsage {
 
     public static void main(String[] args) {
         // initializing the database connection
-        AdminApiService adminApi = new AdminApiService();
-        adminApi.initilizeDatabase();
+        AdminApiService.initilizeDatabase();
 
         // creating ApiService object to interact with the database
         ApiService api = new ApiService();
@@ -21,11 +21,14 @@ public class DemoApiUsage {
         api.addInventory("Freddy's inventory", 30, 20);
 
         // retrieving the inventories
-        Collection<Inventory> inventories = api.retrieveInventories();
+        ArrayList<Integer> inventoryIds = new ArrayList<Integer>();
+        inventoryIds.add(1);
+        inventoryIds.add(2);
+        Collection<Inventory> inventories = api.retrieveInventories(inventoryIds);
 
         // printing the values of each inventory
         for (Inventory inventory : inventories) {
-            System.out.println(inventory.toString());
+            System.out.println(inventory.getName());
         }
     }
 }

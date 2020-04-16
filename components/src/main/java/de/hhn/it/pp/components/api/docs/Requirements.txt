@@ -3,10 +3,34 @@ functional requirements:
 	-add inventory
 	-remove inventory
 	-edit inventory fields
-	-retrieve a list of inventorys
+	-retrieve a list of inventories
 	-add item
 	-remove item
 	-edit item fields
 	-retrieve a list of items
-	-exchange items between inventorys
-	-Knap Sack Problem
+	-exchange items
+	-knapSack problem
+
+#
+#functions group different functional requirements
+#these functions specificly for the demo gui
+#
+functions:
+
+	-Show inventories
+		-retrieve inventories
+		-edit inventory
+		-remove inventory
+		-add inventory?
+	-Show items
+		-retrieve items
+		-edit item
+		-remove item
+		-add item?
+	-KnapSack Problem
+		-retrieve inventories
+		-knapSack problem
+	-Exchange items between inventories
+		-retrieve inventories
+		-retrieve items
+		-exchange items

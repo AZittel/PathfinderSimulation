@@ -1,6 +1,6 @@
 package de.hhn.it.pp.components.api.src.main.java.api.services;
 
-import de.hhn.it.pp.components.api.src.main.java.api.databaseAccess.DatabaseController;
+import de.hhn.it.pp.components.api.src.main.java.api.databaseAccess.Database;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 
@@ -11,7 +11,8 @@ import java.util.Collection;
  */
 public class ApiService {
 
-    DatabaseController dbController = AdminApiService.dbController;
+
+    Database dbController = AdminApiService.dbController;
 
     /**
      * Adds a new inventory to the database
@@ -30,21 +31,21 @@ public class ApiService {
      * @param id id of the inventory to be removed
      */
     public void removeInventory(int id){
-
+        dbController.removeInventory(id);
     }
 
     /**
      * Edits certain fields of an inventory
      */
-    public void editInventory(){
-
+    public void editInventory(Inventory inventory){
+        dbController.editInventory(inventory);
     }
 
     /**
      * Returns a Collection of all inventories
      */
-    public Collection<Inventory> retrieveInventories(){
-        Collection<Inventory> result = dbController.retrieveInventories();
+    public Collection<Inventory> retrieveInventories(Collection<Integer> ids){
+        Collection<Inventory> result = dbController.retrieveInventories(ids);
         return result;
     }
 
@@ -56,8 +57,8 @@ public class ApiService {
      * @param volume volume of this item
      * @param value value of this item
      */
-    public void addItem(String name, Integer weight, Integer volume, Integer value){
-
+    public void addItem(String name, int weight, int volume, int value, int inventoryId){
+        dbController.addItem(name, weight, volume, value, inventoryId);
     }
 
     /**
@@ -66,14 +67,14 @@ public class ApiService {
      * @param id id of the item to be removed
      */
     public void removeItem(Integer id){
-
+        dbController.removeItem(id);
     }
 
     /**
      * Edits certain fields of an inventory
      */
-    public void editItem(){
-
+    public void editItem(Item item){
+        dbController.editItem(item);
     }
 
     /**
@@ -81,8 +82,9 @@ public class ApiService {
      *
      * @param ids a collection of id's of the items to be retrieved
      */
-    public Collection<Item> retireveItems(Collection<Integer> ids){
-        return null;
+    public Collection<Item> retrieveItems(Collection<Integer> ids){
+        Collection<Item> result = dbController.retrieveItems(ids);
+        return result;
     }
 
     /**
