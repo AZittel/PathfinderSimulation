@@ -10,7 +10,7 @@ public class DemoAStarUsage {
   public static void main(String[] args) throws Exception {
     // Create the service
     logger.info(">>> create service");
-    AStarService service = new AStarPathfinding();
+    PathfindingService service = new AStarPathfinding();
     logger.info("" + service);
 
     // Add start point
@@ -41,14 +41,14 @@ public class DemoAStarUsage {
 
     // Start visualization
     logger.info(">>> visualization started");
-    service.startVisualization();
+    service.startPathfinding();
     logger.info("" + service);
 
     Thread.sleep(2500);
 
     // End visualization
     logger.info(">>> visualization stopped");
-    service.stopVisualization();
+    service.stopPathfinding();
     logger.info("" + service);
 
     Thread.sleep(1500);

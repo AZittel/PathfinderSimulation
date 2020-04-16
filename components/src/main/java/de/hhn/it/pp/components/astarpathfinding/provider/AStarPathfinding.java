@@ -1,6 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
-import de.hhn.it.pp.components.astarpathfinding.AStarService;
+import de.hhn.it.pp.components.astarpathfinding.PathfindingService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.exceptions.InvalidStateException;
 import java.awt.Point;
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AStarPathfinding implements AStarService {
+public class AStarPathfinding implements PathfindingService {
 
   private final int MAX_ROWS_COUNT = 30;
   private final int MAX_COL_COUNT = 30;
@@ -182,13 +182,13 @@ public class AStarPathfinding implements AStarService {
   }
 
   @Override
-  public boolean startVisualization() throws InvalidStateException {
+  public boolean startPathfinding() throws InvalidStateException {
 
     return false;
   }
 
   @Override
-  public boolean stopVisualization() throws InvalidStateException {
+  public boolean stopPathfinding() throws InvalidStateException {
 
     return false;
   }

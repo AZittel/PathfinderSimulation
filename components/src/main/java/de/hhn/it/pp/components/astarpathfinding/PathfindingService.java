@@ -8,7 +8,7 @@ import java.awt.Point;
  * This Service is an interface for a pathfinding simulator that provides all the
  * functionality to interact with the simulator.
  */
-public interface AStarService {
+public interface PathfindingService {
 
   /**
    * Sets the start point for the pathfinding algorithm.
@@ -46,7 +46,7 @@ public interface AStarService {
    * @return whether starting the visualization was successful
    * @throws InvalidStateException when trying to start the visualization during the visualization
    */
-  boolean startVisualization() throws InvalidStateException;
+  boolean startPathfinding() throws InvalidStateException;
 
   /**
    * Stops the visualization of the pathfinding algorithm.
@@ -55,7 +55,7 @@ public interface AStarService {
    * @throws InvalidStateException when trying to stop the visualization while the simulation is not
    *     running
    */
-  boolean stopVisualization() throws InvalidStateException;
+  boolean stopPathfinding() throws InvalidStateException;
 
   /**
    * Stops the visualization if it is running and
