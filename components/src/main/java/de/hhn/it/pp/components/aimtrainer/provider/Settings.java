@@ -5,8 +5,8 @@ public class Settings {
     //Describes the Difficulty for this Session
     private Difficulty difficulty;
 
-    public Settings(){
-        this.difficulty = Difficulty.AMATEUR;
+    public Settings(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public void setDifficulty(Difficulty difficulty) {

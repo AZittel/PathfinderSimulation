@@ -8,4 +8,7 @@ public class Player {
         this.nickname = nickname;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
 }

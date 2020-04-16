@@ -16,12 +16,7 @@ import java.util.HashMap;
 
 public interface AimTrainerService {
 
-    /**
-     * Changes Settings to given type of Difficulty.
-     * @param difficulty Difficulty setting to change to
-     * @throws IllegalStateException difficulty does not exist.
-     */
-    void changeSettings(Difficulty difficulty) throws IllegalStateException;
+
 
     /**
      * Creates a window to play the game.
@@ -46,6 +41,12 @@ public interface AimTrainerService {
      */
     void breakTarget(Target target) throws IllegalParameterException;
 
+    /**
+     * Deletes the missed targets
+     * @param target The target to be deleted.
+     * @throws IllegalParameterException target does not exist.
+     */
+    void missedTarget(Target target) throws IllegalParameterException;
     /**
      * Calculates the score based on Hit and Miss rate.
      * @param targetStates List containing all end target states.

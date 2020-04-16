@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.aimtrainer.provider;
 
 import java.awt.*;
-import java.time.Duration;
+
 
 public class Target {
 
@@ -12,11 +12,11 @@ public class Target {
     private final Dimension scale;
 
     //Duration of Target defined in seconds
-    private final Duration lifetime;
+    private final int lifetime;
 
     private TargetState state;
 
-    public Target(Point location, Dimension scale, Duration lifetime) {
+    public Target(Point location, Dimension scale, int lifetime) {
         this.location = location;
         this.scale = scale;
         this.lifetime = lifetime;
@@ -27,7 +27,7 @@ public class Target {
         this.state = state;
     }
 
-    public Duration getLifetime() {
+    public int getLifetime() {
         return lifetime;
     }
 
