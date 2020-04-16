@@ -1,5 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
+import de.hhn.it.pp.components.astarpathfinding.Position;
+
 public class Cell {
   /**
    * The movement cost to move from the starting point to a given square on the grid, following the
@@ -13,25 +15,22 @@ public class Cell {
    */
   private int h;
 
-  /**
-   * Determines whether the cell is blocked for pathing
-   */
+  /** Determines whether the cell is blocked for pathing */
   private boolean isAccessible;
 
+  private Position position;
   private int gridRow;
   private int gridCol;
 
-  /**
-   * The neighbour with the lowest f value
-   */
+  /** The neighbour with the lowest f value */
   private Cell parent;
 
-  private Cell() {
-  }
+  private Cell() {}
 
   public Cell(int gridRow, int gridCol) {
     super();
     isAccessible = true;
+    this.position = new Position(gridRow, gridCol);
     this.gridRow = gridRow;
     this.gridCol = gridCol;
   }
@@ -79,6 +78,14 @@ public class Cell {
 
   public void setParent(Cell parent) {
     this.parent = parent;
+  }
+
+  public Position getPosition() {
+    return position;
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
   }
 
   @Override

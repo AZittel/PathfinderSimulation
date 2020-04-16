@@ -3,10 +3,9 @@ package de.hhn.it.pp.components.astarpathfinding;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.exceptions.InvalidStateException;
 
-
 /**
- * This Service is an interface for a pathfinding simulator that provides all the
- * functionality to interact with the simulator.
+ * This Service is an interface for a pathfinding simulator that provides all the functionality to
+ * interact with the simulator.
  */
 public interface PathfindingService {
 
@@ -50,15 +49,13 @@ public interface PathfindingService {
    *
    * @return whether stopping the visualization was successful
    * @throws InvalidStateException when trying to stop the visualization while the simulation is not
-   * running
+   *     running
    */
   boolean stopPathfinding() throws InvalidStateException;
 
   /**
-   * Stops the visualization if it is running and
-   * resets the start and end point and removes the obstacles on the grid.
+   * Stops the visualization if it is running and resets the start and end point and removes the
+   * obstacles on the grid.
    */
   void reset();
-
-
 }

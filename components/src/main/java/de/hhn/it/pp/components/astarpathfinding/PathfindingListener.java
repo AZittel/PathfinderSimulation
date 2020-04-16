@@ -1,8 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-/**
- * Callback for pathfinding algorithms to share information of their current state.
- */
+/** Callback for pathfinding algorithms to share information of their current state. */
 public interface PathfindingListener {
 
   /**
@@ -11,5 +9,4 @@ public interface PathfindingListener {
    * @param info the current pathfinding information.
    */
   void updateInformation(PathfindingInformation info);
-
 }
