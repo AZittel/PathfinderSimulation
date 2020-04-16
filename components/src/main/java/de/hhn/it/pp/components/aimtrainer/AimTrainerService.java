@@ -1,4 +1,7 @@
-package de.hhn.it.pp.components.aimtrainer.simulation;
+package de.hhn.it.pp.components.aimtrainer;
+
+import de.hhn.it.pp.components.aimtrainer.provider.Settings;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 /**
  * This Interface shows all interaction with the game AimTrainer.
@@ -8,14 +11,12 @@ package de.hhn.it.pp.components.aimtrainer.simulation;
 public interface AimTrainerService {
 
     /**
-     * Creates the main menu of the game.
-     */
-    void createMainMenu();
-
-    /**
      *Creates a window to play the game.
+     * @param nickname Nick of the active player.
+     * @param settings Settings for this Session.
+     * @throws IllegalParameterException nickname is to long or settings are invalid.
      */
-    void startGame();
+    void startGame(String nickname, Settings settings) throws IllegalParameterException;
 
     /**
      *Creates the targets.
