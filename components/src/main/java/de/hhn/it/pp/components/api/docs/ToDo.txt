@@ -1,0 +1,5 @@
+structure demo gui
+
+FX files:
+	fxml files for "api service", "show inventories", "show items"
+	class files for "api service (controller)", "show inventories", "show items"

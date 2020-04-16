@@ -1,8 +1,7 @@
 package de.hhn.it.pp.components.api;
 
 import de.hhn.it.pp.components.api.src.main.java.api.models.*;
-import de.hhn.it.pp.components.api.src.main.java.api.services.AdminApiService;
-import de.hhn.it.pp.components.api.src.main.java.api.services.ApiService;
+import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,8 +9,6 @@ import java.util.Collection;
 public class DemoApiUsage {
 
     public static void main(String[] args) {
-        // initializing the database connection
-        AdminApiService.initilizeDatabase();
 
         // creating ApiService object to interact with the database
         ApiService api = new ApiService();

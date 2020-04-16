@@ -7,15 +7,15 @@ public interface Model {
     /**
      * Returns the class name of a model as a String
      */
-    public String getModelTyp();
+    String getModelTyp();
 
     /**
      * Returns the names of all attributes as a collection of strings
      */
-    public Collection<String> getAttributeNames();
+    Collection<String> getAttributeNames();
 
     /**
      * Returns all attributes as a collection of strings
      */
-    public Collection<String> getAttributes();
+    Collection<String> getAttributes();
 }
