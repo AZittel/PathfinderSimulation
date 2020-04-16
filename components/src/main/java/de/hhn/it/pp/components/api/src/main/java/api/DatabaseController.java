@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.api.src.main.java.api.databaseAccess;
+package de.hhn.it.pp.components.api.src.main.java.api;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import de.hhn.it.pp.components.api.src.main.java.api.models.*;
 /**
  * This class communicates with and handles all internal request to the database
  */
-public class DatabaseController implements Database {
+class DatabaseController implements Database {
 
     private static Connection connection;
     private static String dbPath = "/home/mmk/projects/PP_Project/gaming-pp-20-ss/components/src/main/java/de/hhn/it/pp/components/api/InventoryDatabase.db";

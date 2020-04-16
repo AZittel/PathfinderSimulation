@@ -1,10 +1,8 @@
 package de.hhn.it.pp.javafx.controllers;
 
-import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
-import de.hhn.it.pp.components.api.src.main.java.api.services.AdminApiService;
-import de.hhn.it.pp.components.api.src.main.java.api.services.ApiService;
-import de.hhn.it.pp.components.api.src.main.java.api.services.Interaction;
-
+import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
+import de.hhn.it.pp.components.api.src.main.java.api.Interaction;
+import de.hhn.it.pp.components.api.src.main.java.api.InventoryApi;
 
 import de.hhn.it.pp.javafx.controllers.interaction.InteractionController;
 import javafx.collections.FXCollections;
@@ -31,7 +29,7 @@ public class ApiServiceController extends Controller implements Initializable {
     Node actualControlAnchorPaneNode;
     Label functionsLabel;
     ObservableList<Interaction> executableInteractions;
-    ApiService api;
+    InventoryApi api;
     Interaction currentInteraction;
 
     private static final org.slf4j.Logger logger =
@@ -41,7 +39,6 @@ public class ApiServiceController extends Controller implements Initializable {
 
         executableInteractions = FXCollections.observableArrayList();
         functionsLabel = new Label("Functions: ");
-        AdminApiService.initilizeDatabase();
         api = new ApiService();
         api.addInventory("My inventory", 80, 50);
         api.addInventory("Freddys inventory", 30, 20);

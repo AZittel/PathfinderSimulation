@@ -1,7 +1,7 @@
-package de.hhn.it.pp.components.api.src.main.java.api.services;
+package de.hhn.it.pp.components.api.src.main.java.api;
 
-import de.hhn.it.pp.components.api.src.main.java.api.databaseAccess.Database;
-import de.hhn.it.pp.components.api.src.main.java.api.databaseAccess.DatabaseController;
+import de.hhn.it.pp.components.api.src.main.java.api.Database;
+import de.hhn.it.pp.components.api.src.main.java.api.DatabaseController;
 
 /**
  * This classes purpose is to setup the database tables if needed

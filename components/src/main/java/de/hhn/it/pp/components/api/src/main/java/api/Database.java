@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.api.src.main.java.api.databaseAccess;
+package de.hhn.it.pp.components.api.src.main.java.api;
 
 import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
@@ -9,7 +9,7 @@ import java.util.Collection;
  * This interface is there for providing the basic database access functionalities
  * across multiple DatabaseControllers for different databases
  */
-public interface Database {
+interface Database {
 
     void setup();
 

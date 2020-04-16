@@ -1,6 +1,6 @@
-package de.hhn.it.pp.components.api.src.main.java.api.services;
+package de.hhn.it.pp.components.api.src.main.java.api;
 
-import de.hhn.it.pp.components.api.src.main.java.api.databaseAccess.Database;
+import de.hhn.it.pp.components.api.src.main.java.api.Database;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 
@@ -9,10 +9,14 @@ import java.util.Collection;
 /**
  * This class contains access to all functionalities of our component
  */
-public class ApiService {
+public class ApiService implements InventoryApi{
 
+    Database dbController;
 
-    Database dbController = AdminApiService.dbController;
+    public ApiService(){
+        AdminApiService.initilizeDatabase();
+        this.dbController  = AdminApiService.dbController;
+    }
 
     /**
      * Adds a new inventory to the database

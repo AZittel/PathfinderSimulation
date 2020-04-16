@@ -1,8 +1,8 @@
 package de.hhn.it.pp.javafx.controllers.interaction;
 
 import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
-import de.hhn.it.pp.components.api.src.main.java.api.services.ApiService;
-import de.hhn.it.pp.components.api.src.main.java.api.services.Interaction;
+import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
+import de.hhn.it.pp.components.api.src.main.java.api.Interaction;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.api.src.main.java.api.controller;
+package de.hhn.it.pp.components.api.src.main.java.api;
 
 /**
  * This class handles all complex operations on our models
