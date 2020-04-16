@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingService;
+import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.exceptions.InvalidStateException;
 import java.awt.Point;
@@ -9,7 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AStarPathfinding implements PathfindingService {
+public class AStarPathfindingAlgorithm implements PathfindingService {
 
   private final int MAX_ROWS_COUNT = 30;
   private final int MAX_COL_COUNT = 30;
@@ -21,7 +22,7 @@ public class AStarPathfinding implements PathfindingService {
   private Point startCoordinates = new Point(15, 8);
   private Point destinationCoordinates = new Point(15, 18);
 
-  public AStarPathfinding() {
+  public AStarPathfindingAlgorithm() {
     createDefaultInitialization();
   }
 
@@ -142,10 +143,7 @@ public class AStarPathfinding implements PathfindingService {
     return neighbours;
   }
 
-  public static void main(String[] args) {
-    AStarPathfinding impl = new AStarPathfinding();
-    impl.findPath();
-  }
+
 
   /**
    * Searches the list of open cells for the cell with the lowest f cost and returns it.

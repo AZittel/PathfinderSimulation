@@ -1,6 +1,5 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.provider.Position;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.exceptions.InvalidStateException;
 
@@ -60,6 +59,7 @@ public interface PathfindingService {
    * resets the start and end point and removes the obstacles on the grid.
    */
   void reset();
+
 
 
 

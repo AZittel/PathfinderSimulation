@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.astarpathfinding.provider;
+package de.hhn.it.pp.components.astarpathfinding;
 
 /**
  * A class to represent a position with two values

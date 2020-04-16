@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.provider.AStarPathfinding;
-import de.hhn.it.pp.components.astarpathfinding.provider.Position;
+import de.hhn.it.pp.components.astarpathfinding.provider.AStarPathfindingAlgorithm;
 
 
 public class DemoAStarUsage {
@@ -11,7 +10,7 @@ public class DemoAStarUsage {
   public static void main(String[] args) throws Exception {
     // Create the service
     logger.info(">>> create service");
-    PathfindingService service = new AStarPathfinding();
+    PathfindingService service = new AStarPathfindingAlgorithm();
     logger.info("" + service);
 
     // Add start point
