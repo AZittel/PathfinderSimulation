@@ -1,2 +1,2 @@
-#ignore violetuml editor files
-*.class.violet.html
+#ignore database file
+InventoryDatabase.db
