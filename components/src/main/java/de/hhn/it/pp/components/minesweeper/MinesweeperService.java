@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.minesweeper.provider;
+package de.hhn.it.pp.components.minesweeper;
 
 import java.awt.Point;
 
