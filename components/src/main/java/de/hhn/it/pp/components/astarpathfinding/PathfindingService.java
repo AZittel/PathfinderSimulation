@@ -50,7 +50,7 @@ public interface PathfindingService {
    *
    * @return whether stopping the visualization was successful
    * @throws InvalidStateException when trying to stop the visualization while the simulation is not
-   *     running
+   * running
    */
   boolean stopPathfinding() throws InvalidStateException;
 
@@ -59,8 +59,6 @@ public interface PathfindingService {
    * resets the start and end point and removes the obstacles on the grid.
    */
   void reset();
-
-
 
 
 }

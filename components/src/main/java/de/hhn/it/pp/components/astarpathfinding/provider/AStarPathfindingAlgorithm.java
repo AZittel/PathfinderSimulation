@@ -26,7 +26,9 @@ public class AStarPathfindingAlgorithm implements PathfindingService {
     createDefaultInitialization();
   }
 
-  /** Initializes the grid with the default cells. */
+  /**
+   * Initializes the grid with the default cells.
+   */
   private void createDefaultInitialization() {
     for (int row = 0; row < MAX_ROWS_COUNT; row++) {
       for (int col = 0; col < MAX_COL_COUNT; col++) {
@@ -67,7 +69,7 @@ public class AStarPathfindingAlgorithm implements PathfindingService {
         if (newCostToNeighbour < neighbour.getGCost() || !openList.contains(neighbour)) {
           neighbour.setGCost(newCostToNeighbour);
           neighbour.setHCost(
-              getMDistance(neighbour, grid[destinationCoordinates.x][destinationCoordinates.y]));
+            getMDistance(neighbour, grid[destinationCoordinates.x][destinationCoordinates.y]));
           neighbour.setParent(currentCell);
 
           if (!openList.contains(neighbour)) {
@@ -106,7 +108,7 @@ public class AStarPathfindingAlgorithm implements PathfindingService {
    */
   private int getMDistance(Cell cellA, Cell cellB) {
     return Math.abs(cellA.getGridRow() - cellB.getGridRow())
-        + Math.abs(cellA.getGridCol() - cellB.getGridCol());
+      + Math.abs(cellA.getGridCol() - cellB.getGridCol());
   }
 
   /**
@@ -144,7 +146,6 @@ public class AStarPathfindingAlgorithm implements PathfindingService {
   }
 
 
-
   /**
    * Searches the list of open cells for the cell with the lowest f cost and returns it.
    *
@@ -160,19 +161,19 @@ public class AStarPathfindingAlgorithm implements PathfindingService {
 
   @Override
   public void setStartPoint(Position position)
-      throws IllegalParameterException, InvalidStateException {
+    throws IllegalParameterException, InvalidStateException {
 
   }
 
   @Override
   public void setEndPoint(Position position)
-      throws IllegalParameterException, InvalidStateException {
+    throws IllegalParameterException, InvalidStateException {
 
-}
+  }
 
   @Override
   public void placeObstacle(Position position)
-      throws IllegalParameterException, InvalidStateException {
+    throws IllegalParameterException, InvalidStateException {
 
   }
 
@@ -189,7 +190,8 @@ public class AStarPathfindingAlgorithm implements PathfindingService {
   }
 
   @Override
-  public void reset() {}
+  public void reset() {
+  }
 
   @Override
   public String toString() {

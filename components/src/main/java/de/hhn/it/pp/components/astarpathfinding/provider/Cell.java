@@ -13,16 +13,21 @@ public class Cell {
    */
   private int h;
 
-  /** Determines whether the cell is blocked for pathing */
+  /**
+   * Determines whether the cell is blocked for pathing
+   */
   private boolean isAccessible;
 
   private int gridRow;
   private int gridCol;
 
-  /** The neighbour with the lowest f value */
+  /**
+   * The neighbour with the lowest f value
+   */
   private Cell parent;
 
-  private Cell() {}
+  private Cell() {
+  }
 
   public Cell(int gridRow, int gridCol) {
     super();

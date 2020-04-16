@@ -19,7 +19,7 @@ public class PathfindingInformation {
   private List<Position> visitedPositions = new ArrayList<>();
 
   /**
-   * List of positions of the final and shortest path
+   * List of positions of the final and shortest path.
    */
   private List<Position> finalPathPositions = new ArrayList<>();
 
