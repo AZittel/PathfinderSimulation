@@ -1,15 +1,22 @@
 package de.hhn.it.pp.components.api.src.main.java.api.models;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+/**
+ * This is an item entity class.
+ *
+ * @author Dennis Schies
+ * @version 1.0
+ */
 public class Item implements Model{
 
     private int id;
     private String name;
+    //the weight of this item
     private int weight;
+    //the volume of this item
     private int volume;
+    //the value f this item
     private int value;
+    //the id of the inventory this item is contained in
     private int inventoryId;
 
     public Item(int id, String name, int weight, int volume, int value, int inventoryId){
@@ -70,32 +77,33 @@ public class Item implements Model{
         this.inventoryId = inventoryId;
     }
 
-    @Override
-    public String getModelTyp() {
-        return "Item";
-    }
-
-    @Override
-    public Collection<String> getAttributeNames() {
-        ArrayList<String> result = new ArrayList<String>();
-        result.add("id");
-        result.add("name");
-        result.add("weight");
-        result.add("volume");
-        result.add("value");
-        result.add("inventoryId");
-        return result;
-    }
-
-    @Override
-    public Collection<String> getAttributes() {
-        ArrayList<String> result = new ArrayList<String>();
-        result.add(String.valueOf(this.id));
-        result.add(this.name);
-        result.add(String.valueOf(this.weight));
-        result.add(String.valueOf(this.volume));
-        result.add(String.valueOf(this.value));
-        result.add(String.valueOf(this.inventoryId));
-        return result;
-    }
+//    //under development
+//    @Override
+//    public String getModelTyp() {
+//        return "Item";
+//    }
+//
+//    @Override
+//    public Collection<String> getAttributeNames() {
+//        ArrayList<String> result = new ArrayList<String>();
+//        result.add("id");
+//        result.add("name");
+//        result.add("weight");
+//        result.add("volume");
+//        result.add("value");
+//        result.add("inventoryId");
+//        return result;
+//    }
+//
+//    @Override
+//    public Collection<String> getAttributes() {
+//        ArrayList<String> result = new ArrayList<String>();
+//        result.add(String.valueOf(this.id));
+//        result.add(this.name);
+//        result.add(String.valueOf(this.weight));
+//        result.add(String.valueOf(this.volume));
+//        result.add(String.valueOf(this.value));
+//        result.add(String.valueOf(this.inventoryId));
+//        return result;
+//    }
 }

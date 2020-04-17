@@ -5,7 +5,13 @@ import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 
 import java.util.Collection;
 
-public interface InventoryApi {
+/**
+ * This interface defines the basic functionalities the inventory api must implement.
+ *
+ * @author Dennis Schies
+ * @version 1.0
+ */
+public interface Api {
 
     /**
      * Adds a new inventory to the database
@@ -14,7 +20,7 @@ public interface InventoryApi {
      * @param maxWeight maxWeight this inventory can handle
      * @param maxVolume maxVolume this inventory can handle
      */
-    void addInventory(String name, Integer maxWeight, Integer maxVolume);
+    void addInventory(String name, int maxWeight, int maxVolume);
 
     /**
      * Removes an inventory from te database
@@ -25,6 +31,8 @@ public interface InventoryApi {
 
     /**
      * Edits certain fields of an inventory
+     *
+     * @param inventory the inventory to be edited containing its values
      */
     void editInventory(Inventory inventory);
 
@@ -52,6 +60,8 @@ public interface InventoryApi {
 
     /**
      * Edits certain fields of an inventory
+     *
+     * @param item the item to be edited containing its values
      */
     void editItem(Item item);
 
@@ -62,15 +72,16 @@ public interface InventoryApi {
      */
     Collection<Item> retrieveItems(Collection<Integer> ids);
 
-    /**
-     * Exchanges items between inventories
-     */
-    void exchangeItems();
-
-    /**
-     * Solves the Knap Sack Problem for an inventory to all items in the database
-     *
-     * @param id id of the inventory the Knap Sack Problem shall be solved for
-     */
-    void knapSack(Integer id);
+//    //under development
+//    /**
+//     * Exchanges items between inventories
+//     */
+//    void exchangeItems();
+//
+//    /**
+//     * Solves the Knap Sack Problem for an inventory to all items in the database
+//     *
+//     * @param id id of the inventory the Knap Sack Problem shall be solved for
+//     */
+//    void knapSack(int id);
 }

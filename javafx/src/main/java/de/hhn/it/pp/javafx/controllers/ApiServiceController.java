@@ -1,8 +1,7 @@
 package de.hhn.it.pp.javafx.controllers;
 
 import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
-import de.hhn.it.pp.components.api.src.main.java.api.Interaction;
-import de.hhn.it.pp.components.api.src.main.java.api.InventoryApi;
+import de.hhn.it.pp.components.api.src.main.java.api.Api;
 
 import de.hhn.it.pp.javafx.controllers.interaction.InteractionController;
 import javafx.collections.FXCollections;
@@ -23,14 +22,14 @@ import java.util.ResourceBundle;
 public class ApiServiceController extends Controller implements Initializable {
 
     @FXML
-    ListView<Interaction> interactionListView;
+    ListView<String> interactionListView;
     @FXML
     AnchorPane controlAnchorPane;
     Node actualControlAnchorPaneNode;
     Label functionsLabel;
-    ObservableList<Interaction> executableInteractions;
-    InventoryApi api;
-    Interaction currentInteraction;
+    ObservableList<String> executableInteractions;
+    Api api;
+    String currentInteraction;
 
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(ApiServiceController.class);
@@ -47,18 +46,18 @@ public class ApiServiceController extends Controller implements Initializable {
         api.removeInventory(2);
 
 
-        for(Interaction i: Interaction.values()){
-            executableInteractions.add(i);
-        }
+//        for(Interaction i: Interaction.values()){
+//            executableInteractions.add(i);
+//        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         interactionListView.setItems(executableInteractions);
-        interactionListView.setCellFactory(new Callback<ListView<Interaction>, ListCell<Interaction>>() {
+        interactionListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
-            public ListCell<Interaction> call(ListView<Interaction> param) {
+            public ListCell<String> call(ListView<String> param) {
                 return new InteractionCell();
             }
         });
@@ -67,9 +66,9 @@ public class ApiServiceController extends Controller implements Initializable {
         controlAnchorPane.getChildren().add(functionsLabel);
     }
 
-    private class InteractionCell extends ListCell<Interaction>{
+    private class InteractionCell extends ListCell<String>{
         @Override
-        protected void updateItem(final Interaction interaction, final boolean empty){
+        protected void updateItem(final String interaction, final boolean empty){
             super.updateItem(interaction, empty);
             Label label = new Label();
             if(interaction != null){

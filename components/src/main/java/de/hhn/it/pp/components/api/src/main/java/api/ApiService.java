@@ -1,110 +1,96 @@
 package de.hhn.it.pp.components.api.src.main.java.api;
 
-import de.hhn.it.pp.components.api.src.main.java.api.Database;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
 import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 
 import java.util.Collection;
 
 /**
- * This class contains access to all functionalities of our component
+ * This class implements the functionalities of our Api interface and extends the class AdminApiService so it can setup
+ * the database.
+ *
+ * @author Dennis Schies
+ * @version 1.0
  */
-public class ApiService implements InventoryApi{
+public class ApiService implements Api {
 
-    Database dbController;
+    //the Database this ApiService uses to retrieve and send data
+    private Database database;
 
-    public ApiService(){
-        AdminApiService.initilizeDatabase();
-        this.dbController  = AdminApiService.dbController;
+    /**
+     * Initializes a Database object and calls it's setup method.
+     */
+    public ApiService() {
+        this.database = new SqliteDatabase();
+        this.database.setup();
     }
 
     /**
-     * Adds a new inventory to the database
+     * Initializes a Database object and calls it's setup method.
      *
-     * @param name name of the inventory e.g. "Freddys Inventory"
-     * @param maxWeight maxWeight this inventory can handle
-     * @param maxVolume maxVolume this inventory can handle
+     * @param dbPath the path to your SQLite database file
      */
-    public void addInventory(String name, Integer maxWeight, Integer maxVolume){
-        dbController.addInventory(name, maxWeight, maxVolume);
+    public ApiService(String dbPath) {
+        this.database = new SqliteDatabase(dbPath);
+        this.database.setup();
     }
 
-    /**
-     * Removes an inventory from te database
-     *
-     * @param id id of the inventory to be removed
-     */
-    public void removeInventory(int id){
-        dbController.removeInventory(id);
+    @Override
+    public void addInventory(String name, int maxWeight, int maxVolume) {
+        database.addInventory(name, maxWeight, maxVolume);
     }
 
-    /**
-     * Edits certain fields of an inventory
-     */
-    public void editInventory(Inventory inventory){
-        dbController.editInventory(inventory);
+    @Override
+    public void removeInventory(int id) {
+        database.removeInventory(id);
     }
 
-    /**
-     * Returns a Collection of all inventories
-     */
-    public Collection<Inventory> retrieveInventories(Collection<Integer> ids){
-        Collection<Inventory> result = dbController.retrieveInventories(ids);
+    @Override
+    public void editInventory(Inventory inventory) {
+        database.editInventory(inventory);
+    }
+
+    @Override
+    public Collection<Inventory> retrieveInventories(Collection<Integer> ids) {
+        return database.retrieveInventories(ids);
+    }
+
+    @Override
+    public void addItem(String name, int weight, int volume, int value, int inventoryId) {
+        database.addItem(name, weight, volume, value, inventoryId);
+    }
+
+    @Override
+    public void removeItem(Integer id) {
+        database.removeItem(id);
+    }
+
+    @Override
+    public void editItem(Item item) {
+        database.editItem(item);
+    }
+
+    @Override
+    public Collection<Item> retrieveItems(Collection<Integer> ids) {
+        Collection<Item> result = database.retrieveItems(ids);
         return result;
     }
 
-    /**
-     * Adds a new inventory to the database
-     *
-     * @param name name of the Item
-     * @param weight weight of this item
-     * @param volume volume of this item
-     * @param value value of this item
-     */
-    public void addItem(String name, int weight, int volume, int value, int inventoryId){
-        dbController.addItem(name, weight, volume, value, inventoryId);
-    }
-
-    /**
-     * Removes an item from te database
-     *
-     * @param id id of the item to be removed
-     */
-    public void removeItem(Integer id){
-        dbController.removeItem(id);
-    }
-
-    /**
-     * Edits certain fields of an inventory
-     */
-    public void editItem(Item item){
-        dbController.editItem(item);
-    }
-
-    /**
-     * Returns a Collection of items
-     *
-     * @param ids a collection of id's of the items to be retrieved
-     */
-    public Collection<Item> retrieveItems(Collection<Integer> ids){
-        Collection<Item> result = dbController.retrieveItems(ids);
-        return result;
-    }
-
-    /**
-     * Exchanges items between inventories
-     */
-    public void exchangeItems(){
-
-    }
-
-    /**
-     * Solves the Knap Sack Problem for an inventory to all items in the database
-     *
-     * @param id id of the inventory the Knap Sack Problem shall be solved for
-     */
-    public void knapSack(Integer id){
-
-    }
+//    //under development
+//    /**
+//     * Exchanges items between inventories
+//     */
+//    public void exchangeItems(){
+//
+//    }
+//
+//    /**
+//     * Solves the Knap Sack Problem for an inventory to all items in the database
+//     *
+//     * @param id id of the inventory the Knap Sack Problem shall be solved for
+//     */
+//    public void knapSack(int id){
+//
+//    }
 
 }

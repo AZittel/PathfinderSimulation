@@ -21,15 +21,13 @@ functions:
 		-retrieve inventories
 		-edit inventory
 		-remove inventory
-		-add inventory?
+		-add inventory
+		-knapSack problem
 	-Show items
 		-retrieve items
 		-edit item
 		-remove item
-		-add item?
-	-KnapSack Problem
-		-retrieve inventories
-		-knapSack problem
+		-add item
 	-Exchange items between inventories
 		-retrieve inventories
 		-retrieve items

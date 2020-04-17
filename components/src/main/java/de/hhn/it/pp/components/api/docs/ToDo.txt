@@ -1,5 +1,6 @@
-structure demo gui
+diagram:
+	structure demo gui (class diagram)
 
 FX files:
-	fxml files for "api service", "show inventories", "show items"
-	class files for "api service (controller)", "show inventories", "show items"
+	fxml files for "api service", "show inventories", "show items", "exchange items"
+	controll class files for "api service", "show inventories", "show items", "exchange items"

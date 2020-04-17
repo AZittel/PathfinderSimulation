@@ -1,17 +1,20 @@
 package de.hhn.it.pp.components.api.src.main.java.api.models;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
- * This is an inventory entity class
+ * This is an inventory entity class.
+ *
+ * @author Dennis Schies
+ * @version 1.0
  */
 public class Inventory implements Model{
 
     private int id;
     private String name;
+    //the maximum weight an inventory can carry
     private int maxWeight;
+    //the maximum volume an inventory can carry
     private int maxVolume;
+    //the current value of all items in this inventory
     private int currentValue;
 
     public Inventory(int id, String name, int maxWeight, int maxVolume, int currentValue){
@@ -63,30 +66,31 @@ public class Inventory implements Model{
         this.currentValue = currentValue;
     }
 
-    @Override
-    public String getModelTyp() {
-        return "Inventory";
-    }
-
-    @Override
-    public Collection<String> getAttributeNames() {
-        ArrayList<String> result = new ArrayList<String>();
-        result.add("id");
-        result.add("name");
-        result.add("maxWeight");
-        result.add("maxVolume");
-        result.add("currentValue");
-        return result;
-    }
-
-    @Override
-    public Collection<String> getAttributes() {
-        ArrayList<String> result = new ArrayList<String>();
-        result.add(String.valueOf(this.id));
-        result.add(this.name);
-        result.add(String.valueOf(this.maxWeight));
-        result.add(String.valueOf(this.maxVolume));
-        result.add(String.valueOf(this.currentValue));
-        return result;
-    }
+//    //under development
+//    @Override
+//    public String getModelTyp() {
+//        return "Inventory";
+//    }
+//
+//    @Override
+//    public Collection<String> getAttributeNames() {
+//        ArrayList<String> result = new ArrayList<String>();
+//        result.add("id");
+//        result.add("name");
+//        result.add("maxWeight");
+//        result.add("maxVolume");
+//        result.add("currentValue");
+//        return result;
+//    }
+//
+//    @Override
+//    public Collection<String> getAttributes() {
+//        ArrayList<String> result = new ArrayList<String>();
+//        result.add(String.valueOf(this.id));
+//        result.add(this.name);
+//        result.add(String.valueOf(this.maxWeight));
+//        result.add(String.valueOf(this.maxVolume));
+//        result.add(String.valueOf(this.currentValue));
+//        return result;
+//    }
 }

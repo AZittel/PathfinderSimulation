@@ -6,11 +6,17 @@ import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 import java.util.Collection;
 
 /**
- * This interface is there for providing the basic database access functionalities
- * across multiple DatabaseControllers for different databases
+ * This interface is there for defining the basic database access functionalities
+ * all databases have to implement.
+ *
+ * @author Dennis Schies
+ * @version 1.0
  */
 interface Database {
 
+    /**
+     * Creates the database tables for inventories and items if they do not already exist.
+     */
     void setup();
 
     /**
@@ -69,22 +75,21 @@ interface Database {
     Collection<Item> retrieveItems(Collection<Integer> ids);
 
 
-    //under development
-
-    // add whatever model
-    /*void addModel(Model model);*/
-
-    //remove whatever model
-    /*void removeModel(Model model);*/
-
-    //edit whatever model fields
-    /*void editModel(Model model);*/
-
-    //retrieve a list of whatever models
-    /*Collection<Model> retrieveModels(String modelType,Collection<int> modelIds);*/
-
-    //create a table of whatever model
-    /*void createTableFromModel(Model model);*/
+//    //under development
+//    // add whatever model
+//    void addModel(Model model);
+//
+//    //remove whatever model
+//    void removeModel(Model model);
+//
+//    //edit whatever model fields
+//    void editModel(Model model);
+//
+//    //retrieve a list of whatever models
+//    Collection<Model> retrieveModels(String modelType,Collection<int> modelIds);
+//
+//    //create a table of whatever model
+//    void createTableFromModel(Model model);
 
 
 }
