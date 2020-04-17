@@ -28,7 +28,4 @@ functions:
 		-edit item
 		-remove item
 		-add item
-	-Exchange items between inventories
-		-retrieve inventories
-		-retrieve items
-		-exchange items
+		-move item
