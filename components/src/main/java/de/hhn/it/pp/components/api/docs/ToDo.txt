@@ -1,6 +1,14 @@
-diagram:
-	structure demo gui (class diagram)
+gui files:
+	Controller:	
+	-ApiController
+	-InventoryView
+	-ItemView
+	Layout:
+	-ApiController.fxml
+	-InventoryView.fxml
+	-ItemView.fxml
 
-FX files:
-	fxml files for "api service", "show inventories", "show items", "exchange items"
-	controll class files for "api service", "show inventories", "show items", "exchange items"
+component files:
+	implementing:
+	-moveItem()
+	-knapSack()

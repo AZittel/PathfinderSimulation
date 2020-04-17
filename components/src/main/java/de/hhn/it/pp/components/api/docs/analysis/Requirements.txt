@@ -1,0 +1,12 @@
+functional requirements:
+
+	-add inventory
+	-remove inventory
+	-edit inventory fields
+	-retrieve a list of inventories
+	-add item
+	-remove item
+	-edit item fields
+	-retrieve a list of items
+	-move items
+	-knapSack problem
