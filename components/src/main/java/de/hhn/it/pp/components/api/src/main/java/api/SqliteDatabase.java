@@ -1,5 +1,7 @@
 package de.hhn.it.pp.components.api.src.main.java.api;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +19,8 @@ class SqliteDatabase implements Database {
     //connection object is necessary to create sql statements which execute sql queries
     private static Connection connection;
     //default path to an SQLite database
-    private static String dbPath = "/home/mmk/projects/PP_Project/gaming-pp-20-ss/components/src/main/java/de/hhn/it/pp/components/api/InventoryDatabase.db";
+    private static Path dbPath = Paths.get("..", "components", "src", "main", "java", "de",
+            "hhn", "it", "pp", "components", "api", "InventoryDatabase.db");
 
     /**
      * Creates a connection to an already existing or if none exists creates a new SQLite .db file and connects to this
