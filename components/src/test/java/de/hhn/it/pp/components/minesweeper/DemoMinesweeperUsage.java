@@ -1,8 +1,6 @@
 package de.hhn.it.pp.components.minesweeper;
 
-import de.hhn.it.pp.components.minesweeper.Minesweeper;
-import de.hhn.it.pp.components.minesweeper.MinesweeperService;
-import java.awt.Point;
+import de.hhn.it.pp.components.minesweeper.provider.Minesweeper;
 
 public class DemoMinesweeperUsage {
     private static final org.slf4j.Logger logger =

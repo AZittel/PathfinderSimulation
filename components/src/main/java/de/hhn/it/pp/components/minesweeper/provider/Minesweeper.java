@@ -1,6 +1,8 @@
-package de.hhn.it.pp.components.minesweeper;
+package de.hhn.it.pp.components.minesweeper.provider;
 
-public class Minesweeper implements MinesweeperService{
+import de.hhn.it.pp.components.minesweeper.MinesweeperService;
+
+public class Minesweeper implements MinesweeperService {
 
     @Override
     public void createStartMenu() {
