@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"
+         type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1">
+    <children>
+        <VBox prefHeight="476.0" prefWidth="493.0">
+            <children>
+                <Label text="Items">
+                    <font>
+                        <Font size="50.0"/>
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <AnchorPane fx:id="controlAnchorPane" minHeight="0.0" minWidth="0.0"
+                    prefHeight="160.0" prefWidth="100.0">
+        </AnchorPane>
+    </children>
+</fx:root>
