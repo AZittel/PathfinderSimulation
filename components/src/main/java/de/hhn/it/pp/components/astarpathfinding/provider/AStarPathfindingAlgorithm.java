@@ -1,76 +1,48 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
-import de.hhn.it.pp.components.astarpathfinding.AStarService;
-import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.exceptions.InvalidStateException;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AStarPathfinding implements AStarService {
+public class AStarPathfindingAlgorithm extends AbstractPathfindingAlgorithm {
 
-  private final int MAX_ROWS_COUNT = 30;
-  private final int MAX_COL_COUNT = 30;
-  private final Cell[][] grid = new Cell[MAX_ROWS_COUNT][MAX_COL_COUNT];
-
-  private final List<Cell> openList = new ArrayList<>();
-  private final List<Cell> closedList = new ArrayList<>();
-
-  private Point startCoordinates = new Point(15, 8);
-  private Point destinationCoordinates = new Point(15, 18);
-
-  public AStarPathfinding() {
-    createDefaultInitialization();
-  }
-
-  /** Initializes the grid with the default cells. */
-  private void createDefaultInitialization() {
-    for (int row = 0; row < MAX_ROWS_COUNT; row++) {
-      for (int col = 0; col < MAX_COL_COUNT; col++) {
-        grid[row][col] = new Cell(row, col);
-      }
-    }
-  }
-
-  /**
-   * Calculates the shortest path on the grid from the start point to the end point by using the A*
-   * search algorithm.
-   */
-  private void findPath() {
+  @Override
+  protected void findPath() {
     // Add the start cell to the open list
-    openList.add(grid[startCoordinates.x][startCoordinates.y]);
+    information.addSpecificPosition(grid[startCoordinates.getX()][startCoordinates.getY()]);
 
-    while (!openList.isEmpty()) {
+    while (!information.getSpecificPositions().isEmpty()) {
       Cell currentCell = getCellWithLowestFCost();
       assert currentCell != null;
 
-      openList.remove(currentCell);
-      closedList.add(currentCell);
+      information.getSpecificPositions().remove(currentCell);
+      information.getVisitedPositions().add(currentCell);
 
       // Check whether the algorithm reached the destination cell
-      if (currentCell.equals(grid[destinationCoordinates.x][destinationCoordinates.y])) {
-        tracePath(grid[startCoordinates.x][startCoordinates.y], currentCell);
+      if (currentCell.equals(grid[destinationCoordinates.getX()][destinationCoordinates.getY()])) {
+        tracePath(grid[startCoordinates.getX()][startCoordinates.getY()], currentCell);
         return;
       }
 
       // Add neighbours to possible path if they are accessible i.e. no obstacle.
       for (Cell neighbour : getNeighbours(currentCell)) {
-        if (!neighbour.isAccessible() || closedList.contains(neighbour)) {
+        if (!neighbour.isAccessible() || information.getVisitedPositions().contains(neighbour)) {
           continue;
         }
 
         // Update costs of the neighbour if a shorter path was found
         int newCostToNeighbour = currentCell.getGCost() + getMDistance(currentCell, neighbour);
-        if (newCostToNeighbour < neighbour.getGCost() || !openList.contains(neighbour)) {
+        if (newCostToNeighbour < neighbour.getGCost()
+            || !information.getSpecificPositions().contains(neighbour)) {
           neighbour.setGCost(newCostToNeighbour);
           neighbour.setHCost(
-              getMDistance(neighbour, grid[destinationCoordinates.x][destinationCoordinates.y]));
+              getMDistance(
+                  neighbour, grid[destinationCoordinates.getX()][destinationCoordinates.getY()]));
           neighbour.setParent(currentCell);
 
-          if (!openList.contains(neighbour)) {
-            openList.add(neighbour);
+          if (!information.getSpecificPositions().contains(neighbour)) {
+            information.getSpecificPositions().add(neighbour);
           }
         }
       }
@@ -142,59 +114,20 @@ public class AStarPathfinding implements AStarService {
     return neighbours;
   }
 
-  public static void main(String[] args) {
-    AStarPathfinding impl = new AStarPathfinding();
-    impl.findPath();
-  }
-
   /**
    * Searches the list of open cells for the cell with the lowest f cost and returns it.
    *
    * @return cell with the lowest f cost.
    */
   private Cell getCellWithLowestFCost() {
-    if (!openList.isEmpty()) {
-      return openList.stream().min(Comparator.comparing(Cell::calculateFCost)).get();
+    if (!information.getSpecificPositions().isEmpty()) {
+      return information.getSpecificPositions().stream()
+          .min(Comparator.comparing(Cell::calculateFCost))
+          .get();
     } else {
       return null;
     }
   }
-
-  @Override
-  public boolean setStartPoint(Point position)
-      throws IllegalParameterException, InvalidStateException {
-
-    return false;
-  }
-
-  @Override
-  public boolean setEndPoint(Point position)
-      throws IllegalParameterException, InvalidStateException {
-
-    return false;
-  }
-
-  @Override
-  public boolean placeObstacle(Point position)
-      throws IllegalParameterException, InvalidStateException {
-
-    return false;
-  }
-
-  @Override
-  public boolean startVisualization() throws InvalidStateException {
-
-    return false;
-  }
-
-  @Override
-  public boolean stopVisualization() throws InvalidStateException {
-
-    return false;
-  }
-
-  @Override
-  public void reset() {}
 
   @Override
   public String toString() {
