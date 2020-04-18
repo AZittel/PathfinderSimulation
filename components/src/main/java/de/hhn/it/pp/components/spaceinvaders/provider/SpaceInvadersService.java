@@ -38,6 +38,13 @@ public interface SpaceInvadersService {
     void createEnemies(int xPosition, int yPosition, int speed) throws IllegalParameterException;
 
     /**
+     * @param xMovement direction of move x
+     * @param yMovement direction of move y
+     * @param shot boolean for shoot
+     */
+    void movement(int xMovement, int yMovement, boolean shot)throws IllegalAccessException;
+
+    /**
      *  Resets the Game.
      */
     void restart();
