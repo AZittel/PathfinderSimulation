@@ -33,7 +33,7 @@ public interface SpaceInvadersService {
      * @param xPosition for the position on the x axis
      * @param yPosition for the position on the y axis
      * @param speed for the movement speed of the enemies
-     * @throws IllegalArgumentException if the xPos, yPos or speed is invalid
+     * @throws IllegalParameterException if the xPos, yPos or speed is invalid
      */
     void createEnemies(int xPosition, int yPosition, int speed) throws IllegalParameterException;
 
@@ -41,8 +41,9 @@ public interface SpaceInvadersService {
      * @param xMovement direction of move x
      * @param yMovement direction of move y
      * @param shot boolean for shoot
+     * @throws IllegalArgumentException direction steps out of window
      */
-    void movement(int xMovement, int yMovement, boolean shot)throws IllegalAccessException;
+    void movement(int xMovement, int yMovement, boolean shot)throws  IllegalArgumentException;
 
     /**
      *  Resets the Game.
