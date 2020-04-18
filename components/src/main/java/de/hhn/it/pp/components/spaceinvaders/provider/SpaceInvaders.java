@@ -21,7 +21,12 @@ public class SpaceInvaders implements SpaceInvadersService {
     public void createEnemies(int xPosition, int yPosition, int speed) {new Enemies();}
 
     @Override
-    public void movement(int xMovement, int yMovement, boolean shot){
+    public void movement(int xMovement, int yMovement, boolean shot) {
+    }
+
+    @Override
+    public void showHighscore(int score) {
+
     }
 
     @Override
