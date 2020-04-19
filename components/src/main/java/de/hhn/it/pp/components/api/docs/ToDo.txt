@@ -1,11 +1,7 @@
 gui files:
-	Controller:	
-	-ApiController
-	-InventoryView
+	Views:
 	-ItemView
 	Layout:
-	-ApiController.fxml
-	-InventoryView.fxml
 	-ItemView.fxml
 
 component files:

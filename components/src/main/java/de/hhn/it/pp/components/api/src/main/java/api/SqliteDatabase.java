@@ -124,9 +124,35 @@ class SqliteDatabase implements Database {
     }
 
     @Override
+    public Collection<Inventory> retrieveAllInventories() {
+        ArrayList<Inventory> result = new ArrayList<Inventory>();
+        try {
+            String sql = "SELECT * FROM INVENTORY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("ID");
+                String name = resultSet.getString("NAME");
+                int maxWeight = resultSet.getInt("MAXWEIGHT");
+                int maxVolume = resultSet.getInt("MAXVOLUME");
+                int currentValue;
+                try {
+                    currentValue = resultSet.getInt("CURRENTVALUE");
+                } catch (NullPointerException exception) {
+                    currentValue = 0;
+                }
+                result.add(new Inventory(id, name, maxWeight, maxVolume, currentValue));
+            }
+        } catch (Exception exception) {
+
+        }
+        return result;
+    }
+
+    @Override
     public Collection<Inventory> retrieveInventories(Collection<Integer> ids) {
         ArrayList<Inventory> result = new ArrayList<Inventory>();
-
         try {
             String sql = "SELECT * FROM INVENTORY WHERE ID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);

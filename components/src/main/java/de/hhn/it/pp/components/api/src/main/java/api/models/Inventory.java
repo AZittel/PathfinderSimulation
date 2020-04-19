@@ -26,6 +26,11 @@ public class Inventory implements Model{
 
     }
 
+    @Override
+    public String toString() {
+        return "id: " + this.getId() + ", " + this.getName();
+    }
+
     public int getId() {
         return this.id;
     }

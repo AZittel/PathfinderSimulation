@@ -14,7 +14,7 @@ public class Item implements Model{
     private int weight;
     //the volume of this item
     private int volume;
-    //the value f this item
+    //the value of this item
     private int value;
     //the id of the inventory this item is contained in
     private int inventoryId;
@@ -27,6 +27,11 @@ public class Item implements Model{
         this.value = value;
         this.inventoryId = inventoryId;
 
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + this.getId() + ", " + this.getName();
     }
 
     public int getId() {

@@ -51,6 +51,11 @@ public class ApiService implements Api {
     }
 
     @Override
+    public Collection<Inventory> retrieveAllInventories() {
+        return database.retrieveAllInventories();
+    }
+
+    @Override
     public Collection<Inventory> retrieveInventories(Collection<Integer> ids) {
         return database.retrieveInventories(ids);
     }

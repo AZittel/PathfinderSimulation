@@ -39,6 +39,11 @@ public interface Api {
     /**
      * Returns a Collection of all inventories
      */
+    Collection<Inventory> retrieveAllInventories();
+
+    /**
+     * Returns a Collection of all inventories
+     */
     Collection<Inventory> retrieveInventories(Collection<Integer> ids);
 
     /**

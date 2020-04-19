@@ -1,10 +1,9 @@
 package de.hhn.it.pp.javafx.controllers;
 
-import de.hhn.it.pp.javafx.controllers.apiviews.InventoryView;
-import de.hhn.it.pp.javafx.controllers.apiviews.ItemView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -21,12 +20,9 @@ public class ApiController extends Controller implements Initializable {
 
     @FXML
     ListView<String> functionListView;
-    @FXML
-    AnchorPane controlAnchorPane;
-    Node actualControlAnchorPaneNode;
     ObservableList<String> selectableFunctions;
-    Label chooseLabel;
-    Node currentView;
+    @FXML
+    AnchorPane functionAnchorPane;
 
     private final String INVENTORIES = "Inventories";
     private final String ITEMS = "Items";
@@ -36,7 +32,6 @@ public class ApiController extends Controller implements Initializable {
 
     public ApiController() {
 
-        chooseLabel = new Label("choose a function");
         selectableFunctions = FXCollections.observableArrayList();
         selectableFunctions.add(INVENTORIES);
         selectableFunctions.add(ITEMS);
@@ -53,6 +48,32 @@ public class ApiController extends Controller implements Initializable {
         });
     }
 
+    @FXML
+    public void handleMouseClick(MouseEvent arg0) {
+        logger.info("clicked on " + functionListView.getSelectionModel().getSelectedItem());
+
+        if (functionListView.getSelectionModel().getSelectedItem() == null) {
+            logger.info("No function selected");
+            return;
+        }
+
+        try {
+            if (functionListView.getSelectionModel().getSelectedItem().equals(INVENTORIES)) {
+                logger.info("loading InventoryView");
+                URL url = getClass().getResource("/fxml/apiviews/InventoryView.fxml");
+                functionAnchorPane.getChildren().clear();
+                functionAnchorPane.getChildren().add(FXMLLoader.load(url));
+            } else if (functionListView.getSelectionModel().getSelectedItem().equals(ITEMS)) {
+                logger.info("loading ItemView");
+                URL url = getClass().getResource("/fxml/apiviews/ItemView.fxml");
+                functionAnchorPane.getChildren().clear();
+                functionAnchorPane.getChildren().add(FXMLLoader.load(url));
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     private class FunctionCell extends ListCell<String> {
         @Override
         protected void updateItem(final String function, final boolean empty) {
@@ -63,32 +84,5 @@ public class ApiController extends Controller implements Initializable {
             }
             setGraphic(label);
         }
-    }
-
-    @FXML
-    public void handleMouseClick(MouseEvent arg0) {
-        logger.debug("clicked on " + functionListView.getSelectionModel().getSelectedItem());
-
-        if (functionListView.getSelectionModel().getSelectedItem().equals(INVENTORIES)) {
-            currentView = new InventoryView();
-        } else if (functionListView.getSelectionModel().getSelectedItem().equals(ITEMS)) {
-            currentView = new ItemView();
-        }
-
-        if (currentView == null) {
-            logger.info("No function selected");
-            actualControlAnchorPaneNode = chooseLabel;
-            controlAnchorPane.getChildren().add(chooseLabel);
-            return;
-        }
-
-        // remove current node from the controlAnchorPane
-        if (actualControlAnchorPaneNode != null) {
-            controlAnchorPane.getChildren().remove(actualControlAnchorPaneNode);
-        }
-
-        actualControlAnchorPaneNode = currentView;
-        controlAnchorPane.getChildren().add(currentView);
-
     }
 }
