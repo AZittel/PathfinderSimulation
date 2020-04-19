@@ -39,23 +39,29 @@ public interface PathfindingService {
   /**
    * Starts the visualization of the pathfinding algorithm.
    *
-   * @return whether starting the visualization was successful
    * @throws InvalidStateException when trying to start the visualization during the visualization
    */
-  boolean startPathfinding() throws InvalidStateException;
+  void startPathfinding() throws InvalidStateException;
 
   /**
    * Stops the visualization of the pathfinding algorithm.
    *
-   * @return whether stopping the visualization was successful
    * @throws InvalidStateException when trying to stop the visualization while the simulation is not
-   *     running
+   * running
    */
-  boolean stopPathfinding() throws InvalidStateException;
+  void stopPathfinding() throws InvalidStateException;
 
   /**
    * Stops the visualization if it is running and resets the start and end point and removes the
    * obstacles on the grid.
    */
   void reset();
+
+  /**
+   * Adds a listener to get updates on the pathfinder.
+   *
+   * @param listener object implementing the listener interface
+   * @throws IllegalParameterException if the listener is a null reference.
+   */
+  void addCallback(PathfindingListener listener) throws IllegalParameterException;
 }
