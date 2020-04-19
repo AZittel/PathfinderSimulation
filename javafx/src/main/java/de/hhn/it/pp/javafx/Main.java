@@ -55,7 +55,7 @@ public class Main extends Application {
     addModule("CoffeeMakerService");
 
     //under development
-    addModule("Api");
+    addModule("ApiView");
 
   }
 

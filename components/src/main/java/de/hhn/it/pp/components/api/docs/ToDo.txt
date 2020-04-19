@@ -1,7 +1,7 @@
 gui files:
+	Controller:
+	-ItemViewController
 	Views:
-	-ItemView
-	Layout:
 	-ItemView.fxml
 
 component files:

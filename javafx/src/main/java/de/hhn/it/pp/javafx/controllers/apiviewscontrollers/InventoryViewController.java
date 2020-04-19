@@ -1,4 +1,4 @@
-package de.hhn.it.pp.javafx.controllers.apiviews;
+package de.hhn.it.pp.javafx.controllers.apiviewscontrollers;
 
 import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
 
@@ -21,14 +21,13 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 
-public class InventoryView extends Controller implements Initializable {
+public class InventoryViewController extends Controller implements Initializable {
 
     private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(InventoryView.class);
+            org.slf4j.LoggerFactory.getLogger(InventoryViewController.class);
 
     @FXML
     ListView<Inventory> inventoryListView;
@@ -52,7 +51,7 @@ public class InventoryView extends Controller implements Initializable {
 
     private ApiService api;
 
-    public InventoryView() {
+    public InventoryViewController() {
         api = new ApiService();
 
         inventoryObservableList = FXCollections.observableArrayList();

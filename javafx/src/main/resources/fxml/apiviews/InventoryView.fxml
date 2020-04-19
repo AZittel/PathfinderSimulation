@@ -10,7 +10,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="670.0" maxWidth="700.0"
             minHeight="670.0" minWidth="700.0" prefHeight="670.0" prefWidth="700.0"
             xmlns="http://javafx.com/javafx/10.0.1"
-            fx:controller="de.hhn.it.pp.javafx.controllers.apiviews.InventoryView">
+            fx:controller="de.hhn.it.pp.javafx.controllers.apiviewscontrollers.InventoryViewController">
     <children>
         <HBox AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" prefHeight="50.0"
               prefWidth="700">
