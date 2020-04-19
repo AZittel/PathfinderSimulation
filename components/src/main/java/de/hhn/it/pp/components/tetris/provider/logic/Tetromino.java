@@ -1,6 +1,4 @@
-package de.hhn.it.pp.components.tetris.logic;
-
-
+package de.hhn.it.pp.components.tetris.provider.logic;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 

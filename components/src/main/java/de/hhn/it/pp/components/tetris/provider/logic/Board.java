@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.tetris.logic;
+package de.hhn.it.pp.components.tetris.provider.logic;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class Board {
 
     private static boolean speedup = false;
 
-    private static ArrayList<Tetromino> tetrominos = new ArrayList<Tetromino>();
+    public static ArrayList<Tetromino> tetrominos = new ArrayList<Tetromino>();
 
     private static Tetromino currentTetromino;
 

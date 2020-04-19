@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.tetris;
+package de.hhn.it.pp.components.tetris.provider;
 
 /**
  * Tetris clone written in Java
