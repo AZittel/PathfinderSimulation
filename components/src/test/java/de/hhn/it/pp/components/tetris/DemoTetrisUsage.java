@@ -1,7 +1,8 @@
 package de.hhn.it.pp.components.tetris;
 
-import de.hhn.it.pp.components.tetris.logic.Board;
-import de.hhn.it.pp.components.tetris.logic.Tetromino;
+import de.hhn.it.pp.components.tetris.provider.TetrisGame;
+import de.hhn.it.pp.components.tetris.provider.logic.Board;
+import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
 
 import java.awt.event.KeyEvent;
 
