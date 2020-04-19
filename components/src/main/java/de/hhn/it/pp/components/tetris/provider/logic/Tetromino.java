@@ -1,8 +1,9 @@
-package de.hhn.it.pp.components.tetris.logic;
-
-
+package de.hhn.it.pp.components.tetris.provider.logic;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static de.hhn.it.pp.components.tetris.provider.logic.Tetromino.TetrominoType.randomize;
+
 
 /**
  * This Class used to Create the individual Tetrominos
@@ -23,7 +24,7 @@ public class Tetromino {
      * sets the Color accordingly.
      */
     public Tetromino(){
-        type = TetrominoType.randomize();
+        type = randomize();
         switch (type){
             case I:
                 color = Color.BLUE;

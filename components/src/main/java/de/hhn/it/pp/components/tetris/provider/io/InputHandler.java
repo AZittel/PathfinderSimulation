@@ -1,6 +1,5 @@
-package de.hhn.it.pp.components.tetris.io;
-
-import de.hhn.it.pp.components.tetris.logic.Board;
+package de.hhn.it.pp.components.tetris.provider.io;
+import de.hhn.it.pp.components.tetris.provider.logic.Board;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -74,7 +73,7 @@ public class InputHandler implements KeyListener {
 
     /**
      * resets the gamespeed to normal value if down key is released
-     * @param keyEvent
+     * @param keyEvent the down key
      */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
