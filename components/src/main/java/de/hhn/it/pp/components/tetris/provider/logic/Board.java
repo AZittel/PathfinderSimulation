@@ -2,6 +2,8 @@ package de.hhn.it.pp.components.tetris.provider.logic;
 
 import java.util.ArrayList;
 
+import static de.hhn.it.pp.components.tetris.provider.logic.Board.BoardState.*;
+
 public class Board {
 
     private static int score = 0;
@@ -14,7 +16,7 @@ public class Board {
 
     private static boolean speedup = false;
 
-    public static ArrayList<Tetromino> tetrominos = new ArrayList<Tetromino>();
+    public static ArrayList<Tetromino> tetrominos = new ArrayList<>();
 
     private static Tetromino currentTetromino;
 
@@ -22,7 +24,7 @@ public class Board {
 
     private static int[][] map = new int[10][18];
 
-    public static BoardState boardState = BoardState.start;
+    public static BoardState boardState = start;
 
     /**
      * A Enum in which the Boardstates are described
@@ -43,6 +45,10 @@ public class Board {
         score = 0;
     }
 
+    /**
+     * Adds a Tetromino the the Tetromino arraylist
+     * @param tetromino the tetromino that gets added
+     */
     public static void addTetromino(Tetromino tetromino) {
         tetrominos.add(tetromino);
     }
@@ -71,8 +77,10 @@ public class Board {
         spawnNewTetromino = newValue;
     }
 
-    public static ArrayList<Tetromino> getTetrominos() {
-        return tetrominos;
+    public static void getTetrominos() {
+        for (Tetromino t : tetrominos) {
+            System.out.println(t);
+        }
     }
 
     public static BoardState getBoardState() {

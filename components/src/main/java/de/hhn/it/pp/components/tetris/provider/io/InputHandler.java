@@ -73,7 +73,7 @@ public class InputHandler implements KeyListener {
 
     /**
      * resets the gamespeed to normal value if down key is released
-     * @param keyEvent
+     * @param keyEvent the down key
      */
     @Override
     public void keyReleased(KeyEvent keyEvent) {

@@ -3,6 +3,8 @@ import de.hhn.it.pp.components.tetris.TetrisService;
 import de.hhn.it.pp.components.tetris.provider.logic.Board;
 import java.io.IOException;
 
+import static de.hhn.it.pp.components.tetris.provider.logic.Board.getCurrentTetromino;
+
 public class TetrisGame implements TetrisService {
 
     @Override
@@ -22,7 +24,7 @@ public class TetrisGame implements TetrisService {
 
     @Override
     public void rotate() {
-        Board.getCurrentTetromino().rotate();
+        getCurrentTetromino().rotate();
     }
 
     @Override
