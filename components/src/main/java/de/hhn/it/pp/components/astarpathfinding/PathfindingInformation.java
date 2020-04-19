@@ -7,6 +7,7 @@ import java.util.List;
 /** Representation of an object which holds information about pathfinding algorithms. */
 public class PathfindingInformation {
 
+
   /** List of positions specific to algorithms. */
   private List<Cell> specificPositions = new ArrayList<>();
 

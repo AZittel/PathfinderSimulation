@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
+import de.hhn.it.pp.components.astarpathfinding.PathfindingListener;
 import de.hhn.it.pp.components.astarpathfinding.PathfindingService;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
@@ -21,15 +22,20 @@ public final class Pathfinder implements PathfindingService {
       throws IllegalParameterException, InvalidStateException {}
 
   @Override
-  public boolean startPathfinding() throws InvalidStateException {
-    return false;
+  public void startPathfinding() throws InvalidStateException {
+
   }
 
   @Override
-  public boolean stopPathfinding() throws InvalidStateException {
-    return false;
+  public void stopPathfinding() throws InvalidStateException {
+
   }
 
   @Override
   public void reset() {}
+
+  @Override
+  public void addCallback(PathfindingListener listener) throws IllegalParameterException {
+
+  }
 }
