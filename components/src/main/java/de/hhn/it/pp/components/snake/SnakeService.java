@@ -1,8 +1,8 @@
 package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.provider.Item;
-import de.hhn.it.pp.components.snake.provider.Level;
+import de.hhn.it.pp.components.snake.provider.OurSnakeItem;
+import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface SnakeService {
    *
    * @return List of registered players.
    */
-  List<SnakePlayerDiscriptor> getPlayers();
+  List<SnakePlayerDescriptor> getPlayers();
 
   /**
    * Returns the description of the player with the chosen player name.
@@ -28,7 +28,7 @@ public interface SnakeService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerDiscriptor getPlayer(String nickName) throws IllegalParameterException;
+  SnakePlayerDescriptor getPlayer(String nickName) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the progress of the player.
@@ -38,7 +38,7 @@ public interface SnakeService {
    * @throws IllegalParameterException if either the nick does not exist or the listener is a
    *     null reference.
    */
-  void addCallback(String nick, SnakePlayerDiscriptor listener) throws IllegalParameterException;
+  void addCallback(String nick, SnakePlayerDescriptor listener) throws IllegalParameterException;
 
   /**
    * Removes a listener.
@@ -46,7 +46,7 @@ public interface SnakeService {
    * @param nick     nick of the player
    * @param listener listener to be removed
    */
-  void removeCallback(String nick, SnakePlayerDiscriptor listener) throws IllegalParameterException;
+  void removeCallback(String nick, SnakePlayerDescriptor listener) throws IllegalParameterException;
 
   /**
    * Starts the game of Snake.
@@ -61,8 +61,7 @@ public interface SnakeService {
    *
    * @param level level where the player plays
    */
-  void runLevel(Level level, int highscore) throws IllegalParameterException;
-
+  void runLevel(OurSnakeLevel level, int highscore) throws IllegalParameterException;
 
   /**
    * Closes the game.
@@ -77,14 +76,9 @@ public interface SnakeService {
   void moveSnake(KeyEvent key) throws IllegalParameterException;
 
   /**
-   * Snake collides with an obstacle and dies.
-   */
-  void collide();
-
-  /**
    * Collects items.
    *
    * @param snakeFood food that is collected by the snake.
    */
-  int collect(Item snakeFood);
+  int collect(OurSnakeItem snakeFood);
 }
