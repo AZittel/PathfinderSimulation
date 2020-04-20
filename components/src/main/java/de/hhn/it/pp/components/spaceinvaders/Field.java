@@ -1,4 +1,4 @@
-/**
+/*
  @Author Darko Miklic, Marc Nauendorf
   * @Version 13.04.2020
  */
