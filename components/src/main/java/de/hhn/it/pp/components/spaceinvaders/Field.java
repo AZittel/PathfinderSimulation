@@ -11,5 +11,4 @@ public class Field {
      */
     void createSpace(){
     }
-
 }

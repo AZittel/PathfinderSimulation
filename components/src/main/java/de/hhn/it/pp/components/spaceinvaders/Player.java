@@ -9,12 +9,12 @@ public class Player {
     int numLives;
     int numShutDowns = 0;
 
+    void movement(){}
     /**
      * Player died
      */
     void gameOver() {
     }
-
     /**
      * Player move up
      */
