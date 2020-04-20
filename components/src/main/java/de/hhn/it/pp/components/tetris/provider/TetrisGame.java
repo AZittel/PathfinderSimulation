@@ -1,8 +1,6 @@
 package de.hhn.it.pp.components.tetris.provider;
 import de.hhn.it.pp.components.tetris.TetrisService;
-import de.hhn.it.pp.components.tetris.provider.logic.Board;
-import java.io.IOException;
-
+import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
 import static de.hhn.it.pp.components.tetris.provider.logic.Board.getCurrentTetromino;
 
 public class TetrisGame implements TetrisService {
@@ -38,7 +36,27 @@ public class TetrisGame implements TetrisService {
     }
 
     @Override
-    public void load() throws IOException {
+    public void load() {
         //not yet implemented
+    }
+
+    @Override
+    public int getCurrentTetrominoRotation() throws IllegalStateException, NullPointerException {
+        return 0;
+    }
+
+    @Override
+    public int getCurrentTetrominoSpeed() throws IllegalStateException {
+        return 0;
+    }
+
+    @Override
+    public void getTetrominoLocation(Tetromino tetromino) throws NullPointerException {
+
+    }
+
+    @Override
+    public int getTetrominoRotation() throws NullPointerException {
+        return 0;
     }
 }
