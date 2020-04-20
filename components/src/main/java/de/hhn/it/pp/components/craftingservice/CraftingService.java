@@ -2,8 +2,6 @@ package de.hhn.it.pp.components.craftingservice;
 
 import de.hhn.it.pp.components.craftingservice.provider.CraftingPattern;
 import de.hhn.it.pp.components.craftingservice.provider.Item;
-import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
 
 import java.util.List;
 
