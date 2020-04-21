@@ -2,8 +2,6 @@ package de.hhn.it.pp.components.minesweeper;
 
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 
-
-
 /**
  * This Interface is an Interface for the Game MineSweeper that shows all the
  * functionality to interact with our game.
@@ -47,5 +45,40 @@ public interface MinesweeperService {
      *  Resets the Game.
      */
     void turn(int x, int y);
+
+    /**
+     * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
+     */
+    void setFixBombs();
+
+
+    /**
+     * Getter for getting bombs.
+     */
+    int getBombs();
+
+
+
+    /**
+     * calculates the Points.
+     */
+    void calculatePoints();
+
+
+
+    /**
+     * Sets the current Points.
+     */
+    void setPoints(int points);
+
+
+
+    /**
+     * @return returns the current Points.
+     */
+    int getPoints();
+
+
+
 
 }
