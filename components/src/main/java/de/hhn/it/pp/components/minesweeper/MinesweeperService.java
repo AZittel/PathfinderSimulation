@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.minesweeper.provider;
+package de.hhn.it.pp.components.minesweeper;
 
 import java.awt.Point;
 
@@ -34,6 +34,21 @@ public interface MinesweeperService {
      */
     void restart();
 
+    /**
+     *  Starts the Game.
+     */
+    void startGame();
 
+    /**
+     *  Closes the Game.
+     */
+    void endGame();
+
+    /**
+     *  @param x x-Pos of the clicked field.
+     *  @param y y-Pos of the clicked field.
+     *  Resets the Game.
+     */
+    void spielzug(int x, int y);
 
 }
