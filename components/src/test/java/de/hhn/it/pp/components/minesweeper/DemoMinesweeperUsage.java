@@ -1,12 +1,13 @@
 package de.hhn.it.pp.components.minesweeper;
 
+import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 import de.hhn.it.pp.components.minesweeper.provider.Minesweeper;
 
 public class DemoMinesweeperUsage {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(DemoMinesweeperUsage.class);
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, InvalidGameStateException {
         //Create the Interface from minesweeper.
         logger.info(">>> create minesweeperService");
         MinesweeperService minesweeperService = new Minesweeper();
@@ -14,10 +15,6 @@ public class DemoMinesweeperUsage {
 
         Thread.sleep(3000);
 
-        // Create start menu.
-        logger.info(">>> create startMenu");
-        minesweeperService.createStartMenu();
-        logger.info("" + minesweeperService);
 
         Thread.sleep(1000);
 
@@ -42,6 +39,32 @@ public class DemoMinesweeperUsage {
         logger.info(">>> restart game");
         minesweeperService.restart();
         logger.info("" + minesweeperService);
+
+        Thread.sleep(3000);
+
+        // Starts the game.
+        logger.info(">>> Start game");
+        minesweeperService.startGame();
+        logger.info("" + minesweeperService);
+
+        Thread.sleep(3000);
+
+        // Ends the game.
+        logger.info(">>> end game");
+        minesweeperService.endGame();
+        logger.info("" + minesweeperService);
+
+        Thread.sleep(3000);
+
+        // turn.
+        logger.info(">>> turn");
+        int x = 3;
+        int y = 4;
+        minesweeperService.turn(x,y);
+        logger.info("" + minesweeperService);
+
+
+
 
 
     }
