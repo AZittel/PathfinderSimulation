@@ -1,6 +1,6 @@
-/**
+/*
  @Author Darko Miklic, Marc Nauendorf
-  * @Version 13.04.2020
+  * @Version 18.04.2020
  */
 
 package de.hhn.it.pp.components.spaceinvaders;
@@ -13,39 +13,45 @@ public class SpaceInvadersUsageDemo {
             org.slf4j.LoggerFactory.getLogger(SpaceInvadersUsageDemo.class);
 
     public static void main(String[] args) throws InterruptedException, IllegalParameterException {
+        //Create the service
         logger.info("create SpaceInvaderService");
-        SpaceInvadersService spaceInvadersService = new SpaceInvaders ();
+        SpaceInvadersService spaceInvadersService = new SpaceInvaders();
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(3000);
 
+        //Create the field
         logger.info("create Field");
-        int width =200;
-        int height =100;
-        spaceInvadersService.createField(width, height);
+        spaceInvadersService.createField(200, 100);
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
-        logger.info("create Player 1");
-
-        int yPos =100;
-        int xPos =50;
-        spaceInvadersService.createPlayer(xPos,yPos);
+        //Create the player
+        logger.info("create Player");
+        spaceInvadersService.createPlayer(100,50);
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
+        //Create the "Invaders" (enemies)
         logger.info("create the Invaders");
-        int speed=3;
-        int xPosition=150;
-        int yPosition=100;
-
-        spaceInvadersService.createEnemies(xPosition,yPosition,speed);
+        spaceInvadersService.createEnemies(3,150,100);
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
+        //Displays the highscore
+        logger.info("display the highscore");
+        spaceInvadersService.showHighscore(1);
+        logger.info("" + spaceInvadersService);
+
+        //Moving the player
+        logger.info("moving");
+        spaceInvadersService.movement(1, 2, true);
+        logger.info("" + spaceInvadersService);
+
+        //Resets the game
         logger.info("restart the game");
         spaceInvadersService.restart();
         logger.info(""+ spaceInvadersService);

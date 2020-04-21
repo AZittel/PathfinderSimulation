@@ -1,4 +1,4 @@
-/**
+/*
  @Author Darko Miklic, Marc Nauendorf
   * @Version 13.04.2020
  */
@@ -11,5 +11,4 @@ public class Field {
      */
     void createSpace(){
     }
-
 }

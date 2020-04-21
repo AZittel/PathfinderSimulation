@@ -1,11 +1,9 @@
 package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.provider.Item;
-import de.hhn.it.pp.components.snake.provider.Level;
-import de.hhn.it.pp.components.snake.provider.Snake;
-import java.awt.event.KeyEvent;
-
+import de.hhn.it.pp.components.snake.provider.OurSnakeItem;
+import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
+import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 
 
 /**
@@ -26,7 +24,7 @@ public class DemoSnakeUsage {
 
     // Create the service
     logger.info(">>> create service");
-    SnakeService service = new Snake();
+    de.hhn.it.pp.components.snake.SnakeService service = new OurSnakeService();
     logger.info("{}", service);
 
     // Starts the game, creates the map, spawns snake
@@ -34,7 +32,7 @@ public class DemoSnakeUsage {
     service.startGame("horst64");
     logger.info("{}", service);
 
-    Level levelOne = new Level(1, 0);
+    OurSnakeLevel levelOne = new OurSnakeLevel(1, 0);
 
     // Runs the first level
     logger.info(">>> starts level 1");
@@ -51,7 +49,7 @@ public class DemoSnakeUsage {
     service.getPlayer("horst64");
     logger.info("{}", service);
 
-    SnakePlayerDiscriptor snakePlayerDiscriptor = new SnakePlayerDiscriptor("horst64");
+    SnakePlayerDescriptor snakePlayerDiscriptor = new SnakePlayerDescriptor("horst64");
 
     // Adds a listener to a player to get updates on the progress
     logger.info(">>> adds listener to horst64");
@@ -73,7 +71,7 @@ public class DemoSnakeUsage {
     //service.moveSnake();
     logger.info("{}", service);
 
-    Item snakeFood = new Item(2);
+    OurSnakeItem snakeFood = new OurSnakeItem(2);
 
     // Snake collects item
     logger.info(">>> snake collects item");
@@ -88,11 +86,6 @@ public class DemoSnakeUsage {
     // Snake moves down
     logger.info(">>> snake moves down");
     //service.moveSnake();
-    logger.info("{}", service);
-
-    // Snake collides and dies
-    logger.info(">>> snake collides with obstacle and dies");
-    service.collide();
     logger.info("{}", service);
 
     // Exits game

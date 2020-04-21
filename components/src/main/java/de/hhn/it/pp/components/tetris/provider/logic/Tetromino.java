@@ -1,9 +1,6 @@
-package de.hhn.it.pp.components.tetris.logic;
-
-
-import java.awt.*;
+package de.hhn.it.pp.components.tetris.provider.logic;
 import java.util.concurrent.ThreadLocalRandom;
-
+import static de.hhn.it.pp.components.tetris.provider.logic.Tetromino.TetrominoType.randomize;
 /**
  * This Class used to Create the individual Tetrominos
  */
@@ -15,7 +12,6 @@ public class Tetromino {
     private int size = 0;
     private int rotation = 0;
     int[][][]bounds;
-    Color color;
     boolean moveable = true;
 
     /**
@@ -23,31 +19,8 @@ public class Tetromino {
      * sets the Color accordingly.
      */
     public Tetromino(){
-        type = TetrominoType.randomize();
-        switch (type){
-            case I:
-                color = Color.BLUE;
-                break;
-            case O:
-                color = Color.GREEN;
-                break;
-            case Z:
-                color = Color.ORANGE;
-                break;
-            case S:
-                color = Color.YELLOW;
-                break;
-            case T:
-                color = Color.GRAY;
-                break;
-            case L:
-                color = Color.PINK;
-                break;
-            case J:
-                color = Color.RED;
-                break;
+        type = randomize();
         }
-    }
 
     /**
      * Used to actually build the Tetrominos on the Field
@@ -105,12 +78,9 @@ public class Tetromino {
         return rotation;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     public int getSize() {
         return size;
     }
 }
+
 

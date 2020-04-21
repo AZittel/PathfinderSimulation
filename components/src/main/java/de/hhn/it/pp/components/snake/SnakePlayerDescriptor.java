@@ -5,9 +5,9 @@ package de.hhn.it.pp.components.snake;
  *
  * @author Sören Greiner, Karen Hofele
  */
-public class SnakePlayerDiscriptor {
+public class SnakePlayerDescriptor {
   private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(SnakePlayerDiscriptor.class);
+            org.slf4j.LoggerFactory.getLogger(SnakePlayerDescriptor.class);
 
   private String nickname;
   private int highscore;
@@ -18,7 +18,7 @@ public class SnakePlayerDiscriptor {
    *
    * @param nickname nickname of the current player.
    */
-  public SnakePlayerDiscriptor(final String nickname) {
+  public SnakePlayerDescriptor(final String nickname) {
     this.nickname = nickname;
     highscore = 0;
     level = 1;

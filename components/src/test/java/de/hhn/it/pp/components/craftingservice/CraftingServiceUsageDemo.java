@@ -6,7 +6,7 @@ import de.hhn.it.pp.components.craftingservice.provider.*;
  * A program demo to show off the basic feature of the crafting system
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-04-15
+ * @version 2020-04-20
  */
 
 public class CraftingServiceUsageDemo {
@@ -16,6 +16,11 @@ public class CraftingServiceUsageDemo {
 
         // create an inventory
         Inventory demoInventory = new Inventory(18);
+        // create some resources
+        Resource smallWoodPlank = new Resource("Small Wood Plank");
+        Resource magicalEssence = new Resource("Magical Essence");
+        Resource fieryEssence = new Resource("Fiery Essence");
+        Resource mediumIronBar = new Resource("Medium Iron Bar");
         // create some crafting patterns
         CraftingPattern largeIronSword = new CraftingPattern(1.5f,
                 new Resource("Small Wood Plank"), new Resource("Medium Iron Bar"),
@@ -29,19 +34,13 @@ public class CraftingServiceUsageDemo {
 
         // --- DEMO SCENARIO ---
 
-        // add some resources into the inventory
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(),
-                new Resource("Small Wood Plank"));
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(),
-                new Resource("Magical Essence"));
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(),
-                new Resource("Fiery Essence"));
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(),
-                new Resource("Medium Iron Bar"));
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(),
-                new Resource("Medium Iron Bar"));
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(),
-                new Resource("Medium Iron Bar"));
+        // add the resources into the inventory
+        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), smallWoodPlank);
+        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), magicalEssence);
+        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), fieryEssence);
+        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), mediumIronBar);
+        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), mediumIronBar);
+        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), mediumIronBar);
 
         // print the inventory first
         demoInventory.printInventory();
@@ -60,6 +59,15 @@ public class CraftingServiceUsageDemo {
         smallMagicalWand.printCraftingPattern();
         demoInventory.craft(demoInventory.getItems(), demoInventory.getInventorySize(), smallMagicalWand);
         // this should not work because there is no 'Small Wood Plank' in the inventory anymore - print inventory
+        demoInventory.printInventory();
+
+        // try to delete the 'Magical Essence' form the inventory
+        if(demoInventory.remove(demoInventory.getItems(), magicalEssence)) {
+            System.out.println("'" + magicalEssence.getName() + "' deleted from inventory!\n");
+        } else {
+            System.out.println("Inventory is empty or item doesn't exist!\n");
+        }
+        // this should work - print updated inventory
         demoInventory.printInventory();
     }
 }
