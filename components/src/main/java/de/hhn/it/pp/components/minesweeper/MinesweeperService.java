@@ -42,9 +42,9 @@ public interface MinesweeperService {
     void endGame();
 
     /**
+     * Checks the clicked field.
      * @param x x-Pos of the clicked field.
      * @param y y-Pos of the clicked field.
-     *          Resets the Game.
      */
     void turn(int x, int y);
 
