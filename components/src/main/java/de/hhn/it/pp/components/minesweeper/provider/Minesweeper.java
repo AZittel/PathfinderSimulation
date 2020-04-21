@@ -39,16 +39,17 @@ public class Minesweeper implements MinesweeperService {
     public void turn(int x, int y) {
 
     }
-
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
-    public static void setFixBombs() {
+    @Override
+    public void setFixBombs() {
 
     }
     /**
      * Getter for getting bombs.
      */
+    @Override
     public int getBombs(){
         return 0;
     }
@@ -56,22 +57,26 @@ public class Minesweeper implements MinesweeperService {
     /**
      * calculates the Points.
      */
-    private void calculatePoints(){
+    @Override
+    public void calculatePoints(){
 
     }
 
     /**
      * Sets the current Points.
      */
-    private void setPoints(){
+    @Override
+    public void setPoints(int points){
 
     }
 
     /**
      * @return returns the current Points.
      */
-    private int getPoints(){
+    @Override
+    public int getPoints(){
         return 0;
     }
+
 
 }
