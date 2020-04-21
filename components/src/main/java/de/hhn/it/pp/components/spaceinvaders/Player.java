@@ -1,4 +1,4 @@
-/**
+/*
  @Author Darko Miklic, Marc Nauendorf
   * @Version 13.04.2020
  */
@@ -9,12 +9,12 @@ public class Player {
     int numLives;
     int numShutDowns = 0;
 
+    void movement(){}
     /**
      * Player died
      */
     void gameOver() {
     }
-
     /**
      * Player move up
      */

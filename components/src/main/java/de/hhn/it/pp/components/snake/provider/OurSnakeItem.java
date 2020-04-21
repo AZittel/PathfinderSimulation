@@ -6,7 +6,7 @@ package de.hhn.it.pp.components.snake.provider;
  * @author Karen Hofele, Sören Greiner
  */
 
-public class Item {
+public class OurSnakeItem {
 
   /**
    * Item's value.
@@ -17,7 +17,7 @@ public class Item {
    * Constructor for items.
    * @param value Item's value
    */
-  public Item(int value) {
+  public OurSnakeItem(int value) {
     this.value = value;
   }
 

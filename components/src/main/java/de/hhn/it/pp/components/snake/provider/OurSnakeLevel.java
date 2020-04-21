@@ -2,15 +2,15 @@ package de.hhn.it.pp.components.snake.provider;
 
 import java.util.ArrayList;
 
-public class Level {
+public class OurSnakeLevel {
 
   private int levelId;
 
   private int neededHighscore;
 
-  private ArrayList<Level> allLevels = new ArrayList<>();
+  private ArrayList<OurSnakeLevel> allLevels = new ArrayList<>();
 
-  public Level(int levelId, int neededHighscore) {
+  public OurSnakeLevel(int levelId, int neededHighscore) {
     this.levelId = levelId;
     this.neededHighscore = neededHighscore;
     allLevels.add(this);
