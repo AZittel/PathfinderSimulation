@@ -25,16 +25,26 @@ public class Minesweeper implements MinesweeperService {
 
     }
 
+    /**
+     *  Starts the Game.
+     */
     @Override
     public void startGame() {
 
     }
 
+    /**
+     * Ends the Game.
+     */
     @Override
     public void endGame() {
 
     }
-
+    /**
+     * Checks the clicked field.
+     * @param x x-Pos of the clicked field.
+     * @param y y-Pos of the clicked field.
+     */
     @Override
     public void turn(int x, int y) {
 
