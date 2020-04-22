@@ -6,7 +6,10 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.Directions;
 import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
 import de.hhn.it.pp.components.snake.SnakeService;
+
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Implements all methods of SnakeService and AdminSnakeService.
@@ -21,33 +24,39 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   /** List of all nicknames.*/
   private List<String> profiles;
 
-  private List<SnakePlayerDescriptor> allPlayers;
+  private ArrayList<SnakePlayerDescriptor> allPlayers;
 
   /** Current dircetion of the snake. */
   private Directions currentDirection;
 
   @Override
-  public List<SnakePlayerDescriptor> getPlayers() {
+  public ArrayList<SnakePlayerDescriptor> getPlayers() {
     //return allPlayers; //todo überarbeiten!
     return null;
   }
 
   @Override
-  public SnakePlayerDescriptor getPlayer(String nickName) throws IllegalParameterException {
-    return allPlayers.get(Integer.parseInt(nickName)); //todo übearbeiten! Exception werfen!
+  public SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException {
+    if(allPlayers.contains(nickName)){
+      int index = allPlayers.indexOf(nickName);
+      return allPlayers.get(index);
+    }
+    else{
+      throw new IllegalParameterException("Player with name " + nickName + " isn't available. Register the player first");
+    }
   }
 
   @Override
   public void addCallback(String nickName, SnakePlayerDescriptor listener)
           throws IllegalParameterException {
-    SnakePlayerDescriptor player = getPlayer(nickName);
+    //SnakePlayerDescriptor player = getPlayer(nickName);
     //todo implement method addCallback
   }
 
   @Override
   public void removeCallback(String nickName, SnakePlayerDescriptor listener)
           throws IllegalParameterException {
-    SnakePlayerDescriptor player = getPlayer(nickName);
+    //SnakePlayerDescriptor player = getPlayer(nickName);
     //todo implement method removeCallback
   }
 
