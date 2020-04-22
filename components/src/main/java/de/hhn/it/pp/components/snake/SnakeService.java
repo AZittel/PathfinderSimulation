@@ -3,7 +3,8 @@ package de.hhn.it.pp.components.snake;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.OurSnakeItem;
 import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
-import java.util.List;
+
+import java.util.ArrayList;
 
 /**
  * This SnakeService is an interface for a running instance of the game snake,
@@ -18,7 +19,7 @@ public interface SnakeService {
    *
    * @return List of registered players.
    */
-  List<SnakePlayerDescriptor> getPlayers();
+  ArrayList<SnakePlayerDescriptor> getPlayers();
 
   /**
    * Returns the description of the player with the chosen player name.
@@ -27,7 +28,7 @@ public interface SnakeService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerDescriptor getPlayer(String nickName) throws IllegalParameterException;
+  SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the progress of the player.
