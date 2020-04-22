@@ -4,6 +4,8 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.OurSnakeItem;
 import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -13,8 +15,8 @@ import de.hhn.it.pp.components.snake.provider.OurSnakeService;
  */
 public class DemoSnakeUsage {
 
-  private static final org.slf4j.Logger logger =
-          org.slf4j.LoggerFactory.getLogger(DemoSnakeUsage.class);
+  private static final Logger logger =
+          LoggerFactory.getLogger(DemoSnakeUsage.class);
 
 
   /**
@@ -24,7 +26,7 @@ public class DemoSnakeUsage {
 
     // Create the service
     logger.info(">>> create service");
-    de.hhn.it.pp.components.snake.SnakeService service = new OurSnakeService();
+    SnakeService service = new OurSnakeService();
     logger.info("{}", service);
 
     // Starts the game, creates the map, spawns snake
@@ -63,12 +65,12 @@ public class DemoSnakeUsage {
 
     // Snake moves up
     logger.info(">>> snake moves up");
-    //service.moveSnake();
+    service.moveSnake(Directions.UP);
     logger.info("{}", service);
 
     // Snake moves left
     logger.info(">>> snake moves left");
-    //service.moveSnake();
+    service.moveSnake(Directions.LEFT);
     logger.info("{}", service);
 
     OurSnakeItem snakeFood = new OurSnakeItem(2);
@@ -80,12 +82,12 @@ public class DemoSnakeUsage {
 
     // Snake moves right
     logger.info(">>> snake moves right");
-    //service.moveSnake();
+    service.moveSnake(Directions.RIGHT);
     logger.info("{}", service);
 
     // Snake moves down
     logger.info(">>> snake moves down");
-    //service.moveSnake();
+    service.moveSnake(Directions.DOWN);
     logger.info("{}", service);
 
     // Exits game
@@ -93,5 +95,4 @@ public class DemoSnakeUsage {
     service.exitGame();
     logger.info("{}", service);
   }
-
 }
