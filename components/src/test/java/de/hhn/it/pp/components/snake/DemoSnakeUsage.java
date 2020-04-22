@@ -46,9 +46,11 @@ public class DemoSnakeUsage {
     service.getPlayers();
     logger.info("{}", service);
 
+    SnakePlayerDescriptor player1 = new SnakePlayerDescriptor("horst64");
+
     // Returns all information of a player
     logger.info(">>> returns all information about horst64");
-    service.getPlayer("horst64");
+    service.getPlayer(player1);
     logger.info("{}", service);
 
     SnakePlayerDescriptor snakePlayerDiscriptor = new SnakePlayerDescriptor("horst64");
