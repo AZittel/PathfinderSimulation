@@ -3,7 +3,6 @@ package de.hhn.it.pp.components.snake;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.OurSnakeItem;
 import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 /**
@@ -33,25 +32,25 @@ public interface SnakeService {
   /**
    * Adds a listener to get updates on the progress of the player.
    *
-   * @param nick     nick of the player
+   * @param nickName nickName of the player
    * @param listener object implementing the listener interface
-   * @throws IllegalParameterException if either the nick does not exist or the listener is a
+   * @throws IllegalParameterException if either the nickName does not exist or the listener is a
    *     null reference.
    */
-  void addCallback(String nick, SnakePlayerDescriptor listener) throws IllegalParameterException;
+  void addCallback(String nickName, SnakePlayerDescriptor listener) throws IllegalParameterException;
 
   /**
    * Removes a listener.
    *
-   * @param nick     nick of the player
+   * @param nickName nickName of the player
    * @param listener listener to be removed
    */
-  void removeCallback(String nick, SnakePlayerDescriptor listener) throws IllegalParameterException;
+  void removeCallback(String nickName, SnakePlayerDescriptor listener) throws IllegalParameterException;
 
   /**
    * Starts the game of Snake.
    *
-   * @param nickName nick of the active player
+   * @param nickName nickName of the active player
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
   void startGame(String nickName) throws IllegalParameterException;
@@ -65,15 +64,17 @@ public interface SnakeService {
 
   /**
    * Closes the game.
+   *
+   * @return true if the game was exited
    */
-  void exitGame();
+  boolean exitGame();
 
   /**
    * Moves in chosen direction.
    *
    * @throws IllegalParameterException if the given key is invalid
    */
-  void moveSnake(KeyEvent key) throws IllegalParameterException;
+  void moveSnake(Directions key) throws IllegalParameterException;
 
   /**
    * Collects items.
@@ -81,4 +82,11 @@ public interface SnakeService {
    * @param snakeFood food that is collected by the snake.
    */
   int collect(OurSnakeItem snakeFood);
+
+  /**
+   * Getter for the current direction of the snake.
+   *
+   * @return current direction
+   */
+  Directions getCurrentDirection();
 }
