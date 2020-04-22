@@ -30,9 +30,8 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   private Directions currentDirection;
 
   @Override
-  public ArrayList<SnakePlayerDescriptor> getPlayers() {
-    //return allPlayers; //todo überarbeiten!
-    return null;
+  public ArrayList<SnakePlayerDescriptor> getAllPlayers() {
+    return allPlayers;
   }
 
   @Override
