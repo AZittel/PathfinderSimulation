@@ -7,6 +7,8 @@ package de.hhn.it.pp.components.spaceinvaders.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
+import java.util.List;
+
 /**
  * This Interface is an Interface for the Game Space Invaders that shows all the
  * functionality to interact with our game.
@@ -38,17 +40,44 @@ public interface SpaceInvadersService {
     void createEnemies(int xPosition, int yPosition, int speed) throws IllegalParameterException;
 
     /**
-     * @param xMovement direction of move x
-     * @param yMovement direction of move y
-     * @param shoot boolean for shoot
+     * @param xPosition for the position on the x axis
+     * @param yPosition for the position on the y axis
      * @throws IllegalArgumentException direction steps out of window
      */
-    void movement(int xMovement, int yMovement, boolean shoot) throws  IllegalArgumentException;
+    void movement(int xPosition, int yPosition) throws  IllegalArgumentException;
 
     /**
-     * @param score the counter for destroyed enemies
+     * @param shoot to ask if the player is shooting or not
      */
-    void showHighscore(int score);
+    void shooting(boolean shoot);
+
+    /**
+     * @param collision to ask if the projectile did hit a target
+     */
+    void collide(boolean collision) throws GameOverException;
+
+    /**
+     * @param highscoreList the counter for destroyed enemies
+     */
+    void addHighScore(List<String> highscoreList);
+
+    /**
+     * @param highscoreList the counter for destroyed enemies
+     */
+    void getHighscoreList(List<String> highscoreList);
+
+    /**
+     * @param xPosition for the position on the x axis
+     * @param yPosition for the position on the y axis
+     */
+    void getPositionPlayer(int xPosition, int yPosition) throws IllegalArgumentException;
+
+    /**
+     * @param xPosition for the position on the x axis
+     * @param yPosition for the position on the y axis
+     * @param speed for the movement speed of the enemies
+     */
+    void getPositionEnemies(int xPosition, int yPosition, int speed) throws IllegalArgumentException;
 
     /**
      *  Resets the Game.
