@@ -15,6 +15,7 @@ public class OurSnakeItem {
 
   /**
    * Constructor for items.
+   *
    * @param value Item's value
    */
   public OurSnakeItem(int value) {
@@ -23,18 +24,20 @@ public class OurSnakeItem {
 
   /**
    * Getter for the item's value.
+   *
    * @return item's value
    */
   public int getValue() {
-    return this.value;
+    return value;
   }
 
   /**
    * Spawns the item.
+   *
    * @param xPos x-coordinate of the spawnplace
    * @param yPos y-coordinate of the spawnplace
    */
   public void spawn(int xPos, int yPos){
-
+    //todo implement method
   }
 }
