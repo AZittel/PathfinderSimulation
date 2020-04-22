@@ -43,7 +43,7 @@ public class DemoSnakeUsage {
 
     // Returns list of all registered players
     logger.info(">>> returns the list of all registered players");
-    service.getPlayers();
+    service.getAllPlayers();
     logger.info("{}", service);
 
     SnakePlayerDescriptor player1 = new SnakePlayerDescriptor("horst64");
