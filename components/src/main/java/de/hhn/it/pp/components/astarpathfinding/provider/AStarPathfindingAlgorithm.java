@@ -1,67 +1,86 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
+import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
+import de.hhn.it.pp.components.astarpathfinding.Position;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AStarPathfindingAlgorithm extends AbstractPathfindingAlgorithm {
+public class AStarPathfindingAlgorithm {
 
-  @Override
+  private ArrayList<PathfindingInformation> result = new ArrayList<>();
+
+  private Position startCoordinates;
+  private Position destinationCoordinates;
+  private Terrain[][] map;
+
+  public AStarPathfindingAlgorithm(Position startCoordinates, Position destinationCoordinates,
+                                   Terrain[][] map) {
+    this.startCoordinates = startCoordinates;
+    this.destinationCoordinates = destinationCoordinates;
+    this.map = map;
+  }
+
+
   protected void findPath() {
+    PathfindingInformation information = new PathfindingInformation();
     // Add the start cell to the open list
-    information.addSpecificPosition(grid[startCoordinates.getX()][startCoordinates.getY()]);
+    information.addSpecificPosition(map[startCoordinates.getX()][startCoordinates.getY()]);
 
     while (!information.getSpecificPositions().isEmpty()) {
-      Cell currentCell = getCellWithLowestFCost();
-      assert currentCell != null;
+      Terrain currentTerrain = getCellWithLowestFCost(information);
+      assert currentTerrain != null;
 
-      information.getSpecificPositions().remove(currentCell);
-      information.getVisitedPositions().add(currentCell);
+      information.getSpecificPositions().remove(currentTerrain);
+      information.getVisitedPositions().add(currentTerrain);
 
       // Check whether the algorithm reached the destination cell
-      if (currentCell.equals(grid[destinationCoordinates.getX()][destinationCoordinates.getY()])) {
-        tracePath(grid[startCoordinates.getX()][startCoordinates.getY()], currentCell);
+      if (currentTerrain.equals(map[destinationCoordinates.getX()][destinationCoordinates.getY()])) {
+        tracePath(map[startCoordinates.getX()][startCoordinates.getY()], currentTerrain);
         return;
       }
 
       // Add neighbours to possible path if they are accessible i.e. no obstacle.
-      for (Cell neighbour : getNeighbours(currentCell)) {
-        if (!neighbour.isAccessible() || information.getVisitedPositions().contains(neighbour)) {
+      for (Terrain neighbour : getNeighbours(currentTerrain)) {
+        if (neighbour.getObstacleFactor() >= 1 || information.getVisitedPositions().contains(neighbour)) {
           continue;
         }
 
         // Update costs of the neighbour if a shorter path was found
-        int newCostToNeighbour = currentCell.getGCost() + getMDistance(currentCell, neighbour);
+        int newCostToNeighbour = currentTerrain.getGCost() + (int) ((getMDistance(currentTerrain, neighbour)) * (1 + currentTerrain.getObstacleFactor()));
         if (newCostToNeighbour < neighbour.getGCost()
-            || !information.getSpecificPositions().contains(neighbour)) {
+          || !information.getSpecificPositions().contains(neighbour)) {
           neighbour.setGCost(newCostToNeighbour);
           neighbour.setHCost(
-              getMDistance(
-                  neighbour, grid[destinationCoordinates.getX()][destinationCoordinates.getY()]));
-          neighbour.setParent(currentCell);
+            getMDistance(
+              neighbour, map[destinationCoordinates.getX()][destinationCoordinates.getY()]));
+          neighbour.setParent(currentTerrain);
 
           if (!information.getSpecificPositions().contains(neighbour)) {
             information.getSpecificPositions().add(neighbour);
           }
         }
       }
+
+      result.add(new PathfindingInformation(information.getSpecificPositions(), information.getVisitedPositions(), information.getFinalPathPositions()));
+
     }
   }
 
   /**
    * Backtrack the shortest path from the destination cell to the first cell after the start cell.
    *
-   * @param startCell start point in the grid
-   * @param endCell destination in the grid
+   * @param startTerrain start point in the grid
+   * @param endTerrain destination in the grid
    */
-  private void tracePath(Cell startCell, Cell endCell) {
-    List<Cell> path = new ArrayList<>();
-    Cell currentCell = endCell;
+  private void tracePath(Terrain startTerrain, Terrain endTerrain) {
+    List<Terrain> path = new ArrayList<>();
+    Terrain currentTerrain = endTerrain;
 
-    while (currentCell != startCell) {
-      path.add(currentCell);
-      currentCell = currentCell.getParent();
+    while (currentTerrain != startTerrain) {
+      path.add(currentTerrain);
+      currentTerrain = currentTerrain.getParent();
     }
 
     Collections.reverse(path);
@@ -71,44 +90,44 @@ public class AStarPathfindingAlgorithm extends AbstractPathfindingAlgorithm {
   /**
    * Calculates the approximation heuristics (Manhattan Distance).
    *
-   * @param cellA from
-   * @param cellB to
+   * @param terrainA from
+   * @param terrainB to
    * @return approximation distance between two cells
    */
-  private int getMDistance(Cell cellA, Cell cellB) {
-    return Math.abs(cellA.getGridRow() - cellB.getGridRow())
-        + Math.abs(cellA.getGridCol() - cellB.getGridCol());
+  private int getMDistance(Terrain terrainA, Terrain terrainB) {
+    return Math.abs(terrainA.getPosition().getX() - terrainB.getPosition().getX())
+      + Math.abs(terrainA.getPosition().getY() - terrainB.getPosition().getY());
   }
 
   /**
    * Looks for all available horizontal and vertical neighbours of the given cell in the grid and
    * returns them as an array of cells.
    *
-   * @param cell the cell from which the neighbours are to be determined
+   * @param terrain the cell from which the neighbours are to be determined
    * @return an array of cells which are neighbours of the given cell
    */
-  private Cell[] getNeighbours(Cell cell) {
+  private Terrain[] getNeighbours(Terrain terrain) {
     // We currently have a maximum of 4 neighbours, possibly even less.
-    Cell[] neighbours = new Cell[4];
+    Terrain[] neighbours = new Terrain[4];
 
     // Left neighbour
-    if (cell.getGridRow() - 1 >= 0) {
-      neighbours[0] = grid[cell.getGridRow() - 1][cell.getGridCol()];
+    if (terrain.getPosition().getX() - 1 >= 0) {
+      neighbours[0] = map[terrain.getPosition().getX() - 1][terrain.getPosition().getY()];
     }
 
     // Right neighbour
-    if (cell.getGridRow() + 1 <= grid.length) {
-      neighbours[1] = grid[cell.getGridRow() + 1][cell.getGridCol()];
+    if (terrain.getPosition().getX() + 1 <= map.length) {
+      neighbours[1] = map[terrain.getPosition().getX() + 1][terrain.getPosition().getY()];
     }
 
     // Top neighbour
-    if (cell.getGridCol() - 1 >= 0) {
-      neighbours[2] = grid[cell.getGridRow()][cell.getGridCol() - 1];
+    if (terrain.getPosition().getY() - 1 >= 0) {
+      neighbours[2] = map[terrain.getPosition().getX()][terrain.getPosition().getY() - 1];
     }
 
     // Bottom neighbour
-    if (cell.getGridCol() + 1 <= grid[cell.getGridRow()].length) {
-      neighbours[3] = grid[cell.getGridRow()][cell.getGridCol() + 1];
+    if (terrain.getPosition().getY() + 1 <= map[terrain.getPosition().getX()].length) {
+      neighbours[3] = map[terrain.getPosition().getX()][terrain.getPosition().getY() + 1];
     }
 
     return neighbours;
@@ -119,14 +138,18 @@ public class AStarPathfindingAlgorithm extends AbstractPathfindingAlgorithm {
    *
    * @return cell with the lowest f cost.
    */
-  private Cell getCellWithLowestFCost() {
+  private Terrain getCellWithLowestFCost(PathfindingInformation information) {
     if (!information.getSpecificPositions().isEmpty()) {
       return information.getSpecificPositions().stream()
-          .min(Comparator.comparing(Cell::calculateFCost))
-          .get();
+        .min(Comparator.comparing(Terrain::calculateFCost))
+        .get();
     } else {
       return null;
     }
+  }
+
+  public ArrayList<PathfindingInformation> getResult() {
+    return result;
   }
 
   @Override
