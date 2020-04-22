@@ -8,10 +8,14 @@ package de.hhn.it.pp.components.snake.provider;
 
 public class OurSnakeItem {
 
-  /**
-   * Item's value.
-   */
+  /** Item's value.*/
   private int value;
+
+  /** Item's x-coordinate */
+  private int xPosition;
+
+  /** Item's y-coordinate */
+  private int yPosition;
 
   /**
    * Constructor for items.
@@ -39,5 +43,7 @@ public class OurSnakeItem {
    */
   public void spawn(int xPos, int yPos){
     //todo implement method
+    xPosition = xPos;
+    yPosition = yPos;
   }
 }
