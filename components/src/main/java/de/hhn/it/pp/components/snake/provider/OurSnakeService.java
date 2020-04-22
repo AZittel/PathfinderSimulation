@@ -1,44 +1,54 @@
 package de.hhn.it.pp.components.snake.provider;
 
+import static de.hhn.it.pp.components.snake.Directions.*;
+
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.snake.Directions;
 import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
 import de.hhn.it.pp.components.snake.SnakeService;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
+/**
+ * Implements all methods of SnakeService and AdminSnakeService.
+ *
+ * @author Karen Hofele, Sören Greiner
+ */
+public class OurSnakeService implements SnakeService, AdminSnakeService {
 
-public class OurSnakeService implements SnakeService {
-
-  /**
-   * Achieved points.
-   */
+  /** Achieved points.*/
   private int achievedScore;
 
-  /**
-   * List of all nicknames.
-   */
+  /** List of all nicknames.*/
   private List<String> profiles;
+
+  private List<SnakePlayerDescriptor> allPlayers;
+
+  /** Current dircetion of the snake. */
+  private Directions currentDirection;
 
   @Override
   public List<SnakePlayerDescriptor> getPlayers() {
+    //return allPlayers; //todo überarbeiten!
     return null;
   }
 
   @Override
-  public SnakePlayerDescriptor getPlayer(String nick) throws IllegalParameterException {
-    return null;
+  public SnakePlayerDescriptor getPlayer(String nickName) throws IllegalParameterException {
+    return allPlayers.get(Integer.parseInt(nickName)); //todo übearbeiten! Exception werfen!
   }
 
   @Override
-  public void addCallback(String nick, SnakePlayerDescriptor listener)
+  public void addCallback(String nickName, SnakePlayerDescriptor listener)
           throws IllegalParameterException {
-
+    SnakePlayerDescriptor player = getPlayer(nickName);
+    //todo implement method addCallback
   }
 
   @Override
-  public void removeCallback(String nick, SnakePlayerDescriptor listener)
+  public void removeCallback(String nickName, SnakePlayerDescriptor listener)
           throws IllegalParameterException {
-
+    SnakePlayerDescriptor player = getPlayer(nickName);
+    //todo implement method removeCallback
   }
 
   @Override
@@ -55,7 +65,7 @@ public class OurSnakeService implements SnakeService {
 
   @Override
   public void runLevel(OurSnakeLevel level, int highscore) throws IllegalParameterException {
-    if (highscore == 0 || highscore < 10) {
+    if (highscore < 10) {
       level.load(1); //TODO id überarbeiten
     }
     if (highscore < 0) {
@@ -65,23 +75,20 @@ public class OurSnakeService implements SnakeService {
   }
 
   @Override
-  public void exitGame() {
-
+  public boolean exitGame() {
+    return true;
   }
 
   @Override
-  public void moveSnake(KeyEvent key) throws IllegalParameterException {
-    if (key.getKeyCode() == KeyEvent.VK_W || key.getKeyCode() == KeyEvent.VK_UP) {
-      boolean moveUp = true;
-    }
-    if (key.getKeyCode() == KeyEvent.VK_S || key.getKeyCode() == KeyEvent.VK_DOWN) {
-      boolean moveDown = true;
-    }
-    if (key.getKeyCode() == KeyEvent.VK_A || key.getKeyCode() == KeyEvent.VK_LEFT) {
-      boolean moveLeft = true;
-    }
-    if (key.getKeyCode() == KeyEvent.VK_D || key.getKeyCode() == KeyEvent.VK_RIGHT) {
-      boolean moveRight = true;
+  public void moveSnake(Directions key) throws IllegalParameterException {
+    if (key == LEFT) {
+      currentDirection = LEFT;
+    } else if (key == RIGHT) {
+      currentDirection = RIGHT;
+    } else if (key == DOWN) {
+      currentDirection = DOWN;
+    } else if (key == UP) {
+      currentDirection = UP;
     } else {
       throw new IllegalParameterException("Invalid key. Please press WASD or arrow keys.");
     }
@@ -92,4 +99,29 @@ public class OurSnakeService implements SnakeService {
     achievedScore += snakeFood.getValue();
     return achievedScore;
   }
+
+  @Override
+  public Directions getCurrentDirection() {
+    return currentDirection;
+  }
+
+  @Override
+  public void addPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException {
+    if (allPlayers.contains(nickName)) {
+      throw new IllegalParameterException("nickname is already registered.");
+    } else {
+      allPlayers.add(nickName);
+    }
+  }
+
+  @Override
+  public void removePlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException {
+    if (allPlayers.contains(nickName)) {
+      allPlayers.remove(nickName);
+    } else {
+      throw new IllegalParameterException("nickname is not registered, "
+              + "therefore it can't be removed");
+    }
+  }
 }
+
