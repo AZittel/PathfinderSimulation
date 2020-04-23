@@ -1,6 +1,0 @@
-GitLab:
-https://git.it.hs-heilbronn.de/it/courses/seb/pp/2020-ss/gaming-pp-20-ss
-To-Do liste:
-https://docs.google.com/spreadsheets/d/1_8aPHJDI-Y4M1oVtEbhzQAz0bQTpJXP01nX04aSc8is/edit#gid=0
-Confluence:
-https://confluence-student.it.hs-heilbronn.de/display/PP20SS/04+Snake
