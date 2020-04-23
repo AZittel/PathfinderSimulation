@@ -1,9 +1,10 @@
 package de.hhn.it.pp.javafx.controllers.apiviewscontrollers;
 
+import de.hhn.it.pp.components.api.src.main.java.api.Api;
 import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
 
-
 import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
+import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 import de.hhn.it.pp.javafx.controllers.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Popup;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 
@@ -49,10 +53,9 @@ public class InventoryViewController extends Controller implements Initializable
     @FXML
     TextField newMaxVolume;
 
-    private ApiService api;
+    private static Api api;
 
     public InventoryViewController() {
-        api = new ApiService();
 
         inventoryObservableList = FXCollections.observableArrayList();
         currentInventories = new ArrayList<>();
@@ -90,7 +93,7 @@ public class InventoryViewController extends Controller implements Initializable
     }
 
     @FXML
-    public void search(ActionEvent event) {
+    public void search() {
         logger.info("clicked on search");
 
         if (!idSearch.getText().isEmpty()) {
@@ -184,15 +187,6 @@ public class InventoryViewController extends Controller implements Initializable
         //edit the entry in the database
         api.editInventory(editedInventory);
 
-        /*check if the change has been made in the database by retrieving the item with the id of the previously
-         *selected inventory
-         */
-        ArrayList<Integer> controlId = new ArrayList<>();
-        controlId.add(selectedInventory.getId());
-        ArrayList<Inventory> controlInvList = new ArrayList<>();
-        controlInvList.addAll(api.retrieveInventories(controlId));
-        selectedInventory = controlInvList.get(0);
-
         //update list- and tableVie
         updateInventoryListView();
         updateInventoryTable();
@@ -215,6 +209,37 @@ public class InventoryViewController extends Controller implements Initializable
         //update list- and tableVie
         updateInventoryListView();
         updateInventoryTable();
+    }
+
+    @FXML
+    public void solveKnapSack() {
+        if (selectedInventory == null) {
+            logger.error("no inventory selected");
+            return;
+        }
+
+        String output = "";
+        int weight = 0;
+        int volume = 0;
+        int value = 0;
+        ArrayList<Item> possibleItems = (ArrayList<Item>) api.knapSack(selectedInventory.getId());
+        for (Item item : possibleItems) {
+            output = output.concat("item: " + item.toString() + ", weight: " + item.getWeight() +
+                    ", volume: " + item.getVolume() + ", value: " + item.getValue() + "\n");
+            weight += item.getWeight();
+            volume += item.getVolume();
+            value += item.getValue();
+        }
+        output = output.concat("possible weight: " + weight + ", volume: " + volume + ", value: " + value);
+        logger.debug(output);
+        Alert popup = new Alert(Alert.AlertType.INFORMATION);
+        popup.setTitle("KnapSack result");
+        popup.setHeaderText(null);
+        //popup.initStyle(StageStyle.UTILITY);
+        popup.setContentText(output);
+
+        popup.showAndWait();
+        logger.info("solved knapsack for id: " + selectedInventory.getId());
     }
 
     public void updateInventoryListView() {
@@ -251,6 +276,8 @@ public class InventoryViewController extends Controller implements Initializable
                 inventoryTable.refresh();
                 return;
             }
+        } else {
+            selectedInventory = api.retrieveInventory(selectedInventory.getId());
         }
 
         for (TableColumn<Inventory, String> column : columns) {
@@ -260,6 +287,10 @@ public class InventoryViewController extends Controller implements Initializable
         }
         inventoryTable.getItems().clear();
         inventoryTable.getItems().add(selectedInventory);
+    }
+
+    public static void setApi(Api api) {
+        InventoryViewController.api = api;
     }
 
     private static class InventoryCell extends ListCell<Inventory> {

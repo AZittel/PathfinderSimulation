@@ -1,10 +1,4 @@
-gui files:
-	Controller:
-	-ItemViewController
-	Views:
-	-ItemView.fxml
-
-component files:
-	implementing:
-	-moveItem()
-	-knapSack()
+docs:
+    toUpdate:
+    -api_gui_structure
+    -api_structure

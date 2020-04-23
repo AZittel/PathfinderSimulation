@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
@@ -44,11 +41,11 @@
                 <HBox AnchorPane.topAnchor="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       prefHeight="50.0" prefWidth="580.0">
                     <children>
-                        <TextField fx:id="newName" promptText="new name" prefHeight="50.0" prefWidth="233.3"/>
+                        <TextField fx:id="newName" promptText="new name" prefHeight="50.0" prefWidth="193.3"/>
                         <TextField fx:id="newMaxWeight" promptText="new max weight" prefHeight="50.0"
-                                   prefWidth="233.3"/>
+                                   prefWidth="193.3"/>
                         <TextField fx:id="newMaxVolume" promptText="new max volume" prefHeight="50.0"
-                                   prefWidth="233.3"/>
+                                   prefWidth="193.3"/>
                     </children>
                 </HBox>
                 <HBox AnchorPane.topAnchor="350.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -59,6 +56,12 @@
                         <Button text="edit Inventory" onAction="#editInventory" prefHeight="50.0" prefWidth="150.0"/>
                         <Button text="remove Inventory" onAction="#removeInventory" prefHeight="50.0"
                                 prefWidth="150.0"/>
+                    </children>
+                </HBox>
+                <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      prefHeight="50.0" alignment="CENTER_RIGHT" spacing="83.3">
+                    <children>
+                        <Button text="solve knap sack" onAction="#solveKnapSack" prefHeight="50.0" prefWidth="150.0"/>
                     </children>
                 </HBox>
             </children>

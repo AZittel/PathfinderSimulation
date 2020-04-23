@@ -1,5 +1,9 @@
 package de.hhn.it.pp.javafx.controllers;
 
+import de.hhn.it.pp.components.api.src.main.java.api.Api;
+import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
+import de.hhn.it.pp.javafx.controllers.apiviewscontrollers.InventoryViewController;
+import de.hhn.it.pp.javafx.controllers.apiviewscontrollers.ItemViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +21,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ApiController extends Controller implements Initializable {
+    private static final org.slf4j.Logger logger =
+            org.slf4j.LoggerFactory.getLogger(ApiController.class);
 
+    FXMLLoader loader;
     @FXML
     ListView<String> functionListView;
     ObservableList<String> selectableFunctions;
@@ -27,14 +34,17 @@ public class ApiController extends Controller implements Initializable {
     private final String INVENTORIES = "Inventories";
     private final String ITEMS = "Items";
 
-    private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(ApiController.class);
+    private Api api;
+    private InventoryViewController inventoryViewController;
+    private ItemViewController itemViewController;
 
     public ApiController() {
 
         selectableFunctions = FXCollections.observableArrayList();
         selectableFunctions.add(INVENTORIES);
         selectableFunctions.add(ITEMS);
+        this.api = new ApiService();
+
     }
 
     @Override
@@ -61,11 +71,17 @@ public class ApiController extends Controller implements Initializable {
             if (functionListView.getSelectionModel().getSelectedItem().equals(INVENTORIES)) {
                 logger.info("loading InventoryView");
                 URL url = getClass().getResource("/fxml/apiviews/InventoryView.fxml");
+                loader = new FXMLLoader(url);
+                inventoryViewController = loader.getController();
+                InventoryViewController.setApi(api);
                 functionAnchorPane.getChildren().clear();
                 functionAnchorPane.getChildren().add(FXMLLoader.load(url));
             } else if (functionListView.getSelectionModel().getSelectedItem().equals(ITEMS)) {
                 logger.info("loading ItemView");
                 URL url = getClass().getResource("/fxml/apiviews/ItemView.fxml");
+                loader = new FXMLLoader(url);
+                itemViewController = loader.getController();
+                ItemViewController.setApi(api);
                 functionAnchorPane.getChildren().clear();
                 functionAnchorPane.getChildren().add(FXMLLoader.load(url));
             }
