@@ -1,51 +1,69 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.provider.Cell;
+import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Representation of an object which holds information about pathfinding algorithms. */
+/**
+ * Representation of an object which holds information about pathfinding algorithms.
+ */
 public class PathfindingInformation {
 
 
-  /** List of positions specific to algorithms. */
-  private List<Cell> specificPositions = new ArrayList<>();
+  /**
+   * List of positions specific to algorithms.
+   */
+  private List<Terrain> specificPositions = new ArrayList<>();
 
-  /** List of positions a pathfinding algorithm did visit. */
-  private List<Cell> visitedPositions = new ArrayList<>();
+  /**
+   * List of positions a pathfinding algorithm did visit.
+   */
+  private List<Terrain> visitedPositions = new ArrayList<>();
 
-  /** List of positions of the final and shortest path. */
-  private List<Cell> finalPathPositions = new ArrayList<>();
+  /**
+   * List of positions of the final and shortest path.
+   */
+  private List<Terrain> finalPathPositions = new ArrayList<>();
 
-  public List<Cell> getSpecificPositions() {
+  public PathfindingInformation(List<Terrain> specificPositions, List<Terrain> visitedPositions, List<Terrain> finalPathPositions) {
+    this.specificPositions = new ArrayList<>(specificPositions);
+    this.visitedPositions = new ArrayList<>(visitedPositions);
+    this.finalPathPositions = new ArrayList<>(finalPathPositions);
+  }
+
+  public PathfindingInformation() {
+  }
+
+
+  public List<Terrain> getSpecificPositions() {
     return specificPositions;
   }
 
-  public void setSpecificPositions(List<Cell> specificPositions) {
+  public void setSpecificPositions(List<Terrain> specificPositions) {
     this.specificPositions = specificPositions;
   }
 
-  public List<Cell> getVisitedPositions() {
+  public List<Terrain> getVisitedPositions() {
     return visitedPositions;
   }
 
-  public void setVisitedPositions(List<Cell> visitedPositions) {
+  public void setVisitedPositions(List<Terrain> visitedPositions) {
     this.visitedPositions = visitedPositions;
   }
 
-  public List<Cell> getFinalPathPositions() {
+  public List<Terrain> getFinalPathPositions() {
     return finalPathPositions;
   }
 
-  public void setFinalPathPositions(List<Cell> finalPathPositions) {
+  public void setFinalPathPositions(List<Terrain> finalPathPositions) {
     this.finalPathPositions = finalPathPositions;
   }
 
-  public void addVisitedPosition(Cell visitedPosition) {
+  public void addVisitedPosition(Terrain visitedPosition) {
     this.visitedPositions.add(visitedPosition);
   }
 
-  public void addSpecificPosition(Cell specificPosition) {
+  public void addSpecificPosition(Terrain specificPosition) {
     this.specificPositions.add(specificPosition);
   }
 
@@ -54,4 +72,6 @@ public class PathfindingInformation {
     visitedPositions.clear();
     finalPathPositions.clear();
   }
+
+
 }

@@ -2,7 +2,7 @@ package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.Position;
 
-public class Cell {
+public class Terrain {
   /**
    * The movement cost to move from the starting point to a given square on the grid, following the
    * path generated to get there. (Distance from starting cell)
@@ -15,24 +15,35 @@ public class Cell {
    */
   private int h;
 
-  /** Determines whether the cell is blocked for pathing */
-  private boolean isAccessible;
+  /**
+   * Factor to influence the difficulty to pass the terrain
+   */
+  private double obstacleFactor;
 
+  /**
+   * Position on the map.
+   */
   private Position position;
-  private int gridRow;
-  private int gridCol;
 
-  /** The neighbour with the lowest f value */
-  private Cell parent;
+  /**
+   * The terrain type.
+   */
+  private TerrainType type;
 
-  private Cell() {}
 
-  public Cell(int gridRow, int gridCol) {
+  /**
+   * The neighbour with the lowest f value
+   */
+  private Terrain parent;
+
+  private Terrain() {
+  }
+
+  public Terrain(int gridRow, int gridCol, TerrainType type) {
     super();
-    isAccessible = true;
     this.position = new Position(gridRow, gridCol);
-    this.gridRow = gridRow;
-    this.gridCol = gridCol;
+    this.type = type;
+    this.obstacleFactor = type.getDefaultFactor();
   }
 
   /**
@@ -44,12 +55,23 @@ public class Cell {
     return g + h;
   }
 
-  public boolean isAccessible() {
-    return isAccessible;
+  public double getObstacleFactor() {
+    return obstacleFactor;
   }
 
-  public void setAccessible(boolean accessible) {
-    isAccessible = accessible;
+  /**
+   * Sets the obstacle factor clamped between 0 and 1.
+   *
+   * @param obstacleFactor the new obstacle factor
+   */
+  public void setObstacleFactor(double obstacleFactor) {
+    if (obstacleFactor < 0) {
+      this.obstacleFactor = 0;
+    } else if (this.obstacleFactor > 1) {
+      this.obstacleFactor = 1;
+    } else {
+      this.obstacleFactor = obstacleFactor;
+    }
   }
 
   public int getGCost() {
@@ -64,19 +86,11 @@ public class Cell {
     this.h = h;
   }
 
-  public int getGridRow() {
-    return gridRow;
-  }
-
-  public int getGridCol() {
-    return gridCol;
-  }
-
-  public Cell getParent() {
+  public Terrain getParent() {
     return parent;
   }
 
-  public void setParent(Cell parent) {
+  public void setParent(Terrain parent) {
     this.parent = parent;
   }
 
@@ -90,6 +104,8 @@ public class Cell {
 
   @Override
   public String toString() {
-    return "Cell{" + "gridRow=" + gridRow + ", gridCol=" + gridCol + '}';
+    return
+      position + "";
+
   }
 }
