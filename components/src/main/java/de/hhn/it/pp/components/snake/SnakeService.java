@@ -19,7 +19,7 @@ public interface SnakeService {
    *
    * @return List of registered players.
    */
-  ArrayList<SnakePlayerDescriptor> getAllPlayers();
+  ArrayList<SnakePlayerDescriptor> getPlayer();
 
   /**
    * Returns the description of the player with the chosen player name.
@@ -28,7 +28,7 @@ public interface SnakeService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException;
+  SnakePlayerDescriptor getPlayer(String nickname) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the progress of the player.

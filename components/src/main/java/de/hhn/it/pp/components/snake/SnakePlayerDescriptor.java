@@ -9,7 +9,7 @@ public class SnakePlayerDescriptor {
   private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(SnakePlayerDescriptor.class);
 
-  private String nickname;
+  private String player;
   private int highscore;
   private int level;
   private State state;
@@ -21,7 +21,7 @@ public class SnakePlayerDescriptor {
    * @param nickname nickname of the current player.
    */
   public SnakePlayerDescriptor(final String nickname) {
-    this.nickname = nickname;
+    this.player = nickname;
     highscore = 0;
     level = 1;
     instance = 0;
@@ -31,16 +31,16 @@ public class SnakePlayerDescriptor {
    * Getter for the player's nickname.
    * @return nickname of the player
    */
-  public String getNickname() {
-    return nickname;
+  public String getPlayer() {
+    return player;
   }
 
   /**
    * Setter for the player's nickname.
    * @param nickname new nickname
    */
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
+  public void setPlayer(String nickname) {
+    this.player = nickname;
   }
 
   /**

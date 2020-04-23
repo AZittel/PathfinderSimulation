@@ -4,9 +4,8 @@ import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
 import de.hhn.it.pp.components.snake.SnakeListener;
 import de.hhn.it.pp.components.snake.Move;
 import de.hhn.it.pp.components.snake.provider.snakestates.ControlState;
-
-import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.snakestates.OverState;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 import java.util.ArrayList;
 import java.util.List;
