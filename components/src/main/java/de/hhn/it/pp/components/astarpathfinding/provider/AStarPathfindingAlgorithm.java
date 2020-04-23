@@ -66,6 +66,9 @@ public class AStarPathfindingAlgorithm {
       result.add(new PathfindingInformation(information.getSpecificPositions(), information.getVisitedPositions(), information.getFinalPathPositions()));
 
     }
+
+    //TODO handle no valid path found
+
   }
 
   /**

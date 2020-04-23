@@ -7,6 +7,7 @@ public class MapManager {
   private Terrain[][] map;
 
 
+
   public MapManager() {
 
   }

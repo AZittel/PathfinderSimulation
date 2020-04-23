@@ -1,10 +1,15 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
+import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
+import de.hhn.it.pp.components.astarpathfinding.provider.TerrainType;
 
 public class DemoAStarUsage {
   private static final org.slf4j.Logger logger =
       org.slf4j.LoggerFactory.getLogger(DemoAStarUsage.class);
+
+
+
 
   public static void main(String[] args) throws Exception {
     // Create the service
@@ -31,8 +36,8 @@ public class DemoAStarUsage {
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
       logger.info(">>> add obstacle at: " + 3 + "|" + y);
-      Position obstacle = new Position(3, y);
-      service.placeObstacle(obstacle);
+      Terrain terrain = new Terrain(3, y, TerrainType.WATER);
+      service.placeTerrain(terrain);
     }
     logger.info("" + service);
 

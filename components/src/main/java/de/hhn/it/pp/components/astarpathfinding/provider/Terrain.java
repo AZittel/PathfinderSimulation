@@ -59,8 +59,19 @@ public class Terrain {
     return obstacleFactor;
   }
 
+  /**
+   * Sets the obstacle factor clamped between 0 and 1.
+   *
+   * @param obstacleFactor the new obstacle factor
+   */
   public void setObstacleFactor(double obstacleFactor) {
-    this.obstacleFactor = obstacleFactor;
+    if (obstacleFactor < 0) {
+      this.obstacleFactor = 0;
+    } else if (this.obstacleFactor > 1) {
+      this.obstacleFactor = 1;
+    } else {
+      this.obstacleFactor = obstacleFactor;
+    }
   }
 
   public int getGCost() {
@@ -94,7 +105,7 @@ public class Terrain {
   @Override
   public String toString() {
     return
-      position +"";
+      position + "";
 
   }
 }
