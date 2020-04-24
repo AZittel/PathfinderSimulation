@@ -8,47 +8,33 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.exceptions.InvalidStateException;
 import java.util.ArrayList;
 
-
 public final class Pathfinder implements PathfindingService {
-
+  private MapManager manager = new MapManager();
 
   @Override
-  public void createMap(int width, int height) throws IllegalParameterException,
-      InvalidStateException {
-
+  public void createMap(int width, int height) throws IllegalParameterException {
+    manager.createMap(width, height);
   }
 
   @Override
-  public void setStartPoint(Position position) throws IllegalParameterException,
-      InvalidStateException,
-      OccupiedPositionException {
-
-  }
+  public void setStartPoint(Position position)
+      throws IllegalParameterException, OccupiedPositionException {}
 
   @Override
-  public void setEndPoint(Position position) throws IllegalParameterException,
-      InvalidStateException,
-      OccupiedPositionException {
-
-  }
+  public void setEndPoint(Position position)
+      throws IllegalParameterException, OccupiedPositionException {}
 
   @Override
-  public void placeTerrain(Terrain tile) throws IllegalParameterException, InvalidStateException {
-
-  }
+  public void placeTerrain(Terrain tile) throws IllegalParameterException {}
 
   @Override
-  public ArrayList<PathfindingInformation> startPathfinding() throws InvalidStateException {
+  public ArrayList<PathfindingInformation> startPathfinding() {
     return null;
   }
 
   @Override
-  public void stopPathfinding() throws InvalidStateException {
-
-  }
+  public void stopPathfinding() throws InvalidStateException {}
 
   @Override
-  public void reset() throws InvalidStateException {
-
-  }
+  public void reset() {}
 }

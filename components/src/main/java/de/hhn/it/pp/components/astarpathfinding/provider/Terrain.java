@@ -2,7 +2,7 @@ package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.Position;
 
-public class Terrain {
+public class Terrain implements Cloneable {
   /**
    * The movement cost to move from the starting point to a given square on the grid, following the
    * path generated to get there. (Distance from starting cell)
@@ -15,29 +15,19 @@ public class Terrain {
    */
   private int h;
 
-  /**
-   * Factor to influence the difficulty to pass the terrain
-   */
+  /** Factor to influence the difficulty to pass the terrain */
   private double obstacleFactor;
 
-  /**
-   * Position on the map.
-   */
+  /** Position on the map. */
   private Position position;
 
-  /**
-   * The terrain type.
-   */
+  /** The terrain type. */
   private TerrainType type;
 
-
-  /**
-   * The neighbour with the lowest f value
-   */
+  /** The neighbour with the lowest f value */
   private Terrain parent;
 
-  private Terrain() {
-  }
+  private Terrain() {}
 
   public Terrain(int gridRow, int gridCol, TerrainType type) {
     super();
@@ -104,8 +94,15 @@ public class Terrain {
 
   @Override
   public String toString() {
-    return
-      position + "";
+    return position + "";
+  }
 
+  @Override
+  public Object clone() throws CloneNotSupportedException {
+    Terrain cloned = (Terrain) super.clone();
+    cloned.setParent((Terrain) cloned.getParent().clone());
+    Position clonedPosition = cloned.getPosition();
+    cloned.setPosition(new Position(clonedPosition.getX(), clonedPosition.getY()));
+    return cloned;
   }
 }
