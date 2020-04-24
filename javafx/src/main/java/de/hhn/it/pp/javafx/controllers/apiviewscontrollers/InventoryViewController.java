@@ -1,33 +1,33 @@
 package de.hhn.it.pp.javafx.controllers.apiviewscontrollers;
 
-import de.hhn.it.pp.components.api.src.main.java.api.Api;
-import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
-
-import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
-import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
 import de.hhn.it.pp.javafx.controllers.Controller;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.text.Text;
-import javafx.stage.Popup;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
-
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import de.hhn.it.pp.components.api.src.main.java.api.models.Inventory;
+import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
+import de.hhn.it.pp.components.api.src.main.java.api.Api;
 
+/**
+ * This class is is handles all user interaction via the InventoryView UI
+ *
+ * @author Dennis Schies
+ * @version 1.0
+ */
 public class InventoryViewController extends Controller implements Initializable {
 
     private static final org.slf4j.Logger logger =
@@ -235,13 +235,17 @@ public class InventoryViewController extends Controller implements Initializable
         Alert popup = new Alert(Alert.AlertType.INFORMATION);
         popup.setTitle("KnapSack result");
         popup.setHeaderText(null);
-        //popup.initStyle(StageStyle.UTILITY);
         popup.setContentText(output);
 
         popup.showAndWait();
         logger.info("solved knapsack for id: " + selectedInventory.getId());
     }
 
+    /**
+     * Updates the inventoryListView so that it shows the correspondent inventories depending on
+     * if a defaultListView is set retrieving all inventories or
+     * if not as above choosing inventories corresponding to the currentInventoryIds
+     */
     public void updateInventoryListView() {
         currentInventories.clear();
         inventoryObservableList.clear();
@@ -266,6 +270,12 @@ public class InventoryViewController extends Controller implements Initializable
         });
     }
 
+    /**
+     * Updates the inventoryTableView so that it shows the correspondent inventory depending on
+     * if there is no selected inventory try to get the first one from my currentInventories list
+     * if no entry in currentInventories is found it shall clear the table
+     * if there is a selectedInventory it shall update its values by retrieving one from the api and use that
+     */
     public void updateInventoryTable() {
         if (selectedInventory == null) {
             try {

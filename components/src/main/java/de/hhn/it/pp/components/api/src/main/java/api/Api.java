@@ -117,7 +117,6 @@ public interface Api {
      */
     void moveItem(Item item, int inventoryId);
 
-    //under development
     /**
      * Solves the Knap Sack Problem for an inventory to all items in the database
      *

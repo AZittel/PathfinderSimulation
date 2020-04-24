@@ -1,15 +1,10 @@
 package de.hhn.it.pp.javafx.controllers;
 
-import de.hhn.it.pp.components.api.src.main.java.api.Api;
-import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
-import de.hhn.it.pp.javafx.controllers.apiviewscontrollers.InventoryViewController;
-import de.hhn.it.pp.javafx.controllers.apiviewscontrollers.ItemViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +15,18 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.hhn.it.pp.components.api.src.main.java.api.Api;
+import de.hhn.it.pp.components.api.src.main.java.api.ApiService;
+
+import de.hhn.it.pp.javafx.controllers.apiviewscontrollers.InventoryViewController;
+import de.hhn.it.pp.javafx.controllers.apiviewscontrollers.ItemViewController;
+
+/**
+ * This class is is handles all user interaction via the ApiView UI
+ *
+ * @author Dennis Schies
+ * @version 1.0
+ */
 public class ApiController extends Controller implements Initializable {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(ApiController.class);
@@ -31,12 +38,11 @@ public class ApiController extends Controller implements Initializable {
     @FXML
     AnchorPane functionAnchorPane;
 
+    //the shown functionalities in the listView
     private final String INVENTORIES = "Inventories";
     private final String ITEMS = "Items";
 
     private Api api;
-    private InventoryViewController inventoryViewController;
-    private ItemViewController itemViewController;
 
     public ApiController() {
 
@@ -72,7 +78,6 @@ public class ApiController extends Controller implements Initializable {
                 logger.info("loading InventoryView");
                 URL url = getClass().getResource("/fxml/apiviews/InventoryView.fxml");
                 loader = new FXMLLoader(url);
-                inventoryViewController = loader.getController();
                 InventoryViewController.setApi(api);
                 functionAnchorPane.getChildren().clear();
                 functionAnchorPane.getChildren().add(FXMLLoader.load(url));
@@ -80,7 +85,6 @@ public class ApiController extends Controller implements Initializable {
                 logger.info("loading ItemView");
                 URL url = getClass().getResource("/fxml/apiviews/ItemView.fxml");
                 loader = new FXMLLoader(url);
-                itemViewController = loader.getController();
                 ItemViewController.setApi(api);
                 functionAnchorPane.getChildren().clear();
                 functionAnchorPane.getChildren().add(FXMLLoader.load(url));

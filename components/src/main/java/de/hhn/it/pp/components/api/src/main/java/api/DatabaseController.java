@@ -42,6 +42,7 @@ class DatabaseController {
 
         if (database.getItemInventoryAllocation(weight, volume, inventoryId)) {
             database.editItem(new Item(id, name, weight, volume, value, inventoryId));
+            database.calculateCurrentValue(oldInventoryId);
         }
     }
 
@@ -71,7 +72,7 @@ class DatabaseController {
         }
 
         if (itemNumber <= 0 || maxWeight <= 0 || maxVolume <= 0) {
-            logger.info("no items or limitations set");
+            logger.error("no items or limitations set");
             return null;
         }
 

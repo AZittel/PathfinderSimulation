@@ -60,7 +60,7 @@ interface Database {
     Collection<Inventory> retrieveInventories(Collection<Integer> ids);
 
     /**
-     * Adds a new inventory to the database
+     * Adds a new item to the database
      *
      * @param name name of the Item
      * @param weight weight of this item
@@ -70,7 +70,7 @@ interface Database {
     void addItem(String name, int weight, int volume, int value);
 
     /**
-     * Adds a new inventory to the database
+     * Adds a new item to the database
      *
      * @param name name of the Item
      * @param weight weight of this item
@@ -88,7 +88,7 @@ interface Database {
     void removeItem(int id);
 
     /**
-     * Edits certain fields of an inventory
+     * Edits certain fields of an item
      */
     void editItem(Item item);
 
@@ -100,7 +100,7 @@ interface Database {
     Item retrieveItem(int id);
 
     /**
-     * Returns a Collection of all inventories
+     * Returns a Collection of all items
      */
     Collection<Item> retrieveAllItems();
 
@@ -125,24 +125,5 @@ interface Database {
      * @param id the id of the inventory which we want to calculate the currentValue for
      */
     void calculateCurrentValue(int id);
-
-
-
-//    //under development
-//    // add whatever model
-//    void addModel(Model model);
-//
-//    //remove whatever model
-//    void removeModel(Model model);
-//
-//    //edit whatever model fields
-//    void editModel(Model model);
-//
-//    //retrieve a list of whatever models
-//    Collection<Model> retrieveModels(String modelType,Collection<int> modelIds);
-//
-//    //create a table of whatever model
-//    void createTableFromModel(Model model);
-
 
 }

@@ -110,21 +110,4 @@ public class ApiService implements Api {
         return dbController.knapSack(id);
     }
 
-//    //under development
-//    /**
-//     * Exchanges items between inventories
-//     */
-//    public void exchangeItems(){
-//
-//    }
-//
-//    /**
-//     * Solves the Knap Sack Problem for an inventory to all items in the database
-//     *
-//     * @param id id of the inventory the Knap Sack Problem shall be solved for
-//     */
-//    public void knapSack(int id){
-//
-//    }
-
 }

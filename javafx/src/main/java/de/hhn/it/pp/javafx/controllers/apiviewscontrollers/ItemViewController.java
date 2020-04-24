@@ -1,9 +1,7 @@
 package de.hhn.it.pp.javafx.controllers.apiviewscontrollers;
 
-import de.hhn.it.pp.components.api.src.main.java.api.Api;
-import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
-
 import de.hhn.it.pp.javafx.controllers.Controller;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,17 +9,25 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.util.Callback;
 
-
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import de.hhn.it.pp.components.api.src.main.java.api.Api;
+import de.hhn.it.pp.components.api.src.main.java.api.models.Item;
+
+/**
+ * This class is is handles all user interaction via the ItemView UI
+ *
+ * @author Dennis Schies
+ * @version 1.0
+ */
 public class ItemViewController extends Controller implements Initializable {
 
     private static final org.slf4j.Logger logger =
@@ -256,6 +262,11 @@ public class ItemViewController extends Controller implements Initializable {
         updateItemTable();
     }
 
+    /**
+     * Updates the itemListView so that it shows the correspondent items depending on
+     * if a defaultListView is set it shall retrieve all items or
+     * if not as above choosing items corresponding to the currentItemIds
+     */
     public void updateItemListView() {
         currentItems.clear();
         itemObservableList.clear();
@@ -280,6 +291,12 @@ public class ItemViewController extends Controller implements Initializable {
         });
     }
 
+    /**
+     * Updates the itemTableView so that it shows the correspondent item depending on
+     * if there is no selected item try to get the first one from my currentItems list
+     * if no entry in currentItems is found it shall clear the table
+     * if there is a selectedItem it shall update its values by retrieving one from the api and use that
+     */
     public void updateItemTable() {
         if (selectedItem == null) {
             try {

@@ -22,8 +22,7 @@ class SqliteDatabase implements Database {
 
     //connection object is necessary to create sql statements which execute sql queries
     private static Connection connection;
-    //default path to an SQLite database
-    private static Path dbPath = Paths.get("..", "components", "src", "main", "java", "de",
+    private static Path defaultPath = Paths.get("..", "components", "src", "main", "java", "de",
             "hhn", "it", "pp", "components", "api", "InventoryDatabase.db");
 
     /**
@@ -33,7 +32,7 @@ class SqliteDatabase implements Database {
     public SqliteDatabase() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + defaultPath);
         } catch (Exception exception) {
             exception.printStackTrace();
             System.exit(1);
