@@ -12,17 +12,17 @@ public class SnakePlayerDescriptor {
   private static final Logger logger =
             LoggerFactory.getLogger(SnakePlayerDescriptor.class);
 
-  private String nickName;
+  private String nickname;
   private int highscore;
   private int level;
 
   /**
    * Constructor for the current players instance of the game.
    *
-   * @param nickName nickname of the current player.
+   * @param nickname nickname of the current player.
    */
-  public SnakePlayerDescriptor(final String nickName) {
-    this.nickName = nickName;
+  public SnakePlayerDescriptor(final String nickname) {
+    this.nickname = nickname;
     highscore = 0;
     level = 1;
   }
@@ -30,19 +30,19 @@ public class SnakePlayerDescriptor {
   /**
    * Getter for the player's nickname.
    *
-   * @return nickName of the player
+   * @return nickname of the player
    */
-  public String getNickName() {
-    return nickName;
+  public String getNickname() {
+    return nickname;
   }
 
   /**
    * Setter for the player's nickname.
    *
-   * @param nickName new nickname
+   * @param nickname new nickname
    */
-  public void setNickname(String nickName) {
-    this.nickName = nickName;
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
 
   /**

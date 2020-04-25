@@ -24,37 +24,37 @@ public interface SnakeService {
   /**
    * Returns the description of the player with the chosen player name.
    *
-   * @param nickName nickname of the player.
+   * @param nickname nickname of the player.
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException;
+  SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the progress of the player.
    *
-   * @param nickName nickName of the player
+   * @param nickname nickname of the player
    * @param listener object implementing the listener interface
-   * @throws IllegalParameterException if either the nickName does not exist or the listener is a
+   * @throws IllegalParameterException if either the nickname does not exist or the listener is a
    *     null reference.
    */
-  void addCallback(String nickName, SnakePlayerDescriptor listener) throws IllegalParameterException;
+  void addCallback(String nickname, SnakePlayerDescriptor listener) throws IllegalParameterException;
 
   /**
    * Removes a listener.
    *
-   * @param nickName nickName of the player
+   * @param nickname nickname of the player
    * @param listener listener to be removed
    */
-  void removeCallback(String nickName, SnakePlayerDescriptor listener) throws IllegalParameterException;
+  void removeCallback(String nickname, SnakePlayerDescriptor listener) throws IllegalParameterException;
 
   /**
    * Starts the game of Snake.
    *
-   * @param nickName nickName of the active player
+   * @param nickname nickname of the active player
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
-  void startGame(String nickName) throws IllegalParameterException;
+  void startGame(String nickname) throws IllegalParameterException;
 
   /**
    * Determine the level order in which the player starts.

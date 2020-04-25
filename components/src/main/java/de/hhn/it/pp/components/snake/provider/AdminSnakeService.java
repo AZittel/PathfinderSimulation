@@ -14,16 +14,16 @@ public interface AdminSnakeService {
   /**
    * Adds a new player to the game.
    *
-   * @param nickName of the new player.
+   * @param nickname of the new player.
    * @throws IllegalParameterException if the descriptor is a null reference or incomplete.
    */
-  void addPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException;
+  void addPlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException;
 
   /**
    * Removes a player from the game.
    *
-   * @param nickName of the player that should be removed.
+   * @param nickname of the player that should be removed.
    * @throws IllegalParameterException if the nickname of the player does not exist.
    */
-  void removePlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException;
+  void removePlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException;
 }
