@@ -33,9 +33,9 @@ public interface SnakeService {
   /**
    * Adds a listener to get updates on the progress of the player.
    *
-   * @param nickname nickName of the player
+   * @param nickname nickname of the player
    * @param listener object implementing the listener interface
-   * @throws IllegalParameterException if either the nickName does not exist or the listener is a
+   * @throws IllegalParameterException if either the nickname does not exist or the listener is a
    *     null reference.
    */
   void addCallback(String nickname, SnakePlayerDescriptor listener) throws IllegalParameterException;
@@ -43,7 +43,7 @@ public interface SnakeService {
   /**
    * Removes a listener.
    *
-   * @param nickname nickName of the player
+   * @param nickname nickname of the player
    * @param listener listener to be removed
    */
   void removeCallback(String nickname, SnakePlayerDescriptor listener) throws IllegalParameterException;
@@ -51,7 +51,7 @@ public interface SnakeService {
   /**
    * Starts the game of Snake.
    *
-   * @param nickname nickName of the active player
+   * @param nickname nickname of the active player
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
   void startGame(String nickname) throws IllegalParameterException;
