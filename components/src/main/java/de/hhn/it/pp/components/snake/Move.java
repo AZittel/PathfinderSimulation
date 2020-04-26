@@ -11,7 +11,7 @@ public class Move {
      *
      * @param direction direction in there the snake moves
      */
-    public Move(final Direction direction) {
+    public Move(Direction direction) {
         this.direction = direction;
     }
 
@@ -19,7 +19,7 @@ public class Move {
         return direction;
     }
 
-    public void setDirection(final Direction direction) {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 }

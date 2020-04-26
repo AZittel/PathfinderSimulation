@@ -31,7 +31,7 @@ public class SnakePlayerDescriptor {
    * Getter for the player's nickname.
    * @return nickname of the player
    */
-  public String getPlayer() {
+  public String getNickname() {
     return player;
   }
 
@@ -39,7 +39,7 @@ public class SnakePlayerDescriptor {
    * Setter for the player's nickname.
    * @param nickname new nickname
    */
-  public void setPlayer(String nickname) {
+  public void setNickname(String nickname) {
     this.player = nickname;
   }
 
@@ -55,7 +55,7 @@ public class SnakePlayerDescriptor {
    * Setter for the new highscore.
    * @param highscore new highscore
    */
-  public void setHighscore(final int highscore) {
+  public void setHighscore(int highscore) {
     this.highscore = highscore;
   }
 
@@ -71,7 +71,7 @@ public class SnakePlayerDescriptor {
    * Setter for the new current level.
    * @param level new current level
    */
-  public void setLevel(final int level) {
+  public void setLevel(int level) {
     this.level = level;
   }
 
@@ -87,7 +87,7 @@ public class SnakePlayerDescriptor {
    * Setter for the new current state.
    * @param state new current state
    */
-  public void setState(final State state) {
+  public void setState(State state) {
     this.state = state;
   }
 
@@ -103,7 +103,7 @@ public class SnakePlayerDescriptor {
    * Setter for the new current instance.
    * @param instance new current instance
    */
-  public void setInstance(final int instance) {
+  public void setInstance(int instance) {
     this.instance = instance;
   }
 }
