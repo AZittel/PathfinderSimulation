@@ -35,20 +35,20 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     }
 
     @Override
-    public SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException {
-        if(allPlayers.contains(nickName)){
-            int index = allPlayers.indexOf(nickName);
+    public SnakePlayerDescriptor getPlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException {
+        if(allPlayers.contains(nickname)){
+            int index = allPlayers.indexOf(nickname);
             return allPlayers.get(index);
         }
         else{
-            throw new IllegalParameterException("Player with name " + nickName + " isn't available. Register the player first");
+            throw new IllegalParameterException("Player with name " + nickname + " isn't available. Register the player first");
         }
     }
 
     @Override
-    public void addCallback(String nickName, SnakePlayerDescriptor listener)
+    public void addCallback(String nickname, SnakePlayerDescriptor listener)
             throws IllegalParameterException {
-        //SnakePlayerDescriptor player = getPlayer(nickName);
+        //SnakePlayerDescriptor player = getPlayer(nickname);
         //todo implement method addCallback
     }
 
@@ -60,14 +60,14 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     }
 
     @Override
-    public void startGame(String nickName) throws IllegalParameterException {
+    public void startGame(String nickname) throws IllegalParameterException {
         new OurSnakeItem(1).spawn(20, 50);
-        if (nickName.length() >= 12) {
+        if (nickname.length() >= 12) {
             throw new IllegalParameterException("your nickname is too long. 12 characters are allowed.");
-        } else if (profiles.contains(nickName)) {
+        } else if (profiles.contains(nickname)) {
             throw new IllegalParameterException("nickname is already used. please choose another one");
         } else {
-            profiles.add(nickName);
+            profiles.add(nickname);
         }
     }
 
@@ -114,18 +114,18 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     }
 
     @Override
-    public void addPlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException {
-        if (allPlayers.contains(nickName)) {
+    public void addPlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException {
+        if (allPlayers.contains(nickname)) {
             throw new IllegalParameterException("nickname is already registered.");
         } else {
-            allPlayers.add(nickName);
+            allPlayers.add(nickname);
         }
     }
 
     @Override
-    public void removePlayer(SnakePlayerDescriptor nickName) throws IllegalParameterException {
-        if (allPlayers.contains(nickName)) {
-            allPlayers.remove(nickName);
+    public void removePlayer(SnakePlayerDescriptor nickname) throws IllegalParameterException {
+        if (allPlayers.contains(nickname)) {
+            allPlayers.remove(nickname);
         } else {
             throw new IllegalParameterException("nickname is not registered, "
                     + "therefore it can't be removed");
