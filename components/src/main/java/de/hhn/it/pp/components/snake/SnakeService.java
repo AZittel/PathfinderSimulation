@@ -52,14 +52,18 @@ public interface SnakeService {
    * Starts the game of Snake.
    *
    * @param nickname nickname of the active player
+   * @param windowWidth width of the window
+   * @param windowHeight height of the window
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
-  void startGame(String nickname) throws IllegalParameterException;
+  void startGame(String nickname, int windowWidth, int windowHeight) throws IllegalParameterException;
 
   /**
-   * Determine the level order in which the player starts.
+   * Runs the level.
    *
-   * @param level level where the player plays
+   * @param level level that should be runned
+   * @param highscore highscore that must be achieved to start the next level
+   * @throws IllegalParameterException if the highscore or level is invalid.
    */
   void runLevel(OurSnakeLevel level, int highscore) throws IllegalParameterException;
 
