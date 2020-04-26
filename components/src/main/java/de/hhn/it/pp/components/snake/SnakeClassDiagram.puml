@@ -1,0 +1,272 @@
+@startuml
+
+Snake <.. OurSnake
+SnakePlayerDescriptor -- OurSnake
+SnakeListener -- OurSnake
+Move -- OurSnake
+ControlState -- OurSnake
+OverState -- OurSnake
+class OurSnake {
+- {static} int : instance
+- ControlState : controlState
+- List<SnakeListener> : listeners
+- SnakePlayerDescriptor : descriptor
+--
+# OurSnake(SnakePlayerDescriptor)
+--
++ getInstance() : int
++ setInstance(final int)
++ updateDescriptor() : controlState
++ createLevel() : controlState.onStartLevel()
++ endLevel() : controlState.onEndLevel()
++ move() : controlState.onMove()
++ addCallback(SnakeListener)
++ removeCallback(SnakeListener)
++ getDescriptor() : String
++ getControllState() : String
++ setMakerState(final ControlState)
++ notifyListeners(ControlState)
+ }
+
+ class SnakePlayerDescriptor {
+ - String : player
+ - int : Highscore
+ - int : level
+ - State : state
+ - int : instance
+ --
+ # SnakePlayerDescriptor(final String)
+ --
+ + getPlayer() : String
+ + setPlayer(String)
+ + getHighscore() : int
+ + setHighscore(final int)
+ + getLevel() : int
+ + setLevel(final int)
+ + getState() : State
+ + setState(final State)
+ + getInstance() : int
+ + setInstance(final  int)
+ }
+
+ class Move {
+ - Direction : direction
+ --
+ # Move(final Direction)
+ --
+ + getDirection() : Direction
+ + setDirection(Direction)
+ }
+
+SnakeService <.. OurSnakeService
+AdminSnakeService <.. OurSnakeService
+Direction -- OurSnakeService
+SnakePlayerDescriptor -- OurSnakeService
+SnakeService -- OurSnakeService
+ class OurSnakeService {
+- int : achievedScore
+- List<String> profiles
+- ArrayList<SnakePlayerDescriptor> allPlayers
+- Direction : currentDirection
+--
+ + ArrayList<SnakePlayerDescriptor> getPlayer
+ + SnakePlayerDescriptor getPlayer(String)
+ + addCallback(String, SnakePlayerDescriptor)
+ + removeCallback(String, SnakePlayerDescriptor)
+ + startGame(String)
+ + runLevel(OurSnakeLevel, int)
+ + exitGame(boolean)
+ + moveSnake(Direction)
+ + collect(OurSnakeItem)
+ + Direction getCurrentDirection() : Direction
+ }
+
+ class OurSnakeLevel {
+ - int : levelId
+ - int : neededHighscore
+ - ArrayList<OurSnakeLevel> allLevels
+ --
+ # OurSnakeLevel(int, int)
+ --
+ + getLevelId() : int
+ + load(int)
+ + getNeededHighscore() : int
+ }
+
+ class OurSnakeItem {
+ - int : value
+ - int : xPosition
+ - int : yPosition
+ --
+ # OurSnakeItem(int)
+ --
+ + getValue() : int
+ + spawn(int, int)
+ }
+State -- ControlState
+OurSnake -- ControlState
+ abstract class ControlState {
+ - State : state
+ - OurSnake : snake
+ --
+ # ControlState(OurSnake)
+ --
+ + State getState() : state
+ + setState(final State)
+ + onStartLevel()
+ + onEndLevel()
+ + onCreateEnemy()
+ + onCreateItem()
+ + onCreateLevel()
+ + onMove()
+ + String toString() : String
+ }
+
+ ControlState <|-- CollidedState
+ class CollidedState {
+ # CollidedState(final OurSnake)
+ --
+  + onStartLevel()
+  + onEndLevel()
+  + onCreateEnemy()
+  + onCreateItem()
+  + onCreateLevel()
+  + onMove()
+ }
+
+  ControlState <|-- EnemyState
+  class EnemyState {
+  # EnemyState(final OurSnake)
+  --
+   + onStartLevel()
+   + onEndLevel()
+   + onCreateEnemy()
+   + onCreateItem()
+   + onCreateLevel()
+   + onMove()
+  }
+
+   ControlState <|-- GrowingState
+   class GrowingState {
+   # GrowingState(final OurSnake)
+   --
+    + onStartLevel()
+    + onEndLevel()
+    + onCreateEnemy()
+    + onCreateItem()
+    + onCreateLevel()
+    + onMove()
+   }
+
+    ControlState <|-- ItemState
+    class ItemState {
+    # ItemState(final OurSnake)
+    --
+     + onStartLevel()
+     + onEndLevel()
+     + onCreateEnemy()
+     + onCreateItem()
+     + onCreateLevel()
+     + onMove()
+    }
+
+     ControlState <|-- LevelState
+     class LevelState {
+     # LevelState(final OurSnake)
+     --
+      + onStartLevel()
+      + onEndLevel()
+      + onCreateEnemy()
+      + onCreateItem()
+      + onCreateLevel()
+      + onMove()
+     }
+
+      ControlState <|-- MoveState
+      class MoveState {
+      # MoveState(final OurSnake)
+      --
+       + onStartLevel()
+       + onEndLevel()
+       + onCreateEnemy()
+       + onCreateItem()
+       + onCreateLevel()
+       + onMove()
+      }
+
+       ControlState <|-- OverState
+       class OverState {
+       # OverState(final OurSnake)
+       --
+        + onStartLevel()
+        + onEndLevel()
+        + onCreateEnemy()
+        + onCreateItem()
+        + onCreateLevel()
+        + onMove()
+       }
+
+        ControlState <|-- SnakeState
+        class SnakeState {
+        # SnakeState(final OurSnake)
+        --
+         + onStartLevel()
+         + onEndLevel()
+         + onCreateEnemy()
+         + onCreateItem()
+         + onCreateLevel()
+         + onMove()
+        }
+
+ interface SnakeListener {
+ + newState (State)
+ }
+
+OurSnakeItem -- SnakeService
+OurSnakeLevel -- SnakeService
+ interface SnakeService {
+ + ArrayList<SnakePlayerDescriptor> getPlayer
+ + SnakePlayerDescriptor getPlayer(String)
+ + addCallback(String, SnakePlayerDescriptor)
+ + removeCallback(String, SnakePlayerDescriptor)
+ + startGame(String)
+ + runLevel(OurSnakeLevel, int)
+ + exitGame(boolean)
+ + moveSnake(Direction)
+ + collect(OurSnakeItem)
+ + Direction getCurrentDirection() : Direction
+ }
+
+SnakePlayerDescriptor -- AdminSnakeService
+ interface AdminSnakeService {
+ + addPlayer(SnakePlayerDescriptor)
+ + removePlayer(String)
+ }
+
+ interface Snake {
+ + createLevel()
+ + startLevel()
+ + endLevel()
+ + move(Move)
+ + addCallback(SnakeListener)
+ + removeCallback(SnakeListener)
+ + SnakePlayerDescriptor getDescriptor()
+ }
+
+ enum State {
+ CREATE_ITEM
+ CREATE_LEVEL
+ CREATE_ENEMY
+ MOVING
+ COLLIDED
+ GROWING
+ OVER
+ }
+
+ enum Direction {
+ LEFT
+ RIGHT
+ UP
+ DOWN
+ }
+@enduml

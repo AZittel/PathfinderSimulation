@@ -32,7 +32,7 @@ public class OurSnake implements Snake{
        // controlState = new OverState( snake: this);
         updateDescriptor();
     }
-    public static int instance() {
+    public static int getInstance() {
         return instance;
     }
 
