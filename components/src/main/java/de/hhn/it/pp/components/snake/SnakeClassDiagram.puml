@@ -1,12 +1,35 @@
 @startuml
 
-Snake <.. OurSnake
-SnakePlayerDescriptor -- OurSnake
-SnakeListener -- OurSnake
-Move -- OurSnake
-ControlState -- OurSnake
-OverState -- OurSnake
-class OurSnake {
+folder snake {
+enum Direction
+enum State
+class Move
+class SnakePlayerDescriptor
+interface SnakeService
+interface SnakeListener
+folder provider {
+class OurSnakeService
+class OurSnake
+class OurSnakeItem
+class OurSnakeLevel
+interface AdminSnakeService
+interface Snake
+folder snakestates {
+abstract class ControlState
+class CollidedState
+class EnemyState
+class GrowingState
+class ItemState
+class LevelState
+class MoveState
+class OverState
+class SnakeState
+  }
+ }
+}
+
+
+class OurSnake implements Snake {
 - {static} int : instance
 - ControlState : controlState
 - List<SnakeListener> : listeners
@@ -58,12 +81,7 @@ class OurSnake {
  + setDirection(Direction)
  }
 
-SnakeService <.. OurSnakeService
-AdminSnakeService <.. OurSnakeService
-Direction -- OurSnakeService
-SnakePlayerDescriptor -- OurSnakeService
-SnakeService -- OurSnakeService
- class OurSnakeService {
+ class OurSnakeService implements SnakeService, AdminSnakeService {
 - int : achievedScore
 - List<String> profiles
 - ArrayList<SnakePlayerDescriptor> allPlayers
@@ -122,8 +140,7 @@ OurSnake -- ControlState
  + String toString() : String
  }
 
- ControlState <|-- CollidedState
- class CollidedState {
+ class CollidedState extends ControlState {
  # CollidedState(final OurSnake)
  --
   + onStartLevel()
@@ -134,8 +151,7 @@ OurSnake -- ControlState
   + onMove()
  }
 
-  ControlState <|-- EnemyState
-  class EnemyState {
+  class EnemyState extends ControlState {
   # EnemyState(final OurSnake)
   --
    + onStartLevel()
@@ -146,8 +162,7 @@ OurSnake -- ControlState
    + onMove()
   }
 
-   ControlState <|-- GrowingState
-   class GrowingState {
+   class GrowingState extends ControlState {
    # GrowingState(final OurSnake)
    --
     + onStartLevel()
@@ -158,8 +173,7 @@ OurSnake -- ControlState
     + onMove()
    }
 
-    ControlState <|-- ItemState
-    class ItemState {
+    class ItemState extends ControlState {
     # ItemState(final OurSnake)
     --
      + onStartLevel()
@@ -170,8 +184,7 @@ OurSnake -- ControlState
      + onMove()
     }
 
-     ControlState <|-- LevelState
-     class LevelState {
+     class LevelState extends ControlState {
      # LevelState(final OurSnake)
      --
       + onStartLevel()
@@ -182,8 +195,7 @@ OurSnake -- ControlState
       + onMove()
      }
 
-      ControlState <|-- MoveState
-      class MoveState {
+      class MoveState extends ControlState {
       # MoveState(final OurSnake)
       --
        + onStartLevel()
@@ -194,8 +206,7 @@ OurSnake -- ControlState
        + onMove()
       }
 
-       ControlState <|-- OverState
-       class OverState {
+       class OverState extends ControlState {
        # OverState(final OurSnake)
        --
         + onStartLevel()
@@ -206,8 +217,7 @@ OurSnake -- ControlState
         + onMove()
        }
 
-        ControlState <|-- SnakeState
-        class SnakeState {
+        class SnakeState extends ControlState {
         # SnakeState(final OurSnake)
         --
          + onStartLevel()
@@ -222,8 +232,6 @@ OurSnake -- ControlState
  + newState (State)
  }
 
-OurSnakeItem -- SnakeService
-OurSnakeLevel -- SnakeService
  interface SnakeService {
  + ArrayList<SnakePlayerDescriptor> getPlayer
  + SnakePlayerDescriptor getPlayer(String)
