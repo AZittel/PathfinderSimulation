@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
-import de.hhn.it.pp.components.astarpathfinding.provider.TerrainType;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import java.util.List;
 
@@ -59,4 +58,13 @@ public interface PathfindingService {
    * obstacles on the grid.
    */
   void reset();
+
+  /**
+   * Changes the terrain modifier for a specific terrain type.
+   *
+   * @param type   the terrain type which will be changed
+   * @param modifier the new value for the terrain type modifier. The value must be between 0 and 1
+   * @throws IllegalParameterException thrown if the value is not between 0 and 1
+   */
+  void changeTerrainTypeFactor(TerrainType type, double modifier) throws IllegalParameterException;
 }

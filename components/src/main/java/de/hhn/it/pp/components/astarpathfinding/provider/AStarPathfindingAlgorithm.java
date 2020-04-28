@@ -52,7 +52,7 @@ public class AStarPathfindingAlgorithm {
 
       // Add neighbours to possible path if they are accessible i.e. no obstacle.
       for (Terrain neighbour : getNeighbours(currentTerrain)) {
-        if (neighbour.getObstacleFactor() >= 1
+        if (neighbour.getType().getModifier() >= 1
           || information.getVisitedPositions().contains(neighbour)) {
           continue;
         }
@@ -62,7 +62,7 @@ public class AStarPathfindingAlgorithm {
           currentTerrain.getGCost()
             + (int)
             ((getMDistance(currentTerrain, neighbour))
-              * (1 + currentTerrain.getObstacleFactor()));
+              * (1 + currentTerrain.getType().getModifier()));
         if (newCostToNeighbour < neighbour.getGCost()
           || !information.getSpecificPositions().contains(neighbour)) {
           neighbour.setGCost(newCostToNeighbour);

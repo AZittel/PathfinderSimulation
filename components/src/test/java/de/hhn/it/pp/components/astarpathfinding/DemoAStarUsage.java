@@ -2,7 +2,6 @@ package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
-import de.hhn.it.pp.components.astarpathfinding.provider.TerrainType;
 
 public class DemoAStarUsage {
   private static final org.slf4j.Logger logger =
@@ -35,8 +34,7 @@ public class DemoAStarUsage {
 
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
-      logger.info(">>> add obstacle at: " + 3 + "|" + y);
-      Terrain terrain = new Terrain(3, y, TerrainType.WATER);
+      logger.info(">>> place terrain at: " + 3 + "|" + y);
       service.placeTerrain(TerrainType.LAVA, new Position(3, y));
     }
     logger.info("" + service);

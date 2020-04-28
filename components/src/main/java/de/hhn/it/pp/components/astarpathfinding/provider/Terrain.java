@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.Position;
+import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 
 public class Terrain implements Cloneable {
   /**
@@ -15,10 +16,6 @@ public class Terrain implements Cloneable {
    */
   private int h;
 
-  /**
-   * Factor to influence the difficulty to pass the terrain
-   */
-  private double obstacleFactor;
 
   /**
    * Position on the map.
@@ -42,7 +39,6 @@ public class Terrain implements Cloneable {
     super();
     this.position = new Position(gridRow, gridCol);
     this.type = type;
-    this.obstacleFactor = type.getDefaultFactor();
   }
 
   /**
@@ -52,25 +48,6 @@ public class Terrain implements Cloneable {
    */
   public int calculateFCost() {
     return g + h;
-  }
-
-  public double getObstacleFactor() {
-    return obstacleFactor;
-  }
-
-  /**
-   * Sets the obstacle factor clamped between 0 and 1.
-   *
-   * @param obstacleFactor the new obstacle factor
-   */
-  public void setObstacleFactor(double obstacleFactor) {
-    if (obstacleFactor < 0) {
-      this.obstacleFactor = 0;
-    } else if (this.obstacleFactor > 1) {
-      this.obstacleFactor = 1;
-    } else {
-      this.obstacleFactor = obstacleFactor;
-    }
   }
 
   public int getGCost() {
@@ -95,6 +72,14 @@ public class Terrain implements Cloneable {
 
   public Position getPosition() {
     return position;
+  }
+
+  public TerrainType getType() {
+    return type;
+  }
+
+  public void setType(TerrainType type) {
+    this.type = type;
   }
 
   public void setPosition(Position position) {
