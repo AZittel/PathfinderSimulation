@@ -1,6 +1,8 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-/** A class to represent a position with two values */
+/**
+ * A class to represent a position with two values
+ */
 public class Position {
   private int x;
   private int y;

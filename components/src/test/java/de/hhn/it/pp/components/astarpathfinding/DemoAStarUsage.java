@@ -37,7 +37,7 @@ public class DemoAStarUsage {
     for (int y = 2; y <= 4; y++) {
       logger.info(">>> add obstacle at: " + 3 + "|" + y);
       Terrain terrain = new Terrain(3, y, TerrainType.WATER);
-      service.placeTerrain(terrain);
+      service.placeTerrain(TerrainType.LAVA, new Position(3, y));
     }
     logger.info("" + service);
 
@@ -45,17 +45,11 @@ public class DemoAStarUsage {
 
     // Start visualization
     logger.info(">>> visualization started");
-    service.startPathfinding();
+    service.doPathfinding();
     logger.info("" + service);
 
     Thread.sleep(2500);
 
-    // End visualization
-    logger.info(">>> visualization stopped");
-    service.stopPathfinding();
-    logger.info("" + service);
-
-    Thread.sleep(1500);
 
     // Reset
     logger.info(">>> reset");

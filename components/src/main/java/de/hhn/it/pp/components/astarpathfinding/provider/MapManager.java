@@ -8,12 +8,13 @@ public class MapManager {
 
   private Terrain[][] map;
 
-  public MapManager() {}
+  public MapManager() {
+  }
 
   /**
    * Creates the map with the given length and height.
    *
-   * @param width the width of the map, must higher then 0
+   * @param width  the width of the map, must higher then 0
    * @param height the height of the map, must higher then 0
    * @throws IllegalParameterException if either the width or the height is invalid
    */
@@ -26,9 +27,9 @@ public class MapManager {
     // Check maximum boundaries of the map
     if (width > MAX_WIDTH || height > MAX_HEIGHT) {
       throw new IllegalParameterException(
-          String.format(
-              "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
-              MAX_WIDTH, MAX_HEIGHT));
+        String.format(
+          "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
+          MAX_WIDTH, MAX_HEIGHT));
     }
 
     // Create new map with grass terrain

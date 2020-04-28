@@ -5,8 +5,7 @@ import de.hhn.it.pp.components.astarpathfinding.PathfindingService;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.exceptions.InvalidStateException;
-import java.util.ArrayList;
+import java.util.List;
 
 public final class Pathfinder implements PathfindingService {
   private MapManager manager = new MapManager();
@@ -18,23 +17,25 @@ public final class Pathfinder implements PathfindingService {
 
   @Override
   public void setStartPoint(Position position)
-      throws IllegalParameterException, OccupiedPositionException {}
-
-  @Override
-  public void setEndPoint(Position position)
-      throws IllegalParameterException, OccupiedPositionException {}
-
-  @Override
-  public void placeTerrain(Terrain tile) throws IllegalParameterException {}
-
-  @Override
-  public ArrayList<PathfindingInformation> startPathfinding() {
-    return null;
+    throws IllegalParameterException, OccupiedPositionException {
   }
 
   @Override
-  public void stopPathfinding() throws InvalidStateException {}
+  public void setEndPoint(Position position)
+    throws IllegalParameterException, OccupiedPositionException {
+  }
 
   @Override
-  public void reset() {}
+  public void placeTerrain(TerrainType type, Position position) throws IllegalParameterException {
+  }
+
+  @Override
+  public List<PathfindingInformation> doPathfinding() {
+    return null;
+  }
+
+
+  @Override
+  public void reset() {
+  }
 }
