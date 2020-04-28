@@ -1,6 +1,10 @@
 package de.hhn.it.pp.components.minesweeper.provider;
 
+import de.hhn.it.pp.components.minesweeper.BombPosition;
+import de.hhn.it.pp.components.minesweeper.FieldInformation;
 import de.hhn.it.pp.components.minesweeper.MinesweeperService;
+
+import java.util.List;
 
 public class Minesweeper implements MinesweeperService {
     /**
@@ -46,28 +50,28 @@ public class Minesweeper implements MinesweeperService {
      * @param y y-Pos of the clicked field.
      */
     @Override
-    public void turn(int x, int y) {
-
+    public List<FieldInformation> turn(int x, int y) {
+        return null;
     }
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
     @Override
-    public void setFixBombs() {
+    public void setFixBombs(List<BombPosition> positions) {
 
     }
     /**
      * Getter for getting bombs.
      */
     @Override
-    public int getBombs(){
-        return 0;
+    public List<BombPosition> getBombs(){
+        return null;
     }
 
     /**
      * calculates the Points.
      */
-    @Override
+
     public void calculatePoints(){
 
     }
@@ -75,7 +79,7 @@ public class Minesweeper implements MinesweeperService {
     /**
      * Sets the current Points.
      */
-    @Override
+
     public void setPoints(int points){
 
     }
