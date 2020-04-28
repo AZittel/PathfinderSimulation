@@ -79,21 +79,6 @@ public class DemoMinesweeperUsage {
 
         Thread.sleep(3000);
 
-        // calculate points.
-        logger.info(">>> calculate points");
-        minesweeperService.calculatePoints();
-        logger.info("" + minesweeperService);
-
-        Thread.sleep(3000);
-
-        // setter for points
-        logger.info(">>> set points");
-        int points = 3;
-        minesweeperService.setPoints(points);
-        logger.info("" + minesweeperService);
-
-        Thread.sleep(3000);
-
         // getter for points
         logger.info(">>> get points");
         minesweeperService.getPoints();
