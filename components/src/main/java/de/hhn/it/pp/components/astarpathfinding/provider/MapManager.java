@@ -3,9 +3,14 @@ package de.hhn.it.pp.components.astarpathfinding.provider;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
+
 public class MapManager {
   private static final int MAX_WIDTH = 50;
   private static final int MAX_HEIGHT = 50;
+  private static final int MIN_WIDTH = 2;
+  private static final int MIN_HEIGHT = 2;
+
+
 
   private Terrain[][] map;
 
@@ -13,16 +18,16 @@ public class MapManager {
   }
 
   /**
-   * Creates the map with the given length and height.
+   * Creates the map with the given width and height.
    *
-   * @param width  the width of the map, must higher then 0
-   * @param height the height of the map, must higher then 0
+   * @param width  the width of the map, must higher then 1
+   * @param height the height of the map, must higher then 1
    * @throws IllegalParameterException if either the width or the height is invalid
    */
   public void createMap(int width, int height) throws IllegalParameterException {
     // Check minimum boundaries of the map
-    if (width < 1 || height < 1) {
-      throw new IllegalParameterException("Width or height cannot be lower than 1!");
+    if (width < MIN_WIDTH || height < MIN_HEIGHT) {
+      throw new IllegalParameterException("Width or height cannot be lower than 2!");
     }
 
     // Check maximum boundaries of the map
