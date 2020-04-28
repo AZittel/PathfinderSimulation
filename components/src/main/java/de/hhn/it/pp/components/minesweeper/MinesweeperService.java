@@ -2,6 +2,8 @@ package de.hhn.it.pp.components.minesweeper;
 
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 
+import java.util.List;
+
 /**
  * This Interface is an Interface for the Game MineSweeper that shows all the
  * functionality to interact with our game.
@@ -9,68 +11,55 @@ import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 public interface MinesweeperService {
     /**
      * Creates a field of buttons.
-     * @param  width width for the field.
+     *
+     * @param width  width for the field.
      * @param height height for the field.
-     * @throws IllegalArgumentException if the width or height is invalid.
+     * @throws IllegalArgumentException  if the width or height is invalid.
      * @throws InvalidGameStateException is thrown if the game is already running.
      */
-    void createField(int width, int height) throws IllegalArgumentException,InvalidGameStateException;
+    void createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException;
 
     /**
      * Sets the bombs on the field.
-     * @param  bombCount bombCount is the count of the bombs distributed.
-     * @throws IllegalArgumentException if the bombCount is a invalid number.
+     *
+     * @param bombCount bombCount is the count of the bombs distributed.
+     * @throws IllegalArgumentException  if the bombCount is a invalid number.
      * @throws InvalidGameStateException is thrown if the game is already running.
      */
     void setBombs(int bombCount) throws IllegalArgumentException, InvalidGameStateException;
 
     /**
-     *  Resets the Game.
+     * Resets the Game.
      */
-    void restart();
+    void restart() throws InvalidGameStateException;
 
     /**
-     *  Starts the Game.
+     * Starts the Game.
      */
-    void startGame();
+    void startGame() throws InvalidGameStateException;
 
     /**
-     *  Closes the Game.
+     * Closes the Game.
      */
-    void endGame();
+    void endGame() throws InvalidGameStateException;
 
     /**
-     *  Checks the clicked field.
-     *  @param x x-Pos of the clicked field.
-     *  @param y y-Pos of the clicked field.
+     * Checks the clicked field.
+     * @param x x-Pos of the clicked field.
+     * @param y y-Pos of the clicked field.
      */
-    void turn(int x, int y);
+    List<FieldInformation> turn(int x, int y);
 
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
-    void setFixBombs();
+    void setFixBombs(List<BombPosition> positions);
 
 
     /**
      * Getter for getting bombs.
      */
-    int getBombs();
-
-
-
-    /**
-     * calculates the Points.
-     */
-    void calculatePoints();
-
-
-
-    /**
-     * Sets the current Points.
-     */
-    void setPoints(int points);
-
+    List<BombPosition> getBombs();
 
 
     /**
@@ -78,7 +67,7 @@ public interface MinesweeperService {
      */
     int getPoints();
 
-
-
-
 }
+
+
+
