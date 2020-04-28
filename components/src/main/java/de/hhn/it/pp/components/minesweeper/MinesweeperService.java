@@ -31,17 +31,17 @@ public interface MinesweeperService {
     /**
      * Resets the Game.
      */
-    void restart();
+    void restart() throws InvalidGameStateException;
 
     /**
      * Starts the Game.
      */
-    void startGame();
+    void startGame() throws InvalidGameStateException;
 
     /**
      * Closes the Game.
      */
-    void endGame();
+    void endGame() throws InvalidGameStateException;
 
     /**
      * Checks the clicked field.
@@ -60,18 +60,6 @@ public interface MinesweeperService {
      * Getter for getting bombs.
      */
     List<BombPosition> getBombs();
-
-
-    /**
-     * calculates the Points.
-     */
-    void calculatePoints();
-
-
-    /**
-     * Sets the current Points.
-     */
-    void setPoints(int points);
 
 
     /**
