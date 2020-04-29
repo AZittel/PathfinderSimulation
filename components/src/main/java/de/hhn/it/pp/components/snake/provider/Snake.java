@@ -5,6 +5,7 @@ import de.hhn.it.pp.components.snake.SnakeListener;
 import de.hhn.it.pp.components.snake.Move;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
+//todo javadoc
 public interface Snake {
 
     void createLevel() throws IllegalParameterException;
