@@ -20,4 +20,6 @@ public interface Snake {
     void removeCallback(SnakeListener listener) throws IllegalParameterException;
 
     SnakePlayerDescriptor getDescriptor();
+
+    void spawn(int yPos, int xPos);
 }
