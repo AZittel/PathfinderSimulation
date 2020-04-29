@@ -82,6 +82,19 @@ public class Board {
         spawnNewTetromino = newValue;
     }
 
+    public void setScoreToAdd(int newValue){
+        scoreToAdd = newValue;
+    }
+
+    public void setScore(int newValue){
+        score = newValue;
+    }
+
+    public void setHighscore (int newValue) {
+        highscore = newValue;
+    }
+
+
     public void getTetrominos() {
         for (Tetromino t : tetrominos) {
             System.out.println(t);
@@ -103,6 +116,7 @@ public class Board {
     public int getScoreToAdd() {
         return scoreToAdd;
     }
+
 
     public int[][] getMap() {
         return map;
