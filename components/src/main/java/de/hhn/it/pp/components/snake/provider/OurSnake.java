@@ -6,13 +6,15 @@ import de.hhn.it.pp.components.snake.Move;
 import de.hhn.it.pp.components.snake.provider.snakestates.ControlState;
 import de.hhn.it.pp.components.snake.provider.snakestates.OverState;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OurSnake implements Snake{
-    private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(OurSnake.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(OurSnake.class);
     private static int instance;
     private ControlState controlState;
     private List<SnakeListener> listeners;
@@ -49,10 +51,12 @@ public class OurSnake implements Snake{
         controlState.onCreateLevel();
     }
 
+    @Override
     public void startLevel() throws IllegalStateException {
         controlState.onStartLevel();
     }
 
+    @Override
     public void endLevel() throws IllegalStateException {
         controlState.onEndLevel();
     }
@@ -104,7 +108,7 @@ public class OurSnake implements Snake{
      */
     public void setMakerState(final ControlState makerState) {
         logger.debug("setMakerState - {}", makerState);
-        this.controlState = makerState;
+        controlState = makerState;
         updateDescriptor();
         notifyListeners(controlState);
     }
