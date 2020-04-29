@@ -114,4 +114,9 @@ public class OurSnake implements Snake{
             listener.newState(makerState.getState());
         }
     }
+
+    @Override
+    public void spawn(int xPos, int yPos){
+
+    }
 }
