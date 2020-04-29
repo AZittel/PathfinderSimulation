@@ -1,11 +1,13 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
 
+import de.hhn.it.pp.components.tetris.provider.TetrisGame;
+
 public class Collision {
 
-    Board board;
+    private Board board;
 
-    public Collision(Board thisBoard) {
-        this.board = thisBoard;
+    public Collision() {
+        this.board = TetrisGame.board;
     }
 
     public boolean collideWithTetromino(Tetromino b, int direction) {
@@ -235,6 +237,9 @@ public class Collision {
         }
     }
 
+    public Board getBoard(){
+        return board;
     }
+}
 
 

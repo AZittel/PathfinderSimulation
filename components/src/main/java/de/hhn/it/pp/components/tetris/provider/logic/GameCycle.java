@@ -1,11 +1,13 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
 
+import de.hhn.it.pp.components.tetris.provider.TetrisGame;
+
 public class GameCycle extends Thread {
 
-    Board board;
+    private Collision clCheck;
 
-    public GameCycle(Board thisBoard){
-        this.board = thisBoard;
+    public GameCycle(Collision collision){
+        this.clCheck = collision;
     }
 
     /**
@@ -14,22 +16,22 @@ public class GameCycle extends Thread {
     @Override
     public void run() {
             try {
-                if (board.getBoardState() == BoardState.activeGame) {
+                if (TetrisGame.board.getBoardState() == BoardState.activeGame) {
 
                     //TODO collision checks
                     //check for collision with other blocks and walls
 
                     }
 
-                    if (board.isSpawnNewTetromino()) {
+                    if (TetrisGame.board.isSpawnNewTetromino()) {
                         //TODO collision checks
-                        board.addTetromino(board.getNextTetromino());
-                        board.setCurrentTetromino(board.getNextTetromino());
-                        board.setNextTetromino(new Tetromino());
-                        board.setSpawnNewTetromino(false);
+                        TetrisGame.board.addTetromino(TetrisGame.board.getNextTetromino());
+                        TetrisGame.board.setCurrentTetromino(TetrisGame.board.getNextTetromino());
+                        TetrisGame.board.setNextTetromino(new Tetromino());
+                        TetrisGame.board.setSpawnNewTetromino(false);
                     }
-                if (!board.isSpeedUp()) {
-                    sleep(board.getDifficultyValue());
+                if (!TetrisGame.board.isSpeedUp()) {
+                    sleep(TetrisGame.board.getDifficultyValue());
                 } else {
                     sleep(100);
                 }

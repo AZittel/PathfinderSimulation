@@ -2,10 +2,7 @@ package de.hhn.it.pp.components.tetris.provider;
 import de.hhn.it.pp.components.tetris.TetrisService;
 import de.hhn.it.pp.components.tetris.provider.io.Direction;
 import de.hhn.it.pp.components.tetris.provider.io.SaveGame;
-import de.hhn.it.pp.components.tetris.provider.logic.Board;
-import de.hhn.it.pp.components.tetris.provider.logic.Difficulty;
-import de.hhn.it.pp.components.tetris.provider.logic.GameCycle;
-import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
+import de.hhn.it.pp.components.tetris.provider.logic.*;
 
 /**
  * Tetris clone written in Java
@@ -14,11 +11,12 @@ import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
  */
 public class TetrisGame implements TetrisService {
 
-    Board board = new Board();
+    public static Board board = new Board();
+    private Collision collision = new Collision();
 
     @Override
     public void startGame() {
-        new GameCycle(board).start();
+        new GameCycle().start();
     }
 
     @Override
