@@ -37,7 +37,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   }
 
   @Override
-  public SnakePlayerProfile getPlayer(String nickname) throws IllegalParameterException {
+  public SnakePlayerProfile getPlayerProfile(String nickname) throws IllegalParameterException {
     //if(allPlayers.contains())
     //todo
     //int index = allPlayers.indexOf
@@ -52,14 +52,14 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   @Override
   public void addCallback(String nickname, SnakePlayerProfile listener)
             throws IllegalParameterException {
-        //SnakePlayerDescriptor player = getPlayer(nickname);
+        //SnakePlayerDescriptor playerProfile = getPlayer(nickname);
         //todo implement method addCallback
   }
 
   @Override
   public void removeCallback(String nickname, SnakePlayerProfile listener)
           throws IllegalParameterException {
-        //SnakePlayerDescriptor player = getPlayer(nickname);
+        //SnakePlayerDescriptor playerProfile = getPlayer(nickname);
         //todo implement method removeCallback
   }
 
@@ -71,11 +71,11 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
 
     if (nickname.length() >= 12) {
       throw new IllegalParameterException("your nickname is too long. 12 characters are allowed.");
-    } else if (allPlayerProfiles.contains(getPlayer(nickname))) {
+    } else if (allPlayerProfiles.contains(getPlayerProfile(nickname))) {
       throw new IllegalParameterException("nickname is already used. please choose another one");
     } else {
-      SnakePlayerProfile player = new SnakePlayerProfile(nickname);
-      allPlayerProfiles.add(player);
+      SnakePlayerProfile playerProfile = new SnakePlayerProfile(nickname);
+      allPlayerProfiles.add(playerProfile);
       int xSpawn = 250; //todo magic numbers entfernen
       int ySpawn = 250;
       new OurSnake(nickname).spawn(xSpawn, ySpawn);
@@ -135,8 +135,8 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
 
   @Override
   public void removePlayer(String nickname) throws IllegalParameterException {
-    if (allPlayerProfiles.contains(getPlayer(nickname))) {
-      allPlayerProfiles.remove(getPlayer(nickname));
+    if (allPlayerProfiles.contains(getPlayerProfile(nickname))) {
+      allPlayerProfiles.remove(getPlayerProfile(nickname));
     } else {
       throw new IllegalParameterException("nickname is not registered, "
                     + "therefore it can't be removed");
