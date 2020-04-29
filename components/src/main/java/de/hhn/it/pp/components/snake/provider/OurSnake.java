@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+//todo javadoc
 public class OurSnake implements Snake{
     private static final Logger logger =
             LoggerFactory.getLogger(OurSnake.class);
@@ -37,6 +38,8 @@ public class OurSnake implements Snake{
        // controlState = new OverState( snake: this);
         updateDescriptor();
     }
+
+    //todo javadoc
     public static int getInstance() {
         return instance;
     }
