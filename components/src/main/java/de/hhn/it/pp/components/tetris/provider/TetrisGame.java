@@ -1,38 +1,52 @@
 package de.hhn.it.pp.components.tetris.provider;
 import de.hhn.it.pp.components.tetris.TetrisService;
+import de.hhn.it.pp.components.tetris.provider.io.Direction;
+import de.hhn.it.pp.components.tetris.provider.io.SaveGame;
+import de.hhn.it.pp.components.tetris.provider.logic.Board;
+import de.hhn.it.pp.components.tetris.provider.logic.Difficulty;
+import de.hhn.it.pp.components.tetris.provider.logic.GameCycle;
 import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
-import static de.hhn.it.pp.components.tetris.provider.logic.Board.getCurrentTetromino;
 
+/**
+ * Tetris clone written in Java
+ *
+ * @author Mario Schweidler, Violetta Manow
+ */
 public class TetrisGame implements TetrisService {
+
+    Board board = new Board();
 
     @Override
     public void startGame() {
-        //new Gamecycle
+        new GameCycle(board).start();
     }
 
     @Override
-    public void setDifficulty() {
-        //not yet implemented
+    public void setDifficulty(Difficulty difficulty) {
+        board.setDifficultyValue(difficulty);
     }
 
     @Override
-    public void move(String direction) {
-        //this will work properly with javafx via a keylistener (InputHandler)
+    public void move(Direction direction) {
+        switch (direction) {
+            case LEFT:;
+            case RIGHT:;
+            case DOWN:;
+        }
     }
 
     @Override
     public void rotate() {
-        getCurrentTetromino().rotate();
+        board.getCurrentTetromino().rotate();
     }
 
     @Override
     public void reset() {
-        //Board.clear() and some more code magic
+        board.clear();
     }
 
     @Override
     public void save() {
-        //not yet implemented
     }
 
     @Override
@@ -42,21 +56,21 @@ public class TetrisGame implements TetrisService {
 
     @Override
     public int getCurrentTetrominoRotation() throws IllegalStateException, NullPointerException {
-        return 0;
+        return board.getCurrentTetromino().getRotation();
     }
 
     @Override
     public int getCurrentTetrominoSpeed() throws IllegalStateException {
-        return 0;
+        return board.getDifficultyValue();
     }
 
     @Override
-    public void getTetrominoLocation(Tetromino tetromino) throws NullPointerException {
-
+    public int getTetrominoLocation(Tetromino tetromino) throws NullPointerException {
+        return tetromino.getX() + tetromino.getY();
     }
 
     @Override
-    public int getTetrominoRotation() throws NullPointerException {
-        return 0;
+    public int getTetrominoRotation(Tetromino tetromino) throws NullPointerException {
+        return tetromino.getRotation();
     }
 }

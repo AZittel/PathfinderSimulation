@@ -2,28 +2,34 @@ package de.hhn.it.pp.components.tetris.provider.logic;
 
 public class GameCycle extends Thread {
 
+    Board board;
+
+    public GameCycle(Board thisBoard){
+        this.board = thisBoard;
+    }
+
     /**
      * this executes a normal game cycle. collision checks missing
      */
     @Override
     public void run() {
             try {
-                if (Board.getBoardState() == Board.BoardState.activeGame) {
+                if (board.getBoardState() == BoardState.activeGame) {
 
                     //TODO collision checks
                     //check for collision with other blocks and walls
 
                     }
 
-                    if (Board.isSpawnNewTetromino()) {
+                    if (board.isSpawnNewTetromino()) {
                         //TODO collision checks
-                        Board.addTetromino(Board.getNextTetromino());
-                        Board.setCurrentTetromino(Board.getNextTetromino());
-                        Board.setNextTetromino(new Tetromino());
-                        Board.setSpawnNewTetromino(false);
+                        board.addTetromino(board.getNextTetromino());
+                        board.setCurrentTetromino(board.getNextTetromino());
+                        board.setNextTetromino(new Tetromino());
+                        board.setSpawnNewTetromino(false);
                     }
-                if (!Board.isSpeedUp()) {
-                    sleep(1000);
+                if (!board.isSpeedUp()) {
+                    sleep(board.getDifficultyValue());
                 } else {
                     sleep(100);
                 }

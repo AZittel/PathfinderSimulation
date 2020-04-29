@@ -1,4 +1,6 @@
 package de.hhn.it.pp.components.tetris;
+import de.hhn.it.pp.components.tetris.provider.io.Direction;
+import de.hhn.it.pp.components.tetris.provider.logic.Difficulty;
 import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
 
 import java.io.IOException;
@@ -18,16 +20,17 @@ public interface TetrisService {
 
     /**
      * Select a difficulty setting for Tetris
+     * @param difficulty the desired difficulty of the game
      * @throws IllegalStateException if the method is called while in an active game
      */
-    void setDifficulty() throws IllegalStateException;
+    void setDifficulty(Difficulty difficulty) throws IllegalStateException;
 
     /**
      * Move the current Tetromino (left/right/down)
      * @param direction the direction in which the Tetromino should be moved
      * @throws NullPointerException if the value of the string is null
      */
-    void move(String direction) throws NullPointerException;
+    void move(Direction direction) throws NullPointerException;
 
     /**
      * Rotate the current Tetromino
@@ -69,11 +72,11 @@ public interface TetrisService {
      * @param tetromino the Tetromino who gets located
      * @throws NullPointerException if the Tetromino can't be found
      */
-    void getTetrominoLocation(Tetromino tetromino) throws NullPointerException;
+    int getTetrominoLocation(Tetromino tetromino) throws NullPointerException;
 
     /**
      * Shows the rotation value of a specified Tetromino
      * @throws NullPointerException if there is no Tetromino
      */
-    int getTetrominoRotation() throws NullPointerException;
+    int getTetrominoRotation(Tetromino tetromino) throws NullPointerException;
 }
