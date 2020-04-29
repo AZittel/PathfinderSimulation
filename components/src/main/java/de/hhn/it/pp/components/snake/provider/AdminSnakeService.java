@@ -3,6 +3,8 @@ package de.hhn.it.pp.components.snake.provider;
 import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
+//todo checkstyle
+
 /**
         * Admin interface to the OurSnakeService to add / remove a Player to / from the service.
         *
