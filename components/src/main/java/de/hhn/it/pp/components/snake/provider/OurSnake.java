@@ -20,6 +20,12 @@ public class OurSnake implements Snake{
     private List<SnakeListener> listeners;
     private SnakePlayerDescriptor descriptor;
 
+    /** x-coordinate of the snake */
+    private int xPosition;
+
+    /** y-coordinate of the snake */
+    private int yPosition;
+
     /**
      * Constructor to create a OurSnake based on the information in the given
      * SnakePlayerDescriptor.
