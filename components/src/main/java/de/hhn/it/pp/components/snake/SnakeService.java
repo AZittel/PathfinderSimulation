@@ -52,11 +52,11 @@ public interface SnakeService {
    * Starts the game of Snake.
    *
    * @param nickname nickname of the active player
-   * @param windowWidth width of the window
-   * @param windowHeight height of the window
+   * @param winWidth width of the window
+   * @param winHeight height of the window
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
-  void startGame(String nickname, int windowWidth, int windowHeight) throws IllegalParameterException;
+  void startGame(String nickname, int winWidth, int winHeight) throws IllegalParameterException;
 
   /**
    * Runs the level.
