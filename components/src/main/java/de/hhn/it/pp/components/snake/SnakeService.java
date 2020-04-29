@@ -3,7 +3,6 @@ package de.hhn.it.pp.components.snake;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.OurSnakeItem;
 import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
-
 import java.util.ArrayList;
 
 /**
@@ -19,7 +18,7 @@ public interface SnakeService {
    *
    * @return List of registered players.
    */
-  ArrayList<SnakePlayerDescriptor> getAllPlayers();
+  ArrayList<SnakePlayerProfile> getAllPlayers();
 
   /**
    * Returns the description of the player with the chosen player name.
@@ -28,7 +27,7 @@ public interface SnakeService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerDescriptor getPlayer(String nickname) throws IllegalParameterException;
+  SnakePlayerProfile getPlayer(String nickname) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the progress of the player.
@@ -38,7 +37,8 @@ public interface SnakeService {
    * @throws IllegalParameterException if either the nickname does not exist or the listener is a
    *     null reference.
    */
-  void addCallback(String nickname, SnakePlayerDescriptor listener) throws IllegalParameterException;
+  void addCallback(String nickname, SnakePlayerProfile listener)
+          throws IllegalParameterException;
 
   /**
    * Removes a listener.
@@ -46,7 +46,8 @@ public interface SnakeService {
    * @param nickname nickname of the player
    * @param listener listener to be removed
    */
-  void removeCallback(String nickname, SnakePlayerDescriptor listener) throws IllegalParameterException;
+  void removeCallback(String nickname, SnakePlayerProfile listener)
+          throws IllegalParameterException;
 
   /**
    * Starts the game of Snake.
