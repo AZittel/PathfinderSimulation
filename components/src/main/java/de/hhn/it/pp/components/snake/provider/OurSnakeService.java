@@ -20,7 +20,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   private int achievedScore;
 
   /** List of all player profiles. **/
-  private ArrayList<SnakePlayerProfile> allPlayers;
+  private ArrayList<SnakePlayerProfile> allPlayerProfiles;
 
   /** Current dircetion of the snake. */
   private Direction currentDirection;
@@ -32,8 +32,8 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   private int windowHeight;
 
   @Override
-  public ArrayList<SnakePlayerProfile> getAllPlayers() {
-    return allPlayers;
+  public ArrayList<SnakePlayerProfile> getAllPlayerProfiles() {
+    return allPlayerProfiles;
   }
 
   @Override
@@ -71,11 +71,11 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
 
     if (nickname.length() >= 12) {
       throw new IllegalParameterException("your nickname is too long. 12 characters are allowed.");
-    } else if (allPlayers.contains(getPlayer(nickname))) {
+    } else if (allPlayerProfiles.contains(getPlayer(nickname))) {
       throw new IllegalParameterException("nickname is already used. please choose another one");
     } else {
       SnakePlayerProfile player = new SnakePlayerProfile(nickname);
-      allPlayers.add(player);
+      allPlayerProfiles.add(player);
       int xSpawn = 250; //todo magic numbers entfernen
       int ySpawn = 250;
       new OurSnake(nickname).spawn(xSpawn, ySpawn);
@@ -126,17 +126,17 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
 
   @Override
   public void addPlayer(SnakePlayerProfile nickname) throws IllegalParameterException {
-    if (allPlayers.contains(nickname)) {
+    if (allPlayerProfiles.contains(nickname)) {
       throw new IllegalParameterException("nickname is already registered.");
     } else {
-      allPlayers.add(nickname);
+      allPlayerProfiles.add(nickname);
     }
   }
 
   @Override
   public void removePlayer(String nickname) throws IllegalParameterException {
-    if (allPlayers.contains(getPlayer(nickname))) {
-      allPlayers.remove(getPlayer(nickname));
+    if (allPlayerProfiles.contains(getPlayer(nickname))) {
+      allPlayerProfiles.remove(getPlayer(nickname));
     } else {
       throw new IllegalParameterException("nickname is not registered, "
                     + "therefore it can't be removed");
