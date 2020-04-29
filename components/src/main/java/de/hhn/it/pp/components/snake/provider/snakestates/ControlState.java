@@ -3,6 +3,7 @@ package de.hhn.it.pp.components.snake.provider.snakestates;
 import de.hhn.it.pp.components.snake.State;
 import de.hhn.it.pp.components.snake.provider.OurSnake;
 
+//todo javadoc
 public abstract class ControlState {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(ControlState.class);
@@ -15,6 +16,7 @@ public abstract class ControlState {
         this.snake = snake;
     }
 
+    //todo javadoc
     public State getState() {
         return state;
     }

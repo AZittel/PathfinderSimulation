@@ -3,6 +3,7 @@ package de.hhn.it.pp.components.snake.provider.snakestates;
 import de.hhn.it.pp.components.snake.State;
 import de.hhn.it.pp.components.snake.provider.OurSnake;
 
+//todo javadoc
 public class EnemyState extends ControlState {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(EnemyState.class);
