@@ -67,7 +67,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     public void startGame(String nickname, int winWidth, int winHeight) throws IllegalParameterException {
         windowWidth = winWidth;
         windowHeight = winHeight;
-        new OurSnakeItem(1).spawn(20, 50);
+
         if (nickname.length() >= 12) {
             throw new IllegalParameterException("your nickname is too long. 12 characters are allowed.");
         } else if (allPlayers.contains(getPlayer(nickname))) {
@@ -75,6 +75,10 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
         } else {
             SnakePlayerDescriptor player = new SnakePlayerDescriptor(nickname);
             allPlayers.add(player);
+            int xSpawn = 250; //todo magic numbers entfernen
+            int ySpawn = 250;
+            new OurSnake(nickname).spawn(xSpawn, ySpawn);
+            new OurSnakeItem(1).spawn(20, 50);
         }
     }
 
