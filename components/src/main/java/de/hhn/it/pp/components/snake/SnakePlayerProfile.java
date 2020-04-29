@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Description of a player.
+ * Description of a player's profile.
  *
  * @author Sören Greiner, Karen Hofele
  */
@@ -12,7 +12,7 @@ public class SnakePlayerProfile {
   private static final Logger logger =
             LoggerFactory.getLogger(SnakePlayerProfile.class);
 
-  private String player;
+  private String playerProfile;
   private int highscore;
   private int level;
   private State state;
@@ -24,7 +24,7 @@ public class SnakePlayerProfile {
    * @param nickname nickname of the current player.
    */
   public SnakePlayerProfile(final String nickname) {
-    player = nickname;
+    playerProfile = nickname;
     highscore = 0;
     level = 1;
     instance = 0;
@@ -35,7 +35,7 @@ public class SnakePlayerProfile {
    * @return nickname of the player
    */
   public String getNickname() {
-    return player;
+    return playerProfile;
   }
 
   /**
@@ -43,7 +43,7 @@ public class SnakePlayerProfile {
    * @param nickname new nickname
    */
   public void setNickname(String nickname) {
-    player = nickname;
+    playerProfile = nickname;
   }
 
   /**
