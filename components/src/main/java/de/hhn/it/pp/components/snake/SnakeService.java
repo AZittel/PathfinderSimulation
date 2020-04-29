@@ -27,7 +27,7 @@ public interface SnakeService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerProfile getPlayer(String nickname) throws IllegalParameterException;
+  SnakePlayerProfile getPlayerProfile(String nickname) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the progress of the player.
