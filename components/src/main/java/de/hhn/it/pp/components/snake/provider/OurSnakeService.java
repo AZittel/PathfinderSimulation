@@ -26,6 +26,12 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     /** Current dircetion of the snake. */
     private Direction currentDirection;
 
+    /** Width of the window */
+    private int windowWidth;
+
+    /** Height of the window */
+    private int windowHeight;
+
     @Override
     public ArrayList<SnakePlayerDescriptor> getAllPlayers() {
         return allPlayers;
@@ -58,8 +64,10 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     }
 
     @Override
-    public void startGame(String nickname, int windowWidth, int windowHeight) throws IllegalParameterException {
-        new OurSnakeItem(1).spawn(20, 50); //todo
+    public void startGame(String nickname, int winWidth, int winHeight) throws IllegalParameterException {
+        windowWidth = winWidth;
+        windowHeight = winHeight;
+        new OurSnakeItem(1).spawn(20, 50);
         if (nickname.length() >= 12) {
             throw new IllegalParameterException("your nickname is too long. 12 characters are allowed.");
         } else if (allPlayers.contains(getPlayer(nickname))) {
