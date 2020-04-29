@@ -18,7 +18,7 @@ public interface SnakeService {
    *
    * @return List of registered players.
    */
-  ArrayList<SnakePlayerProfile> getAllPlayers();
+  ArrayList<SnakePlayerProfile> getAllPlayerProfiles();
 
   /**
    * Returns the description of the player with the chosen player name.
