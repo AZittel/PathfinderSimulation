@@ -29,14 +29,11 @@ public class OurSnake implements Snake{
     /**
      * Constructor to create a OurSnake based on the information in the given
      * SnakePlayerDescriptor.
-     *
-     * @param descriptor Descriptor with basic facts about the Snake to be created
      */
-    public OurSnake(SnakePlayerDescriptor descriptor) {
-        logger.debug("Constructor - {}", descriptor);
+    public OurSnake(String nickname) {
         listeners = new ArrayList<>();
-        this.descriptor = descriptor;
-        descriptor.setInstance(instance++);
+        SnakePlayerDescriptor descriptor = new SnakePlayerDescriptor(nickname);
+                descriptor.setInstance(instance++);
        // controlState = new OverState( snake: this);
         updateDescriptor();
     }
@@ -119,6 +116,7 @@ public class OurSnake implements Snake{
         notifyListeners(controlState);
     }
 
+    //todo javadoc
     private void notifyListeners(ControlState makerState) {
         for (SnakeListener listener : listeners) {
             listener.newState(makerState.getState());
@@ -127,6 +125,7 @@ public class OurSnake implements Snake{
 
     @Override
     public void spawn(int xPos, int yPos){
-
+        xPosition = xPos;
+        yPosition = yPos;
     }
 }
