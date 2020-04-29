@@ -11,12 +11,11 @@ import de.hhn.it.pp.components.tetris.provider.logic.*;
  */
 public class TetrisGame implements TetrisService {
 
-    public static Board board = new Board();
-    private Collision collision = new Collision();
+    private Board board = new Board();
 
     @Override
     public void startGame() {
-        new GameCycle().start();
+        new GameCycle(board).start();
     }
 
     @Override

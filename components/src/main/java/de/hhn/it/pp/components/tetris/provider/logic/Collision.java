@@ -4,13 +4,7 @@ import de.hhn.it.pp.components.tetris.provider.TetrisGame;
 
 public class Collision {
 
-    private Board board;
-
-    public Collision() {
-        this.board = TetrisGame.board;
-    }
-
-    public boolean collideWithTetromino(Tetromino b, int direction) {
+    public boolean collideWithTetromino(Board board, Tetromino b, int direction) {
         // direction: -1 = links, 0 = runter, 1 = rechts
 
         switch (direction) {
@@ -41,7 +35,7 @@ public class Collision {
                                         if (board.getMap()[b.getX() + i][b.getY() + j + 1] >= 1) {
 
                                             board.setSpawnNewTetromino(true);
-                                            fillBlock(b);
+                                            fillBlock(board, b);
 
                                             return true;
                                         }
@@ -77,7 +71,7 @@ public class Collision {
         return false;
     }
 
-    public boolean collideInRotation(Tetromino b) {
+    public boolean collideInRotation(Board board, Tetromino b) {
         int rot = b.getRotation() + 1;
         if (rot == 4) {
             rot = 0;
@@ -90,11 +84,11 @@ public class Collision {
         tetromino.setX(b.getX()-1);
         tetromino.setY(b.getY());
 
-        if(collideWithWall(tetromino, 1)) {
+        if(collideWithWall(board, tetromino, 1)) {
             return true;
         }
         tetromino.setX(b.getX()+2);
-        if(collideWithWall(tetromino, -1)) {
+        if(collideWithWall(board, tetromino, -1)) {
             return true;
         }
 
@@ -119,7 +113,7 @@ public class Collision {
         return false;
     }
 
-    public boolean collideWithWall(Tetromino b, int direction) {
+    public boolean collideWithWall(Board board, Tetromino b, int direction) {
         // direction: -1 = links, 0 = runter, 1 = rechts
         switch (direction) {
             case -1:
@@ -139,7 +133,7 @@ public class Collision {
                         if (b.getBounds()[b.getRotation()][i][j] == 1) {
                             if (b.getY() + j == 17) {
                                 board.setSpawnNewTetromino(true);
-                                fillBlock(b);
+                                fillBlock(board, b);
 
                                 return true;
                             }
@@ -163,7 +157,7 @@ public class Collision {
         return false;
     }
 
-    private void fillBlock(Tetromino b) {
+    private void fillBlock(Board board, Tetromino b) {
         try {
             for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
                 for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
@@ -177,10 +171,10 @@ public class Collision {
         } catch (Exception e) {
 
         }
-        checkLoose();
+        checkLoose(board);
     }
 
-    public void checkFullRow(int multiplier) {
+    public void checkFullRow(Board board, int multiplier) {
         //TODO safe function
 
         int tetrominosInRow = 0;
@@ -195,7 +189,7 @@ public class Collision {
             if (tetrominosInRow == 10) {
 
                 board.setScoreToAdd(board.getScoreToAdd()+ (10*multiplier));
-                delRow(y, multiplier);
+                delRow(board, y, multiplier);
                 break;
             } else {
                 tetrominosInRow = 0;
@@ -212,7 +206,7 @@ public class Collision {
         }
     }
 
-    private void delRow(int row, int multiplier) {
+    private void delRow(Board board, int row, int multiplier) {
 
         for (int i = 0; i < board.getMap().length; i++) {
             board.getMap()[i][row] = 0;
@@ -224,10 +218,10 @@ public class Collision {
             }
 
         }
-        checkFullRow(multiplier + 1);
+        checkFullRow(board,multiplier + 1);
     }
 
-    private void checkLoose() {
+    private void checkLoose(Board board) {
         for (int x = 0; x < board.getMap().length; x++) {
 
             if (board.getMap()[x][0] > 0) {
@@ -235,10 +229,6 @@ public class Collision {
             }
 
         }
-    }
-
-    public Board getBoard(){
-        return board;
     }
 }
 

@@ -24,6 +24,8 @@ public class Board {
 
     private int[][] map = new int[10][18];
 
+    private Collision myCollision = new Collision();
+
     public BoardState boardState = BoardState.start;
 
     /**
@@ -72,6 +74,14 @@ public class Board {
 
     public void setSpeedup(boolean newValue) {
         speedup = newValue;
+    }
+
+    public Collision getMyCollision(){
+        return myCollision;
+    }
+
+    public void setCollision(Collision collision){
+        this.myCollision = collision;
     }
 
     public boolean isSpawnNewTetromino() {

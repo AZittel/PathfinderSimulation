@@ -4,10 +4,10 @@ import de.hhn.it.pp.components.tetris.provider.TetrisGame;
 
 public class GameCycle extends Thread {
 
-    private Collision clCheck;
+    private Board board;
 
-    public GameCycle(Collision collision){
-        this.clCheck = collision;
+    public GameCycle(Board thisBoard){
+        this.board = thisBoard;
     }
 
     /**
@@ -16,22 +16,22 @@ public class GameCycle extends Thread {
     @Override
     public void run() {
             try {
-                if (TetrisGame.board.getBoardState() == BoardState.activeGame) {
+                if (board.getBoardState() == BoardState.activeGame) {
 
                     //TODO collision checks
                     //check for collision with other blocks and walls
 
                     }
 
-                    if (TetrisGame.board.isSpawnNewTetromino()) {
+                    if (board.isSpawnNewTetromino()) {
                         //TODO collision checks
-                        TetrisGame.board.addTetromino(TetrisGame.board.getNextTetromino());
-                        TetrisGame.board.setCurrentTetromino(TetrisGame.board.getNextTetromino());
-                        TetrisGame.board.setNextTetromino(new Tetromino());
-                        TetrisGame.board.setSpawnNewTetromino(false);
+                        board.addTetromino(board.getNextTetromino());
+                        board.setCurrentTetromino(board.getNextTetromino());
+                        board.setNextTetromino(new Tetromino());
+                        board.setSpawnNewTetromino(false);
                     }
-                if (!TetrisGame.board.isSpeedUp()) {
-                    sleep(TetrisGame.board.getDifficultyValue());
+                if (!board.isSpeedUp()) {
+                    sleep(board.getDifficultyValue());
                 } else {
                     sleep(100);
                 }
