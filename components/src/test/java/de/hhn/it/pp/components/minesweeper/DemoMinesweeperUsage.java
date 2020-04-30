@@ -3,6 +3,8 @@ package de.hhn.it.pp.components.minesweeper;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 import de.hhn.it.pp.components.minesweeper.provider.Minesweeper;
 
+import java.util.List;
+
 public class DemoMinesweeperUsage {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(DemoMinesweeperUsage.class);
@@ -67,7 +69,8 @@ public class DemoMinesweeperUsage {
 
         // set fix bombs.
         logger.info(">>> setFixBombs");
-        minesweeperService.setFixBombs();
+        List<BombPosition> positions = null;
+        minesweeperService.setFixBombs(positions);
         logger.info("" + minesweeperService);
 
         Thread.sleep(3000);
@@ -75,21 +78,6 @@ public class DemoMinesweeperUsage {
         // get bombs.
         logger.info(">>> get bombs");
         minesweeperService.getBombs();
-        logger.info("" + minesweeperService);
-
-        Thread.sleep(3000);
-
-        // calculate points.
-        logger.info(">>> calculate points");
-        minesweeperService.calculatePoints();
-        logger.info("" + minesweeperService);
-
-        Thread.sleep(3000);
-
-        // setter for points
-        logger.info(">>> set points");
-        int points = 3;
-        minesweeperService.setPoints(points);
         logger.info("" + minesweeperService);
 
         Thread.sleep(3000);
