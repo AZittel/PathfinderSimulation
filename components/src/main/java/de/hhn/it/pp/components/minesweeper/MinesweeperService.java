@@ -2,8 +2,6 @@ package de.hhn.it.pp.components.minesweeper;
 
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 
-import java.util.List;
-
 /**
  * This Interface is an Interface for the Game MineSweeper that shows all the
  * functionality to interact with our game.
@@ -31,35 +29,47 @@ public interface MinesweeperService {
     /**
      * Resets the Game.
      */
-    void restart() throws InvalidGameStateException;
+    void restart();
 
     /**
      * Starts the Game.
      */
-    void startGame() throws InvalidGameStateException;
+    void startGame();
 
     /**
      * Closes the Game.
      */
-    void endGame() throws InvalidGameStateException;
+    void endGame();
 
     /**
      * Checks the clicked field.
      * @param x x-Pos of the clicked field.
      * @param y y-Pos of the clicked field.
      */
-    List<FieldInformation> turn(int x, int y);
+    void turn(int x, int y);
 
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
-    void setFixBombs(List<BombPosition> positions);
+    void setFixBombs();
 
 
     /**
      * Getter for getting bombs.
      */
-    List<BombPosition> getBombs();
+    int getBombs();
+
+
+    /**
+     * calculates the Points.
+     */
+    void calculatePoints();
+
+
+    /**
+     * Sets the current Points.
+     */
+    void setPoints(int points);
 
 
     /**
