@@ -24,7 +24,7 @@ public class SaveGame {
     }
 
     public static void save(Board board){
-        File file = new File("rsc/data/save.txt");
+        File file = new File("provider/save/savefile.txt");
 
         try {
             OutputStream stream = new FileOutputStream(file);
