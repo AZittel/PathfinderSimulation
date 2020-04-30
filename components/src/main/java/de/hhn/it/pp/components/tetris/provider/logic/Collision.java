@@ -3,67 +3,82 @@ package de.hhn.it.pp.components.tetris.provider.logic;
 import de.hhn.it.pp.components.tetris.provider.TetrisGame;
 
 public class Collision {
+    /**
+     * Medthod to identify if the Tetromino is colliding with another.
+     *
+     * @param board
+     * @param b         current tetromino
+     * @param direction current direction the Tetromino has
+     * @return boolean true if a Collision happened
+     */
 
     public boolean collideWithTetromino(Board board, Tetromino b, int direction) {
-        // direction: -1 = links, 0 = runter, 1 = rechts
+        // direction: -1 = left, 0 = down, 1 = right
 
         switch (direction) {
             case -1:
-                if (b.getY() > 0) {
-                    if (b.getX() > 0) {
+                //checks if the Tetromino is inside the Map and not on the left Wall
+                if (b.getY() > 0 && b.getX() > 0) {
+                    //iteration to check for all sub-Tetromino-Blocks of the Tetromino
+                    for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
+                        for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
+                            //checks if there is a Tetromino already placed left to the current Tetromino
+                            if (b.getBounds()[b.getRotation()][i][j] == 1) {
+                                if (board.getMap()[b.getX() + i - 1][b.getY() + j] >= 1) {
+
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                break;
+            case 0:
+                //checks that the Tetromino is inside the Map
+                if (b.getY() + b.getSize() > 1 && b.getY() - b.getSize() < 17) {
+
+                    try {
+                        //iteration to check for all sub-Tetromino-Blocks of the Tetromino
                         for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
                             for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
+                                //checks if there is a Tetromino already placed underneath the current Tetromino
                                 if (b.getBounds()[b.getRotation()][i][j] == 1) {
-                                    if (board.getMap()[b.getX() + i - 1][b.getY() + j] >= 1) {
+                                    if (board.getMap()[b.getX() + i][b.getY() + j + 1] >= 1) {
+                                        //when the Tetromino lands ontop of a  already placed Tetromino a new Tetromino will spawn
+                                        //the placed TetrominoTypeValue will be added to the Map
+                                        board.setSpawnNewTetromino(true);
+                                        fillBlock(board, b);
 
                                         return true;
                                     }
                                 }
                             }
                         }
+                    } catch (Exception e) {
+                        return false;
                     }
-                }
-                break;
-            case 0:
-                if (b.getY() + b.getSize() > 1) {
-                    if (b.getY() - b.getSize() < 17) {
-                        try {
-                            for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
-                                for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
-                                    if (b.getBounds()[b.getRotation()][i][j] == 1) {
 
-                                        if (board.getMap()[b.getX() + i][b.getY() + j + 1] >= 1) {
-
-                                            board.setSpawnNewTetromino(true);
-                                            fillBlock(board, b);
-
-                                            return true;
-                                        }
-                                    }
-                                }
-                            }
-                        } catch (Exception e) {
-                            return false;
-                        }
-                    }
                 }
 
                 break;
             case 1:
-                if (b.getY() > 0) {
-                    if (b.getX() < 10) {
-                        for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
-                            for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
-                                if (b.getBounds()[b.getRotation()][i][j] == 1) {
-                                    if (board.getMap()[b.getX() + i + 1][b.getY() + j] >= 1) {
+                //checks if the Tetromino is inside the Map and not on the right Wall
+                if (b.getY() > 0 && b.getX() < 10) {
+                    //iteration to check for all sub-Tetromino-Blocks of the Tetromino
+                    for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
+                        for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
+                            //checks if there is a Tetromino already placed to the right of the current Tetromino
+                            if (b.getBounds()[b.getRotation()][i][j] == 1) {
+                                if (board.getMap()[b.getX() + i + 1][b.getY() + j] >= 1) {
 
-                                        return true;
-                                    }
+                                    return true;
                                 }
                             }
                         }
-
                     }
+
+
                 }
                 break;
         }
@@ -71,28 +86,35 @@ public class Collision {
         return false;
     }
 
+    /**
+     * Methode to Check if the Tetromino would collide with something while Rotating
+     *
+     * @param board
+     * @param b     current Tetromino
+     * @return boolean true if a Collision happened
+     */
     public boolean collideInRotation(Board board, Tetromino b) {
+
         int rot = b.getRotation() + 1;
+        // if the rotation is set to 4 the next would be 0
         if (rot == 4) {
             rot = 0;
         }
-
+        //creating a new Tetromino with next rotation
         Tetromino tetromino = new Tetromino();
         tetromino.setRotation(rot);
         tetromino.setBounds(b.getBounds());
         tetromino.setSize(b.getSize());
-        tetromino.setX(b.getX()-1);
+        tetromino.setX(b.getX() - 1);
         tetromino.setY(b.getY());
 
-        if(collideWithWall(board, tetromino, 1)) {
+        //Check if the Tetromino would collide with the walls
+        if (collideWithWall(board, tetromino, 1)) {
             return true;
         }
-        tetromino.setX(b.getX()+2);
-        if(collideWithWall(board, tetromino, -1)) {
-            return true;
-        }
-
+        //check if the Tetromino would still be above the bottom
         if (b.getY() > 0) {
+            //iteration to check for all sub-Tetromino-Blocks of the Tetromino
             for (int i = 0; i < b.getBounds()[rot].length; i++) {
                 for (int j = 0; j < b.getBounds()[rot][i].length; j++) {
                     if (b.getBounds()[rot][i][j] == 1) {
@@ -113,12 +135,22 @@ public class Collision {
         return false;
     }
 
+    /**
+     * Medthod to identify if the Tetromino is colliding with the Walls of the Map.
+     *
+     * @param board
+     * @param b         current tetromino
+     * @param direction current direction the Tetromino has
+     * @return boolean true if a Collision happened
+     */
     public boolean collideWithWall(Board board, Tetromino b, int direction) {
-        // direction: -1 = links, 0 = runter, 1 = rechts
+        // direction: -1 = left, 0 = down, 1 = right
         switch (direction) {
             case -1:
+                //iteration to check for all sub-Tetromino-Blocks of the Tetromino
                 for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
                     for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
+                        //check if the current Tetromino is on the left Wall
                         if (b.getBounds()[b.getRotation()][i][j] == 1) {
                             if (b.getX() + i == 0) {
                                 return true;
@@ -128,10 +160,14 @@ public class Collision {
                 }
                 break;
             case 0:
+                //iteration to check for all sub-Tetromino-Blocks of the Tetromino
                 for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
                     for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
+                        //check if the current Tetromino is on the bottom Wall
                         if (b.getBounds()[b.getRotation()][i][j] == 1) {
                             if (b.getY() + j == 17) {
+                                //when the Tetromino hits the Bottom of the Map a new Tetromino will spawn
+                                //the placed TetrominoTypeValue will be added to the Map
                                 board.setSpawnNewTetromino(true);
                                 fillBlock(board, b);
 
@@ -142,8 +178,10 @@ public class Collision {
                 }
                 break;
             case 1:
+                //iteration to check for all sub-Tetromino-Blocks of the Tetromino
                 for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
                     for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
+                        //check if the current Tetromino is on the right Wall
                         if (b.getBounds()[b.getRotation()][i][j] == 1) {
                             if (b.getX() + (i + 2) >= 11) {
                                 return true;
@@ -157,6 +195,12 @@ public class Collision {
         return false;
     }
 
+    /**
+     * Adds the currently placed Tetromino and adds their Type Value to the Map
+     *
+     * @param board
+     * @param b
+     */
     private void fillBlock(Board board, Tetromino b) {
         try {
             for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
@@ -174,6 +218,12 @@ public class Collision {
         checkLoose(board);
     }
 
+    /**
+     * Methode to check every row from the Bottom to the Top if the intire Row is with by Tetrominos
+     *
+     * @param board
+     * @param multiplier
+     */
     public void checkFullRow(Board board, int multiplier) {
         //TODO safe function
 
@@ -188,7 +238,7 @@ public class Collision {
             }
             if (tetrominosInRow == 10) {
 
-                board.setScoreToAdd(board.getScoreToAdd()+ (10*multiplier));
+                board.setScoreToAdd(board.getScoreToAdd() + (10 * multiplier));
                 delRow(board, y, multiplier);
                 break;
             } else {
@@ -206,6 +256,11 @@ public class Collision {
         }
     }
 
+    /**
+     * @param board
+     * @param row
+     * @param multiplier
+     */
     private void delRow(Board board, int row, int multiplier) {
 
         for (int i = 0; i < board.getMap().length; i++) {
@@ -218,9 +273,14 @@ public class Collision {
             }
 
         }
-        checkFullRow(board,multiplier + 1);
+        checkFullRow(board, multiplier + 1);
     }
 
+    /**
+     * Methode to determine a Gameover by checking if a Tetromino reaches to the highest row in the Map
+     *
+     * @param board
+     */
     private void checkLoose(Board board) {
         for (int x = 0; x < board.getMap().length; x++) {
 
@@ -231,5 +291,3 @@ public class Collision {
         }
     }
 }
-
-

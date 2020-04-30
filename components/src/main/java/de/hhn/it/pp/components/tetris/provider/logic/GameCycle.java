@@ -17,14 +17,18 @@ public class GameCycle extends Thread {
     public void run() {
             try {
                 if (board.getBoardState() == BoardState.activeGame) {
-
-                    //TODO collision checks
                     //check for collision with other blocks and walls
+                    if (!Collision.collideWithWall(this.board, board.getCurrentTetromino(), 0)) {
+                        board.getCurrentTetromino().setY(board.getCurrentTetromino().getY() + 1);
+                        Collision.collideWithWall(this.board, board.getCurrentTetromino(), 0);
 
                     }
 
+
+                }
+
                     if (board.isSpawnNewTetromino()) {
-                        //TODO collision checks
+                        Collision.checkFullRow(this.board,1);
                         board.addTetromino(board.getNextTetromino());
                         board.setCurrentTetromino(board.getNextTetromino());
                         board.setNextTetromino(new Tetromino());
