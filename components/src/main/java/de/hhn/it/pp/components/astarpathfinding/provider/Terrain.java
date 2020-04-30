@@ -4,6 +4,8 @@ import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 
 public class Terrain implements Cloneable {
+  private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Terrain.class);
+
   /**
    * The movement cost to move from the starting point to a given square on the grid, following the
    * path generated to get there. (Distance from starting cell)
@@ -16,29 +18,22 @@ public class Terrain implements Cloneable {
    */
   private int h;
 
-
-  /**
-   * Position on the map.
-   */
+  /** Position on the map. */
   private Position position;
 
-  /**
-   * The terrain type.
-   */
+  /** The terrain type. */
   private TerrainType type;
 
-  /**
-   * The neighbour with the lowest f value
-   */
+  /** The neighbour with the lowest f value */
   private Terrain parent;
 
-  private Terrain() {
-  }
+  private Terrain() {}
 
   public Terrain(int gridRow, int gridCol, TerrainType type) {
     super();
     this.position = new Position(gridRow, gridCol);
     this.type = type;
+    logger.info("Terrain created: {}", this.toString());
   }
 
   /**
@@ -88,7 +83,7 @@ public class Terrain implements Cloneable {
 
   @Override
   public String toString() {
-    return position + "";
+    return type + " at " + position;
   }
 
   @Override

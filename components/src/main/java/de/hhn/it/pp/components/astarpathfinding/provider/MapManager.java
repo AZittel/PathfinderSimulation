@@ -1,8 +1,8 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
+import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-
 
 public class MapManager {
   private static final int MAX_WIDTH = 50;
@@ -10,17 +10,32 @@ public class MapManager {
   private static final int MIN_WIDTH = 2;
   private static final int MIN_HEIGHT = 2;
 
+  private static final int DEFAULT_WIDTH = 10;
+  private static final int DEFAULT_HEIGHT = 10;
 
+  private static final Position DEFAULT_START_POSITION = new Position(0, 0);
+  private static final Position DEFAULT_DESTINATION_POSITION = new Position(9, 9);
+
+  private Position startCoordinates;
+  private Position destinationCoordinates;
 
   private Terrain[][] map;
 
   public MapManager() {
+    try {
+      createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+      startCoordinates = DEFAULT_START_POSITION;
+      destinationCoordinates = DEFAULT_DESTINATION_POSITION;
+    } catch (IllegalParameterException e) {
+      // Should never land here
+      e.printStackTrace();
+    }
   }
 
   /**
    * Creates the map with the given width and height.
    *
-   * @param width  the width of the map, must higher then 1
+   * @param width the width of the map, must higher then 1
    * @param height the height of the map, must higher then 1
    * @throws IllegalParameterException if either the width or the height is invalid
    */
@@ -33,17 +48,47 @@ public class MapManager {
     // Check maximum boundaries of the map
     if (width > MAX_WIDTH || height > MAX_HEIGHT) {
       throw new IllegalParameterException(
-        String.format(
-          "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
-          MAX_WIDTH, MAX_HEIGHT));
+          String.format(
+              "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
+              MAX_WIDTH, MAX_HEIGHT));
     }
 
     // Create new map with grass terrain
     map = new Terrain[height][width];
     for (int row = 0; row < height; row++) {
-      for (int col = 0; col < height; col++) {
-        map[row][col] = new Terrain(row, col, TerrainType.GRASS);
+      for (int col = 0; col < width; col++) {
+        map[row][col] = new Terrain(row, col, TerrainType.DIRT);
       }
+    }
+  }
+
+  /**
+   * Creates and places a terrain from the given type on the given position.
+   *
+   * @param type the terrain type
+   * @param position the position on the map
+   */
+  public void createTerrain(TerrainType type, Position position) {
+    map[position.getY()][position.getX()] = new Terrain(position.getY(), position.getX(), type);
+  }
+
+  /**
+   * Evaluates if the position is in the current map's boundaries.
+   *
+   * @param position the x and y coordinates
+   * @throws IllegalParameterException thrown when the position is not on the map
+   */
+  public void checkPositionInBounds(Position position) throws IllegalParameterException {
+    if (position.getX() < 0) {
+      throw new IllegalParameterException("X cannot be lower than 0!");
+    } else if (position.getX() > getWidth() - 1) {
+      throw new IllegalParameterException(
+          String.format("X cannot be greater than %d!", getWidth() - 1));
+    } else if (position.getY() < 0) {
+      throw new IllegalParameterException("Y cannot be lower than 0!");
+    } else if (position.getY() > getHeight() - 1) {
+      throw new IllegalParameterException(
+          String.format("Y cannot be greater than %d!", getHeight() - 1));
     }
   }
 
@@ -54,4 +99,29 @@ public class MapManager {
   public Terrain[][] getMap() {
     return map;
   }
+
+  public int getWidth() {
+    return map[0].length;
+  }
+
+  public int getHeight() {
+    return map.length;
+  }
+
+  public Position getStartCoordinates() {
+    return startCoordinates;
+  }
+
+  public void setStartCoordinates(Position startCoordinates) {
+    this.startCoordinates = startCoordinates;
+  }
+
+  public Position getDestinationCoordinates() {
+    return destinationCoordinates;
+  }
+
+  public void setDestinationCoordinates(Position destinationCoordinates) {
+    this.destinationCoordinates = destinationCoordinates;
+  }
+
 }
