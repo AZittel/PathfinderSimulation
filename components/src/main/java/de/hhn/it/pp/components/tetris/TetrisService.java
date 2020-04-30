@@ -1,8 +1,8 @@
 package de.hhn.it.pp.components.tetris;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.tetris.provider.io.Direction;
 import de.hhn.it.pp.components.tetris.provider.logic.Difficulty;
 import de.hhn.it.pp.components.tetris.provider.logic.Tetromino;
-
 import java.io.IOException;
 
 /**
@@ -72,7 +72,7 @@ public interface TetrisService {
      * @param tetromino the Tetromino who gets located
      * @throws NullPointerException if the Tetromino can't be found
      */
-    int getTetrominoLocation(Tetromino tetromino) throws NullPointerException;
+    int[] getTetrominoLocation(Tetromino tetromino) throws NullPointerException;
 
     /**
      * Shows the rotation value of a specified Tetromino

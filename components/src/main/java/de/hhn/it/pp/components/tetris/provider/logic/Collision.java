@@ -1,17 +1,15 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
 
-import de.hhn.it.pp.components.tetris.provider.TetrisGame;
-
 public class Collision {
+
     /**
-     * Medthod to identify if the Tetromino is colliding with another.
+     * Method to identify if the Tetromino is colliding with another.
      *
-     * @param board
+     * @param board     the board
      * @param b         current tetromino
      * @param direction current direction the Tetromino has
      * @return boolean true if a Collision happened
      */
-
     public boolean collideWithTetromino(Board board, Tetromino b, int direction) {
         // direction: -1 = left, 0 = down, 1 = right
 
@@ -48,7 +46,7 @@ public class Collision {
                                         //when the Tetromino lands ontop of a  already placed Tetromino a new Tetromino will spawn
                                         //the placed TetrominoTypeValue will be added to the Map
                                         board.setSpawnNewTetromino(true);
-                                        fillBlock(board, b);
+                                        fillTetromino(board, b);
 
                                         return true;
                                     }
@@ -87,9 +85,9 @@ public class Collision {
     }
 
     /**
-     * Methode to Check if the Tetromino would collide with something while Rotating
+     * Method to check if the Tetromino would collide with something while rotating.
      *
-     * @param board
+     * @param board the board
      * @param b     current Tetromino
      * @return boolean true if a Collision happened
      */
@@ -136,9 +134,9 @@ public class Collision {
     }
 
     /**
-     * Medthod to identify if the Tetromino is colliding with the Walls of the Map.
+     * Method to identify if the Tetromino is colliding with the walls of the map.
      *
-     * @param board
+     * @param board     the board
      * @param b         current tetromino
      * @param direction current direction the Tetromino has
      * @return boolean true if a Collision happened
@@ -169,7 +167,7 @@ public class Collision {
                                 //when the Tetromino hits the Bottom of the Map a new Tetromino will spawn
                                 //the placed TetrominoTypeValue will be added to the Map
                                 board.setSpawnNewTetromino(true);
-                                fillBlock(board, b);
+                                fillTetromino(board, b);
 
                                 return true;
                             }
@@ -196,12 +194,12 @@ public class Collision {
     }
 
     /**
-     * Adds the currently placed Tetromino and adds their Type Value to the Map
+     * Adds the currently placed Tetromino and adds their typevalue to the map
      *
-     * @param board
-     * @param b
+     * @param board the board
+     * @param b the Tetromino that gets filled
      */
-    private void fillBlock(Board board, Tetromino b) {
+    private void fillTetromino(Board board, Tetromino b) {
         try {
             for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
                 for (int j = 0; j < b.getBounds()[b.getRotation()][i].length; j++) {
@@ -219,10 +217,10 @@ public class Collision {
     }
 
     /**
-     * Methode to check every row from the Bottom to the Top if the intire Row is with by Tetrominos
+     * Method to check every row from the bottom to the top if the entire row is filled with Tetrominos
      *
-     * @param board
-     * @param multiplier
+     * @param board         the board
+     * @param multiplier    the multiplier value
      */
     public void checkFullRow(Board board, int multiplier) {
         //TODO safe function
@@ -257,9 +255,10 @@ public class Collision {
     }
 
     /**
-     * @param board
-     * @param row
-     * @param multiplier
+     * Used to delete a filled row
+     * @param board         the board
+     * @param row           the row to delete
+     * @param multiplier    the point multiplier
      */
     private void delRow(Board board, int row, int multiplier) {
 
@@ -277,17 +276,16 @@ public class Collision {
     }
 
     /**
-     * Methode to determine a Gameover by checking if a Tetromino reaches to the highest row in the Map
+     * Method to determine a gameover by checking if a Tetromino reaches to the highest row in the map
      *
-     * @param board
+     * @param board the board
      */
     private void checkLoose(Board board) {
         for (int x = 0; x < board.getMap().length; x++) {
 
             if (board.getMap()[x][0] > 0) {
-                board.boardState = BoardState.gameover;
+                board.setBoardState(BoardState.gameover);
             }
-
         }
     }
 }

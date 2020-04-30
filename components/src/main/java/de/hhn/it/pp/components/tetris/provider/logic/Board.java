@@ -5,28 +5,17 @@ import java.util.ArrayList;
 public class Board {
 
     private int score = 0;
-
     private int highscore = 0;
-
     private int scoreToAdd = 0;
-
     private boolean spawnNewTetromino = false;
-
     private boolean speedup = false;
-
     private int difficultyValue = 0;
-
     public ArrayList<Tetromino> tetrominos = new ArrayList<>();
-
     private Tetromino currentTetromino;
-
     private Tetromino nextTetromino;
-
     private int[][] map = new int[10][18];
-
     private Collision myCollision = new Collision();
-
-    public BoardState boardState = BoardState.start;
+    private BoardState boardState = BoardState.start;
 
     /**
      * clears the board (remove all tetrominos)
@@ -140,4 +129,7 @@ public class Board {
         return nextTetromino;
     }
 
+    public void setBoardState(BoardState boardState) {
+        this.boardState = boardState;
+    }
 }

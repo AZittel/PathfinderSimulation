@@ -3,7 +3,6 @@ import de.hhn.it.pp.components.tetris.TetrisService;
 import de.hhn.it.pp.components.tetris.provider.io.Direction;
 import de.hhn.it.pp.components.tetris.provider.io.SaveGame;
 import de.hhn.it.pp.components.tetris.provider.logic.*;
-
 /**
  * Tetris clone written in Java
  *
@@ -11,16 +10,16 @@ import de.hhn.it.pp.components.tetris.provider.logic.*;
  */
 public class TetrisGame implements TetrisService {
 
-    private Board board = new Board();
+    private GameCycle myGame = new GameCycle();
 
     @Override
     public void startGame() {
-        new GameCycle(board).start();
+        myGame.start();
     }
 
     @Override
     public void setDifficulty(Difficulty difficulty) {
-        board.setDifficultyValue(difficulty);
+        myGame.getBoard().setDifficultyValue(difficulty);
     }
 
     @Override
@@ -34,40 +33,51 @@ public class TetrisGame implements TetrisService {
 
     @Override
     public void rotate() {
-        board.getCurrentTetromino().rotate();
+        myGame.getBoard().getCurrentTetromino().rotate();
     }
 
     @Override
     public void reset() {
-        board.clear();
+        myGame.getBoard().clear();
     }
 
     @Override
     public void save() {
+        SaveGame.save(myGame.getBoard());
     }
 
     @Override
     public void load() {
-        //not yet implemented
+        SaveGame.load(myGame.getBoard());
     }
 
     @Override
     public int getCurrentTetrominoRotation() throws IllegalStateException, NullPointerException {
-        return board.getCurrentTetromino().getRotation();
+        return myGame.getBoard().getCurrentTetromino().getRotation();
     }
 
     @Override
     public int getCurrentTetrominoSpeed() throws IllegalStateException {
-        return board.getDifficultyValue();
+        return myGame.getBoard().getDifficultyValue();
     }
 
     @Override
-    public int getTetrominoLocation(Tetromino tetromino) throws NullPointerException {
-        return tetromino.getX() + tetromino.getY();
+    public int[] getTetrominoLocation(Tetromino tetromino) throws NullPointerException {
+        int xCord = tetromino.getX();
+        int yCord = tetromino.getY();
+        return new int[] {xCord, yCord};
     }
 
     @Override
     public int getTetrominoRotation(Tetromino tetromino) throws NullPointerException {
         return tetromino.getRotation();
+    }
+
+    public BoardState getBoardState(){
+        return myGame.getBoard().getBoardState();
+    }
+
+    public void setBoardState(BoardState boardState){
+        myGame.getBoard().setBoardState(boardState);
     }
 }

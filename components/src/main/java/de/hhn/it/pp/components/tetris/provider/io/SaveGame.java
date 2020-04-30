@@ -1,25 +1,44 @@
 package de.hhn.it.pp.components.tetris.provider.io;
 
+import de.hhn.it.pp.components.tetris.provider.logic.Board;
+
+import java.io.*;
+import java.util.Scanner;
+
 public class SaveGame {
 
     //under heavy construction!!!
 
-    private String name;
-    private int highScore;
+    public static void load(Board board){
+        File file = new File("provider/save/savefile.txt");
 
-    public SaveGame(){
+        try {
+            Scanner sc = new Scanner(file);
+            board.setHighscore(sc.nextInt());
+            sc.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        }
     }
 
-    private void load(){
+    public static void save(Board board){
+        File file = new File("rsc/data/save.txt");
 
+        try {
+            OutputStream stream = new FileOutputStream(file);
+            try {
+                stream.write(Integer.toString(board.getHighscore()).getBytes());
+                stream.close();
 
-    }
+            } catch (IOException e) {
 
-    public String getName(){
-        return name;
-    }
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
 
-    public int getHighScore() {
-        return highScore;
+            e.printStackTrace();
+        }
     }
 }
