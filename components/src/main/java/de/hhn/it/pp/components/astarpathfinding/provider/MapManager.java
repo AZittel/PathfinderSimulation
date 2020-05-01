@@ -2,6 +2,7 @@ package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 public class MapManager {
@@ -68,7 +69,9 @@ public class MapManager {
    * @param type the terrain type
    * @param position the position on the map
    */
-  public void createTerrain(TerrainType type, Position position) {
+  public void createTerrain(TerrainType type, Position position) throws IllegalParameterException {
+    // Check map boundaries
+    checkPositionInBounds(position);
     map[position.getY()][position.getX()] = new Terrain(position.getY(), position.getX(), type);
   }
 
@@ -78,7 +81,7 @@ public class MapManager {
    * @param position the x and y coordinates
    * @throws IllegalParameterException thrown when the position is not on the map
    */
-  public void checkPositionInBounds(Position position) throws IllegalParameterException {
+  private void checkPositionInBounds(Position position) throws IllegalParameterException {
     if (position.getX() < 0) {
       throw new IllegalParameterException("X cannot be lower than 0!");
     } else if (position.getX() > getWidth() - 1) {
@@ -112,7 +115,16 @@ public class MapManager {
     return startCoordinates;
   }
 
-  public void setStartCoordinates(Position startCoordinates) {
+  public void setStartCoordinates(Position startCoordinates)
+    throws IllegalParameterException, OccupiedPositionException {
+    // Check map boundaries
+    checkPositionInBounds(startCoordinates);
+
+    // Check occupied position
+    if (getDestinationCoordinates().equals(startCoordinates)) {
+      throw new OccupiedPositionException(
+        "The start point cannot be placed on the destination point");
+    }
     this.startCoordinates = startCoordinates;
   }
 
@@ -120,7 +132,16 @@ public class MapManager {
     return destinationCoordinates;
   }
 
-  public void setDestinationCoordinates(Position destinationCoordinates) {
+  public void setDestinationCoordinates(Position destinationCoordinates)
+    throws IllegalParameterException, OccupiedPositionException {
+    // Check map boundaries
+    checkPositionInBounds(destinationCoordinates);
+
+    // Check occupied position
+    if (getStartCoordinates().equals(destinationCoordinates)) {
+      throw new OccupiedPositionException(
+        "The destination point cannot be placed on the start point");
+    }
     this.destinationCoordinates = destinationCoordinates;
   }
 
