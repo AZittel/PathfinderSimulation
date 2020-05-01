@@ -1,73 +1,83 @@
-package de.hhn.it.pp.components.craftingservice;
-
-import de.hhn.it.pp.components.craftingservice.provider.*;
-
-/**
- * A program demo to show off the basic feature of the crafting system
- *
- * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-04-20
- */
-
-public class CraftingServiceUsageDemo {
-
-    public static void main(String[] args) {
-        // --- INITIALIZATION --
-
-        // create an inventory
-        Inventory demoInventory = new Inventory(18);
-        // create some resources
-        Resource smallWoodPlank = new Resource("Small Wood Plank");
-        Resource magicalEssence = new Resource("Magical Essence");
-        Resource fieryEssence = new Resource("Fiery Essence");
-        Resource mediumIronBar = new Resource("Medium Iron Bar");
-        // create some crafting patterns
-        CraftingPattern largeIronSword = new CraftingPattern(1.5f,
-                new Resource("Small Wood Plank"), new Resource("Medium Iron Bar"),
-                new Resource("Medium Iron Bar"), new Weapon("Large Iron Sword"));
-        CraftingPattern fierySword = new CraftingPattern(2.5f,
-                new Weapon("Large Iron Sword"), new Resource("Fiery Essence"),
-                new Weapon("Fiery Sword"));
-        CraftingPattern smallMagicalWand = new CraftingPattern(1.0f,
-                new Resource("Small Wood Plank"), new Resource("Magical Essence"),
-                new Weapon("Small Magical Wand"));
-
-        // --- DEMO SCENARIO ---
-
-        // add the resources into the inventory
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), smallWoodPlank);
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), magicalEssence);
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), fieryEssence);
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), mediumIronBar);
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), mediumIronBar);
-        demoInventory.add(demoInventory.getItems(), demoInventory.getInventorySize(), mediumIronBar);
-
-        // print the inventory first
-        demoInventory.printInventory();
-
-        // try to craft some patterns and print the needed and provided items of each pattern before
-        largeIronSword.printCraftingPattern();
-        demoInventory.craft(demoInventory.getItems(), demoInventory.getInventorySize(), largeIronSword);
-        // this should work - print updated inventory
-        demoInventory.printInventory();
-
-        fierySword.printCraftingPattern();
-        demoInventory.craft(demoInventory.getItems(), demoInventory.getInventorySize(), fierySword);
-        // this should work - print updated inventory
-        demoInventory.printInventory();
-
-        smallMagicalWand.printCraftingPattern();
-        demoInventory.craft(demoInventory.getItems(), demoInventory.getInventorySize(), smallMagicalWand);
-        // this should not work because there is no 'Small Wood Plank' in the inventory anymore - print inventory
-        demoInventory.printInventory();
-
-        // try to delete the 'Magical Essence' form the inventory
-        if(demoInventory.remove(demoInventory.getItems(), magicalEssence)) {
-            System.out.println("'" + magicalEssence.getName() + "' deleted from inventory!\n");
-        } else {
-            System.out.println("Inventory is empty or item doesn't exist!\n");
-        }
-        // this should work - print updated inventory
-        demoInventory.printInventory();
-    }
-}
+//package component.test;
+//
+//import component.CraftingService;
+//import component.exceptions.CraftingNotPossibleException;
+//import component.exceptions.IllegalParameterException;
+//import component.provider.CraftingImplementation;
+//import component.provider.CraftingPattern;
+//import component.provider.Inventory;
+//import component.provider.Item;
+//
+//import java.util.ArrayList;
+//
+///**
+// * A program demo to show off the basic feature of the crafting system
+// *
+// * @author Oliver Koch, Philipp Alessandrini
+// * @version 2020-05-01
+// */
+//
+//public class CraftingServiceUsageDemo {
+//
+//    /**
+//     * Initializes a sample crafting pattern
+//     * @return the initialized and usable crafting pattern
+//     */
+//    private static CraftingPattern largeIronSword() {
+//        // define name
+//        String name = "Pattern: Large Iron Sword";
+//        // define crafting time
+//        int craftingTime = 2500;
+//        // define needed items
+//        ArrayList<Item> neededItems = new ArrayList<>();
+//        neededItems.add(new Item("Small Wood Plank"));
+//        neededItems.add(new Item("Medium Iron Bar"));
+//        neededItems.add(new Item("Medium Iron Bar"));
+//        // define provided items
+//        ArrayList<Item> providedItems = new ArrayList<>();
+//        providedItems.add(new Item("Large Iron Sword"));
+//        providedItems.add(new Item("Hot Ash"));
+//        providedItems.add(new Item("Hot Ash"));
+//
+//        // create and return complete pattern
+//        return new CraftingPattern(name, craftingTime, neededItems, providedItems);
+//    }
+//
+//    public static void main(String[] args) {
+//        // create the CraftingService
+//        CraftingService service = new CraftingImplementation();
+//        // create an inventory
+//        Inventory demoInventory = new Inventory(new ArrayList<Item>());
+//
+//        // add some resources into the inventory
+//        try {
+//            service.add(demoInventory, new Item("Small Wood Plank"));
+//            service.add(demoInventory, new Item("Medium Iron Bar"));
+//            service.add(demoInventory, new Item("Medium Iron Bar"));
+//            service.add(demoInventory, new Item("Medium Iron Bar"));
+//        } catch (IllegalParameterException e) {
+//            System.err.println(e.getMessage() + "\n");
+//        }
+//        System.out.println();
+//
+//        // print the inventory first
+//        demoInventory.printInventory();
+//
+//        // try to delete one 'Medium Iron Bar' from the inventory parallel before the crafting process has ended
+//        try {
+//            service.remove(demoInventory, new Item("Medium Iron Bar"));
+//        } catch (IllegalParameterException e) {
+//            System.err.println(e.getMessage() + "\n");
+//        }
+//        System.out.println();
+//        // this should work - print updated inventory
+//        demoInventory.printInventory();
+//
+//        // try to craft the chosen pattern - this should also work
+//        try {
+//            service.craft(demoInventory, largeIronSword());
+//        } catch (CraftingNotPossibleException e) {
+//            System.err.println(e.getMessage() + "\n");
+//        }
+//    }
+//}
