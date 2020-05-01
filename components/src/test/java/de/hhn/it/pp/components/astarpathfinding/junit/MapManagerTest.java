@@ -1,5 +1,9 @@
 package de.hhn.it.pp.components.astarpathfinding.junit;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
@@ -15,8 +19,15 @@ public class MapManagerTest {
   @DisplayName("Create a new terrain map")
   public void createMap_newMap() throws IllegalParameterException, PositionOutOfBounds {
     MapManager testManager = new MapManager();
-    testManager.createMap(5, 5);
+    testManager.createMap(12, 15);
     Terrain[][] map = testManager.getMap();
-
+    assertAll(
+        () -> assertEquals(15, map.length, "The map height should be 15."),
+        () -> assertEquals(12, map[0].length, "The map height should be 12."));
+    for (int i = 0; i < map.length - 1; i++) {
+      for (int j = 0; j < map[0].length - 1; j++) {
+        assertEquals(TerrainType.DIRT, map[i][j].getType(), "The terrain type should be dirt.");
+      }
+    }
   }
 }
