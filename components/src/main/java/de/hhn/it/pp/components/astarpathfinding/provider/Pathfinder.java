@@ -12,42 +12,48 @@ public final class Pathfinder implements PathfindingService {
   private static final org.slf4j.Logger logger =
     org.slf4j.LoggerFactory.getLogger(Pathfinder.class);
 
-  private MapManager manager = new MapManager();
+  private MapManager mapManager = new MapManager();
 
   @Override
   public void createMap(int width, int height) throws IllegalParameterException {
     logger.info("createMap: width = {} height = {}", width, height);
-    manager.createMap(width, height);
+    mapManager.createMap(width, height);
   }
 
   @Override
   public void setStartPoint(Position position)
     throws IllegalParameterException, OccupiedPositionException {
     logger.info("setStartPoint: position = {}", position.toString());
-    manager.setStartCoordinates(position);
+    mapManager.setStartCoordinates(position);
   }
 
   @Override
   public void setEndPoint(Position position)
     throws IllegalParameterException, OccupiedPositionException {
     logger.info("setEndPoint: position = {}", position.toString());
-    manager.setDestinationCoordinates(position);
+    mapManager.setDestinationCoordinates(position);
   }
 
   @Override
   public void placeTerrain(TerrainType type, Position position) throws IllegalParameterException {
     logger.info("placeTerrain: type = {}, position = {} ", type, position.toString());
-    manager.createTerrain(type, position);
+    mapManager.createTerrain(type, position);
   }
 
   @Override
   public List<PathfindingInformation> doPathfinding() {
     logger.info("doPathfinding: no params");
-    return new AStarPathfindingAlgorithm(manager).findPath();
+
+    return new AStarPathfindingAlgorithm(mapManager).findPath();
   }
 
   @Override
   public void reset() {
+    logger.info("reset: no params");
+    // Reset the TerrainType modifiers
+    TerrainType.resetModifers();
+    // Reset the mapManager
+    mapManager.reset();
   }
 
   @Override

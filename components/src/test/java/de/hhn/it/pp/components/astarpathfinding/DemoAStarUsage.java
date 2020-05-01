@@ -2,6 +2,10 @@ package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DemoAStarUsage {
   private static final org.slf4j.Logger logger =
@@ -43,7 +47,11 @@ public class DemoAStarUsage {
 
     // Start visualization
     logger.info(">>> visualization started");
-    service.doPathfinding();
+    List<PathfindingInformation> results = service.doPathfinding();
+    for(Terrain terrain : results.get(results.size()-1).getFinalPathPositions()){
+      System.out.print(terrain + " ");
+    }
+    System.out.println();
     logger.info("" + service);
 
     Thread.sleep(2500);

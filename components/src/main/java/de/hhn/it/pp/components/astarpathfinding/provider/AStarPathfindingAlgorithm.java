@@ -49,27 +49,31 @@ public class AStarPathfindingAlgorithm {
 
       // Add neighbours to possible path if they are accessible i.e. no obstacle.
       for (Terrain neighbour : getNeighbours(currentTerrain)) {
-        if (neighbour.getType().getModifier() >= 1
-          || information.getVisitedPositions().contains(neighbour)) {
-          continue;
-        }
+        if (neighbour != null) {
+          if (neighbour.
+            getType().
+            getModifier() >= 1
+            || information.getVisitedPositions().contains(neighbour)) {
+            continue;
+          }
 
-        // Update costs of the neighbour if a shorter path was found
-        int newCostToNeighbour =
-          currentTerrain.getGCost()
-            + (int)
-            ((getMDistance(currentTerrain, neighbour))
-              * (1 + currentTerrain.getType().getModifier()));
-        if (newCostToNeighbour < neighbour.getGCost()
-          || !information.getSpecificPositions().contains(neighbour)) {
-          neighbour.setGCost(newCostToNeighbour);
-          neighbour.setHCost(
-            getMDistance(
-              neighbour, map[destinationCoordinates.getX()][destinationCoordinates.getY()]));
-          neighbour.setParent(currentTerrain);
+          // Update costs of the neighbour if a shorter path was found
+          int newCostToNeighbour =
+            currentTerrain.getGCost()
+              + (int)
+              ((getMDistance(currentTerrain, neighbour))
+                * (1 + currentTerrain.getType().getModifier()));
+          if (newCostToNeighbour < neighbour.getGCost()
+            || !information.getSpecificPositions().contains(neighbour)) {
+            neighbour.setGCost(newCostToNeighbour);
+            neighbour.setHCost(
+              getMDistance(
+                neighbour, map[destinationCoordinates.getX()][destinationCoordinates.getY()]));
+            neighbour.setParent(currentTerrain);
 
-          if (!information.getSpecificPositions().contains(neighbour)) {
-            information.getSpecificPositions().add(neighbour);
+            if (!information.getSpecificPositions().contains(neighbour)) {
+              information.getSpecificPositions().add(neighbour);
+            }
           }
         }
       }
@@ -100,9 +104,7 @@ public class AStarPathfindingAlgorithm {
       path.add(currentTerrain);
       currentTerrain = currentTerrain.getParent();
     }
-
     Collections.reverse(path);
-    System.out.println(path);
     return path;
   }
 

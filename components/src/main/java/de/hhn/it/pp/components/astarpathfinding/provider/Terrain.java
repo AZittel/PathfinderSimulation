@@ -18,16 +18,23 @@ public class Terrain implements Cloneable {
    */
   private int h;
 
-  /** Position on the map. */
+  /**
+   * Position on the map.
+   */
   private Position position;
 
-  /** The terrain type. */
+  /**
+   * The terrain type.
+   */
   private TerrainType type;
 
-  /** The neighbour with the lowest f value */
+  /**
+   * The neighbour with the lowest f value
+   */
   private Terrain parent;
 
-  private Terrain() {}
+  private Terrain() {
+  }
 
   public Terrain(int gridRow, int gridCol, TerrainType type) {
     super();
@@ -69,16 +76,16 @@ public class Terrain implements Cloneable {
     return position;
   }
 
+  public void setPosition(Position position) {
+    this.position = position;
+  }
+
   public TerrainType getType() {
     return type;
   }
 
   public void setType(TerrainType type) {
     this.type = type;
-  }
-
-  public void setPosition(Position position) {
-    this.position = position;
   }
 
   @Override
@@ -88,10 +95,14 @@ public class Terrain implements Cloneable {
 
   @Override
   public Object clone() throws CloneNotSupportedException {
+
     Terrain cloned = (Terrain) super.clone();
-    cloned.setParent((Terrain) cloned.getParent().clone());
+    if (parent != null) {
+      cloned.setParent((Terrain) cloned.getParent().clone());
+    }
     Position clonedPosition = cloned.getPosition();
     cloned.setPosition(new Position(clonedPosition.getX(), clonedPosition.getY()));
+
     return cloned;
   }
 }

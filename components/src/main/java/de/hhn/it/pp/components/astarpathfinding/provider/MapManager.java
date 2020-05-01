@@ -95,6 +95,17 @@ public class MapManager {
     }
   }
 
+  /**
+   * Overwrites the map with a new empty map of the same size.
+   */
+  public void reset(){
+    try {
+      createMap(map[0].length, map.length);
+    } catch (IllegalParameterException e) {
+      e.printStackTrace();
+    }
+  }
+
   public Terrain getTerrainAt(int row, int col) {
     return map[row][col];
   }
