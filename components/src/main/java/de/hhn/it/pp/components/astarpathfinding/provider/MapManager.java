@@ -3,6 +3,8 @@ package de.hhn.it.pp.components.astarpathfinding.provider;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds.PositionType;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 public class MapManager {
@@ -24,10 +26,10 @@ public class MapManager {
 
   public MapManager() {
     try {
-      createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
       startCoordinates = DEFAULT_START_POSITION;
       destinationCoordinates = DEFAULT_DESTINATION_POSITION;
-    } catch (IllegalParameterException e) {
+      createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    } catch (IllegalParameterException | PositionOutOfBounds e) {
       // Should never land here
       e.printStackTrace();
     }
@@ -40,7 +42,8 @@ public class MapManager {
    * @param height the height of the map, must higher then 1
    * @throws IllegalParameterException if either the width or the height is invalid
    */
-  public void createMap(int width, int height) throws IllegalParameterException {
+  public void createMap(int width, int height)
+      throws IllegalParameterException, PositionOutOfBounds {
     // Check minimum boundaries of the map
     if (width < MIN_WIDTH || height < MIN_HEIGHT) {
       throw new IllegalParameterException("Width or height cannot be lower than 2!");
@@ -52,6 +55,16 @@ public class MapManager {
           String.format(
               "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
               MAX_WIDTH, MAX_HEIGHT));
+    }
+
+    // Check if start and destination positions are still on the map
+    if (startCoordinates.getX() >= width || startCoordinates.getY() >= height) {
+      startCoordinates = null;
+      throw new PositionOutOfBounds("Start position out of new map boundaries", PositionType.START);
+    } else if (destinationCoordinates.getX() >= width || destinationCoordinates.getY() >= height) {
+      destinationCoordinates = null;
+      throw new PositionOutOfBounds(
+          "Destination position out of new map boundaries", PositionType.DESTINATION);
     }
 
     // Create new map with grass terrain
@@ -95,13 +108,11 @@ public class MapManager {
     }
   }
 
-  /**
-   * Overwrites the map with a new empty map of the same size.
-   */
-  public void reset(){
+  /** Overwrites the map with a new empty map of the same size. */
+  public void reset() {
     try {
       createMap(map[0].length, map.length);
-    } catch (IllegalParameterException e) {
+    } catch (IllegalParameterException | PositionOutOfBounds e) {
       e.printStackTrace();
     }
   }
@@ -127,14 +138,14 @@ public class MapManager {
   }
 
   public void setStartCoordinates(Position startCoordinates)
-    throws IllegalParameterException, OccupiedPositionException {
+      throws IllegalParameterException, OccupiedPositionException {
     // Check map boundaries
     checkPositionInBounds(startCoordinates);
 
     // Check occupied position
     if (getDestinationCoordinates().equals(startCoordinates)) {
       throw new OccupiedPositionException(
-        "The start point cannot be placed on the destination point");
+          "The start point cannot be placed on the destination point");
     }
     this.startCoordinates = startCoordinates;
   }
@@ -144,16 +155,15 @@ public class MapManager {
   }
 
   public void setDestinationCoordinates(Position destinationCoordinates)
-    throws IllegalParameterException, OccupiedPositionException {
+      throws IllegalParameterException, OccupiedPositionException {
     // Check map boundaries
     checkPositionInBounds(destinationCoordinates);
 
     // Check occupied position
     if (getStartCoordinates().equals(destinationCoordinates)) {
       throw new OccupiedPositionException(
-        "The destination point cannot be placed on the start point");
+          "The destination point cannot be placed on the start point");
     }
     this.destinationCoordinates = destinationCoordinates;
   }
-
 }

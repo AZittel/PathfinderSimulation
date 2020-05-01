@@ -5,31 +5,33 @@ import de.hhn.it.pp.components.astarpathfinding.PathfindingService;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import java.util.List;
 
 public final class Pathfinder implements PathfindingService {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(Pathfinder.class);
+      org.slf4j.LoggerFactory.getLogger(Pathfinder.class);
 
   private MapManager mapManager = new MapManager();
 
   @Override
-  public void createMap(int width, int height) throws IllegalParameterException {
+  public void createMap(int width, int height)
+      throws IllegalParameterException, PositionOutOfBounds {
     logger.info("createMap: width = {} height = {}", width, height);
     mapManager.createMap(width, height);
   }
 
   @Override
   public void setStartPoint(Position position)
-    throws IllegalParameterException, OccupiedPositionException {
+      throws IllegalParameterException, OccupiedPositionException {
     logger.info("setStartPoint: position = {}", position.toString());
     mapManager.setStartCoordinates(position);
   }
 
   @Override
   public void setEndPoint(Position position)
-    throws IllegalParameterException, OccupiedPositionException {
+      throws IllegalParameterException, OccupiedPositionException {
     logger.info("setEndPoint: position = {}", position.toString());
     mapManager.setDestinationCoordinates(position);
   }
@@ -43,7 +45,6 @@ public final class Pathfinder implements PathfindingService {
   @Override
   public List<PathfindingInformation> doPathfinding() {
     logger.info("doPathfinding: no params");
-
     return new AStarPathfindingAlgorithm(mapManager).findPath();
   }
 
@@ -58,19 +59,19 @@ public final class Pathfinder implements PathfindingService {
 
   @Override
   public void changeTerrainTypeFactor(TerrainType type, double modifier)
-    throws IllegalParameterException {
+      throws IllegalParameterException {
     logger.info("changeTerrainTypeFactor: type = {}, modifier = {} ", type, modifier);
     // Check the range of the modifier
     if (modifier < TerrainType.MIN_VALUE) {
       throw new IllegalParameterException(
-        String.format(
-          "Invalid modifier value! Modifier must not be lower than %f!",
-          TerrainType.MIN_VALUE));
+          String.format(
+              "Invalid modifier value! Modifier must not be lower than %f!",
+              TerrainType.MIN_VALUE));
     } else if (modifier > TerrainType.MAX_VALUE) {
       throw new IllegalParameterException(
-        String.format(
-          "Invalid modifier value! Modifier must not be greater than %f!",
-          TerrainType.MAX_VALUE));
+          String.format(
+              "Invalid modifier value! Modifier must not be greater than %f!",
+              TerrainType.MAX_VALUE));
     }
     type.setModifier(modifier);
   }

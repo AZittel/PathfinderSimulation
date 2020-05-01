@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import java.util.List;
 
@@ -13,11 +14,13 @@ public interface PathfindingService {
   /**
    * Creates the map with the given length and height.
    *
-   * @param width  the width of the map, must higher then 0
+   * @param width the width of the map, must higher then 0
    * @param height the height of the map, must higher then 0
    * @throws IllegalParameterException if either the width or the height is invalid
+   * @throws PositionOutOfBounds if the start or destination position would be out of bounds after
+   *     creating the new map
    */
-  void createMap(int width, int height) throws IllegalParameterException;
+  void createMap(int width, int height) throws IllegalParameterException, PositionOutOfBounds;
 
   /**
    * Sets the start point for the pathfinding algorithm.
@@ -40,7 +43,7 @@ public interface PathfindingService {
   /**
    * Places a terrain of the given type on the given position.
    *
-   * @param type     the type defining the terrain
+   * @param type the type defining the terrain
    * @param position the position on the map
    * @throws IllegalParameterException if the position is invalid
    */
@@ -62,7 +65,7 @@ public interface PathfindingService {
   /**
    * Changes the terrain modifier for a specific terrain type.
    *
-   * @param type   the terrain type which will be changed
+   * @param type the terrain type which will be changed
    * @param modifier the new value for the terrain type modifier. The value must be between 0 and 1
    * @throws IllegalParameterException thrown if the value is not between 0 and 1
    */
