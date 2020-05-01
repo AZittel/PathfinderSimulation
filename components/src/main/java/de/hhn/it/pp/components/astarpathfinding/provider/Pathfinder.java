@@ -42,7 +42,8 @@ public final class Pathfinder implements PathfindingService {
 
   @Override
   public List<PathfindingInformation> doPathfinding() {
-    return null;
+    logger.info("doPathfinding: no params");
+    return new AStarPathfindingAlgorithm(manager).findPath();
   }
 
   @Override
