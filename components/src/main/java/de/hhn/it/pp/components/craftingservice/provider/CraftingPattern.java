@@ -1,70 +1,31 @@
 package de.hhn.it.pp.components.craftingservice.provider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A prototype class for crafting patterns.
  * Right now there are 3 different patterns(small weapons, large weapons, enchanted weapons).
  * @author Philipp Alessandrini, Oliver Koch
- * @version 2020-04-15
+ * @version 2020-05-01
  */
 public class CraftingPattern {
-    private static ArrayList<CraftingPattern> allCraftingPatterns = new ArrayList<>();
-    private ArrayList<Item> neededItems = new ArrayList<>();
-    private Weapon craftedWeapon;
     private String name;
-    private float craftingTime;
+    private int craftingTime; // [msec]
+    private List<Item> neededItems;
+    private List<Item> providedItems;
 
     /**
      * The constructor for small weapons.
+     * @param name, the name of the crafting pattern
      * @param craftingTime, the needed time to craft the weapon
-     * @param neededResource1 The needed resource number 1 to craft the weapon.
-     * @param neededResource2 The needed resource number 2 to craft the weapon.
-     * @param craftedWeapon The weapon that will be crafted if this crafting pattern is used.
+     * @param neededItems, the needed items to craft the pattern
+     * @param providedItems, the provided items after the pattern is crafted
      */
-    public CraftingPattern(float craftingTime, Resource neededResource1, Resource neededResource2,
-                           Weapon craftedWeapon) {
-        this.name = this.getClass().getSimpleName() + ": " + craftedWeapon.getName();
+    public CraftingPattern(String name, int craftingTime, List<Item> neededItems, List<Item> providedItems) {
+        this.name = name;
         this.craftingTime = craftingTime;
-        neededItems.add(neededResource1);
-        neededItems.add(neededResource2);
-        this.craftedWeapon = craftedWeapon;
-        allCraftingPatterns.add(this);
-    }
-
-    /**
-     * The constructor for large weapons.
-     * @param craftingTime, the needed time to craft the weapon
-     * @param neededResource1 The needed resource number 1 to craft the weapon.
-     * @param neededResource2 The needed resource number 2 to craft the weapon.
-     * @param neededResource3 The needed resource number 3 to craft the weapon.
-     * @param craftedWeapon The weapon that will be crafted if this crafting pattern is used.
-     */
-    public CraftingPattern(float craftingTime, Resource neededResource1, Resource neededResource2,
-                           Resource neededResource3, Weapon craftedWeapon) {
-        this.name = this.getClass().getSimpleName() + ": " + craftedWeapon.getName();
-        this.craftingTime = craftingTime;
-        neededItems.add(neededResource1);
-        neededItems.add(neededResource2);
-        neededItems.add(neededResource3);
-        this.craftedWeapon = craftedWeapon;
-        allCraftingPatterns.add(this);
-    }
-
-    /**
-     * The constructor for enchanted weapons. It is an enchanting pattern but works the same way.
-     * @param craftingTime, the needed time to craft the weapon
-     * @param neededWeapon The needed weapon to craft the enchanted weapon(the unenchanted weapon will be lost).
-     * @param neededEssence The needed essence to craft the enchanted weapon.
-     * @param craftedWeapon The weapon that will be crafted if this crafting pattern is used.
-     */
-    public CraftingPattern(float craftingTime, Weapon neededWeapon, Resource neededEssence, Weapon craftedWeapon) {
-        this.name = this.getClass().getSimpleName() + ": " + craftedWeapon.getName();
-        this.craftingTime = craftingTime;
-        neededItems.add(neededWeapon);
-        neededItems.add(neededEssence);
-        this.craftedWeapon = craftedWeapon;
-        allCraftingPatterns.add(this);
+        this.neededItems = neededItems;
+        this.providedItems = providedItems;
     }
 
     /**
@@ -72,31 +33,30 @@ public class CraftingPattern {
      */
     public void printCraftingPattern() {
         System.out.println("--- " + this.getName() + " ---");
-        System.out.println("Needed items: ");
+        System.out.println("Needed item/s: ");
         for (Item neededItem : this.getNeededItems()) {
             System.out.println("- " + neededItem.getName());
         }
-        System.out.println("Provided weapon: ");
-        System.out.println("- " + getCraftedWeapon().getName() + "\n");
+        System.out.println("Provided item/s: ");
+        for (Item providedItem : this.getProvidedItems()) {
+            System.out.println("- " + providedItem.getName());
+        }
+        System.out.println();
     }
 
     public String getName() {
         return name;
     }
 
-    public float getCraftingTime() {
+    public int getCraftingTime() {
         return craftingTime;
     }
 
-    public ArrayList<Item> getNeededItems() {
+    public List<Item> getNeededItems() {
         return neededItems;
     }
 
-    public Weapon getCraftedWeapon() {
-        return craftedWeapon;
-    }
-
-    public static ArrayList<CraftingPattern> getAllCraftingPatterns() {
-        return allCraftingPatterns;
+    public List<Item> getProvidedItems() {
+        return providedItems;
     }
 }
