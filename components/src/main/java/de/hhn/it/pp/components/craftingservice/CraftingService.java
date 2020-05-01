@@ -1,40 +1,57 @@
-package de.hhn.it.pp.components.craftingservice;
-
-import de.hhn.it.pp.components.craftingservice.provider.CraftingPattern;
-import de.hhn.it.pp.components.craftingservice.provider.Item;
-
-import java.util.List;
-
-/**
- * The CraftingService interface, which contains all relevant methods
- * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-04-09
- */
-public interface CraftingService {
-
-    /**
-     * Add a specific item to the provided inventory
-     * @param inventory, the provided inventory
-     * @param inventorySize, the size of the inventory
-     * @param item, the provided item
-     * @return true, if the item could be added, false if not
-     */
-    boolean add(List<Item> inventory, int inventorySize, Item item);
-
-    /**
-     * Remove a specific item from the provided inventory
-     * @param inventory, the provided inventory
-     * @param item, the provided item
-     * @return true, if item was found, false if not
-     */
-    boolean remove(List<Item> inventory, Item item);
-
-    /**
-     * Craft a specific pattern if possible and add it to the inventory
-     * @param inventory, the provided inventory
-     * @param  inventorySize, the size of the inventory
-     * @param craftingPattern, the provided pattern
-     * @return true, if pattern could be crafted, false if not
-     */
-    boolean craft(List<Item> inventory, int inventorySize, CraftingPattern craftingPattern);
-}
+//package de.hhn.it.pp.components.craftingservice;
+//
+//import de.hhn.it.pp.components.craftingservice.provider.CraftingPattern;
+//import de.hhn.it.pp.components.craftingservice.provider.Item;
+//import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+//import de.hhn.it.pp.components.craftingservice.exceptions.CraftingNotPossibleException;
+//
+//
+///**
+// * The component.CraftingService interface, which contains all relevant methods
+// * @author Oliver Koch, Philipp Alessandrini
+// * @version 2020-05-01
+// */
+//public interface CraftingService {
+//
+//    /**
+//     * Add a specific item to the provided inventory
+//     * @param inventory, the provided inventory
+//     * @param item, the provided item
+//     * @throws IllegalParameterException, if inventory or craftingPattern are null
+//     */
+//    void add(Inventory inventory, Item item) throws IllegalParameterException;
+//
+//    /**
+//     * Remove a specific item from the provided inventory
+//     * @param inventory, the provided inventory
+//     * @param item, the provided item
+//     * @throws IllegalParameterException, if inventory or craftingPattern are null,
+//     *                                    or if the inventory contains no items,
+//     *                                    or if the searched item doesn't exist in the inventory
+//     */
+//    void remove(Inventory inventory, Item item) throws IllegalParameterException;
+//
+//    /**
+//     * Craft a specific pattern if possible and add it to the inventory
+//     * @param inventory, the provided inventory
+//     * @param craftingPattern, the provided pattern
+//     * @throws CraftingNotPossibleException, if inventory or craftingPattern are null,
+//     *                                       or if items in inventory don't match crafting Pattern,
+//     *                                       or if an item is already being crafted
+//     */
+//    void craft(Inventory inventory, CraftingPattern craftingPattern) throws CraftingNotPossibleException;
+//
+//    /**
+//     * Notification callback, if the crafting process has started
+//     * @param message individual message
+//     * @throws IllegalParameterException, if message is too short
+//     */
+//    void craftingStartedNotification(String message) throws IllegalParameterException;
+//
+//    /**
+//     * Notification callback, if the crafting process has ended
+//     * @param message individual message
+//     * @throws IllegalParameterException, if message is too short
+//     */
+//    void craftingEndedNotification(String message) throws IllegalParameterException;
+//}
