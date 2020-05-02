@@ -1,4 +1,4 @@
-package snake.junit;
+package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
@@ -56,7 +56,7 @@ public class TestSnakeServiceBadCases {
     }
 
     @Test
-    @DisplayName("move snake with a null direction")
+    @DisplayName("move de.hhn.it.pp.components.snake with a null direction")
     void testBrewingWithNullReceipt() throws IllegalParameterException {
         IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException.class,
                 () -> snakePlayerService.moveSnake(0, null));

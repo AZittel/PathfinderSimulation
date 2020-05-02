@@ -1,4 +1,4 @@
-package snake.junit;
+package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
