@@ -2,7 +2,7 @@ package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.Move;
-import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
+import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerListener;
 import de.hhn.it.pp.components.snake.provider.snakestates.ControlState;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class OurSnake implements Snake {
   private static int idCounter;
   private ControlState controlState;
   private List<SnakePlayerListener> listeners;
-  private SnakePlayerDescriptor descriptor;
+  private SnakePlayerProfile descriptor;
 
   /**
    * Constructor to create a OurSnake based on the information in the given
@@ -24,7 +24,7 @@ public class OurSnake implements Snake {
    *
    * @param descriptor Descriptor with basic facts about the Snake to be created
    */
-  public OurSnake(SnakePlayerDescriptor descriptor) {
+  public OurSnake(SnakePlayerProfile descriptor) {
     logger.debug("Constructor - {}", descriptor);
     listeners = new ArrayList<>();
     this.descriptor = descriptor;
@@ -88,7 +88,7 @@ public class OurSnake implements Snake {
   }
 
   @Override
-  public SnakePlayerDescriptor getDescriptor() {
+  public SnakePlayerProfile getDescriptor() {
     return descriptor;
   }
 
@@ -108,9 +108,9 @@ public class OurSnake implements Snake {
     notifyListeners(controlState);
   }
 
-  private void notifyListeners(ControlState controlState) {
+  private void notifyListeners(ControlState conState) {
     for (SnakePlayerListener listener : listeners) {
-      listener.newState(controlState.getState());
+      listener.newState(conState.getState());
     }
   }
 }
