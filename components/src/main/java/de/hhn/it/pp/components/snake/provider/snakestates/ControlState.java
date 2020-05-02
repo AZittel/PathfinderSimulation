@@ -2,21 +2,21 @@ package de.hhn.it.pp.components.snake.provider.snakestates;
 
 import de.hhn.it.pp.components.snake.State;
 import de.hhn.it.pp.components.snake.provider.OurSnake;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//todo javadoc
 public abstract class ControlState {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(ControlState.class);
 
     protected State state;
-    protected OurSnake snake;
+    protected OurSnake player;
 
-    public ControlState(OurSnake snake) {
+    public ControlState(OurSnake player) {
         logger.debug("ControlState - Constructor - " + this.getClass().getSimpleName());
-        this.snake = snake;
+        this.player = player;
     }
 
-    //todo javadoc
     public State getState() {
         return state;
     }
@@ -25,15 +25,11 @@ public abstract class ControlState {
         this.state = state;
     }
 
-    public abstract void onStartLevel() throws IllegalStateException;
+    public abstract void onStartGame() throws IllegalStateException;
 
-    public abstract void onEndLevel() throws IllegalStateException;
+    public abstract void onSwitchLevel() throws IllegalStateException;
 
-    public abstract void onCreateEnemy() throws IllegalStateException;
-
-    public abstract void onCreateItem() throws IllegalStateException;
-
-    public abstract void onCreateLevel() throws IllegalStateException;
+    public abstract void onEndGame() throws IllegalStateException;
 
     public abstract void onMove() throws IllegalStateException;
 

@@ -1,46 +1,51 @@
 package de.hhn.it.pp.components.snake;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * Description of a player.
+ * Description of a player's profile.
  *
  * @author Sören Greiner, Karen Hofele
  */
 public class SnakePlayerDescriptor {
-  private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(SnakePlayerDescriptor.class);
+  private static final Logger logger =
+            LoggerFactory.getLogger(SnakePlayerDescriptor.class);
 
-  private String player;
+
+  private String nickname;
   private int highscore;
   private int level;
   private State state;
-  private int instance;
+  private int id;
 
   /**
    * Constructor for the current players instance of the game.
    *
    * @param nickname nickname of the current player.
    */
+
   public SnakePlayerDescriptor(final String nickname) {
-    this.player = nickname;
+    this.nickname = nickname;
     highscore = 0;
     level = 1;
-    instance = 0;
+    id = 0;
   }
 
   /**
    * Getter for the player's nickname.
    * @return nickname of the player
    */
-  public String getNickname() {
-    return player;
+  public String getPlayer() {
+    return nickname;
   }
 
   /**
    * Setter for the player's nickname.
    * @param nickname new nickname
    */
-  public void setNickname(String nickname) {
-    this.player = nickname;
+  public void setPlayer(String nickname) {
+    this.nickname = nickname;
   }
 
   /**
@@ -91,19 +96,22 @@ public class SnakePlayerDescriptor {
     this.state = state;
   }
 
-  /**
-   * Getter for the current instance.
-   * @return the current instance
-   */
-  public int getInstance() {
-    return instance;
+  public int getId() {
+    return id;
   }
 
-  /**
-   * Setter for the new current instance.
-   * @param instance new current instance
-   */
-  public void setInstance(int instance) {
-    this.instance = instance;
+  public void setId(final int id) {
+    this.id = id;
+  }
+
+  @Override
+  public String toString() {
+    return "SnakePlayerDescriptor{"
+            + "Player='" + nickname + '\''
+            + ", highscore='" + highscore + '\''
+            + ", state=" + state
+            + ", level=" + level
+            + ", id=" + id
+            + '}';
   }
 }

@@ -6,18 +6,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //todo javadoc
-public class GrowingState extends ControlState {
+public class CollectingState extends ControlState {
   private static final Logger logger =
-            LoggerFactory.getLogger(GrowingState.class);
+            LoggerFactory.getLogger(CollectingState.class);
 
   /**
    * Standard constructor for States.
    *
    * @param snake related maker
    */
-  public GrowingState(final OurSnake snake) {
+  public CollectingState(final OurSnake snake) {
     super(snake);
-    state = State.GROWING;
+    state = State.COLLECTING;
   }
 
   @Override

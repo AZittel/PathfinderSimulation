@@ -1,51 +1,45 @@
 package de.hhn.it.pp.components.snake.provider;
 
-import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
-import de.hhn.it.pp.components.snake.SnakeListener;
+import de.hhn.it.pp.components.snake.Direction;
 import de.hhn.it.pp.components.snake.Move;
+import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
+import de.hhn.it.pp.components.snake.SnakePlayerListener;
 import de.hhn.it.pp.components.snake.provider.snakestates.ControlState;
-import de.hhn.it.pp.components.snake.provider.snakestates.OverState;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//todo javadoc
-public class OurSnake implements Snake{
-    private static final Logger logger =
-            LoggerFactory.getLogger(OurSnake.class);
-    private static int instance;
+
+public class OurSnake implements Snake {
+    private static final org.slf4j.Logger logger =
+            org.slf4j.LoggerFactory.getLogger(OurSnake.class);
+    private static int idCounter;
     private ControlState controlState;
-    private List<SnakeListener> listeners;
+    private List<SnakePlayerListener> listeners;
     private SnakePlayerDescriptor descriptor;
-
-    /** x-coordinate of the snake */
-    private int xPosition;
-
-    /** y-coordinate of the snake */
-    private int yPosition;
 
     /**
      * Constructor to create a OurSnake based on the information in the given
      * SnakePlayerDescriptor.
+     *
+     * @param descriptor Descriptor with basic facts about the Snake to be created
      */
-    public OurSnake(String nickname) {
+    public OurSnake(SnakePlayerDescriptor descriptor) {
+        logger.debug("Constructor - {}", descriptor);
         listeners = new ArrayList<>();
-        SnakePlayerDescriptor descriptor = new SnakePlayerDescriptor(nickname);
-                descriptor.setInstance(instance++);
-       // controlState = new OverState( snake: this);
+        this.descriptor = descriptor;
+        descriptor.setId(idCounter++);
+        //controlState = new OverState( snake: this);
         updateDescriptor();
     }
 
-    //todo javadoc
-    public static int getInstance() {
-        return instance;
+    public static int getIdCounter() {
+        return idCounter;
     }
 
-    public static void setInstance(final int instance){
-        OurSnake.instance = instance;
+    public static void setIdCounter(final int idCounter) {
+        OurSnake.idCounter = idCounter;
     }
 
     private void updateDescriptor() {
@@ -53,48 +47,44 @@ public class OurSnake implements Snake{
     }
 
     @Override
-    public void createLevel() throws IllegalParameterException {
-        controlState.onCreateLevel();
+    public void startGame() throws IllegalStateException {
+        controlState.onStartGame();
     }
 
     @Override
-    public void startLevel() throws IllegalStateException {
-        controlState.onStartLevel();
+    public void switchLevel() throws IllegalParameterException {
+        controlState.onSwitchLevel();
     }
 
     @Override
-    public void endLevel() throws IllegalStateException {
-        controlState.onEndLevel();
+    public void endGame() throws IllegalStateException {
+        controlState.onEndGame();
     }
 
     @Override
-    public void move(Move move) throws IllegalParameterException, IllegalStateException {
+    public void move(Move direction) throws IllegalParameterException, IllegalStateException {
         controlState.onMove();
     }
 
     @Override
-    public void addCallback(SnakeListener listener) throws IllegalParameterException {
+    public void addCallback(SnakePlayerListener listener) throws IllegalParameterException {
         if (listener == null) {
             throw new IllegalParameterException("Listener was null reference.");
         }
-
         if (listeners.contains(listener)) {
             throw new IllegalParameterException("Listener already registered.");
         }
-
         listeners.add(listener);
     }
 
     @Override
-    public void removeCallback(SnakeListener listener) throws IllegalParameterException {
+    public void removeCallback(SnakePlayerListener listener) throws IllegalParameterException {
         if (listener == null) {
             throw new IllegalParameterException("Listener was null reference.");
         }
-
         if (!listeners.contains(listener)) {
             throw new IllegalParameterException("Listener is not registered:" + listener);
         }
-
         listeners.remove(listener);
     }
 
@@ -110,25 +100,18 @@ public class OurSnake implements Snake{
     /**
      * sets the state of the Snake and notifies all listeners.
      *
-     * @param makerState new maker state
+     * @param controlState new maker state
      */
-    public void setMakerState(final ControlState makerState) {
-        logger.debug("setMakerState - {}", makerState);
-        controlState = makerState;
+    public void setControlState(final ControlState controlState) {
+        logger.debug("setMakerState - {}", controlState);
+        this.controlState = controlState;
         updateDescriptor();
         notifyListeners(controlState);
     }
 
-    //todo javadoc
-    private void notifyListeners(ControlState makerState) {
-        for (SnakeListener listener : listeners) {
-            listener.newState(makerState.getState());
+    private void notifyListeners(ControlState controlState) {
+        for (SnakePlayerListener listener : listeners) {
+            listener.newState(controlState.getState());
         }
-    }
-
-    @Override
-    public void spawn(int xPos, int yPos){
-        xPosition = xPos;
-        yPosition = yPos;
     }
 }
