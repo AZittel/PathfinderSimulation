@@ -15,7 +15,7 @@ public interface SnakePlayerService {
    *
    * @return List of registered players.
    */
-  List<SnakePlayerDescriptor> getSnakePlayers();
+  List<SnakePlayerProfile> getAllSnakePlayerProfiles();
 
   /**
    * Returns the description of the player with the chosen player id.
@@ -24,7 +24,7 @@ public interface SnakePlayerService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerDescriptor getSnakePlayer(int id) throws IllegalParameterException;
+  SnakePlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the state of the player.
