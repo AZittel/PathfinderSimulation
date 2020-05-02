@@ -6,35 +6,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class ControlState {
-    private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(ControlState.class);
+  private static final Logger logger =
+            LoggerFactory.getLogger(ControlState.class);
 
-    protected State state;
-    protected OurSnake player;
+  protected State state;
+  protected OurSnake player;
 
-    public ControlState(OurSnake player) {
-        logger.debug("ControlState - Constructor - " + this.getClass().getSimpleName());
-        this.player = player;
-    }
+  protected ControlState(OurSnake player) {
+    logger.debug("ControlState - Constructor - " + getClass().getSimpleName());
+    this.player = player;
+  }
 
-    public State getState() {
-        return state;
-    }
+  public State getState() {
+    return state;
+  }
 
-    public void setState(final State state) {
-        this.state = state;
-    }
+  public void setState(final State state) {
+    this.state = state;
+  }
 
-    public abstract void onStartGame() throws IllegalStateException;
+  public abstract void onStartGame() throws IllegalStateException;
 
-    public abstract void onSwitchLevel() throws IllegalStateException;
+  public abstract void onSwitchLevel() throws IllegalStateException;
 
-    public abstract void onEndGame() throws IllegalStateException;
+  public abstract void onEndGame() throws IllegalStateException;
 
-    public abstract void onMove() throws IllegalStateException;
+  public abstract void onMove() throws IllegalStateException;
 
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
+  @Override
+  public String toString() {
+    return getClass().getSimpleName();
+  }
 }
