@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 
 //todo javadoc
 public class Move {
-  private static final Logger logger =
-            LoggerFactory.getLogger(Move.class);
+  private static final Logger logger = LoggerFactory.getLogger(Move.class);
 
   private Direction direction;
 
