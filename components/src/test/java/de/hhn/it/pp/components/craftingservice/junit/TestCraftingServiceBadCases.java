@@ -39,7 +39,7 @@ public class TestCraftingServiceBadCases {
         // define name
         String name = "TestPattern: Crafted Test Cookie";
         // define crafting time
-        int craftingTime = 1000;
+        int craftingTime = 500;
         // define needed items
         ArrayList<Item> neededItems = new ArrayList<>();
         neededItems.add(new Item("Test Recipe"));

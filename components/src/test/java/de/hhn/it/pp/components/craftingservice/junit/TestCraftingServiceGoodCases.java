@@ -46,7 +46,7 @@ public class TestCraftingServiceGoodCases {
         // define name
         String name = "TestPattern: Crafted Test Item";
         // define crafting time
-        int craftingTime = 500;
+        int craftingTime = 250;
         // define needed items
         ArrayList<Item> neededItems = new ArrayList<>();
         neededItems.add(new Item("Test Bar"));
