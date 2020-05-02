@@ -61,4 +61,8 @@ public class PositionOutOfBounds extends Exception {
   public PositionOutOfBounds(final Throwable cause) {
     super(cause);
   }
+
+  public PositionType getPositionType() {
+    return positionType;
+  }
 }

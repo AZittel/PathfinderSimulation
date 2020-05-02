@@ -8,16 +8,16 @@ import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds.P
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 public class MapManager {
-  private static final int MAX_WIDTH = 50;
-  private static final int MAX_HEIGHT = 50;
-  private static final int MIN_WIDTH = 2;
-  private static final int MIN_HEIGHT = 2;
+  public static final int MAX_WIDTH = 50;
+  public static final int MAX_HEIGHT = 50;
+  public static final int MIN_WIDTH = 2;
+  public static final int MIN_HEIGHT = 2;
 
-  private static final int DEFAULT_WIDTH = 10;
-  private static final int DEFAULT_HEIGHT = 10;
+  public static final int DEFAULT_WIDTH = 10;
+  public static final int DEFAULT_HEIGHT = 10;
 
-  private static final Position DEFAULT_START_POSITION = new Position(0, 0);
-  private static final Position DEFAULT_DESTINATION_POSITION = new Position(9, 9);
+  public static final Position DEFAULT_START_POSITION = new Position(0, 0);
+  public static final Position DEFAULT_DESTINATION_POSITION = new Position(9, 9);
 
   private Position startCoordinates;
   private Position destinationCoordinates;
@@ -166,4 +166,6 @@ public class MapManager {
     }
     this.destinationCoordinates = destinationCoordinates;
   }
+
+
 }
