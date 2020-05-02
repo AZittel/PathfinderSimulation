@@ -4,7 +4,7 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
 import de.hhn.it.pp.components.snake.Direction;
 import de.hhn.it.pp.components.snake.Move;
-import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
+import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerListener;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   private static final Logger logger =
             LoggerFactory.getLogger(OurSnakePlayerService.class);
 
-  private Map<Integer, Snake> players;
+  private Map<Integer, Snake> allPlayersProfiles;
 
   public OurSnakePlayerService() {
-    players = new HashMap<>();
+    allPlayersProfiles = new HashMap<>();
   }
 
   /** Current dircetion of the snake. */
@@ -41,10 +41,10 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    */
   private Snake getPlayerById(int id)throws IllegalParameterException {
     logger.info("getPlayerByNickname: id = {}", id);
-    if (!players.containsKey(id)) {
+    if (!allPlayersProfiles.containsKey(id)) {
       throw new IllegalParameterException("Player with id " + id + " does not exist.");
     }
-    return players.get(id);
+    return allPlayersProfiles.get(id);
   }
 
   /**
@@ -53,10 +53,10 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @return List of registered players.
    */
   @Override
-  public List<SnakePlayerDescriptor> getSnakePlayers() {
+  public List<SnakePlayerProfile> getAllSnakePlayerProfiles() {
     logger.info("getSnakePlayers: no params");
-    List<SnakePlayerDescriptor> results = new ArrayList<>();
-    for (Snake player : players.values()) {
+    List<SnakePlayerProfile> results = new ArrayList<>();
+    for (Snake player : allPlayersProfiles.values()) {
       results.add(player.getDescriptor());
     }
     return results;
@@ -70,7 +70,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @throws IllegalParameterException if the player does not exist
    */
   @Override
-  public SnakePlayerDescriptor getSnakePlayer(int id) throws IllegalParameterException {
+  public SnakePlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException {
     logger.info("getSnakePlayer: id = {}", id);
     Snake player = getPlayerById(id);
     return player.getDescriptor();
@@ -100,7 +100,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   @Override
   public void removeCallback(int id, SnakePlayerListener listener)
           throws IllegalParameterException {
-    logger.info("removeCallback: id = {}, listener = {}");
+    logger.info("removeCallback: id = {}, listener = {}", id, listener);
     Snake player = getPlayerById(id);
     player.removeCallback(listener);
   }
@@ -159,19 +159,19 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   // Methods for the AdminSnakePlayerService
 
   /**
-   * Adds a new player to the game.
+   * Adds a new player profile to the game.
    *
-   * @param descriptor of the new player.
+   * @param profile of the new player.
    * @throws IllegalParameterException if the descriptor is a null reference or incomplete.
    */
   @Override
-  public void addSnakePlayer(SnakePlayerDescriptor descriptor) throws IllegalParameterException {
-    logger.info("addSnakePlayer: descriptor = {}", descriptor);
-    CheckingHelper.assertThatIsNotNull(descriptor, "descriptor");
-    CheckingHelper.assertThatIsReadableString(descriptor.getPlayer(), "nickname");
+  public void addSnakePlayerProfile(SnakePlayerProfile profile) throws IllegalParameterException {
+    logger.info("addSnakePlayer: descriptor = {}", profile);
+    CheckingHelper.assertThatIsNotNull(profile, "descriptor");
+    CheckingHelper.assertThatIsReadableString(profile.getPlayer(), "nickname");
 
-    Snake player = new OurSnake(descriptor);
-    players.put(player.getDescriptor().getId(), player);
+    Snake player = new OurSnake(profile);
+    allPlayersProfiles.put(player.getDescriptor().getId(), player);
   }
 
   /**
@@ -181,11 +181,11 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @throws IllegalParameterException if the nickname of the player does not exist.
    */
   @Override
-  public void removeSnakePlayer(int id) throws IllegalParameterException {
+  public void removeSnakePlayerProfile(int id) throws IllegalParameterException {
     logger.info("removeSnakePlayer, id = {}", id);
-    if (!players.containsKey(id)) {
+    if (!allPlayersProfiles.containsKey(id)) {
       throw new IllegalParameterException("player with nickname " + id + " not regestered.");
     }
-    players.remove(id);
+    allPlayersProfiles.remove(id);
   }
 }
