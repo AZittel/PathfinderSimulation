@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
+import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 
 /**
  * Admin interface to the OurSnakeService to add / remove a Player to / from the service.
@@ -11,18 +11,18 @@ import de.hhn.it.pp.components.snake.SnakePlayerDescriptor;
 public interface AdminSnakePlayerService {
 
   /**
-   * Adds a new player to the game.
+   * Adds a new player profile to the game.
    *
-   * @param descriptor of the new player.
-   * @throws IllegalParameterException if the descriptor is a null reference or incomplete.
+   * @param profile of the new player.
+   * @throws IllegalParameterException if the profile is a null reference or incomplete.
    */
-  void addSnakePlayer(SnakePlayerDescriptor descriptor) throws IllegalParameterException;
+  void addSnakePlayerProfile(SnakePlayerProfile profile) throws IllegalParameterException;
 
   /**
-   * Removes a player from the game.
+   * Removes a player profile from the game.
    *
-   * @param snakePlayerId id of the player that should be removed.
+   * @param snakePlayerId id of the player profile that should be removed.
    * @throws IllegalParameterException if the nickname of the player does not exist.
    */
-  void removeSnakePlayer(int snakePlayerId) throws IllegalParameterException;
+  void removeSnakePlayerProfile(int snakePlayerId) throws IllegalParameterException;
 }
