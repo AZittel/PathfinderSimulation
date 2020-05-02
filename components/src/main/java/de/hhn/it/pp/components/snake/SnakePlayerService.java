@@ -48,9 +48,11 @@ public interface SnakePlayerService {
    * Starts the game snake for the player.
    *
    * @param id id of the active player
+   * @param winHeight windowheight
+   * @param winWidth windowwidth
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
-  void startGame(int id) throws IllegalParameterException;
+  void startGame(int id, int winHeight, int winWidth) throws IllegalParameterException;
 
   /**
    * Switches the Current Level.
