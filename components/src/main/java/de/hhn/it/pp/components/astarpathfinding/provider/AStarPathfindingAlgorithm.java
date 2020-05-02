@@ -39,8 +39,8 @@ public class AStarPathfindingAlgorithm {
       information.getVisitedPositions().add(currentTerrain);
 
       // Check whether the algorithm reached the destination cell
-      if (currentTerrain.equals(
-        map[destinationCoordinates.getX()][destinationCoordinates.getY()])) {
+      if (currentTerrain
+        .equals(map[destinationCoordinates.getX()][destinationCoordinates.getY()])) {
         information.setFinalPathPositions(
           tracePath(map[startCoordinates.getX()][startCoordinates.getY()], currentTerrain));
         result.add(information);
@@ -52,23 +52,19 @@ public class AStarPathfindingAlgorithm {
         if (neighbour != null) {
           if (neighbour.
             getType().
-            getModifier() >= 1
-            || information.getVisitedPositions().contains(neighbour)) {
+            getModifier() >= 1 || information.getVisitedPositions().contains(neighbour)) {
             continue;
           }
 
           // Update costs of the neighbour if a shorter path was found
-          int newCostToNeighbour =
-            currentTerrain.getGCost()
-              + (int)
-              ((getMDistance(currentTerrain, neighbour))
-                * (1 + currentTerrain.getType().getModifier()));
-          if (newCostToNeighbour < neighbour.getGCost()
-            || !information.getSpecificPositions().contains(neighbour)) {
+          int newCostToNeighbour = currentTerrain.getGCost() +
+            (int) ((getMDistance(currentTerrain, neighbour)) *
+              (1 + currentTerrain.getType().getModifier()));
+          if (newCostToNeighbour < neighbour.getGCost() ||
+            !information.getSpecificPositions().contains(neighbour)) {
             neighbour.setGCost(newCostToNeighbour);
-            neighbour.setHCost(
-              getMDistance(
-                neighbour, map[destinationCoordinates.getX()][destinationCoordinates.getY()]));
+            neighbour.setHCost(getMDistance(neighbour,
+              map[destinationCoordinates.getX()][destinationCoordinates.getY()]));
             neighbour.setParent(currentTerrain);
 
             if (!information.getSpecificPositions().contains(neighbour)) {
@@ -116,8 +112,8 @@ public class AStarPathfindingAlgorithm {
    * @return approximation distance between two cells
    */
   private int getMDistance(Terrain terrainA, Terrain terrainB) {
-    return Math.abs(terrainA.getPosition().getX() - terrainB.getPosition().getX())
-      + Math.abs(terrainA.getPosition().getY() - terrainB.getPosition().getY());
+    return Math.abs(terrainA.getPosition().getX() - terrainB.getPosition().getX()) +
+      Math.abs(terrainA.getPosition().getY() - terrainB.getPosition().getY());
   }
 
   /**
@@ -162,8 +158,7 @@ public class AStarPathfindingAlgorithm {
   private Terrain getCellWithLowestFCost(PathfindingInformation information) {
     if (!information.getSpecificPositions().isEmpty()) {
       return information.getSpecificPositions().stream()
-        .min(Comparator.comparing(Terrain::calculateFCost))
-        .get();
+        .min(Comparator.comparing(Terrain::calculateFCost)).get();
     } else {
       return null;
     }

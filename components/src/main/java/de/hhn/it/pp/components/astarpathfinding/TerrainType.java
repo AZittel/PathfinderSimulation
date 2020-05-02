@@ -27,8 +27,8 @@ public enum TerrainType {
   /**
    * Restores the default values for the terrain types.
    */
-  public static void resetModifers(){
-    for(TerrainType type : TerrainType.values()){
+  public static void resetModifers() {
+    for (TerrainType type : TerrainType.values()) {
       type.setModifier(type.getDefaultModifier());
     }
   }
