@@ -1,5 +1,7 @@
 package de.hhn.it.pp.components.snake.provider;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+
 /**
  * Creates items that can be collected by the snake.
  *
@@ -36,14 +38,21 @@ public class OurSnakeItem {
   }
 
   /**
-   * Spawns the item.
+   * Spawns an item.
    *
    * @param xPos x-coordinate of the spawnplace
    * @param yPos y-coordinate of the spawnplace
+   * @throws IllegalParameterException if the coordinates are outside the playfield
    */
-  public void spawn(int xPos, int yPos) {
-    //todo implement method
-    xPosition = xPos;
-    yPosition = yPos;
+  public void spawn(int xPos, int yPos) throws IllegalParameterException {
+    if(xPos>OurSnakePlayerService.getWindowWidth()||yPos>OurSnakePlayerService.getWindowHeight()){
+      throw new IllegalParameterException("Coordinates are outside the playfield");
+    }
+    else if(xPos < 0 || yPos<0){
+      throw new IllegalParameterException("Coordinates are too small");
+    } else {
+      xPosition = xPos;
+      yPosition = yPos;
+    }
   }
 }
