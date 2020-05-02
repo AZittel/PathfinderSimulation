@@ -23,15 +23,15 @@ public class TestAdminInterfaceGoodCases {
 
     SnakePlayerService snakePlayerService;
     AdminSnakePlayerService adminSnakePlayerService;
-    List<SnakePlayerProfile> descriptor;
+    List<SnakePlayerProfile> profiles;
 
     @BeforeEach
-    void setup (List<SnakePlayerProfile> descriptor) {
+    void setup (List<SnakePlayerProfile> profiles) {
         OurSnake.setIdCounter(0);
         OurSnakePlayerService ourSnakePlayerService = new OurSnakePlayerService();
         snakePlayerService = ourSnakePlayerService;
         adminSnakePlayerService = ourSnakePlayerService;
-        this.descriptor = descriptor;
+        this.profiles = profiles;
     }
 
     @Test
