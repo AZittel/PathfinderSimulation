@@ -32,6 +32,9 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   /** Current dircetion of the snake. */
   private Direction currentDirection;
 
+  private static int windowHeight;
+  private static int windowWidth;
+
   /**
    * Returns the player from the HashMap with the chosen player id.
    *
@@ -109,12 +112,16 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * Starts the game snake for the player.
    *
    * @param id id of the active player
+   * @param winHeight windowheight
+   * @param winWidth windowwidth
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
   @Override
-  public void startGame(int id) throws IllegalParameterException {
+  public void startGame(int id, int winHeight, int winWidth) throws IllegalParameterException {
     logger.info("startGame: id = {}", id);
     Snake player = getPlayerById(id);
+    windowHeight = winHeight;
+    windowWidth = winWidth;
     player.startGame();
   }
 
@@ -147,7 +154,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   }
 
   @Override
-  public void moveSnake(final int id, final Move direction) throws IllegalParameterException {
+  public void moveSnake(int id, Move direction) throws IllegalParameterException {
     logger.info("usedKey: id = {}, direction = {}", id, direction);
     Snake player = getPlayerById(id);
     if (direction == null) {
@@ -187,5 +194,23 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
       throw new IllegalParameterException("player with nickname " + id + " not regestered.");
     }
     allPlayersProfiles.remove(id);
+  }
+
+  /**
+   * Getter for windowheight
+   *
+   * @return windowheight
+   */
+  public static int getWindowHeight() {
+    return windowHeight;
+  }
+
+  /**
+   * Getter for windowwidth
+   *
+   * @return windowidth
+   */
+  public static int getWindowWidth() {
+    return windowWidth;
   }
 }
