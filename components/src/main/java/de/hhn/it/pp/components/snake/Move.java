@@ -7,22 +7,22 @@ import org.slf4j.LoggerFactory;
 public class Move {
   private static final Logger logger = LoggerFactory.getLogger(Move.class);
 
-  private Direction direction;
+  private Direction currentDirection;
 
   /**
    * Constructor for the Move direction of the snake.
    *
-   * @param direction direction in there the snake moves
+   * @param currentDirection direction in there the snake moves
    */
-  public Move(Direction direction) {
-    this.direction = direction;
+  public Move(Direction currentDirection) {
+    this.currentDirection = currentDirection;
   }
 
-  public Direction getDirection() {
-    return direction;
+  public Direction getCurrentDirection() {
+    return currentDirection;
   }
 
-  public void setDirection(Direction direction) {
-    this.direction = direction;
+  public void setCurrentDirection(Direction direction) {
+    currentDirection = direction;
   }
 }
