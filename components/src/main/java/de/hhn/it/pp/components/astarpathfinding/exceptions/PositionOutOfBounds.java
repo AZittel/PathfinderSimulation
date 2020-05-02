@@ -4,9 +4,13 @@ import java.security.PrivilegedActionException;
 
 public class PositionOutOfBounds extends Exception {
   private static final org.slf4j.Logger logger =
-      org.slf4j.LoggerFactory.getLogger(PositionOutOfBounds.class);
+    org.slf4j.LoggerFactory.getLogger(PositionOutOfBounds.class);
 
-  public enum PositionType {START, DESTINATION, DEFAULT;}
+  public enum PositionType {
+    START,
+    DESTINATION,
+    DEFAULT
+  }
 
   private PositionType positionType = PositionType.DEFAULT;
 
@@ -23,7 +27,7 @@ public class PositionOutOfBounds extends Exception {
    *
    * @param message the detail message. The detail message is saved for later retrieval by the
    *                {@link #getMessage()} method.
-   * @param type the type of the affected position
+   * @param type    the type of the affected position
    */
   public PositionOutOfBounds(final String message, PositionType type) {
     super(message);

@@ -14,11 +14,11 @@ public interface PathfindingService {
   /**
    * Creates the map with the given length and height.
    *
-   * @param width the width of the map, must higher then 0
+   * @param width  the width of the map, must higher then 0
    * @param height the height of the map, must higher then 0
    * @throws IllegalParameterException if either the width or the height is invalid
-   * @throws PositionOutOfBounds if the start or destination position would be out of bounds after
-   *     creating the new map
+   * @throws PositionOutOfBounds       if the start or destination position would be out of bounds
+   *                                   after creating the new map
    */
   void createMap(int width, int height) throws IllegalParameterException, PositionOutOfBounds;
 
@@ -26,28 +26,28 @@ public interface PathfindingService {
    * Sets the start point for the pathfinding algorithm.
    *
    * @param position position on the grid
-   * @throws IllegalParameterException if the position is invalid
+   * @throws PositionOutOfBounds       if the position is out of bounds
    * @throws OccupiedPositionException thrown when start point is equal to the end point
    */
-  void setStartPoint(Position position) throws IllegalParameterException, OccupiedPositionException;
+  void setStartPoint(Position position) throws PositionOutOfBounds, OccupiedPositionException;
 
   /**
    * Sets the end point for the pathfinding algorithm.
    *
    * @param position position on the grid
-   * @throws IllegalParameterException if the position is invalid
+   * @throws PositionOutOfBounds       if the position is out of bounds
    * @throws OccupiedPositionException thrown when end point is equal to the start point
    */
-  void setEndPoint(Position position) throws IllegalParameterException, OccupiedPositionException;
+  void setEndPoint(Position position) throws PositionOutOfBounds, OccupiedPositionException;
 
   /**
    * Places a terrain of the given type on the given position.
    *
-   * @param type the type defining the terrain
+   * @param type     the type defining the terrain
    * @param position the position on the map
-   * @throws IllegalParameterException if the position is invalid
+   * @throws PositionOutOfBounds if the position is out of bounds
    */
-  void placeTerrain(TerrainType type, Position position) throws IllegalParameterException;
+  void placeTerrain(TerrainType type, Position position) throws PositionOutOfBounds;
 
   /**
    * Starts the visualization of the pathfinding algorithm.
@@ -65,7 +65,7 @@ public interface PathfindingService {
   /**
    * Changes the terrain modifier for a specific terrain type.
    *
-   * @param type the terrain type which will be changed
+   * @param type     the terrain type which will be changed
    * @param modifier the new value for the terrain type modifier. The value must be between 0 and 1
    * @throws IllegalParameterException thrown if the value is not between 0 and 1
    */
