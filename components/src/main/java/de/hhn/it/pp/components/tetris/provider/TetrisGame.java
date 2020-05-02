@@ -24,11 +24,7 @@ public class TetrisGame implements TetrisService {
 
     @Override
     public void move(Direction direction) {
-        switch (direction) {
-            case LEFT:;
-            case RIGHT:;
-            case DOWN:;
-        }
+        Move.moveTetromino(myGame.getBoard(),direction);
     }
 
     @Override

@@ -1,5 +1,9 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * This Class used to Create the individual Tetrominos
  */
@@ -19,16 +23,53 @@ public class Tetromino {
      */
     public Tetromino(){
         type = TetrominoType.randomize();
+
+        try{
+            buildTetromino(type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+    }
 
     /**
      * Used to actually build the Tetrominos on the Field
      * @return The Tetromino
      */
-    public int[][][] buildTetromino(){
-        // TODO: actually make it work
-        int[][][] temp = new int[0][0][0];
-        return temp;
+    public int[][][] buildTetromino(TetrominoType type) throws FileNotFoundException {
+        // the easiest solution was using text files and excel. works for now
+        int[][][] bounds;
+
+        switch (type) {
+            case I:
+                bounds = new int[4][4][4];
+                break;
+            case O:
+                bounds = new int[4][2][2];
+                break;
+            default:
+                bounds = new int[4][3][3];
+        }
+
+        File file = new File("resources/" + type + ".txt");
+        Scanner sc = new Scanner(file);
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; i < bounds[0].length; i++) {
+
+                if (sc.hasNext()) {
+                    String[] srow = sc.next().split("");
+                    int[] row = new int[bounds[0].length];
+
+                    for (int k = 0; k < row.length; k++) {
+                        row[k] = Integer.parseInt(srow[k]);
+                        bounds[i][k][j] = row[k];
+
+                    }
+                }
+            }
+
+        }
+        return bounds;
     }
 
     /**

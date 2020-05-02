@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Board {
 
@@ -21,10 +22,8 @@ public class Board {
      * clears the board (remove all tetrominos)
      */
     public void clear() {
-        for (int x = 0; x < map.length; x++) {
-            for (int y = 0; y < map[x].length; y++) {
-                map[x][y] = 0;
-            }
+        for (int[] ints : map) {
+            Arrays.fill(ints, 0);
         }
         score = 0;
     }

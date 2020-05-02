@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class SaveGame {
 
-    //under heavy construction!!!
+    // TODO save files should probably be handled better, for now this works but only for one user
 
     public static void load(Board board){
         File file = new File("provider/save/savefile.txt");

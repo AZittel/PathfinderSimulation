@@ -10,6 +10,7 @@ public class GameCycle extends Thread {
     @Override
     public void run() {
             try {
+                // TODO this should be overhauled once the gui is in place (start/stop and stuff)
                 if (board.getBoardState() == BoardState.activeGame) {
                     //check for collision with other blocks and walls
                     if (!board.getMyCollision().collideWithWall(this.board, board.getCurrentTetromino(), 0)) {
