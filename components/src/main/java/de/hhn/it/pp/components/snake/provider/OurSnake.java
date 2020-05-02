@@ -101,7 +101,7 @@ public class OurSnake implements Snake {
    *
    * @param controlState new maker state
    */
-  public void setControlState(final ControlState controlState) {
+  public void setControlState(ControlState controlState) {
     logger.debug("setMakerState - {}", controlState);
     this.controlState = controlState;
     updateDescriptor();
