@@ -3,7 +3,7 @@
  * @Version 18.04.2020
  */
 
-package de.hhn.it.pp.components.spaceinvaders.provider;
+package de.hhn.it.pp.components.spaceinvaders;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
@@ -52,11 +52,6 @@ public interface SpaceInvadersService {
     void shooting(boolean shoot);
 
     /**
-     * @param collision to ask if the projectile did hit a target
-     */
-    void collide(boolean collision) throws GameOverException;
-
-    /**
      * @param highscoreList the counter for destroyed enemies
      */
     void addHighScore(List<String> highscoreList);
@@ -64,20 +59,18 @@ public interface SpaceInvadersService {
     /**
      * @param highscoreList the counter for destroyed enemies
      */
-    void getHighscoreList(List<String> highscoreList);
+    List<String> getHighscoreList(List<String> highscoreList);
 
     /**
-     * @param xPosition for the position on the x axis
-     * @param yPosition for the position on the y axis
+     * @param arr for the position on the x and y axis
      */
-    void getPositionPlayer(int xPosition, int yPosition) throws IllegalArgumentException;
+    int[][] getPositionPlayer(int[][] arr) throws IllegalArgumentException;
 
     /**
-     * @param xPosition for the position on the x axis
-     * @param yPosition for the position on the y axis
+     * @param arr for the position on the x and y axis
      * @param speed for the movement speed of the enemies
      */
-    void getPositionEnemies(int xPosition, int yPosition, int speed) throws IllegalArgumentException;
+    int[][] getPositionEnemies(int[][] arr, int speed) throws IllegalArgumentException;
 
     /**
      *  Resets the Game.
