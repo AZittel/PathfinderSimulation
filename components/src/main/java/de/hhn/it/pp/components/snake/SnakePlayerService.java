@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-
 import java.util.List;
 
 /**
@@ -11,12 +10,11 @@ import java.util.List;
  * @author Karen Hofele, Sören Greiner
  */
 public interface SnakePlayerService {
-/**
- * Returns a list of registered players from snake.
- *
- * @return List of registered players.
- */
-
+  /**
+   * Returns a list of registered players from snake.
+   *
+   * @return List of registered players.
+   */
   List<SnakePlayerDescriptor> getSnakePlayers();
 
   /**
