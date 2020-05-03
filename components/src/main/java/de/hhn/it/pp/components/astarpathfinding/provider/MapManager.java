@@ -31,6 +31,7 @@ public class MapManager {
       createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     } catch (IllegalParameterException | PositionOutOfBounds e) {
       // Do nothing, because this case should never happen
+      e.printStackTrace();
     }
   }
 
@@ -113,6 +114,7 @@ public class MapManager {
     try {
       createMap(map[0].length, map.length);
     } catch (IllegalParameterException | PositionOutOfBounds e) {
+      // Do nothing, because this case should never happen
       e.printStackTrace();
     }
   }
