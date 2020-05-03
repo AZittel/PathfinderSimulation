@@ -208,4 +208,82 @@ public class MapManagerTest {
       }
     }
   }
+
+  @Test
+  @DisplayName("Tests all possible out of bounds directions for setStartCoordinates")
+  public void setStartCoordinates_OutOfBounds() {
+    assertAll(
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () -> testMapManager.setStartCoordinates(new Position(-1, 5)),
+                "Start point should be out of bounds on the left side"),
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () ->
+                    testMapManager.setStartCoordinates(
+                        new Position(testMapManager.getWidth() + 1, 5)),
+                "Start point should be out of bounds on the right side"),
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () -> testMapManager.setStartCoordinates(new Position(5, -1)),
+                "Start point should be out of bounds on the top side"),
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () ->
+                    testMapManager.setStartCoordinates(
+                        new Position(5, testMapManager.getHeight() + 1)),
+                "Start point should be out of bounds on the bottom side"));
+  }
+
+  @Test
+  @DisplayName("Tries to set the start point onto the destination point")
+  public void setStartCoordinates_occupiedPosition() {
+    assertThrows(
+        OccupiedPositionException.class,
+        () -> testMapManager.setStartCoordinates(MapManager.DEFAULT_DESTINATION_POSITION),
+        "Expected an exception when placing the start point");
+  }
+
+  @Test
+  @DisplayName("Tests all possible out of bounds directions for setDestinationCoordinates")
+  public void setDestinationCoordinates_OutOfBounds() {
+    assertAll(
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () -> testMapManager.setDestinationCoordinates(new Position(-1, 5)),
+                "Destination point should be out of bounds on the left side"),
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () ->
+                    testMapManager.setDestinationCoordinates(
+                        new Position(testMapManager.getWidth() + 1, 5)),
+                "Destination point should be out of bounds on the right side"),
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () -> testMapManager.setDestinationCoordinates(new Position(5, -1)),
+                "Destination point should be out of bounds on the top side"),
+        () ->
+            assertThrows(
+                PositionOutOfBounds.class,
+                () ->
+                    testMapManager.setDestinationCoordinates(
+                        new Position(5, testMapManager.getHeight() + 1)),
+                "Destination point should be out of bounds on the bottom side"));
+  }
+
+  @Test
+  @DisplayName("Tries to set the start point onto the destination point")
+  public void setDestinationCoordinates_occupiedPosition() {
+    assertThrows(
+        OccupiedPositionException.class,
+        () -> testMapManager.setDestinationCoordinates(MapManager.DEFAULT_START_POSITION),
+        "Expected an exception when placing the destination point");
+  }
 }
