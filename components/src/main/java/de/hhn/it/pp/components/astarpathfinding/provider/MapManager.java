@@ -30,8 +30,7 @@ public class MapManager {
       destinationCoordinates = DEFAULT_DESTINATION_POSITION;
       createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     } catch (IllegalParameterException | PositionOutOfBounds e) {
-      // Should never land here
-      e.printStackTrace();
+      // Do nothing, because this case should never happen
     }
   }
 

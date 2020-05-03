@@ -28,6 +28,22 @@ public class MapManagerTest {
     testMapManager = new MapManager();
   }
 
+  @Test
+  @DisplayName("Successfully create a new MapManager with default values")
+  public void constructor_newMapManager() {
+    Terrain[][] map = testMapManager.getMap();
+    assertAll(
+        () -> assertEquals(MapManager.DEFAULT_START_POSITION, testMapManager.getStartCoordinates(), "The start position should be equal to the default start position"),
+        () -> assertEquals(MapManager.DEFAULT_DESTINATION_POSITION, testMapManager.getDestinationCoordinates(), "The destination position should be equal to the default destination position"),
+        () -> assertEquals(MapManager.DEFAULT_HEIGHT, map.length, "The map height should be the default height."),
+        () -> assertEquals(MapManager.DEFAULT_WIDTH, map[0].length, "The map width should be the default width.")
+    );
+    for (int i = 0; i < map.length - 1; i++) {
+      for (int j = 0; j < map[0].length - 1; j++) {
+        assertEquals(TerrainType.DIRT, map[i][j].getType(), "The terrain type should be dirt.");
+      }
+    }
+  }
 
   @Test
   @DisplayName("Successfully create a new terrain map")
@@ -36,7 +52,7 @@ public class MapManagerTest {
     Terrain[][] map = testMapManager.getMap();
     assertAll(
       () -> assertEquals(15, map.length, "The map height should be 15."),
-      () -> assertEquals(12, map[0].length, "The map height should be 12."));
+      () -> assertEquals(12, map[0].length, "The map width should be 12."));
     for (int i = 0; i < map.length - 1; i++) {
       for (int j = 0; j < map[0].length - 1; j++) {
         assertEquals(TerrainType.DIRT, map[i][j].getType(), "The terrain type should be dirt.");
@@ -129,6 +145,5 @@ public class MapManagerTest {
     PositionOutOfBounds exception =
       assertThrows(PositionOutOfBounds.class, () -> testMapManager.createTerrain(type, pos));
   }
-
 
 }
