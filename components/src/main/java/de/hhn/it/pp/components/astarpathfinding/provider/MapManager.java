@@ -119,7 +119,8 @@ public class MapManager {
     }
   }
 
-  public Terrain getTerrainAt(int row, int col) {
+  public Terrain getTerrainAt(int row, int col) throws PositionOutOfBounds{
+    checkPositionInBounds(new Position(col, row));
     return map[row][col];
   }
 
