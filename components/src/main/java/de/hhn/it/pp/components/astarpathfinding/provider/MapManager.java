@@ -70,7 +70,7 @@ public class MapManager {
     map = new Terrain[height][width];
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
-        map[row][col] = new Terrain(row, col, TerrainType.DIRT);
+        map[row][col] = new Terrain(new Position(col, row), TerrainType.DIRT);
       }
     }
   }
@@ -84,7 +84,7 @@ public class MapManager {
   public void createTerrain(TerrainType type, Position position) throws PositionOutOfBounds {
     // Check map boundaries
     checkPositionInBounds(position);
-    map[position.getY()][position.getX()] = new Terrain(position.getY(), position.getX(), type);
+    map[position.getY()][position.getX()] = new Terrain(position, type);
   }
 
   /**
@@ -119,9 +119,9 @@ public class MapManager {
     }
   }
 
-  public Terrain getTerrainAt(int row, int col) throws PositionOutOfBounds{
-    checkPositionInBounds(new Position(col, row));
-    return map[row][col];
+  public Terrain getTerrainAt(Position position) throws PositionOutOfBounds{
+    checkPositionInBounds(position);
+    return map[position.getY()][position.getX()];
   }
 
   public Terrain[][] getMap() {

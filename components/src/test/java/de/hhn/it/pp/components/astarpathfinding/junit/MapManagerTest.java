@@ -123,9 +123,9 @@ public class MapManagerTest {
   public void createTerrain_Good() throws PositionOutOfBounds {
     TerrainType type = TerrainType.SWAMP;
     Position pos = new Position(5, 5);
-    Terrain oldTerrain = testMapManager.getTerrainAt(pos.getX(), pos.getY());
+    Terrain oldTerrain = testMapManager.getTerrainAt(pos);
     testMapManager.createTerrain(type, pos);
-    Terrain newTerrain = testMapManager.getTerrainAt(pos.getY(), pos.getX());
+    Terrain newTerrain = testMapManager.getTerrainAt(pos);
     assertAll(
       () -> assertEquals(TerrainType.SWAMP, newTerrain.getType()),
       () -> assertNotSame(oldTerrain, newTerrain));
@@ -292,12 +292,11 @@ public class MapManagerTest {
   @Test
   @DisplayName("Pull the terrain at specific coordinates in bounds")
   public void getTerrainAt_inBounds() throws PositionOutOfBounds {
-    int xPos = 5;
-    int yPos = 5;
-    assertEquals(TerrainType.DIRT, testMapManager.getTerrainAt(xPos, yPos).getType(),
+    Position pos = new Position(5, 5);
+    assertEquals(TerrainType.DIRT, testMapManager.getTerrainAt(pos).getType(),
       "The expected terrain Dirt was not found");
-    testMapManager.createTerrain(TerrainType.SWAMP, new Position(xPos, yPos));
-    assertEquals(TerrainType.SWAMP, testMapManager.getTerrainAt(xPos, yPos).getType(),
+    testMapManager.createTerrain(TerrainType.SWAMP, pos);
+    assertEquals(TerrainType.SWAMP, testMapManager.getTerrainAt(pos).getType(),
       "The expected terrain SWAMP was not found");
   }
 
@@ -307,26 +306,31 @@ public class MapManagerTest {
     int inBounds = 5;
     int negativOutOfBounds = -1;
     int positivOutOfBounds = 15;
+    Position leftOutOfBounds = new Position(-1, 5);
+    Position rightOutOfBounds = new Position(15, 5);
+    Position topOutOfBounds = new Position(5, -1);
+    Position bottomOutOfBounds = new Position(5, 15);
+
     assertAll(
       () ->
         assertThrows(
           PositionOutOfBounds.class,
-          () -> testMapManager.getTerrainAt(inBounds, negativOutOfBounds),
+          () -> testMapManager.getTerrainAt(leftOutOfBounds),
           "Expected an exception when looking for terrain with the x coordinate out of bounds to " +
             "the left"),
       () -> assertThrows(
         PositionOutOfBounds.class,
-        () -> testMapManager.getTerrainAt(inBounds, positivOutOfBounds),
+        () -> testMapManager.getTerrainAt(rightOutOfBounds),
         "Expected an exception when looking for terrain with the x coordinate out of bounds to " +
           "the right"),
       () -> assertThrows(
         PositionOutOfBounds.class,
-        () -> testMapManager.getTerrainAt(negativOutOfBounds, inBounds),
+        () -> testMapManager.getTerrainAt(topOutOfBounds),
         "Expected an exception when looking for terrain with the y coordinate out of bounds to " +
           "the top"),
       () -> assertThrows(
         PositionOutOfBounds.class,
-        () -> testMapManager.getTerrainAt(positivOutOfBounds, inBounds),
+        () -> testMapManager.getTerrainAt(bottomOutOfBounds),
         "Expected an exception when looking for terrain with the y coordinate out of bounds to " +
           "the bottom")
     );

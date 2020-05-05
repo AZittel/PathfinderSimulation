@@ -1,5 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
+import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
+
 /**
  * A class to represent a position with two values
  */
@@ -37,5 +39,17 @@ public class Position {
   @Override
   public String toString() {
     return "x=" + x + ", y=" + y;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Position pos = (Position) obj;
+    return getX() == pos.getX() && getY() == pos.getY();
   }
 }
