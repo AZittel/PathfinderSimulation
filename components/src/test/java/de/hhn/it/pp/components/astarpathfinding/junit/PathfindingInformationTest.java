@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
+import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
 import java.util.ArrayList;
@@ -24,17 +25,17 @@ public class PathfindingInformationTest {
     List<Terrain> visitedPositions = new ArrayList<>();
     List<Terrain> finalPathPositions = new ArrayList<>();
 
-    Terrain position1 = new Terrain(1, 1, TerrainType.WATER);
-    Terrain position2 = new Terrain(2, 1, TerrainType.WATER);
-    Terrain position3 = new Terrain(3, 1, TerrainType.WATER);
+    Terrain position1 = new Terrain(new Position(1, 1), TerrainType.WATER);
+    Terrain position2 = new Terrain(new Position(2, 1), TerrainType.WATER);
+    Terrain position3 = new Terrain(new Position(3, 1), TerrainType.WATER);
     specificPositions.add(position1);
     specificPositions.add(position2);
     specificPositions.add(position3);
 
-    Terrain position4 = new Terrain(2, 5, TerrainType.GRASS);
-    Terrain position5 = new Terrain(2, 6, TerrainType.GRASS);
-    Terrain position6 = new Terrain(3, 6, TerrainType.DIRT);
-    Terrain position7 = new Terrain(4, 6, TerrainType.DIRT);
+    Terrain position4 = new Terrain(new Position(2, 5), TerrainType.GRASS);
+    Terrain position5 = new Terrain(new Position(2, 6), TerrainType.GRASS);
+    Terrain position6 = new Terrain(new Position(3, 6), TerrainType.DIRT);
+    Terrain position7 = new Terrain(new Position(4, 6), TerrainType.DIRT);
     visitedPositions.add(position4);
     visitedPositions.add(position5);
     visitedPositions.add(position6);
