@@ -37,9 +37,12 @@ public interface SpaceInvadersService {
      * @param speed for the movement speed of the enemies
      * @throws IllegalParameterException if the xPos, yPos or speed is invalid
      */
-    void createEnemies(int xPosition, int yPosition, int speed) throws IllegalParameterException;
+    void createEnemy(int xPosition, int yPosition, EnemyType type, int speed) throws IllegalParameterException;
 
     /**
+     *
+     * Movement of the player.
+     *
      * @param xPosition for the position on the x axis
      * @param yPosition for the position on the y axis
      * @throws IllegalArgumentException direction steps out of window
@@ -49,8 +52,11 @@ public interface SpaceInvadersService {
     /**
      * @param shoot to ask if the player is shooting or not
      */
-    void shooting(boolean shoot);
+    void shooting();
 
+    void addListener(InvaderListener listener) throws IllegalParameterException;
+
+    void removeListener(InvaderListener listener) throws IllegalParameterException;
     /**
      * @param highscoreList the counter for destroyed enemies
      */
@@ -59,18 +65,18 @@ public interface SpaceInvadersService {
     /**
      * @param highscoreList the counter for destroyed enemies
      */
-    List<String> getHighscoreList(List<String> highscoreList);
+    List<HighScoreEntry> getHighscoreList();
 
     /**
      * @param arr for the position on the x and y axis
      */
-    int[][] getPositionPlayer(int[][] arr) throws IllegalArgumentException;
+    Position getPositionPlayer() throws IllegalArgumentException;
 
     /**
      * @param arr for the position on the x and y axis
      * @param speed for the movement speed of the enemies
      */
-    int[][] getPositionEnemies(int[][] arr, int speed) throws IllegalArgumentException;
+    List<Position> getPositionEnemies() throws IllegalArgumentException;
 
     /**
      *  Resets the Game.
