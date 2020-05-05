@@ -5,9 +5,7 @@
 
 package de.hhn.it.pp.components.spaceinvaders.provider;
 
-import de.hhn.it.pp.components.spaceinvaders.Enemies;
-import de.hhn.it.pp.components.spaceinvaders.Field;
-import de.hhn.it.pp.components.spaceinvaders.Player;
+import de.hhn.it.pp.components.spaceinvaders.SpaceInvadersService;
 
 import java.util.List;
 
@@ -32,9 +30,8 @@ public class SpaceInvaders implements SpaceInvadersService {
 
     }
 
-    @Override
-    public void collide(boolean collision) throws GameOverException {
-
+    public boolean collide(boolean collision) throws GameOverException {
+            return collision;
     }
 
     @Override
@@ -43,18 +40,18 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public void getHighscoreList(List<String> highscoreList) {
-
+    public List<String> getHighscoreList(List<String> highscoreList) {
+            return highscoreList;
     }
 
     @Override
-    public void getPositionPlayer(int xPosition, int yPosition) throws IllegalArgumentException {
-
+    public int[][] getPositionPlayer(int[][] arr) throws IllegalArgumentException {
+            return arr;
     }
 
     @Override
-    public void getPositionEnemies(int xPosition, int yPosition, int speed) throws IllegalArgumentException {
-
+    public int[][] getPositionEnemies(int[][] arr, int speed) throws IllegalArgumentException {
+            return arr;
     }
 
     @Override
