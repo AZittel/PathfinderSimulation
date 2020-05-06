@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.minesweeper;
 
+import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 import de.hhn.it.pp.components.minesweeper.provider.Minesweeper;
 
@@ -9,7 +10,7 @@ public class DemoMinesweeperUsage {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(DemoMinesweeperUsage.class);
 
-    public static void main(String[] args) throws InterruptedException, InvalidGameStateException {
+    public static void main(String[] args) throws InterruptedException, InvalidGameStateException, BooouuummmmException {
         //Create the Interface from minesweeper.
         logger.info(">>> create minesweeperService");
         MinesweeperService minesweeperService = new Minesweeper();
