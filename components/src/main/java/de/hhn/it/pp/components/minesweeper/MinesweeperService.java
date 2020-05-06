@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.minesweeper;
 
+import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public interface MinesweeperService {
      * @param x x-Pos of the clicked field.
      * @param y y-Pos of the clicked field.
      */
-    List<FieldInformation> turn(int x, int y);
+    List<FieldInformation> turn(int x, int y) throws BooouuummmmException;
 
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
