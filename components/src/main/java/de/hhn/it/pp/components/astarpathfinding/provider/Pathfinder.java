@@ -57,7 +57,7 @@ public final class Pathfinder implements PathfindingService {
   }
 
   @Override
-  public void changeTerrainTypeFactor(TerrainType type, double modifier)
+  public void changeTerrainTypeModifier(TerrainType type, double modifier)
     throws IllegalParameterException {
     logger.info("changeTerrainTypeFactor: type = {}, modifier = {} ", type, modifier);
     // Check the range of the modifier
