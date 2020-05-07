@@ -126,25 +126,25 @@ public class AStarPathfindingAlgorithm {
   private Terrain[] getNeighbours(Terrain terrain) {
     // We currently have a maximum of 4 neighbours, possibly even less.
     Terrain[] neighbours = new Terrain[4];
-    Terrain[][] map = mapManager.getMap();
+    Terrain[][] map = mapManager.getMap(); //TODO NEIghbours check does not work properly
     // Left neighbour
     if (terrain.getPosition().getX() - 1 >= 0) {
-      neighbours[0] = map[terrain.getPosition().getX() - 1][terrain.getPosition().getY()];
+      neighbours[0] = map[terrain.getPosition().getY()][terrain.getPosition().getX() - 1];
     }
 
     // Right neighbour
     if (terrain.getPosition().getX() + 1 <= map.length) {
-      neighbours[1] = map[terrain.getPosition().getX() + 1][terrain.getPosition().getY()];
+      neighbours[1] = map[terrain.getPosition().getY()][terrain.getPosition().getX() + 1];
     }
 
     // Top neighbour
     if (terrain.getPosition().getY() - 1 >= 0) {
-      neighbours[2] = map[terrain.getPosition().getX()][terrain.getPosition().getY() - 1];
+      neighbours[2] = map[terrain.getPosition().getY() - 1][terrain.getPosition().getX()];
     }
 
     // Bottom neighbour
     if (terrain.getPosition().getY() + 1 <= map[terrain.getPosition().getX()].length) {
-      neighbours[3] = map[terrain.getPosition().getX()][terrain.getPosition().getY() + 1];
+      neighbours[3] = map[terrain.getPosition().getY() + 1][terrain.getPosition().getX()];
     }
 
     return neighbours;
