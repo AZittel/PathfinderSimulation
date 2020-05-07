@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 public class TerrainTest {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(MapManagerTest.class);
+    org.slf4j.LoggerFactory.getLogger(TerrainTest.class);
 
 
   private MapManager testMapManager;
