@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding.junit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
@@ -38,25 +39,34 @@ public class AStarPathfindingAlgorithmTest {
     testMapManager.setStartCoordinates(start);
     Position end = new Position(2, 6);
     testMapManager.setDestinationCoordinates(end);
-//    testMapManager.createMap(5, 5);
-    //TODO
-
-    Terrain terrain2 = testMapManager.createTerrain(TerrainType.SWAMP, new Position(4, 1));
-    Terrain terrain1 = testMapManager.createTerrain(TerrainType.LAVA, new Position(4, 2));
-    Terrain terrain3 = testMapManager.createTerrain(TerrainType.SWAMP, new Position(4, 3));
-
+    testMapManager.createMap(7, 7);
+    Terrain terrain2 = testMapManager.createTerrain(TerrainType.SWAMP, new Position(1, 4));
+    Terrain terrain1 = testMapManager.createTerrain(TerrainType.LAVA, new Position(2, 4));
+    Terrain terrain3 = testMapManager.createTerrain(TerrainType.SWAMP, new Position(3, 4));
     ArrayList<PathfindingInformation> result = algorithm.findPath();
     List<Terrain> finalPath = result.get(result.size() - 1).getFinalPathPositions();
+    List<Terrain> expectedPath = new ArrayList<>();
+    expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
+    expectedPath.add(testMapManager.getTerrainAt(new Position(1, 3)));
+    expectedPath.add(testMapManager.getTerrainAt(new Position(1, 4)));
+    expectedPath.add(testMapManager.getTerrainAt(new Position(1, 5)));
+    expectedPath.add(testMapManager.getTerrainAt(new Position(1, 6)));
+    expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
 
     assertFalse(finalPath.isEmpty());
-    for(Terrain[] row : testMapManager.getMap()) {
-      for (Terrain col : row) {
-        System.out.print(col + " | ");
-      }
-      System.out.println();
+    for (int i = 0; i < finalPath.size(); i++) {
+      assertEquals(expectedPath.get(i), finalPath.get(i),
+        "The expected path is not the same as the actual path");
     }
 
-    System.out.println(finalPath);
+//    for (Terrain[] row : testMapManager.getMap()) {
+//      for (Terrain col : row) {
+//        System.out.print(col + " | ");
+//      }
+//      System.out.println();
+//    }
+//
+//    System.out.println(finalPath);
 
   }
 

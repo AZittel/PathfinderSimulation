@@ -39,7 +39,7 @@ public class DemoAStarUsage {
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
       logger.info(">>> place terrain at: " + 3 + "|" + y);
-      service.placeTerrain(TerrainType.LAVA, new Position(3, y));
+      service.placeTerrain(TerrainType.LAVA, new Position(y, 3));
     }
     logger.info("" + service);
 

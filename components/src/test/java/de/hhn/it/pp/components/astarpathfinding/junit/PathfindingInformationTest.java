@@ -73,36 +73,36 @@ public class PathfindingInformationTest {
         "Checking specificPositions objects",
         () ->
             assertEquals(
-                clone.getSpecificPositions().get(1).getPosition().getX(),
-                position2.getPosition().getX()),
+                clone.getSpecificPositions().get(1).getPosition().getRow(),
+                position2.getPosition().getRow()),
         () ->
             assertEquals(
-                clone.getSpecificPositions().get(1).getPosition().getY(),
-                position2.getPosition().getY()),
+                clone.getSpecificPositions().get(1).getPosition().getCol(),
+                position2.getPosition().getCol()),
         () -> assertSame(clone.getSpecificPositions().get(1).getType(), position2.getType()));
 
     assertAll(
         "Checking visitedPositions objects",
         () ->
             assertEquals(
-                clone.getVisitedPositions().get(2).getPosition().getX(),
-                position6.getPosition().getX()),
+                clone.getVisitedPositions().get(2).getPosition().getRow(),
+                position6.getPosition().getRow()),
         () ->
             assertEquals(
-                clone.getVisitedPositions().get(2).getPosition().getY(),
-                position6.getPosition().getY()),
+                clone.getVisitedPositions().get(2).getPosition().getCol(),
+                position6.getPosition().getCol()),
         () -> assertSame(clone.getVisitedPositions().get(2).getType(), position6.getType()));
 
     assertAll(
         "Checking finalPathPositions objects",
         () ->
             assertEquals(
-                clone.getFinalPathPositions().get(2).getPosition().getX(),
-                position7.getPosition().getX()),
+                clone.getFinalPathPositions().get(2).getPosition().getRow(),
+                position7.getPosition().getRow()),
         () ->
             assertEquals(
-                clone.getFinalPathPositions().get(2).getPosition().getY(),
-                position7.getPosition().getY()),
+                clone.getFinalPathPositions().get(2).getPosition().getCol(),
+                position7.getPosition().getCol()),
         () -> assertSame(clone.getFinalPathPositions().get(2).getType(), position7.getType()));
   }
 }

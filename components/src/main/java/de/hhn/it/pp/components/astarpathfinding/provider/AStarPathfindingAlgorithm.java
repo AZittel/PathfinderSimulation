@@ -29,7 +29,7 @@ public class AStarPathfindingAlgorithm {
     Terrain[][] map = mapManager.getMap();
 
     // Add the start cell to the open list
-    information.addSpecificPosition(map[startCoordinates.getX()][startCoordinates.getY()]);
+    information.addSpecificPosition(map[startCoordinates.getRow()][startCoordinates.getCol()]);
 
     while (!information.getSpecificPositions().isEmpty()) {
       Terrain currentTerrain = getCellWithLowestFCost(information);
@@ -40,9 +40,9 @@ public class AStarPathfindingAlgorithm {
 
       // Check whether the algorithm reached the destination cell
       if (currentTerrain
-        .equals(map[destinationCoordinates.getX()][destinationCoordinates.getY()])) {
+        .equals(map[destinationCoordinates.getRow()][destinationCoordinates.getCol()])) {
         information.setFinalPathPositions(
-          tracePath(map[startCoordinates.getX()][startCoordinates.getY()], currentTerrain));
+          tracePath(map[startCoordinates.getRow()][startCoordinates.getCol()], currentTerrain));
         result.add(information);
         return result;
       }
@@ -64,7 +64,7 @@ public class AStarPathfindingAlgorithm {
             !information.getSpecificPositions().contains(neighbour)) {
             neighbour.setGCost(newCostToNeighbour);
             neighbour.setHCost(getMDistance(neighbour,
-              map[destinationCoordinates.getX()][destinationCoordinates.getY()]));
+              map[destinationCoordinates.getRow()][destinationCoordinates.getCol()]));
             neighbour.setParent(currentTerrain);
 
             if (!information.getSpecificPositions().contains(neighbour)) {
@@ -112,8 +112,8 @@ public class AStarPathfindingAlgorithm {
    * @return approximation distance between two cells
    */
   private int getMDistance(Terrain terrainA, Terrain terrainB) {
-    return Math.abs(terrainA.getPosition().getX() - terrainB.getPosition().getX()) +
-      Math.abs(terrainA.getPosition().getY() - terrainB.getPosition().getY());
+    return Math.abs(terrainA.getPosition().getRow() - terrainB.getPosition().getRow()) +
+      Math.abs(terrainA.getPosition().getCol() - terrainB.getPosition().getCol());
   }
 
   /**
@@ -128,23 +128,23 @@ public class AStarPathfindingAlgorithm {
     Terrain[] neighbours = new Terrain[4];
     Terrain[][] map = mapManager.getMap(); //TODO NEIghbours check does not work properly
     // Left neighbour
-    if (terrain.getPosition().getX() - 1 >= 0) {
-      neighbours[0] = map[terrain.getPosition().getY()][terrain.getPosition().getX() - 1];
+    if (terrain.getPosition().getCol() - 1 >= 0) {
+      neighbours[0] = map[terrain.getPosition().getRow() ][terrain.getPosition().getCol()- 1];
     }
 
     // Right neighbour
-    if (terrain.getPosition().getX() + 1 <= map.length) {
-      neighbours[1] = map[terrain.getPosition().getY()][terrain.getPosition().getX() + 1];
+    if (terrain.getPosition().getCol() + 1 < map[terrain.getPosition().getRow()].length) {
+      neighbours[1] = map[terrain.getPosition().getRow() ][terrain.getPosition().getCol()+ 1];
     }
 
     // Top neighbour
-    if (terrain.getPosition().getY() - 1 >= 0) {
-      neighbours[2] = map[terrain.getPosition().getY() - 1][terrain.getPosition().getX()];
+    if (terrain.getPosition().getRow() - 1 >= 0) {
+      neighbours[2] = map[terrain.getPosition().getRow()- 1][terrain.getPosition().getCol() ];
     }
 
     // Bottom neighbour
-    if (terrain.getPosition().getY() + 1 <= map[terrain.getPosition().getX()].length) {
-      neighbours[3] = map[terrain.getPosition().getY() + 1][terrain.getPosition().getX()];
+    if (terrain.getPosition().getRow() + 1 < map.length) {
+      neighbours[3] = map[terrain.getPosition().getRow() + 1][terrain.getPosition().getCol()];
     }
 
     return neighbours;

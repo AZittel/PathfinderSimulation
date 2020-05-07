@@ -90,7 +90,7 @@ public class Terrain implements Cloneable {
 
   @Override
   public String toString() {
-    return type + " at " + position;
+    return type + " " + position;
   }
 
   /**
@@ -104,7 +104,7 @@ public class Terrain implements Cloneable {
       cloned.setParent((Terrain) cloned.getParent().clone());
     }
     Position clonedPosition = cloned.getPosition();
-    cloned.setPosition(new Position(clonedPosition.getX(), clonedPosition.getY()));
+    cloned.setPosition(new Position(clonedPosition.getRow(), clonedPosition.getCol()));
 
     return cloned;
   }
