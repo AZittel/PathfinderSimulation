@@ -2,6 +2,7 @@ package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
 import de.hhn.it.pp.components.astarpathfinding.Position;
+import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,14 +53,14 @@ public class AStarPathfindingAlgorithm {
         if (neighbour != null) {
           if (neighbour.
             getType().
-            getModifier() >= 1 || information.getVisitedPositions().contains(neighbour)) {
+            getModifier() >= TerrainType.MAX_VALUE || information.getVisitedPositions().contains(neighbour)) {
             continue;
           }
 
           // Update costs of the neighbour if a shorter path was found
           int newCostToNeighbour = currentTerrain.getGCost() +
             (int) ((getMDistance(currentTerrain, neighbour)) *
-              (1 + currentTerrain.getType().getModifier()));
+            (1 + (currentTerrain.getType().getModifier())));
           if (newCostToNeighbour < neighbour.getGCost() ||
             !information.getSpecificPositions().contains(neighbour)) {
             neighbour.setGCost(newCostToNeighbour);

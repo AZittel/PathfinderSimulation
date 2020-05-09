@@ -37,7 +37,7 @@ public class PathfinderTest {
   public void changeTerrainTypeModifier_aboveMaxValue() throws IllegalParameterException {
     IllegalParameterException e = assertThrows(
       IllegalParameterException.class,
-      () -> pathfinder.changeTerrainTypeModifier(TerrainType.WATER, 2));
+      () -> pathfinder.changeTerrainTypeModifier(TerrainType.WATER, 150));
     assertEquals(String
       .format("Invalid modifier value! Modifier must not be greater than %f!",
         TerrainType.MAX_VALUE), e.getMessage());
