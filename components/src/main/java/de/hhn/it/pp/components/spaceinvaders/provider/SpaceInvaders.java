@@ -5,33 +5,46 @@
 
 package de.hhn.it.pp.components.spaceinvaders.provider;
 
-import de.hhn.it.pp.components.spaceinvaders.SpaceInvadersService;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.spaceinvaders.*;
 
 import java.util.List;
 
 public class SpaceInvaders implements SpaceInvadersService {
 
     @Override
-    public void createField(int width, int height) {new Field();}
-
-    @Override
-    public void createPlayer(int xPos, int yPos) {new Player();}
-
-    @Override
-    public void createEnemies(int xPosition, int yPosition, int speed) {new Enemies();}
-
-    @Override
-    public void movement(int xMovement, int yMovement) throws IllegalArgumentException {
+    public void createField(int width, int height) throws IllegalParameterException {
 
     }
 
     @Override
-    public void shooting(boolean shoot) {
+    public void createPlayer(int xPos, int yPos) throws IllegalParameterException {
 
     }
 
-    public boolean collide(boolean collision) throws GameOverException {
-            return collision;
+    @Override
+    public void createEnemy(int xPosition, int yPosition, EnemyType type, int speed) throws IllegalParameterException {
+
+    }
+
+    @Override
+    public void movement(int xPosition, int yPosition) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void shooting() {
+
+    }
+
+    @Override
+    public void addListener(InvaderListener listener) throws IllegalParameterException {
+
+    }
+
+    @Override
+    public void removeListener(InvaderListener listener) throws IllegalParameterException {
+
     }
 
     @Override
@@ -40,21 +53,22 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public List<String> getHighscoreList(List<String> highscoreList) {
-            return highscoreList;
+    public List<HighScoreEntry> getHighscoreList() {
+        return null;
     }
 
     @Override
-    public int[][] getPositionPlayer(int[][] arr) throws IllegalArgumentException {
-            return arr;
+    public Position getPositionPlayer() throws IllegalArgumentException {
+        return null;
     }
 
     @Override
-    public int[][] getPositionEnemies(int[][] arr, int speed) throws IllegalArgumentException {
-            return arr;
+    public List<Position> getPositionEnemies() throws IllegalArgumentException {
+        return null;
     }
 
     @Override
-    public void restart() {}
+    public void restart() {
 
+    }
 }
