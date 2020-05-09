@@ -24,11 +24,9 @@ public interface SpaceInvadersService {
 
     /**
      * Creates the player
-     * @param yPos for the position on the y axis
-     * @param xPos for the position on the x axis
      * @throws IllegalParameterException if the width or height is invalid
      */
-    void createPlayer(int xPos, int yPos) throws IllegalParameterException;
+    void createPlayer() throws IllegalParameterException;
 
     /**
      * Creates the enemies
@@ -50,7 +48,6 @@ public interface SpaceInvadersService {
     void movement(int xPosition, int yPosition) throws  IllegalArgumentException;
 
     /**
-     * @param shoot to ask if the player is shooting or not
      */
     void shooting();
 
@@ -63,18 +60,14 @@ public interface SpaceInvadersService {
     void addHighScore(List<String> highscoreList);
 
     /**
-     * @param highscoreList the counter for destroyed enemies
      */
     List<HighScoreEntry> getHighscoreList();
 
     /**
-     * @param arr for the position on the x and y axis
      */
     Position getPositionPlayer() throws IllegalArgumentException;
 
     /**
-     * @param arr for the position on the x and y axis
-     * @param speed for the movement speed of the enemies
      */
     List<Position> getPositionEnemies() throws IllegalArgumentException;
 

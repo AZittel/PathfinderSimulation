@@ -31,14 +31,14 @@ public class SpaceInvadersUsageDemo {
 
         //Create the player
         logger.info("create Player");
-        spaceInvadersService.createPlayer(100,50);
+        spaceInvadersService.createPlayer();
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
         //Create the "Invaders" (enemies)
         logger.info("create the Invaders");
-        spaceInvadersService.createEnemies(3,150,100);
+        spaceInvadersService.createEnemy(4, 56, EnemyType.STANDARD , 23);
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
@@ -52,21 +52,21 @@ public class SpaceInvadersUsageDemo {
 
         //Asks for the position of the player
         logger.info("get position player");
-        spaceInvadersService.getPositionPlayer(new int[2][3]);
+        spaceInvadersService.getPositionPlayer();
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
         //Shoots projectiles at the enemies
         logger.info("shooting");
-        spaceInvadersService.shooting(true);
+        spaceInvadersService.shooting();
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
         //Ask for the position of the enemies
         logger.info("get position enemies");
-        spaceInvadersService.getPositionEnemies(new int[5][6], 3);
+        spaceInvadersService.getPositionEnemies();
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
@@ -81,7 +81,7 @@ public class SpaceInvadersUsageDemo {
 
         //Displays the highscore
         logger.info("get highscore list");
-        spaceInvadersService.getHighscoreList(Collections.singletonList("Player 1 1000 Points"));
+        spaceInvadersService.getHighscoreList();
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);

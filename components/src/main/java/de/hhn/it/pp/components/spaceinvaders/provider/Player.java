@@ -5,9 +5,15 @@
 
 package de.hhn.it.pp.components.spaceinvaders.provider;
 
-public class Player {
+import de.hhn.it.pp.components.spaceinvaders.Position;
+
+public class Player extends Position {
     int numLives;
     int numShutDowns = 0;
+
+    public Player(int x, int y) {
+        super(x, y);
+    }
 
     void movement(){}
     /**

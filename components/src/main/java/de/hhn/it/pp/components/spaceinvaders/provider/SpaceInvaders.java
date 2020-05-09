@@ -18,7 +18,7 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public void createPlayer(int xPos, int yPos) throws IllegalParameterException {
+    public void createPlayer() throws IllegalParameterException {
 
     }
 
@@ -61,6 +61,7 @@ public class SpaceInvaders implements SpaceInvadersService {
     public Position getPositionPlayer() throws IllegalArgumentException {
         return null;
     }
+
 
     @Override
     public List<Position> getPositionEnemies() throws IllegalArgumentException {
