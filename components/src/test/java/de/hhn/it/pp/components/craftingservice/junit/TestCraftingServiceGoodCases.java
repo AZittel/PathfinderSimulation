@@ -1,158 +1,208 @@
 package de.hhn.it.pp.components.craftingservice.junit;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import de.hhn.it.pp.components.craftingservice.CraftingPattern;
 import de.hhn.it.pp.components.craftingservice.CraftingService;
+import de.hhn.it.pp.components.craftingservice.CraftingServiceUsageDemo;
+import de.hhn.it.pp.components.craftingservice.Inventory;
+import de.hhn.it.pp.components.craftingservice.Item;
 import de.hhn.it.pp.components.craftingservice.exceptions.CraftingNotPossibleException;
 import de.hhn.it.pp.components.craftingservice.provider.CraftingImplementation;
-import de.hhn.it.pp.components.craftingservice.provider.CraftingPattern;
-import de.hhn.it.pp.components.craftingservice.provider.Inventory;
-import de.hhn.it.pp.components.craftingservice.provider.Item;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * A jUnit test class which tests the good cases of the CraftingService
+ * A jUnit test class which tests the good cases of the CraftingService.
+ *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-05-01
+ * @version 2020-05-10
  */
 @DisplayName("Test the CraftingService with good cases.")
 public class TestCraftingServiceGoodCases {
-    CraftingService craftingService;
-    Inventory testInventory;
-    CraftingPattern craftedTestItem;
-    ArrayList<Item> expectedItemsBeforeTestingOperations;
+  CraftingService craftingService;
+  Inventory testInventory;
+  CraftingPattern tastyChocolateCookie;
+  ArrayList<Item> expectedItemsBeforeTestingOperations;
+  ArrayList<String> expectedPatternNamesBeforeTestingOperations;
 
-    @BeforeEach
-    void setup() throws IllegalParameterException {
-        // --- initialize Crafting Service and Inventory ---
-        craftingService = new CraftingImplementation();
-        testInventory = new Inventory(new ArrayList<Item>());
-        expectedItemsBeforeTestingOperations = new ArrayList<>();
+  @BeforeEach
+  void setup() throws IllegalParameterException {
+    // initialize Crafting Service and Inventory
+    craftingService = new CraftingImplementation();
+    testInventory = new Inventory(new ArrayList<>());
+    expectedItemsBeforeTestingOperations = new ArrayList<>();
+    expectedPatternNamesBeforeTestingOperations = new ArrayList<>();
 
-        // add some resources into the inventory
-        craftingService.add(testInventory, new Item("Small Wood Plank"));
-        craftingService.add(testInventory, new Item("Test Bar"));
+    // add some resources into the inventory
+    testInventory.add(new Item("Egg"));
+    testInventory.add(new Item("Milk Chocolate"));
+    testInventory.add(new Item("Flour"));
 
-        // make sure that the inventory contains exactly this expected items after added the resources
-        expectedItemsBeforeTestingOperations.add(new Item("Small Wood Plank"));
-        expectedItemsBeforeTestingOperations.add(new Item("Test Bar"));
+    // make sure that the inventory contains exactly this expected items after added the resources
+    expectedItemsBeforeTestingOperations.add(new Item("Egg"));
+    expectedItemsBeforeTestingOperations.add(new Item("Milk Chocolate"));
+    expectedItemsBeforeTestingOperations.add(new Item("Flour"));
 
-        // --- initialize a sample Crafting Pattern ---
-        // define name
-        String name = "TestPattern: Crafted Test Item";
-        // define crafting time
-        int craftingTime = 250;
-        // define needed items
-        ArrayList<Item> neededItems = new ArrayList<>();
-        neededItems.add(new Item("Test Bar"));
-        // define provided items
-        ArrayList<Item> providedItems = new ArrayList<>();
-        providedItems.add(new Item("Crafted Test Item"));
-        providedItems.add(new Item("Residue"));
-        // create the crafting pattern
-        craftedTestItem = new CraftingPattern(name, craftingTime, neededItems, providedItems);
-    }
+    // get a sample crafting pattern from the UsageDemo
+    tastyChocolateCookie = CraftingServiceUsageDemo.tastyChocolateCookie();
 
-    @Test
-    @DisplayName("add a new item into the inventory")
-    void testSuccessfulAdding() throws IllegalParameterException {
-        // test items before adding
-        assertAll( // items in each list should be identical
-                () -> assertEquals(expectedItemsBeforeTestingOperations.get(0).getName(),
-                        testInventory.getItems().get(0).getName(),
-                        "First item should be 'Small Wood Plank'"),
-                () -> assertEquals(expectedItemsBeforeTestingOperations.get(1).getName(),
-                        testInventory.getItems().get(1).getName(),
-                        "Second item should be 'Test Bar'")
-        );
+    // add the sample pattern to the crafting service
+    craftingService.addCraftingPattern(tastyChocolateCookie);
 
-        // add a new item into the inventory
-        craftingService.add(testInventory, new Item("Tasty Chocolate Cookie"));
+    // make sure that the crafting service contains exactly this expected patterns
+    // after initialized the sample pattern
+    expectedPatternNamesBeforeTestingOperations.add("Pattern: Tasty Chocolate Cookie");
+  }
 
-        // test items after adding
-        ArrayList<Item> expectedItemsAfterAdding = new ArrayList<>();
-        expectedItemsAfterAdding.add(new Item("Small Wood Plank"));
-        expectedItemsAfterAdding.add(new Item("Test Bar"));
-        expectedItemsAfterAdding.add(new Item("Tasty Chocolate Cookie"));
+  @Test
+  @DisplayName("get list of pattern-names")
+  void testSuccessfulGettingPatternNames() {
+    // compare pattern names
+    assertEquals(expectedPatternNamesBeforeTestingOperations.get(0),
+        craftingService.getPatternNames().get(0),
+        "The only pattern should be 'Pattern: Tasty Chocolate Cookie'");
+  }
 
-        assertAll( // items in each list should be identical
-                () -> assertEquals(expectedItemsAfterAdding.get(0).getName(),
-                        testInventory.getItems().get(0).getName(),
-                        "First item should be 'Small Wood Plank'"),
-                () -> assertEquals(expectedItemsAfterAdding.get(1).getName(),
-                        testInventory.getItems().get(1).getName(),
-                        "Second item should be 'Test Bar'"),
-                () -> assertEquals(expectedItemsAfterAdding.get(2).getName(),
-                        testInventory.getItems().get(2).getName(),
-                        "Third item should be 'Tasty Chocolate Cookie'")
-        );
-    }
+  @Test
+  @DisplayName("get a specific pattern")
+  void testSuccessfulGettingPattern() throws IllegalParameterException {
+    // compare patterns
+    assertEquals(tastyChocolateCookie,
+        craftingService.getPattern("Pattern: Tasty Chocolate Cookie"),
+        "Pattern should be 'Pattern: Tasty Chocolate Cookie'");
+  }
 
-    @Test
-    @DisplayName("remove an existing item from the inventory")
-    void testSuccessfulRemoving() throws IllegalParameterException {
-        // test items before removing
-        assertAll( // items in each list should be identical
-                () -> assertEquals(expectedItemsBeforeTestingOperations.get(0).getName(),
-                        testInventory.getItems().get(0).getName(),
-                        "First item should be 'Small Wood Plank'"),
-                () -> assertEquals(expectedItemsBeforeTestingOperations.get(1).getName(),
-                        testInventory.getItems().get(1).getName(),
-                        "Second item should be 'Test Bar'")
-        );
+  @Test
+  @DisplayName("add a new crafting pattern to the crafting service")
+  void testSuccessfulAddingPattern() throws IllegalParameterException {
+    // compare pattern before adding
+    assertEquals(expectedPatternNamesBeforeTestingOperations.get(0),
+        craftingService.getPatternNames().get(0),
+        "Pattern should be 'Pattern: Tasty Chocolate Cookie'");
 
-        // remove an existing item from the inventory
-        craftingService.remove(testInventory, new Item("Small Wood Plank"));
+    // get another sample crafting pattern from the UsageDemo
+    CraftingPattern largeIronSword = CraftingServiceUsageDemo.largeIronSword();
 
-        // test item after removing
-        ArrayList<Item> expectedItemsAfterRemoving = new ArrayList<>();
-        expectedItemsAfterRemoving.add(new Item("Test Bar"));
+    // add this pattern to the crafting service
+    craftingService.addCraftingPattern(largeIronSword);
 
-        // items in each list should be identical
-        assertEquals(expectedItemsAfterRemoving.get(0).getName(), testInventory.getItems().get(0).getName(),
-                "The item should be 'Test Bar'");
-    }
+    // compare patterns after adding
+    ArrayList<String> expectedPatternNamesAfterAdding = new ArrayList<>();
+    expectedPatternNamesAfterAdding.add("Pattern: Large Iron Sword");
+    expectedPatternNamesAfterAdding.add("Pattern: Tasty Chocolate Cookie");
 
-    @Test
-    @DisplayName("craft a pattern which implies the inventory")
-    void testSuccessfulCraftingProcess() throws CraftingNotPossibleException, InterruptedException {
-        // test items before crafting
-        assertAll( // items in each list should be identical
-                () -> assertEquals(expectedItemsBeforeTestingOperations.get(0).getName(),
-                        testInventory.getItems().get(0).getName(),
-                        "First item should be 'Small Wood Plank'"),
-                () -> assertEquals(expectedItemsBeforeTestingOperations.get(1).getName(),
-                        testInventory.getItems().get(1).getName(),
-                        "Second item should be 'Test Bar'")
-        );
+    // patterns in each list should be identical
+    assertAll(
+        () -> assertEquals(expectedPatternNamesAfterAdding.get(0),
+            craftingService.getPatternNames().get(0),
+            "First pattern should be 'Pattern: Large Iron Sword'"),
+        () -> assertEquals(expectedPatternNamesAfterAdding.get(1),
+            craftingService.getPatternNames().get(1),
+            "Second pattern should be 'Pattern: Tasty Chocolate Cookie'")
+    );
+  }
 
-        // craft the sample pattern
-        craftingService.craft(testInventory, craftedTestItem);
+  @Test
+  @DisplayName("remove an existing pattern from the crafting service")
+  void testSuccessfulRemovingPattern() throws IllegalParameterException,
+      OperationNotSupportedException {
+    // compare pattern before removing
+    assertEquals(expectedPatternNamesBeforeTestingOperations.get(0),
+        craftingService.getPatternNames().get(0),
+        "First pattern should be 'Pattern: Tasty Chocolate Cookie'");
 
-        // wait until item is crafted before continuing
-        CraftingImplementation.getCurrentThread().join();
+    // remove an existing pattern from the crafting service
+    craftingService.removeCraftingPattern("Pattern: Tasty Chocolate Cookie");
 
-        // test items after crafting
-        ArrayList<Item> expectedItemsAfterCrafting = new ArrayList<>();
-        expectedItemsAfterCrafting.add(new Item("Small Wood Plank"));
-        expectedItemsAfterCrafting.add(new Item("Crafted Test Item"));
-        expectedItemsAfterCrafting.add(new Item("Residue"));
+    // compare lists after removing (they should be empty now)
+    ArrayList<String> expectedPatternNamesAfterRemoving = new ArrayList<>();
 
-        assertAll( // items in each list should be identical
-                () -> assertEquals(expectedItemsAfterCrafting.get(0).getName(),
-                        testInventory.getItems().get(0).getName(),
-                        "First item should be 'Small Wood Plank'"),
-                () -> assertEquals(expectedItemsAfterCrafting.get(1).getName(),
-                        testInventory.getItems().get(1).getName(),
-                        "Second item should be 'Crafted Test Item'"),
-                () -> assertEquals(expectedItemsAfterCrafting.get(2).getName(),
-                        testInventory.getItems().get(2).getName(),
-                        "Third item should be 'Residue'")
-        );
-    }
+    // compare lists - they should be empty now
+    assertEquals(expectedPatternNamesAfterRemoving,
+        craftingService.getPatternNames(),
+        "There should be no items'");
+  }
+
+  @Test
+  @DisplayName("craft a pattern which implies the inventory")
+  void testSuccessfulCraftingProcess() throws CraftingNotPossibleException, InterruptedException {
+    // compare items before crafting
+    // items in each list should be identical
+    assertAll(
+        () -> assertEquals(expectedItemsBeforeTestingOperations.get(0).getName(),
+            testInventory.getItems().get(0).getName(),
+            "First item should be 'Egg'"),
+        () -> assertEquals(expectedItemsBeforeTestingOperations.get(1).getName(),
+            testInventory.getItems().get(1).getName(),
+            "Second item should be 'Milk Chocolate'"),
+        () -> assertEquals(expectedItemsBeforeTestingOperations.get(2).getName(),
+            testInventory.getItems().get(2).getName(),
+            "Third item should be 'Flour'")
+    );
+
+    // craft the sample pattern
+    craftingService.craft(testInventory, tastyChocolateCookie);
+
+    // wait until item is crafted before continuing
+    CraftingImplementation.getCurrentThread().join();
+
+    // compare items after crafting
+    ArrayList<Item> expectedItemsAfterCrafting = new ArrayList<>();
+    expectedItemsAfterCrafting.add(new Item("Tasty Chocolate Cookie"));
+    expectedItemsAfterCrafting.add(new Item("Baking Powder"));
+
+    // items in each list should be identical
+    assertAll(
+        () -> assertEquals(expectedItemsAfterCrafting.get(0).getName(),
+            testInventory.getItems().get(0).getName(),
+            "First item should be 'Tasty Chocolate Cookie'"),
+        () -> assertEquals(expectedItemsAfterCrafting.get(1).getName(),
+            testInventory.getItems().get(1).getName(),
+            "Second item should be 'Baking Powder'")
+    );
+  }
+
+  @Test
+  @DisplayName("add a new listener")
+  void testSuccessfulAddingListener() throws IllegalParameterException {
+    // listener should be null at the beginning
+    assertNull(CraftingImplementation.getListener(),
+        "Listener should not be initialized yet");
+
+    // add a listener
+    craftingService.addListener(CraftingImplementation.getCallbackNotificator());
+
+    // compare listeners
+    assertEquals(CraftingImplementation.getCallbackNotificator(),
+        CraftingImplementation.getListener(),
+        "There should be the callback notificator now");
+  }
+
+  @Test
+  @DisplayName("remove a current listener")
+  void testSuccessfulRemovingListener() throws IllegalParameterException {
+    // add a listener
+    craftingService.addListener(CraftingImplementation.getCallbackNotificator());
+
+    // compare listener after adding
+    assertEquals(CraftingImplementation.getCallbackNotificator(),
+        CraftingImplementation.getListener(),
+        "There should be a callback listener currently'");
+
+    // remove the listener
+    craftingService.removeListener(CraftingImplementation.getCallbackNotificator());
+
+    // compare listeners after removing
+    assertNull(CraftingImplementation.getListener(),
+        "There should be no initialized listener now'");
+  }
 }
