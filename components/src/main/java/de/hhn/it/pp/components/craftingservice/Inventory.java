@@ -13,6 +13,8 @@ import java.util.List;
  * @version 2020-05-09
  */
 public class Inventory {
+  private static final org.slf4j.Logger logger =
+      org.slf4j.LoggerFactory.getLogger(Inventory.class);
   private List<Item> items;
 
   /**
@@ -35,7 +37,7 @@ public class Inventory {
       throw new IllegalParameterException("Item was null reference!\n");
     }
     items.add(item);
-    System.out.println("'" + item.getName() + "' added into the inventory!");
+    logger.info("add: item = {}", item);
   }
 
   /**
@@ -56,7 +58,7 @@ public class Inventory {
     for (Item inventoryItem : items) {
       if (inventoryItem.getName().equals(item.getName())) {
         items.remove(inventoryItem);
-        System.out.println("'" + item.getName() + "' deleted from the inventory!");
+        logger.info("remove: item = {}", item);
         return;
       }
     }
@@ -68,11 +70,10 @@ public class Inventory {
    * Print all items contained in the inventory to the console.
    */
   public void printInventory() {
-    System.out.println("\nItems in inventory: ");
+    System.out.println("Items in inventory: ");
     for (Item inventoryItem : items) {
       System.out.println("- " + inventoryItem.getName());
     }
-    System.out.println();
   }
 
   public List<Item> getItems() {
