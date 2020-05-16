@@ -2,6 +2,7 @@ package de.hhn.it.pp.components.craftingservice;
 
 import java.util.List;
 
+
 /**
  * A prototype class for crafting patterns.
  * Right now there are 3 different patterns(small weapons, large weapons, enchanted weapons).
@@ -44,7 +45,6 @@ public class CraftingPattern {
     for (Item providedItem : this.getProvidedItems()) {
       System.out.println("- " + providedItem.getName());
     }
-    System.out.println();
   }
 
   public String getName() {
