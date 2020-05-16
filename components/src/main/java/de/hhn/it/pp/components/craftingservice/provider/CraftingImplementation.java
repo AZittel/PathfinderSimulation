@@ -22,6 +22,8 @@ import java.util.Map;
  * @version 2020-05-09
  */
 public class CraftingImplementation implements CraftingService {
+  private static final org.slf4j.Logger logger =
+      org.slf4j.LoggerFactory.getLogger(CraftingImplementation.class);
   // stores all crafting patterns
   private Map<String, CraftingPattern> craftingPatterns;
   // initialize the callback notificator
@@ -46,7 +48,7 @@ public class CraftingImplementation implements CraftingService {
       throw new IllegalParameterException("Crafting pattern was null reference!\n");
     }
     craftingPatterns.put(pattern.getName(), pattern);
-    System.out.println("'" + pattern.getName() + "' added to the Crafting Service!");
+    logger.info("addCraftingPattern: pattern = {}", pattern);
   }
 
   @Override
@@ -62,7 +64,7 @@ public class CraftingImplementation implements CraftingService {
       throw new IllegalParameterException("'" + patternName + "' doesn't exist!\n");
     } else {
       craftingPatterns.remove(patternName);
-      System.out.println("'" + patternName + "' deleted from the Crafting Service!");
+      logger.info("removeCraftingPattern: patternName = {}", patternName);
     }
   }
 
@@ -73,6 +75,7 @@ public class CraftingImplementation implements CraftingService {
 
   @Override
   public CraftingPattern getPattern(String patternName) throws IllegalParameterException {
+    logger.info("getPattern: patternName = {}", patternName);
     if (patternName == null) {
       throw new IllegalParameterException("Pattern-name was null reference!\n");
     }
@@ -86,6 +89,7 @@ public class CraftingImplementation implements CraftingService {
   @Override
   public void craft(
       Inventory inventory, CraftingPattern craftingPattern) throws CraftingNotPossibleException {
+    logger.info("craft: inventory = {}, craftingPattern = {}", inventory, craftingPattern);
     if (craftingActive) {
       throw new CraftingNotPossibleException("An item is already being crafted!\n");
     }
@@ -103,7 +107,7 @@ public class CraftingImplementation implements CraftingService {
           try {
             inventory.remove(inventory.getItems().get(j));
           } catch (IllegalParameterException | OperationNotSupportedException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
           }
           j = inventory.getItems().size();
         }
@@ -117,7 +121,7 @@ public class CraftingImplementation implements CraftingService {
         addListener(callbackNotificator);
         listener.craftingStartedNotification(craftingPattern);
       } catch (IllegalParameterException e) {
-        System.err.println(e.getMessage() + "\n");
+        logger.error(e.getMessage());
       }
       // initialize a crafting thread
       Crafting crafting = new Crafting(inventory, craftingPattern);
@@ -135,6 +139,7 @@ public class CraftingImplementation implements CraftingService {
 
   @Override
   public void addListener(CraftingListener listener) throws IllegalParameterException {
+    logger.info("addListener: listener = {}", listener);
     if (listener == null) {
       throw new IllegalParameterException("Listener was null reference!\n");
     }
@@ -143,6 +148,7 @@ public class CraftingImplementation implements CraftingService {
 
   @Override
   public void removeListener(CraftingListener listener) throws IllegalParameterException {
+    logger.info("removeListener: listener = {}", listener);
     if (listener == null) {
       throw new IllegalParameterException("Listener was null reference!\n");
     }
