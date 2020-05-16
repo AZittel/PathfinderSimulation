@@ -15,6 +15,8 @@ import java.util.ArrayList;
  */
 
 public class CraftingServiceUsageDemo {
+  private static final org.slf4j.Logger logger =
+      org.slf4j.LoggerFactory.getLogger(CraftingServiceUsageDemo.class);
 
   /**
    * Initializes a sample crafting pattern.
@@ -87,7 +89,7 @@ public class CraftingServiceUsageDemo {
       demoInventory.add(new Item("Medium Iron Bar"));
       demoInventory.add(new Item("Medium Iron Bar"));
     } catch (IllegalParameterException e) {
-      System.err.println(e.getMessage() + "\n");
+      logger.error(e.getMessage());
     }
 
     // print the inventory first
@@ -97,7 +99,7 @@ public class CraftingServiceUsageDemo {
     try {
       demoInventory.remove(new Item("Medium Iron Bar"));
     } catch (IllegalParameterException | OperationNotSupportedException e) {
-      System.err.println(e.getMessage() + "\n");
+      logger.error(e.getMessage());
     }
 
     // print updated inventory
@@ -107,7 +109,7 @@ public class CraftingServiceUsageDemo {
     try {
       service.craft(demoInventory, service.getPattern("Pattern: Large Iron Sword"));
     } catch (CraftingNotPossibleException | IllegalParameterException e) {
-      System.err.println(e.getMessage() + "\n");
+      logger.error(e.getMessage());
     }
 
     // wait until the crafting process is done
@@ -122,17 +124,17 @@ public class CraftingServiceUsageDemo {
 
     // show all crafting patterns
     System.out.println("Available Crafting Patterns: ");
-    System.out.println(service.getPatternNames().toString() + "\n");
+    System.out.println(service.getPatternNames().toString());
 
     // try to delete a crafting pattern - this should work
     try {
       service.removeCraftingPattern("Pattern: Large Iron Sword");
     } catch (IllegalParameterException | OperationNotSupportedException e) {
-      System.err.println(e.getMessage() + "\n");
+      logger.error(e.getMessage());
     }
 
     // show again all crafting patterns
-    System.out.println("\nAvailable Crafting Patterns: ");
+    System.out.println("Available Crafting Patterns: ");
     System.out.println(service.getPatternNames().toString());
   }
 }
