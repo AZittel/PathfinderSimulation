@@ -7,7 +7,6 @@ package de.hhn.it.pp.components.spaceinvaders;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.spaceinvaders.provider.GameOverException;
 import de.hhn.it.pp.components.spaceinvaders.provider.SpaceInvaders;
-import de.hhn.it.pp.components.spaceinvaders.provider.SpaceInvadersService;
 
 import java.util.Collections;
 
@@ -53,7 +52,7 @@ public class SpaceInvadersUsageDemo {
 
         //Asks for the position of the player
         logger.info("get position player");
-        spaceInvadersService.getPositionPlayer(1, 2);
+        spaceInvadersService.getPositionPlayer(new int[2][3]);
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
@@ -67,17 +66,11 @@ public class SpaceInvadersUsageDemo {
 
         //Ask for the position of the enemies
         logger.info("get position enemies");
-        spaceInvadersService.getPositionEnemies(5, 6, 3);
+        spaceInvadersService.getPositionEnemies(new int[5][6], 3);
         logger.info("" + spaceInvadersService);
 
         Thread.sleep(1000);
 
-        //Projectiles colliding with targets
-        logger.info("collide");
-        spaceInvadersService.collide(true);
-        logger.info("" + spaceInvadersService);
-
-        Thread.sleep(1000);
 
         //Adds the new highscore to the highscore list
         logger.info("add highscore");

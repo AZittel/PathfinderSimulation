@@ -1,6 +1,9 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
-import java.util.concurrent.ThreadLocalRandom;
-import static de.hhn.it.pp.components.tetris.provider.logic.Tetromino.TetrominoType.randomize;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * This Class used to Create the individual Tetrominos
  */
@@ -19,17 +22,54 @@ public class Tetromino {
      * sets the Color accordingly.
      */
     public Tetromino(){
-        type = randomize();
+        type = TetrominoType.randomize();
+
+        try{
+            buildTetromino(type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+    }
 
     /**
      * Used to actually build the Tetrominos on the Field
      * @return The Tetromino
      */
-    public int[][][] buildTetromino(){
-        // TODO: actually make it work
-        int[][][] temp = new int[0][0][0];
-        return temp;
+    public int[][][] buildTetromino(TetrominoType type) throws FileNotFoundException {
+        // the easiest solution was using text files and excel. works for now
+        int[][][] bounds;
+
+        switch (type) {
+            case I:
+                bounds = new int[4][4][4];
+                break;
+            case O:
+                bounds = new int[4][2][2];
+                break;
+            default:
+                bounds = new int[4][3][3];
+        }
+
+        File file = new File("resources/" + type + ".txt");
+        Scanner sc = new Scanner(file);
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; i < bounds[0].length; i++) {
+
+                if (sc.hasNext()) {
+                    String[] srow = sc.next().split("");
+                    int[] row = new int[bounds[0].length];
+
+                    for (int k = 0; k < row.length; k++) {
+                        row[k] = Integer.parseInt(srow[k]);
+                        bounds[i][k][j] = row[k];
+
+                    }
+                }
+            }
+
+        }
+        return bounds;
     }
 
     /**
@@ -43,19 +83,59 @@ public class Tetromino {
         }
     }
 
-    /**
-     * Used to organize the Tetromino Types
-     */
-    public enum TetrominoType{
-        I,O,Z,S,T,L,J;
+    public void setRotation(int newRotation){
+        this.rotation = newRotation;
+    }
+     public void setType(TetrominoType newType){
+        this.type = newType;
+     }
 
-        /**
-         * Randomizes the Tetromino Type
-         * @return a random Tetromino
-         */
-        public static TetrominoType randomize(){
-            return values()[ThreadLocalRandom.current().nextInt(0,values().length)];
+     public void setX(int newX){
+        this.x = newX;
+     }
+
+     public void setY(int newY){
+        this.y = newY;
+     }
+
+     public void setSize (int newSize){
+        this.size = newSize;
+     }
+
+     public void setBounds(int [][][] newBounds){
+        this.bounds = newBounds;
+     }
+
+     public void setMoveable(boolean newMoveable){
+        this.moveable = newMoveable;
+     }
+
+     public int getTypeValue() {
+        switch (type) {
+            case I:
+                return 1;
+
+            case O:
+                return 2;
+
+            case Z:
+                return 3;
+
+            case S:
+                return 4;
+
+            case T:
+                return 5;
+
+            case L:
+                return 6;
+
+            case J:
+                return 7;
         }
+
+        return 0;
+
     }
 
     public TetrominoType getType() {

@@ -1,46 +1,29 @@
 package de.hhn.it.pp.components.tetris.provider.logic;
 
 import java.util.ArrayList;
-
-import static de.hhn.it.pp.components.tetris.provider.logic.Board.BoardState.*;
+import java.util.Arrays;
 
 public class Board {
 
-    private static int score = 0;
-
-    private static int highscore = 0;
-
-    private static int scoreToAdd = 0;
-
-    private static boolean spawnNewTetromino = false;
-
-    private static boolean speedup = false;
-
-    public static ArrayList<Tetromino> tetrominos = new ArrayList<>();
-
-    private static Tetromino currentTetromino;
-
-    private static Tetromino nextTetromino;
-
-    private static int[][] map = new int[10][18];
-
-    public static BoardState boardState = start;
-
-    /**
-     * A Enum in which the Boardstates are described
-     */
-    public enum BoardState {
-        start, activeGame, pause, gameover
-    }
+    private int score = 0;
+    private int highscore = 0;
+    private int scoreToAdd = 0;
+    private boolean spawnNewTetromino = false;
+    private boolean speedup = false;
+    private int difficultyValue = 0;
+    public ArrayList<Tetromino> tetrominos = new ArrayList<>();
+    private Tetromino currentTetromino;
+    private Tetromino nextTetromino;
+    private int[][] map = new int[10][18];
+    private Collision myCollision = new Collision();
+    private BoardState boardState = BoardState.start;
 
     /**
      * clears the board (remove all tetrominos)
      */
-    public static void clear() {
-        for (int x = 0; x < map.length; x++) {
-            for (int y = 0; y < map[x].length; y++) {
-                map[x][y] = 0;
-            }
+    public void clear() {
+        for (int[] ints : map) {
+            Arrays.fill(ints, 0);
         }
         score = 0;
     }
@@ -49,64 +32,101 @@ public class Board {
      * Adds a Tetromino the the Tetromino arraylist
      * @param tetromino the tetromino that gets added
      */
-    public static void addTetromino(Tetromino tetromino) {
+    public void addTetromino(Tetromino tetromino) {
         tetrominos.add(tetromino);
     }
 
-    public static void setCurrentTetromino(Tetromino tetromino) {
+    public void setCurrentTetromino(Tetromino tetromino) {
         currentTetromino = tetromino;
     }
 
-    public static void setNextTetromino(Tetromino tetromino) {
+    public void setNextTetromino(Tetromino tetromino) {
         nextTetromino = tetromino;
     }
 
-    public static boolean isSpeedUp() {
+    public void setDifficultyValue(Difficulty difficulty){
+        switch (difficulty){
+            case EASY: difficultyValue = 1500;
+            case MEDIUM: difficultyValue = 1000;
+            case HARD: difficultyValue = 500;
+        }
+    }
+
+    public int getDifficultyValue(){
+        return difficultyValue;
+    }
+
+    public boolean isSpeedUp() {
         return speedup;
     }
 
-    public static void setSpeedup(boolean newValue) {
+    public void setSpeedup(boolean newValue) {
         speedup = newValue;
     }
 
-    public static boolean isSpawnNewTetromino() {
+    public Collision getMyCollision(){
+        return myCollision;
+    }
+
+    public void setCollision(Collision collision){
+        this.myCollision = collision;
+    }
+
+    public boolean isSpawnNewTetromino() {
         return spawnNewTetromino;
     }
 
-    public static void setSpawnNewTetromino(boolean newValue) {
+    public void setSpawnNewTetromino(boolean newValue) {
         spawnNewTetromino = newValue;
     }
 
-    public static void getTetrominos() {
+    public void setScoreToAdd(int newValue){
+        scoreToAdd = newValue;
+    }
+
+    public void setScore(int newValue){
+        score = newValue;
+    }
+
+    public void setHighscore (int newValue) {
+        highscore = newValue;
+    }
+
+
+    public void getTetrominos() {
         for (Tetromino t : tetrominos) {
             System.out.println(t);
         }
     }
 
-    public static BoardState getBoardState() {
+    public BoardState getBoardState() {
         return boardState;
     }
 
-    public static int getHighscore() {
+    public int getHighscore() {
         return highscore;
     }
 
-    public static int getScore() {
+    public int getScore() {
         return score;
     }
 
-    public static int getScoreToAdd() {
+    public int getScoreToAdd() {
         return scoreToAdd;
     }
 
-    public static int[][] getMap() {
+
+    public int[][] getMap() {
         return map;
     }
-    public static Tetromino getCurrentTetromino() {
+    public Tetromino getCurrentTetromino() {
         return currentTetromino;
     }
 
-    public static Tetromino getNextTetromino() {
+    public Tetromino getNextTetromino() {
         return nextTetromino;
+    }
+    public void setBoardState(BoardState boardState) {
+        this.boardState = boardState;
     }
 }

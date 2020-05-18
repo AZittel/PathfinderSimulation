@@ -4,6 +4,8 @@ import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 
 public class Terrain implements Cloneable {
+  private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Terrain.class);
+
   /**
    * The movement cost to move from the starting point to a given square on the grid, following the
    * path generated to get there. (Distance from starting cell)
@@ -15,7 +17,6 @@ public class Terrain implements Cloneable {
    * destination. (Distance from the end cell)
    */
   private int h;
-
 
   /**
    * Position on the map.
@@ -35,10 +36,11 @@ public class Terrain implements Cloneable {
   private Terrain() {
   }
 
-  public Terrain(int gridRow, int gridCol, TerrainType type) {
+  public Terrain(Position position, TerrainType type) {
     super();
-    this.position = new Position(gridRow, gridCol);
+    this.position = position;
     this.type = type;
+    logger.trace("Terrain created: {}", this.toString());
   }
 
   /**
@@ -74,6 +76,10 @@ public class Terrain implements Cloneable {
     return position;
   }
 
+  public void setPosition(Position position) {
+    this.position = position;
+  }
+
   public TerrainType getType() {
     return type;
   }
@@ -82,21 +88,37 @@ public class Terrain implements Cloneable {
     this.type = type;
   }
 
-  public void setPosition(Position position) {
-    this.position = position;
-  }
-
   @Override
   public String toString() {
-    return position + "";
+    return type + " " + position;
+  }
+
+  /**
+   * TODO java doc
+   */
+  @Override
+  public Object clone() throws CloneNotSupportedException {
+
+    Terrain cloned = (Terrain) super.clone();
+    if (parent != null) {
+      cloned.setParent((Terrain) cloned.getParent().clone());
+    }
+    Position clonedPosition = cloned.getPosition();
+    cloned.setPosition(new Position(clonedPosition.getRow(), clonedPosition.getCol()));
+
+    return cloned;
   }
 
   @Override
-  public Object clone() throws CloneNotSupportedException {
-    Terrain cloned = (Terrain) super.clone();
-    cloned.setParent((Terrain) cloned.getParent().clone());
-    Position clonedPosition = cloned.getPosition();
-    cloned.setPosition(new Position(clonedPosition.getX(), clonedPosition.getY()));
-    return cloned;
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Terrain ter = (Terrain) obj;
+    return position.equals(ter.position) && h == ter.h && g == ter.g &&
+      type == ter.type;
   }
 }
