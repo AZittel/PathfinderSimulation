@@ -5,15 +5,15 @@ public class FieldInformation {
             org.slf4j.LoggerFactory.getLogger(FieldInformation.class);
     private final int x;
     private final int y;
-    private boolean activFlag;
+    private boolean activeFlag;
     private int number;
-    private boolean ishidden;
+    private boolean Hidden;
 
     public FieldInformation(int x, int y) {
         this.x = x;
         this.y = y;
-        this.activFlag = false;
-        this.ishidden = true;
+        this.activeFlag = false;
+        this.Hidden = true;
     }
 
     public int getX() {
@@ -24,27 +24,27 @@ public class FieldInformation {
         return y;
     }
 
-    public boolean isActivFlag() {
-        return activFlag;
+    public boolean isActiveFlag() {
+        return activeFlag;
     }
 
     public int getNumber() {
         return number;
     }
 
-    public boolean isIshidden() {
-        return ishidden;
+    public boolean isHidden() {
+        return Hidden;
     }
 
-    public void setActivFlag(boolean activFlag) {
-        this.activFlag = activFlag;
+    public void setActiveFlag(boolean activeFlag) {
+        this.activeFlag = activeFlag;
     }
 
     public void setNumber(int number) {
         this.number = number;
     }
 
-    public void setIshidden(boolean ishidden) {
-        this.ishidden = ishidden;
+    public void setIsHidden(boolean ishidden) {
+        this.Hidden = ishidden;
     }
 }
