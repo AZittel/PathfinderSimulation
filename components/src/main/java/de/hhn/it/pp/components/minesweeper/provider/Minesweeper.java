@@ -8,8 +8,11 @@ import de.hhn.it.pp.components.minesweeper.MinesweeperService;
 
 public class Minesweeper implements MinesweeperService {
     private int bombCount;
+    private int points;
+    int width;
+    int heigth;
     private FieldInformation[][] fieldInformations;
-    public BombPosition[] bombPositions;
+    private BombPosition[] bombPositions;
     private int points;
     /**
      * creates a game field.
@@ -17,6 +20,8 @@ public class Minesweeper implements MinesweeperService {
     @Override
     public void createField(int width, int height) throws IllegalArgumentException, IllegalParameterException {
         fieldInformations = new FieldInformation[width][height];
+        this.width = width;
+        this. heigth = height;
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 fieldInformations[i][j] = new FieldInformation(i, j);
@@ -39,6 +44,7 @@ public class Minesweeper implements MinesweeperService {
      */
     @Override
     public FieldInformation[][] restart(int width, int height)throws IllegalArgumentException, IllegalParameterException {
+        FieldInformation[][] fieldInformations = new FieldInformation[width][height];
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 fieldInformations[i][j].setNumber(0);
@@ -73,19 +79,57 @@ public class Minesweeper implements MinesweeperService {
      */
     @Override
     public FieldInformation[][] turn(int x, int y) {
-        return null;
-
+        if(fieldInformations[x][y].getBomb() == true){
+            for(int i = 0; i < width; i++){
+                for(int j = 0; j < heigth; j++){
+                    fieldInformations[i][j].setIsHidden(false);
+                    return fieldInformations;
+                }
+            }
+        }
+        if(fieldInformations[x][y].getNumber() != 0){
+            fieldInformations[x][y].setIsHidden(false);
+            return fieldInformations;
+        }else {
+            if(x == 0 && y == heigth){
+               turn(x + 1, y);
+               turn(x + 1, y - 1);
+               turn(x, y - 1);
+            }else if(x == width && y == heigth){
+                turn(x, y - 1);
+                turn(x - 1, y - 1);
+                turn(x - 1, y);
+            }else if(x == width && y == 0){
+                turn(x, y + 1);
+                turn(x - 1, y + 1);
+                turn(x - 1, y);
+            }else if(x == width && y == 0){
+                turn(x, y + 1);
+                turn(x + 1, y + 1);
+                turn(x + 1, y);
+            }else{
+                turn(x, y + 1);
+                turn(x + 1, y + 1);
+                turn(x + 1, y);
+                turn(x + 1, y - 1);
+                turn(x, y - 1);
+                turn(x - 1, y - 1);
+                turn(x - 1, y);
+                turn(x - 1, y + 1);
+            }
+        }
+        return fieldInformations;
     }
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
     @Override
     public void setFixBombs() {
-        bombPositions = new BombPosition[4];
-        bombPositions[0] = new BombPosition(0, 0);
-        bombPositions[1] = new BombPosition(1, 1);
-        bombPositions[2] = new BombPosition(2, 2);
-        bombPositions[3] = new BombPosition(3, 1);
+        fieldInformations[0][0].setBomb();
+        fieldInformations[1][1].setBomb();
+        fieldInformations[2][2].setBomb();
+        fieldInformations[3][1].setBomb();
+
     }
     /**
      * Getter for getting bombs.
