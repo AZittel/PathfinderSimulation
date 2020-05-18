@@ -9,7 +9,7 @@ import de.hhn.it.pp.components.minesweeper.MinesweeperService;
 public class Minesweeper implements MinesweeperService {
     private int bombCount;
     private FieldInformation[][] fieldInformations;
-    private BombPosition[] bombPositions;
+    public BombPosition[] bombPositions;
     private int points;
     /**
      * creates a game field.
@@ -39,7 +39,6 @@ public class Minesweeper implements MinesweeperService {
      */
     @Override
     public FieldInformation[][] restart(int width, int height)throws IllegalArgumentException, IllegalParameterException {
-        FieldInformation[][] fieldInformations = new FieldInformation[width][height];
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 fieldInformations[i][j].setNumber(0);
@@ -47,7 +46,7 @@ public class Minesweeper implements MinesweeperService {
                 fieldInformations[i][j].setActiveFlag(false);
             }
         }
-        setBombs(bombCount);
+        setFixBombs();
         return fieldInformations;
     }
 
@@ -82,10 +81,11 @@ public class Minesweeper implements MinesweeperService {
      */
     @Override
     public void setFixBombs() {
-        bombPositions = new BombPosition[3];
+        bombPositions = new BombPosition[4];
         bombPositions[0] = new BombPosition(0, 0);
         bombPositions[1] = new BombPosition(1, 1);
         bombPositions[2] = new BombPosition(2, 2);
+        bombPositions[3] = new BombPosition(3, 1);
     }
     /**
      * Getter for getting bombs.
