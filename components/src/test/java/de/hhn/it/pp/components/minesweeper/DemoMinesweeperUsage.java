@@ -70,7 +70,7 @@ public class DemoMinesweeperUsage {
 
         // set fix bombs.
         logger.info(">>> setFixBombs");
-        List<BombPosition> positions = null;
+        BombPosition[][] positions = null;
         minesweeperService.setFixBombs(positions);
         logger.info("" + minesweeperService);
 

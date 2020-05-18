@@ -1,6 +1,6 @@
 package de.hhn.it.pp.components.minesweeper.junit;
 
-public class BombTest {
+public class BombPositionTest {
     private static final org.slf4j.Logger logger =
-            org.slf4j.LoggerFactory.getLogger(BombTest.class);
+            org.slf4j.LoggerFactory.getLogger(BombPositionTest.class);
 }

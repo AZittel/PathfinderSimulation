@@ -50,7 +50,7 @@ public class Minesweeper implements MinesweeperService {
      * @param y y-Pos of the clicked field.
      */
     @Override
-    public List<FieldInformation> turn(int x, int y) {
+    public FieldInformation[][] turn(int x, int y) {
         return null;
 
     }
@@ -58,7 +58,7 @@ public class Minesweeper implements MinesweeperService {
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
     @Override
-    public void setFixBombs(List<BombPosition> positions) {
+    public void setFixBombs(BombPosition[][] positions) {
 
     }
     /**
