@@ -11,6 +11,7 @@ public class FieldInformationTest {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(FieldInformationTest.class);
 
+
     @Test
     @DisplayName("Testing the FieldInformation.")
     public void fieldInformation() throws IllegalParameterException {
@@ -31,7 +32,7 @@ public class FieldInformationTest {
                                 testfield.getY(),
                                 "The Field Y Size"));
         assertAll(
-                "Checking if the Field is hidden and there is no activ Flag",
+                "Checking if the Field is hidden and there is no active Flag and no Number",
                 () ->
                         assertEquals(
                                 true,
@@ -41,7 +42,35 @@ public class FieldInformationTest {
                         assertEquals(
                                 false,
                                 testfield.isActiveFlag(),
-                                "The Field has no Active Flag."));
+                                "The Field has no Active Flag."),
+                () ->
+                        assertEquals(
+                                0,
+                                testfield.getNumber(),
+                                "The Field has no Number."));
+
+
+        //Changing some Parameters for more tests.
+        testfield.setActiveFlag(true);
+        testfield.setIsHidden(false);
+        testfield.setNumber(5);
+        assertAll(
+                "Checking if the Field is now not hidden and there is an active Flag and a Number",
+                () ->
+                        assertEquals(
+                                false,
+                                testfield.isHidden(),
+                                "The Field isn´t hidden"),
+                () ->
+                        assertEquals(
+                                true,
+                                testfield.isActiveFlag(),
+                                "The Field has an Active Flag."),
+                () ->
+                        assertEquals(
+                                5,
+                                testfield.getNumber(),
+                                "The Field has the Number 5."));
 
     }
 }

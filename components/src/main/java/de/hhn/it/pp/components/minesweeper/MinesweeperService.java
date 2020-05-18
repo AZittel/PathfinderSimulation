@@ -66,6 +66,12 @@ public interface MinesweeperService {
      */
     int getPoints();
 
+    /**
+     *
+     * @return the Field.
+     */
+    int getField();
+
 }
 
 

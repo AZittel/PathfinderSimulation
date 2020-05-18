@@ -4,9 +4,9 @@ import de.hhn.it.pp.components.minesweeper.BombPosition;
 import de.hhn.it.pp.components.minesweeper.FieldInformation;
 import de.hhn.it.pp.components.minesweeper.MinesweeperService;
 
-import java.util.List;
 
 public class Minesweeper implements MinesweeperService {
+    private int points;
     /**
      * creates a game field.
      */
@@ -80,6 +80,7 @@ public class Minesweeper implements MinesweeperService {
      * Sets the current Points.
      */
     public void setPoints(int points){
+        this.points = points;
 
     }
 
@@ -88,8 +89,15 @@ public class Minesweeper implements MinesweeperService {
      */
     @Override
     public int getPoints(){
-        return 0;
+        return points;
     }
 
+    /**
+     * @return the Field.
+     */
+    @Override
+    public int getField(){
+        return 0;
+    }
 
 }
