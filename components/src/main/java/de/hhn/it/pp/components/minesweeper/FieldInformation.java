@@ -9,13 +9,14 @@ public class FieldInformation {
     private final int y;
     private boolean activeFlag;
     private int number;
-    private boolean Hidden;
+    private boolean hidden;
+    private boolean bomb;
 
     public FieldInformation(int x, int y) throws IllegalParameterException {
         this.x = x;
         this.y = y;
         this.activeFlag = false;
-        this.Hidden = true;
+        this.hidden = true;
     }
 
     public int getX() {
@@ -34,8 +35,10 @@ public class FieldInformation {
         return number;
     }
 
+    public boolean getBomb() {return bomb;}
+
     public boolean isHidden() {
-        return Hidden;
+        return hidden;
     }
 
     public void setActiveFlag(boolean activeFlag) {
@@ -46,7 +49,9 @@ public class FieldInformation {
         this.number = number;
     }
 
-    public void setIsHidden(boolean ishidden) {
-        this.Hidden = ishidden;
+    public void setIsHidden(boolean isHidden) {
+        this.hidden = isHidden;
     }
+
+    public void setBomb(){ this.bomb = true;}
 }
