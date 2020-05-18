@@ -9,25 +9,26 @@ import de.hhn.it.pp.components.minesweeper.MinesweeperService;
 public class Minesweeper implements MinesweeperService {
     private int bombCount;
     private FieldInformation[][] fieldInformations;
+    private BombPosition[] bombPositions;
     private int points;
     /**
      * creates a game field.
      */
     @Override
-    public FieldInformation[][] createField(int width, int height) throws IllegalArgumentException, IllegalParameterException {
+    public void createField(int width, int height) throws IllegalArgumentException, IllegalParameterException {
         fieldInformations = new FieldInformation[width][height];
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 fieldInformations[i][j] = new FieldInformation(i, j);
             }
         }
-        return fieldInformations;
     }
     /**
      * Sets bombs on random locations on the field.
      */
     @Override
     public void setBombs(int bombCount) throws IllegalArgumentException {
+        bombPositions = new BombPosition[bombCount];
         this.bombCount = bombCount;
         for(int i = 0; i < bombCount; i++){
 
@@ -54,8 +55,9 @@ public class Minesweeper implements MinesweeperService {
      *  Starts the Game.
      */
     @Override
-    public void startGame() {
-
+    public void startGame(int width, int heigth, int bombCount) throws IllegalParameterException {
+        createField(width, heigth);
+        setBombs(bombCount);
     }
 
     /**
@@ -79,15 +81,18 @@ public class Minesweeper implements MinesweeperService {
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
     @Override
-    public void setFixBombs(BombPosition[][] positions) {
-
+    public void setFixBombs() {
+        bombPositions = new BombPosition[3];
+        bombPositions[0] = new BombPosition(0, 0);
+        bombPositions[1] = new BombPosition(1, 1);
+        bombPositions[2] = new BombPosition(2, 2);
     }
     /**
      * Getter for getting bombs.
      */
     @Override
-    public BombPosition[][] getBombs() {
-        return null;
+    public BombPosition[] getBombs() {
+        return bombPositions;
     }
         /**
          * calculates the Points.
@@ -117,8 +122,8 @@ public class Minesweeper implements MinesweeperService {
      * @return the Field.
      */
     @Override
-    public int getField(){
-        return 0;
+    public FieldInformation[][] getField(){
+        return fieldInformations;
     }
 
 

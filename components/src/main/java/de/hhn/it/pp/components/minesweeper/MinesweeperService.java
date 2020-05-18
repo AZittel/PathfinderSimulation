@@ -18,7 +18,7 @@ public interface MinesweeperService {
      * @throws IllegalArgumentException  if the width or height is invalid.
      * @throws InvalidGameStateException is thrown if the game is already running.
      */
-    FieldInformation[][] createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException, IllegalParameterException;
+    void createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException, IllegalParameterException;
 
     /**
      * Sets the bombs on the field.
@@ -32,12 +32,12 @@ public interface MinesweeperService {
     /**
      * Resets the Game.
      */
-    FieldInformation[][] restart(int widht, int height) throws InvalidGameStateException, IllegalArgumentException, IllegalParameterException;
+    FieldInformation[][] restart(int width, int height) throws InvalidGameStateException, IllegalArgumentException, IllegalParameterException;
 
     /**
      * Starts the Game.
      */
-    void startGame() throws InvalidGameStateException;
+    void startGame(int width, int height, int bombCount) throws InvalidGameStateException, IllegalParameterException;
 
     /**
      * Closes the Game.
@@ -54,13 +54,13 @@ public interface MinesweeperService {
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
-    void setFixBombs(BombPosition[][] positions);
+    void setFixBombs();
 
 
     /**
      * Getter for getting bombs.
      */
-    BombPosition[][] getBombs();
+    BombPosition[] getBombs();
 
     /**
      * @return returns the current Points.
@@ -71,7 +71,7 @@ public interface MinesweeperService {
      *
      * @return the Field.
      */
-    int getField();
+    FieldInformation[][] getField();
 
 }
 
