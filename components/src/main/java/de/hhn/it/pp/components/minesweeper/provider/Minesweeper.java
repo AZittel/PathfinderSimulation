@@ -10,6 +10,7 @@ public class Minesweeper implements MinesweeperService {
     private int bombCount;
     private FieldInformation[][] fieldInformations;
     private int points;
+    private BombPosition [] bombPositions;
     /**
      * creates a game field.
      */
@@ -79,15 +80,16 @@ public class Minesweeper implements MinesweeperService {
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
     @Override
-    public void setFixBombs(BombPosition[][] positions) {
+    public void setFixBombs(BombPosition[] positions) {
+
 
     }
     /**
      * Getter for getting bombs.
      */
     @Override
-    public BombPosition[][] getBombs() {
-        return null;
+    public BombPosition[] getBombs() {
+        return bombPositions;
     }
         /**
          * calculates the Points.
@@ -117,9 +119,8 @@ public class Minesweeper implements MinesweeperService {
      * @return the Field.
      */
     @Override
-    public int getField(){
-        return 0;
+    public FieldInformation[][] getField(){
+        return fieldInformations;
     }
-
 
 }

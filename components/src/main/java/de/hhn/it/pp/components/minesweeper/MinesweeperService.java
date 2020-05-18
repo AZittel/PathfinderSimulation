@@ -3,7 +3,6 @@ package de.hhn.it.pp.components.minesweeper;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
-import java.util.List;
 
 /**
  * This Interface is an Interface for the Game MineSweeper that shows all the
@@ -54,13 +53,13 @@ public interface MinesweeperService {
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
-    void setFixBombs(BombPosition[][] positions);
+    void setFixBombs(BombPosition[] positions);
 
 
     /**
      * Getter for getting bombs.
      */
-    BombPosition[][] getBombs();
+    BombPosition[] getBombs();
 
     /**
      * @return returns the current Points.
@@ -71,7 +70,7 @@ public interface MinesweeperService {
      *
      * @return the Field.
      */
-    int getField();
+    FieldInformation[][] getField();
 
 }
 
