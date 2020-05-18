@@ -62,12 +62,10 @@ public class AStarPathfindingAlgorithmTest {
     assertFalse(finalPath.isEmpty());
     assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
 
-
     Terrain terrain4 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 3));
     Terrain terrain5 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 4));
     Terrain terrain6 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 5));
     Terrain terrain7 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 6));
-
 
     result = algorithm.findPath();
     finalPath = result.get(result.size() - 1).getFinalPathPositions();
@@ -83,8 +81,6 @@ public class AStarPathfindingAlgorithmTest {
     expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
     expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
     assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
-
-
   }
 
   @Test
@@ -117,7 +113,6 @@ public class AStarPathfindingAlgorithmTest {
     assertFalse(finalPath.isEmpty());
     assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
 
-
     TerrainType.SWAMP.setModifier(20.0);
     result = algorithm.findPath();
     finalPath = result.get(result.size() - 1).getFinalPathPositions();
@@ -132,7 +127,6 @@ public class AStarPathfindingAlgorithmTest {
 
     assertFalse(finalPath.isEmpty());
     assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
-
   }
 
   private void printMapWithFinalPath(List<Terrain> finalPath) {
@@ -179,8 +173,5 @@ public class AStarPathfindingAlgorithmTest {
     terrain4 = testMapManager.createTerrain(TerrainType.LAVA, new Position(2, 5));
     result = algorithm.findPath();
     assertTrue(result.isEmpty());
-
   }
-
-
 }

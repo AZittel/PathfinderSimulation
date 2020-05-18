@@ -22,5 +22,4 @@ public class TerrainTypeTest {
     assertEquals(type1.getDefaultModifier(), type1.getModifier());
     assertEquals(type2.getDefaultModifier(), type2.getModifier());
   }
-
 }

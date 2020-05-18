@@ -52,7 +52,7 @@ public class PathfindingInformationTest {
     PathfindingInformation clone = information.clone();
 
     assertAll(
-        "Checking cloned objects list size",
+        "Checking the cloned object's list size",
         () ->
             assertEquals(
                 3,
@@ -74,35 +74,53 @@ public class PathfindingInformationTest {
         () ->
             assertEquals(
                 clone.getSpecificPositions().get(1).getPosition().getRow(),
-                position2.getPosition().getRow()),
+                position2.getPosition().getRow(),
+                "The row of the specific position at index 1 should be the same but was not"),
         () ->
             assertEquals(
                 clone.getSpecificPositions().get(1).getPosition().getCol(),
-                position2.getPosition().getCol()),
-        () -> assertSame(clone.getSpecificPositions().get(1).getType(), position2.getType()));
+                position2.getPosition().getCol(),
+                "The col of the specific position at index 1 should be the same but was not"),
+        () ->
+            assertSame(
+                clone.getSpecificPositions().get(1).getType(),
+                position2.getType(),
+                "The type of the specific position at index 1 should be the same but was not"));
 
     assertAll(
         "Checking visitedPositions objects",
         () ->
             assertEquals(
                 clone.getVisitedPositions().get(2).getPosition().getRow(),
-                position6.getPosition().getRow()),
+                position6.getPosition().getRow(),
+                "The row of the visited position at index 2 should be the same but was not"),
         () ->
             assertEquals(
                 clone.getVisitedPositions().get(2).getPosition().getCol(),
-                position6.getPosition().getCol()),
-        () -> assertSame(clone.getVisitedPositions().get(2).getType(), position6.getType()));
+                position6.getPosition().getCol(),
+                "The col of the visited position at index 2 should be the same but was not"),
+        () ->
+            assertSame(
+                clone.getVisitedPositions().get(2).getType(),
+                position6.getType(),
+                "The type of the visited position at index 2 should be the same but was not"));
 
     assertAll(
         "Checking finalPathPositions objects",
         () ->
             assertEquals(
                 clone.getFinalPathPositions().get(2).getPosition().getRow(),
-                position7.getPosition().getRow()),
+                position7.getPosition().getRow(),
+                "The row of the final position at index 2 should be the same but was not"),
         () ->
             assertEquals(
                 clone.getFinalPathPositions().get(2).getPosition().getCol(),
-                position7.getPosition().getCol()),
-        () -> assertSame(clone.getFinalPathPositions().get(2).getType(), position7.getType()));
+                position7.getPosition().getCol(),
+                "The col of the final position at index 2 should be the same but was not"),
+        () ->
+            assertSame(
+                clone.getFinalPathPositions().get(2).getType(),
+                position7.getType(),
+                "The type of the final position at index 2 should be the same but was not"));
   }
 }

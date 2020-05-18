@@ -55,5 +55,4 @@ public class TerrainTest {
     assertNotSame(terrain, clonedTerrain, "The two terrains should be not the same Object");
     assertEquals(terrain, clonedTerrain);
   }
-
 }
