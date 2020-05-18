@@ -65,7 +65,7 @@ public class Minesweeper implements MinesweeperService {
      * Getter for getting bombs.
      */
     @Override
-    public List<BombPosition> getBombs() {
+    public BombPosition[][] getBombs() {
         return null;
     }
         /**

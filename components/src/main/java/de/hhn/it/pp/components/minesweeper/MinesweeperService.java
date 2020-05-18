@@ -59,7 +59,7 @@ public interface MinesweeperService {
     /**
      * Getter for getting bombs.
      */
-    List<BombPosition> getBombs();
+    BombPosition[][] getBombs();
 
     /**
      * @return returns the current Points.
