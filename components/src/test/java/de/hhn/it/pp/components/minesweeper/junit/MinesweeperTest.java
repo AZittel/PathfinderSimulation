@@ -18,15 +18,20 @@ public class MinesweeperTest {
     @Test
     @DisplayName("Testing the Minesweeper Class.")
     public void bombInformation() throws IllegalParameterException {
-        BombPosition[][] bomb = new BombPosition[3][4];
+        BombPosition[] bomb = new BombPosition[4];
         Minesweeper minesweeper = new Minesweeper();
-        minesweeper.createField(5, 5);
+        minesweeper.createField(4, 5);
         assertAll(
                 () ->
                         assertEquals(
-                                0,
-                                minesweeper.getField(),
-                                "Gets the Field."),
+                                4,
+                                minesweeper.getField().length,
+                                "Gets the width of the Field."),
+                () ->
+                        assertEquals(
+                                5,
+                                minesweeper.getField()[1].length,
+                                "Gets the height of the Field."),
 
                 () ->
                         assertEquals(

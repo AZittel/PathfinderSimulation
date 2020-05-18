@@ -3,7 +3,6 @@ package de.hhn.it.pp.components.minesweeper;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
-import java.util.List;
 
 /**
  * This Interface is an Interface for the Game MineSweeper that shows all the

@@ -126,5 +126,4 @@ public class Minesweeper implements MinesweeperService {
         return fieldInformations;
     }
 
-
 }
