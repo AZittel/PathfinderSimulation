@@ -1,32 +1,53 @@
 package de.hhn.it.pp.components.minesweeper.provider;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.minesweeper.BombPosition;
 import de.hhn.it.pp.components.minesweeper.FieldInformation;
 import de.hhn.it.pp.components.minesweeper.MinesweeperService;
 
 
 public class Minesweeper implements MinesweeperService {
+    private int bombCount;
+    private FieldInformation[][] fieldInformations;
     private int points;
     /**
      * creates a game field.
      */
     @Override
-    public void createField(int width, int height) throws IllegalArgumentException {
-
+    public FieldInformation[][] createField(int width, int height) throws IllegalArgumentException, IllegalParameterException {
+        fieldInformations = new FieldInformation[width][height];
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                fieldInformations[i][j] = new FieldInformation(i, j);
+            }
+        }
+        return fieldInformations;
     }
     /**
      * Sets bombs on random locations on the field.
      */
     @Override
     public void setBombs(int bombCount) throws IllegalArgumentException {
+        this.bombCount = bombCount;
+        for(int i = 0; i < bombCount; i++){
 
+        }
     }
     /**
      *  resets the field and restarts the game with new bombs
      */
     @Override
-    public void restart() {
-
+    public FieldInformation[][] restart(int width, int height)throws IllegalArgumentException, IllegalParameterException {
+        FieldInformation[][] fieldInformations = new FieldInformation[width][height];
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                fieldInformations[i][j].setNumber(0);
+                fieldInformations[i][j].setIsHidden(true);
+                fieldInformations[i][j].setActiveFlag(false);
+            }
+        }
+        setBombs(bombCount);
+        return fieldInformations;
     }
 
     /**
@@ -99,5 +120,6 @@ public class Minesweeper implements MinesweeperService {
     public int getField(){
         return 0;
     }
+
 
 }

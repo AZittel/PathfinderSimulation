@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.minesweeper;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface MinesweeperService {
      * @throws IllegalArgumentException  if the width or height is invalid.
      * @throws InvalidGameStateException is thrown if the game is already running.
      */
-    void createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException;
+    FieldInformation[][] createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException, IllegalParameterException;
 
     /**
      * Sets the bombs on the field.
@@ -31,7 +32,7 @@ public interface MinesweeperService {
     /**
      * Resets the Game.
      */
-    void restart() throws InvalidGameStateException;
+    FieldInformation[][] restart(int widht, int height) throws InvalidGameStateException, IllegalArgumentException, IllegalParameterException;
 
     /**
      * Starts the Game.
