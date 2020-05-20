@@ -13,7 +13,6 @@ public class Minesweeper implements MinesweeperService {
     int heigth;
     private FieldInformation[][] fieldInformations;
     private BombPosition[] bombPositions;
-    private int points;
     /**
      * creates a game field.
      */
@@ -169,5 +168,4 @@ public class Minesweeper implements MinesweeperService {
     public FieldInformation[][] getField(){
         return fieldInformations;
     }
-
 }

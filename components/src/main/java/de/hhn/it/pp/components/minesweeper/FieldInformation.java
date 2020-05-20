@@ -18,6 +18,7 @@ public class FieldInformation {
         this.y = y;
         this.activeFlag = false;
         this.hidden = true;
+        this.bomb = false;
     }
 
     public int getX() {
@@ -36,7 +37,9 @@ public class FieldInformation {
         return number;
     }
 
-    public boolean getBomb() {return bomb;}
+    public boolean getBomb() {
+        return bomb;
+    }
 
     public boolean isHidden() {
         return hidden;
