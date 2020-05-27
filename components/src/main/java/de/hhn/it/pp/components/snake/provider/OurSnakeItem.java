@@ -2,12 +2,13 @@ package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
+//todo logger
+
 /**
  * Creates items that can be collected by the snake.
  *
  * @author Karen Hofele, Sören Greiner
  */
-
 public class OurSnakeItem {
 
   /** Item's value.*/
