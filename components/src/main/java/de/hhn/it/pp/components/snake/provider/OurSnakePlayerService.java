@@ -3,9 +3,8 @@ package de.hhn.it.pp.components.snake.provider;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
 import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.Move;
+import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
-import de.hhn.it.pp.components.snake.SnakePlayerListener;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+//todo logger checken
+//todo javadoc
 
 /**
  * Implements all methods of SnakeService and AdminSnakeService.
@@ -60,7 +62,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
     logger.info("getSnakePlayers: no params");
     List<SnakePlayerProfile> results = new ArrayList<>();
     for (Snake player : allPlayersProfiles.values()) {
-      results.add(player.getDescriptor());
+      results.add(player.getProfile());
     }
     return results;
   }
@@ -76,36 +78,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   public SnakePlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException {
     logger.info("getSnakePlayer: id = {}", id);
     Snake player = getPlayerById(id);
-    return player.getDescriptor();
-  }
-
-  /**
-   * Adds a listener to get updates on the state of the player.
-   *
-   * @param id id of the player
-   * @param listener object implementing the listener interface
-   * @throws IllegalParameterException if either the nickname does not exist or the listener is a
-   *     null reference.
-   */
-  @Override
-    public void addCallback(int id, SnakePlayerListener listener) throws IllegalParameterException {
-    logger.info("addCallback: id = {}, listener = {}", id, listener);
-    Snake player = getPlayerById(id);
-    player.addCallback(listener);
-  }
-
-  /**
-   * Removes a listener.
-   *
-   * @param id id of the player
-   * @param listener listener to be removed
-   */
-  @Override
-  public void removeCallback(int id, SnakePlayerListener listener)
-          throws IllegalParameterException {
-    logger.info("removeCallback: id = {}, listener = {}", id, listener);
-    Snake player = getPlayerById(id);
-    player.removeCallback(listener);
+    return player.getProfile();
   }
 
   /**
@@ -134,9 +107,9 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    */
   @Override
   public void switchLevel(int id, int highscore) throws IllegalParameterException {
-    logger.info("switchLevel: id = {}", id);
-    Snake player = getPlayerById(id);
-    player.switchLevel();
+      logger.info("switchLevel: id = {}", id);
+      Snake player = getPlayerById(id);
+      player.switchLevel();
   }
 
   /**
@@ -153,8 +126,9 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
 
   }
 
+
   @Override
-  public void moveSnake(int id, Move direction) throws IllegalParameterException {
+  public void moveSnake(int id, Movement direction) throws IllegalParameterException {
     logger.info("usedKey: id = {}, direction = {}", id, direction);
     Snake player = getPlayerById(id);
     if (direction == null) {
@@ -177,8 +151,8 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
     CheckingHelper.assertThatIsNotNull(profile, "descriptor");
     CheckingHelper.assertThatIsReadableString(profile.getPlayer(), "nickname");
 
-    Snake player = new OurSnake(profile);
-    allPlayersProfiles.put(player.getDescriptor().getId(), player);
+    Snake player = new Snake(profile);
+    allPlayersProfiles.put(player.getProfile().getId(), player);
   }
 
   /**
