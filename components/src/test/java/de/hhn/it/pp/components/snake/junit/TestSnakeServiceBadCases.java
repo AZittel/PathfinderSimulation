@@ -39,26 +39,5 @@ public class TestSnakeServiceBadCases {
                 () -> snakePlayerService.getSnakePlayerProfile(23));
     }
 
-    @Test
-    @DisplayName("add callback for a non existing Player")
-    void testExceptionWhenAddingCallbackToNonExistentCoffeeMaker() {
-        IllegalParameterException illegalParameterException = assertThrows(
-                IllegalParameterException.class,
-                () -> snakePlayerService.addCallback(23, new DummyCallback()));
-    }
 
-    @Test
-    @DisplayName("remove callback for a non existing Player")
-    void testExceptionWhenRemovingCallbackToNonExistentPlayer() {
-        IllegalParameterException illegalParameterException = assertThrows(
-                IllegalParameterException.class,
-                () -> snakePlayerService.removeCallback(23, new DummyCallback()));
-    }
-
-    @Test
-    @DisplayName("move de.hhn.it.pp.components.snake with a null direction")
-    void testBrewingWithNullReceipt() throws IllegalParameterException {
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException.class,
-                () -> snakePlayerService.moveSnake(0, null));
-    }
 }
