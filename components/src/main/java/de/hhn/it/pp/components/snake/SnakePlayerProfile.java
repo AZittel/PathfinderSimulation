@@ -3,6 +3,9 @@ package de.hhn.it.pp.components.snake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//todo javadoc
+// todo logger
+
 /**
  * Description of a player's profile.
  *
@@ -16,7 +19,6 @@ public class SnakePlayerProfile {
   private String nickname;
   private int highscore;
   private int level;
-  private State state;
   private int id;
 
   /**
@@ -80,21 +82,6 @@ public class SnakePlayerProfile {
     this.level = level;
   }
 
-  /**
-   * Getter for the current state.
-   * @return the current state
-   */
-  public State getState() {
-    return state;
-  }
-
-  /**
-   * Setter for the new current state.
-   * @param state new current state
-   */
-  public void setState(State state) {
-    this.state = state;
-  }
 
   public int getId() {
     return id;
@@ -109,7 +96,6 @@ public class SnakePlayerProfile {
     return "SnakePlayerDescriptor{"
             + "Player='" + nickname + '\''
             + ", highscore='" + highscore + '\''
-            + ", state=" + state
             + ", level=" + level
             + ", id=" + id
             + '}';
