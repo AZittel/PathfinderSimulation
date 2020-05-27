@@ -1,23 +1,60 @@
 package de.hhn.it.pp.components.snake.provider;
 
-import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.Move;
+import de.hhn.it.pp.components.snake.Direction;
+import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
-import de.hhn.it.pp.components.snake.SnakePlayerListener;
 
-public interface Snake {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-  void startGame() throws IllegalStateException;
+// todo javadoc
+//todo logger
+public class Snake {
+  private static final Logger logger =
+            LoggerFactory.getLogger(Snake.class);
+  private static int idCounter;
+  private SnakePlayerProfile profile;
 
-  void switchLevel() throws IllegalParameterException; //todo
+  /**
+   * Constructor to create a OurSnake based on the information in the given
+   * SnakePlayerProfile.
+   *
+   * @param profile profile that is chosen to play the game.
+   */
+  public Snake(SnakePlayerProfile profile) {
+    logger.info("Constructor - {}", profile);
+    this.profile = profile;
+    profile.setId(idCounter++);
+  }
 
-  void endGame() throws IllegalStateException;
+  public static int getIdCounter() {
+    logger.info("getter for id");
+    return idCounter;
+  }
 
-  void move(Move direction) throws IllegalParameterException, IllegalStateException;
+  public static void setIdCounter(final int idCounter) {
+    Snake.idCounter = idCounter;
+  }
 
-  void addCallback(SnakePlayerListener listener) throws IllegalParameterException;
+  public SnakePlayerProfile getProfile() {
+    return profile;
+  }
 
-  void removeCallback(SnakePlayerListener listener) throws IllegalParameterException;
+  public void endGame(){
 
-  SnakePlayerProfile getDescriptor();
+  }
+
+  // todo implementieren oder weglassen?
+  public void move(Movement direction){
+  }
+
+
+  public void startGame(){
+
+  }
+
+
+
+public void switchLevel(){}
 }
+
