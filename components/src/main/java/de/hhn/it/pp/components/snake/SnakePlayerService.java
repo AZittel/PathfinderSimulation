@@ -34,7 +34,7 @@ public interface SnakePlayerService {
    * @throws IllegalParameterException if either the nickname does not exist or the listener is a
    *     null reference.
    */
-  void addCallback(int id, SnakePlayerListener listener) throws IllegalParameterException;
+  //void addCallback(int id, SnakePlayerListener listener) throws IllegalParameterException;
 
   /**
    * Removes a listener.
@@ -42,7 +42,7 @@ public interface SnakePlayerService {
    * @param id id of the player
    * @param listener listener to be removed
    */
-  void removeCallback(int id, SnakePlayerListener listener) throws IllegalParameterException;
+  //void removeCallback(int id, SnakePlayerListener listener) throws IllegalParameterException;
 
   /**
    * Starts the game snake for the player.
@@ -76,7 +76,7 @@ public interface SnakePlayerService {
    *
    * @throws IllegalParameterException if the given key is invalid
    */
-  void moveSnake(int id, Move direction) throws IllegalParameterException;
+  void moveSnake(int id, Movement direction) throws IllegalParameterException;
 
 
 }
