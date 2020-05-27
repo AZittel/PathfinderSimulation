@@ -3,7 +3,7 @@ package de.hhn.it.pp.components.snake.junit;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
 import de.hhn.it.pp.components.snake.provider.AdminSnakePlayerService;
-import de.hhn.it.pp.components.snake.provider.OurSnake;
+import de.hhn.it.pp.components.snake.provider.Snake;
 import de.hhn.it.pp.components.snake.provider.OurSnakePlayerService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ public class TestAdminInterfaceGoodCases {
 
     @BeforeEach
     void setup (List<SnakePlayerProfile> profiles) {
-        OurSnake.setIdCounter(0);
+        Snake.setIdCounter(0);
         OurSnakePlayerService ourSnakePlayerService = new OurSnakePlayerService();
         snakePlayerService = ourSnakePlayerService;
         adminSnakePlayerService = ourSnakePlayerService;
