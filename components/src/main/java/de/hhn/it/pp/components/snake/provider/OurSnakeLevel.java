@@ -2,6 +2,8 @@ package de.hhn.it.pp.components.snake.provider;
 
 import java.util.ArrayList;
 
+//todo logger
+
 /**
  * Creates a new level.
  *
