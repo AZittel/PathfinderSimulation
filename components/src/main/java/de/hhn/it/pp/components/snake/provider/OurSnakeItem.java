@@ -4,8 +4,6 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//todo logger
-
 /**
  * Creates items that can be collected by the snake.
  *
