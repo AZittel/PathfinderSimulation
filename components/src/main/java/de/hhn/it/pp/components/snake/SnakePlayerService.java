@@ -27,24 +27,6 @@ public interface SnakePlayerService {
   SnakePlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException;
 
   /**
-   * Adds a listener to get updates on the state of the player.
-   *
-   * @param id id of the player
-   * @param listener object implementing the listener interface
-   * @throws IllegalParameterException if either the nickname does not exist or the listener is a
-   *     null reference.
-   */
-  //void addCallback(int id, SnakePlayerListener listener) throws IllegalParameterException;
-
-  /**
-   * Removes a listener.
-   *
-   * @param id id of the player
-   * @param listener listener to be removed
-   */
-  //void removeCallback(int id, SnakePlayerListener listener) throws IllegalParameterException;
-
-  /**
    * Starts the game snake for the player.
    *
    * @param id id of the active player
