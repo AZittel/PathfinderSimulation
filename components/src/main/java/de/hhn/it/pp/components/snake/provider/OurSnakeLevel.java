@@ -1,5 +1,8 @@
 package de.hhn.it.pp.components.snake.provider;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 
 //todo logger
@@ -10,6 +13,11 @@ import java.util.ArrayList;
  * @author Karen Hofele, Sören Greiner
  */
 public class OurSnakeLevel {
+
+  private static final Logger logger =
+          LoggerFactory.getLogger(OurSnakeLevel.class);
+
+
 
   /** Id of the level. */
   private int levelId;
