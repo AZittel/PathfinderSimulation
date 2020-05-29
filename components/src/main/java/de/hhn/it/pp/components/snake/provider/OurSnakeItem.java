@@ -31,6 +31,7 @@ public class OurSnakeItem {
    * @param value Item's value
    */
   public OurSnakeItem(int value) {
+    logger.info("created item with value = {}", value);
     this.value = value;
   }
 
@@ -40,6 +41,7 @@ public class OurSnakeItem {
    * @return item's value
    */
   public int getValue() {
+    logger.info("item's value = {}", value);
     return value;
   }
 
@@ -51,6 +53,7 @@ public class OurSnakeItem {
    * @throws IllegalParameterException if the coordinates are outside the playfield
    */
   public void spawn(int xPos, int yPos) throws IllegalParameterException {
+    logger.info("spawned item at pos={} {}", xPos, yPos);
     if(xPos>OurSnakePlayerService.getWindowWidth()||yPos>OurSnakePlayerService.getWindowHeight()){
       throw new IllegalParameterException("Coordinates are outside the playfield");
     }
