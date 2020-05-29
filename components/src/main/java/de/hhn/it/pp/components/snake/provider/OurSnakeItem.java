@@ -1,6 +1,8 @@
 package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //todo logger
 
@@ -10,6 +12,9 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
  * @author Karen Hofele, Sören Greiner
  */
 public class OurSnakeItem {
+
+  private static final Logger logger =
+          LoggerFactory.getLogger(OurSnakeItem.class);
 
   /** Item's value.*/
   private int value;
