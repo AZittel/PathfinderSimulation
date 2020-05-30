@@ -62,4 +62,22 @@ public class OurSnakeItem {
       yPosition = yPos;
     }
   }
+
+  /**
+   * Getter for item's xPosition.
+   *
+   * @return xPosition
+   */
+  public int getxPosition() {
+    return xPosition;
+  }
+
+  /**
+   * Getter for item's yPosition.
+   *
+   * @return yPosition
+   */
+  public int getyPosition() {
+    return yPosition;
+  }
 }
