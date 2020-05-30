@@ -1,7 +1,10 @@
 package de.hhn.it.pp.components.snake;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
 
 /**
  * Class for player profiles.
@@ -24,7 +27,10 @@ public class SnakePlayerProfile {
   private int currentLevel;
 
   /** player's id */
-  private int playerId;
+  private int playerId = 0;
+
+  /** list for player id's */
+  private ArrayList<Integer> allIds = new ArrayList<>();
 
   /**
    * Constructor for the current players instance of the game.
@@ -36,7 +42,8 @@ public class SnakePlayerProfile {
     this.nickname = nickname;
     playerHighscore = 0;
     currentLevel = 1;
-    playerId = 0; //todo id hochzählen
+    playerId++;
+    allIds.add(playerId);
   }
 
   /**
@@ -114,10 +121,13 @@ public class SnakePlayerProfile {
    *
    * @param playerId player's id
    */
-  public void setPlayerId(final int playerId) {
+  public void setPlayerId(final int playerId) throws IllegalParameterException {
     logger.info("set player's id: {}", playerId);
-    this.playerId = playerId;
-    //todo exception if id already in use
+    if(allIds.contains(playerId)){
+      throw new IllegalParameterException("playerId is already chosen, chose another one");
+    }else{
+      this.playerId = playerId;
+    }
   }
 
   /**
