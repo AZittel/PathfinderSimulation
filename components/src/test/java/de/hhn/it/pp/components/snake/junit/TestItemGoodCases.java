@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class TestItemGoodCases {
     private static final Logger logger = LoggerFactory.getLogger(TestItemGoodCases.class);
     private OurSnakeItem item;
-    private int xPos;
-    private int yPos;
+    private int xPos = 12;
+    private int yPos = 13;
 
     @BeforeEach
     void setup(){
@@ -31,11 +31,7 @@ public class TestItemGoodCases {
     @Test
     @DisplayName("spawns item")
     void testSpawnItem(){
-        assertNotNull(xPos, "should not be null");
-        assertNotNull(yPos, "should not be null");
-        
+        assertEquals(12, item.getxPosition(), "item's xPosition is 12");
+        assertEquals(13, item.getyPosition(), "item's yPosition is 13");
     }
-
-
-
 }
