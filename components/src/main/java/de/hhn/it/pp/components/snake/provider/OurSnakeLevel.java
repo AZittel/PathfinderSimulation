@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
-//todo logger
-
 /**
  * Creates a new level.
  *
@@ -14,10 +12,9 @@ import java.util.ArrayList;
  */
 public class OurSnakeLevel {
 
+  /** OurSnakeLevel's Logger */
   private static final Logger logger =
           LoggerFactory.getLogger(OurSnakeLevel.class);
-
-
 
   /** Id of the level. */
   private int levelId;
@@ -35,7 +32,7 @@ public class OurSnakeLevel {
    * @param neededHighscore highscore that is required for the next level
    */
   public OurSnakeLevel(int levelId, int neededHighscore) {
-    logger.info("created level with id {} and needed highscore {}", levelId, neededHighscore);
+    logger.info("Constructor: created level with id {} and needed highscore {}", levelId, neededHighscore);
     this.levelId = levelId;
     this.neededHighscore = neededHighscore;
     allLevels.add(this);
