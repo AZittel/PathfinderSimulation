@@ -153,7 +153,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   public void addSnakePlayerProfile(SnakePlayerProfile profile) throws IllegalParameterException {
     logger.info("addSnakePlayer: descriptor = {}", profile);
     CheckingHelper.assertThatIsNotNull(profile, "descriptor");
-    CheckingHelper.assertThatIsReadableString(profile.getPlayer(), "nickname");
+    CheckingHelper.assertThatIsReadableString(profile.getPlayerNickname(), "nickname");
 
     Snake player = new Snake(profile);
     allPlayersProfiles.put(player.getProfile().getPlayerId(), player);
