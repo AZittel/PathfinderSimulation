@@ -13,9 +13,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//todo logger checken
-//todo javadoc
-
 /**
  * Implements all methods of SnakeService and AdminSnakeService.
  *
