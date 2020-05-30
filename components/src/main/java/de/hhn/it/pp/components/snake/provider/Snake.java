@@ -12,7 +12,7 @@ public class Snake {
 
   /** Snake's Logger */
   private static final Logger logger =
-            LoggerFactory.getLogger(Snake.class);
+          LoggerFactory.getLogger(Snake.class);
 
   /** Counter for profile id's */
   private static int idCounter;
@@ -61,6 +61,5 @@ public class Snake {
 
 
 
-public void switchLevel(){}
+  public void switchLevel(){}
 }
-
