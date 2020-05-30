@@ -35,6 +35,7 @@ public class OurSnakeLevel {
    * @param neededHighscore highscore that is required for the next level
    */
   public OurSnakeLevel(int levelId, int neededHighscore) {
+    logger.info("created level with id {} and needed highscore {}", levelId, neededHighscore);
     this.levelId = levelId;
     this.neededHighscore = neededHighscore;
     allLevels.add(this);
@@ -46,6 +47,7 @@ public class OurSnakeLevel {
    * @return level's id
    */
   public int getLevelId() {
+    logger.info("level's id = {}", levelId);
     return levelId;
   }
 
@@ -55,7 +57,8 @@ public class OurSnakeLevel {
    * @param id Id of the level that should load.
    */
   public void load(int id){
-
+    //todo implement!
+    //todo logger
   }
 
   /**
@@ -64,6 +67,7 @@ public class OurSnakeLevel {
    * @return Required highscore for the next level
    */
   public int getNeededHighscore() {
+    logger.info("needed highscore of the level is {}", neededHighscore);
     return neededHighscore;
   }
 }
