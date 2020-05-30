@@ -1,4 +1,4 @@
-package snake;
+package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
