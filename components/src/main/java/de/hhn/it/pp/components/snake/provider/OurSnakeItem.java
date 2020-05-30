@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 public class OurSnakeItem {
 
+  /** OurSnakeItem's Logger */
   private static final Logger logger =
           LoggerFactory.getLogger(OurSnakeItem.class);
 
@@ -29,7 +30,7 @@ public class OurSnakeItem {
    * @param value Item's value
    */
   public OurSnakeItem(int value) {
-    logger.info("created item with value = {}", value);
+    logger.info("Constructor: created item with value = {}", value);
     this.value = value;
   }
 
