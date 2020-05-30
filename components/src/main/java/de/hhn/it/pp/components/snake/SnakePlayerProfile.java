@@ -50,7 +50,7 @@ public class SnakePlayerProfile {
    *
    * @return nickname of the player
    */
-  public String getPlayer() {
+  public String getPlayerNickname() {
     logger.info("get player's nickname: {}", nickname);
     return nickname;
   }
@@ -60,7 +60,7 @@ public class SnakePlayerProfile {
    *
    * @param nickname new nickname
    */
-  public void setPlayer(String nickname) {
+  public void setPlayerNickname(String nickname) {
     logger.info("set player's nickname: {}", nickname);
     this.nickname = nickname;
   }
