@@ -155,7 +155,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
     CheckingHelper.assertThatIsReadableString(profile.getPlayer(), "nickname");
 
     Snake player = new Snake(profile);
-    allPlayersProfiles.put(player.getProfile().getId(), player);
+    allPlayersProfiles.put(player.getProfile().getPlayerId(), player);
   }
 
   /**
