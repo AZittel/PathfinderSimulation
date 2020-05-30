@@ -6,6 +6,7 @@ import de.hhn.it.pp.components.snake.Direction;
 import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

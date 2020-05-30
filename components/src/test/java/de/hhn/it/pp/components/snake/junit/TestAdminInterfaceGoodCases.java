@@ -49,10 +49,10 @@ public class TestAdminInterfaceGoodCases {
         SnakePlayerProfile descriptor = new SnakePlayerProfile("LongDongSilver");
         adminSnakePlayerService.addSnakePlayerProfile(descriptor);
         List<SnakePlayerProfile> players = snakePlayerService.getAllSnakePlayerProfiles();
-        SnakePlayerProfile descriptor1 = players.get(0);
+        SnakePlayerProfile profile1 = players.get(0);
         assertAll(
                 () -> assertEquals(1, players.size(), "There should be exactly one player in the list."),
-                () -> assertEquals(0, descriptor1.getId(), "Id of players should start with 0")
+                () -> assertEquals(0, profile1.getPlayerId(), "Id of players should start with 0")
         );
     }
 
@@ -63,7 +63,7 @@ public class TestAdminInterfaceGoodCases {
         adminSnakePlayerService.addSnakePlayerProfile(descriptor);
         List<SnakePlayerProfile> players = snakePlayerService.getAllSnakePlayerProfiles();
         SnakePlayerProfile descriptor1 = players.get(0);
-        adminSnakePlayerService.removeSnakePlayerProfile(players.get(0).getId());
+        adminSnakePlayerService.removeSnakePlayerProfile(players.get(0).getPlayerId());
         players = snakePlayerService.getAllSnakePlayerProfiles();
         assertEquals(0, players.size());
         }
