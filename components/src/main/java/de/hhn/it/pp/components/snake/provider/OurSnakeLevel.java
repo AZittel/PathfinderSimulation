@@ -53,7 +53,7 @@ public class OurSnakeLevel {
    * @param id Id of the level that should load.
    */
   public void load(int id){
-      //todo implement!
+      //todo implementieren, wenn mehrere Levels eingebaut werden!
       //todo logger
   }
 
