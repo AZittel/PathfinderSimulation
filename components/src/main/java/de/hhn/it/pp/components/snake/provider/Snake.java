@@ -29,7 +29,6 @@ public class Snake {
   public Snake(SnakePlayerProfile profile) {
     logger.info("Constructor - {}", profile);
     this.profile = profile;
-    profile.setPlayerId(idCounter++);
   }
 
   public static int getIdCounter() {
