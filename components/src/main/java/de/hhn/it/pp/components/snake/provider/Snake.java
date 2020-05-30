@@ -2,7 +2,6 @@ package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,14 +9,14 @@ import org.slf4j.LoggerFactory;
 //todo logger
 public class Snake {
 
-  /** Snake's Logger */
+  /** Snake's Logger. */
   private static final Logger logger =
           LoggerFactory.getLogger(Snake.class);
 
-  /** Counter for profile id's */
+  /** Counter for profile id's. */
   private static int idCounter;
 
-  /** variable for player's profile */
+  /** variable for player's profile. */
   private SnakePlayerProfile profile;
 
   /**

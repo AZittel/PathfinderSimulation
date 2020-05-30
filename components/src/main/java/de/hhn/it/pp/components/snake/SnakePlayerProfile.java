@@ -1,10 +1,9 @@
 package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
 
 /**
  * Class for player profiles.
@@ -13,23 +12,23 @@ import java.util.ArrayList;
  */
 public class SnakePlayerProfile {
 
-  /** SnakePlayerProfile's logger */
+  /** SnakePlayerProfile's logger. */
   private static final Logger logger =
             LoggerFactory.getLogger(SnakePlayerProfile.class);
 
-  /** player's nickname */
+  /** player's nickname. */
   private String nickname;
 
-  /** player's highscore */
+  /** player's highscore. */
   private int playerHighscore;
 
-  /** player's level */
+  /** player's level. */
   private int currentLevel;
 
-  /** player's id */
+  /** player's id. */
   private int playerId = 0;
 
-  /** list for player id's */
+  /** list for player id's. */
   private ArrayList<Integer> allIds = new ArrayList<>();
 
   /**
@@ -107,7 +106,7 @@ public class SnakePlayerProfile {
   }
 
   /**
-   * Getter for player's id
+   * Getter for player's id.
    *
    * @return player's id
    */
@@ -117,21 +116,21 @@ public class SnakePlayerProfile {
   }
 
   /**
-   * Setter for player's id
+   * Setter for player's id.
    *
    * @param playerId player's id
    */
   public void setPlayerId(final int playerId) throws IllegalParameterException {
     logger.info("set player's id: {}", playerId);
-    if(allIds.contains(playerId)){
+    if (allIds.contains(playerId)) {
       throw new IllegalParameterException("playerId is already chosen, chose another one");
-    }else{
+    } else {
       this.playerId = playerId;
     }
   }
 
   /**
-   * to String method for a player profile and its properties
+   * to String method for a player profile and its properties.
    *
    * @return player profile and its properties as a string
    */
