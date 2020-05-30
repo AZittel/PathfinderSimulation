@@ -37,12 +37,15 @@ public class TestSnakePlayerServiceGoodCases {
     @Test
     @DisplayName("add and remove profiles to a snakeProfile.")
     void AddAndRemoveAProfileToASnakePlayerProfile() throws IllegalParameterException {
-        List<SnakePlayerProfile> profiles = snakePlayerService.getAllSnakePlayerProfiles();
+        List<SnakePlayerProfile> allSnakePlayerProfiles = snakePlayerService.getAllSnakePlayerProfiles();
         SnakePlayerProfile profile = new SnakePlayerProfile("FreshToasted");
         adminSnakePlayerService.addSnakePlayerProfile(profile);
+        snakePlayerService.getSnakePlayerProfile(0);
+        adminSnakePlayerService.removeSnakePlayerProfile(0);
+
+       // IllegalParameterException exception = assertThrows(IllegalParameterException.class,
+              //  () -> snakePlayerService.getSnakePlayerProfile(allSnakePlayerProfiles.getPlayerId(0));
 
 
     }
-
-
 }
