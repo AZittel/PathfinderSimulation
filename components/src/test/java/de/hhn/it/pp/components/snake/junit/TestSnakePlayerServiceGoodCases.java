@@ -16,18 +16,32 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Test the SnakeService with good cases.")
-public class TestSnakeServiceGoodCases {
+public class TestSnakePlayerServiceGoodCases {
     private static final Logger logger =
-            LoggerFactory.getLogger(TestSnakeServiceGoodCases.class);
+            LoggerFactory.getLogger(TestSnakePlayerServiceGoodCases.class);
 
     SnakePlayerService snakePlayerService;
     AdminSnakePlayerService adminSnakePlayerService;
 
     @BeforeEach
-    void setup(List<SnakePlayerProfile> descriptors) throws IllegalParameterException {
+    void setup(List<SnakePlayerProfile> profiles) throws IllegalParameterException {
         OurSnakePlayerService ourSnakePlayerService = new OurSnakePlayerService();
         snakePlayerService = ourSnakePlayerService;
         adminSnakePlayerService = ourSnakePlayerService;
+
+        for (SnakePlayerProfile profile : profiles) {
+            adminSnakePlayerService.addSnakePlayerProfile(profile);
+        }
+    }
+
+    @Test
+    @DisplayName("add and remove profiles to a snakeProfile.")
+    void AddAndRemoveAProfileToASnakePlayerProfile() throws IllegalParameterException {
+        List<SnakePlayerProfile> profiles = snakePlayerService.getAllSnakePlayerProfiles();
+        SnakePlayerProfile profile = new SnakePlayerProfile("FreshToasted");
+        adminSnakePlayerService.addSnakePlayerProfile(profile);
+
+
     }
 
 
