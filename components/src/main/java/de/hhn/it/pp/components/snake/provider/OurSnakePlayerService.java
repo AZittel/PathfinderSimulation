@@ -22,20 +22,27 @@ import org.slf4j.LoggerFactory;
  * @author Karen Hofele, Sören Greiner
  */
 public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlayerService {
+
+  /** OurSnakePlayerService's Logger */
   private static final Logger logger =
             LoggerFactory.getLogger(OurSnakePlayerService.class);
 
+  /** Map for all player profiles */
   private Map<Integer, Snake> allPlayersProfiles;
 
-  public OurSnakePlayerService() {
-    allPlayersProfiles = new HashMap<>();
-  }
+  /** window's height */
+  private static int windowHeight;
+
+  /** window's width */
+  private static int windowWidth;
 
   /** Current dircetion of the snake. */
   private Direction currentDirection;
 
-  private static int windowHeight;
-  private static int windowWidth;
+  public OurSnakePlayerService() {
+    logger.info("Constructor");
+    allPlayersProfiles = new HashMap<>();
+  }
 
   /**
    * Returns the player from the HashMap with the chosen player id.
@@ -126,7 +133,6 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
 
   }
 
-
   @Override
   public void moveSnake(int id, Movement direction) throws IllegalParameterException {
     logger.info("usedKey: id = {}, direction = {}", id, direction);
@@ -176,6 +182,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @return windowheight
    */
   public static int getWindowHeight() {
+    logger.info("window height: {}", windowHeight);
     return windowHeight;
   }
 
@@ -185,6 +192,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @return windowidth
    */
   public static int getWindowWidth() {
+    logger.info("window width: {}", windowWidth);
     return windowWidth;
   }
 }
