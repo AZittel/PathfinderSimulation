@@ -42,7 +42,7 @@ public class OurSnakeLevel {
    *
    * @return level's id
    */
-  public int getLevelId() {
+  public  int getLevelId() {
     logger.info("level's id = {}", levelId);
     return levelId;
   }

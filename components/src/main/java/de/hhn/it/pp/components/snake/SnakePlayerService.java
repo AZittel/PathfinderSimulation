@@ -49,7 +49,7 @@ public interface SnakePlayerService {
    * Ends the game of Snake.
    *
    * @param id id of the player
-   * @throws IllegalParameterException if the chosen nickname isn't playing
+   * @throws IllegalParameterException if the chosen id isn't playing
    */
   void endGame(int id) throws  IllegalParameterException;
 
@@ -58,5 +58,5 @@ public interface SnakePlayerService {
    *
    * @throws IllegalParameterException if the given key is invalid
    */
-  void moveSnake(int id, Movement direction) throws IllegalParameterException;
+  void moveSnake(int id, Direction direction) throws IllegalParameterException;
 }

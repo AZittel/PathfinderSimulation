@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.snake.provider;
 
+import de.hhn.it.pp.components.snake.Direction;
 import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class Snake {
   }
 
   // todo implementieren oder weglassen?
-  public void move(Movement direction){
+  public void move(Direction direction){
   }
 
 

@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class SnakePlayerProfile {
 
   /** SnakePlayerProfile's logger. */
-  private static final Logger logger =
+  private static Logger logger =
             LoggerFactory.getLogger(SnakePlayerProfile.class);
 
   /** player's nickname. */
@@ -26,7 +26,7 @@ public class SnakePlayerProfile {
   private int currentLevel;
 
   /** player's id. */
-  private int playerId = 0;
+  private static int playerId = 0;
 
   /** list for player id's. */
   private ArrayList<Integer> allIds = new ArrayList<>();

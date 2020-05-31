@@ -3,7 +3,6 @@ package de.hhn.it.pp.components.snake.provider;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
 import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.SnakePlayerProfile;
 import de.hhn.it.pp.components.snake.SnakePlayerService;
 
@@ -132,7 +131,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   }
 
   @Override
-  public void moveSnake(int id, Movement direction) throws IllegalParameterException {
+  public void moveSnake(int id, Direction direction) throws IllegalParameterException {
     logger.info("usedKey: id = {}, direction = {}", id, direction);
     Snake player = getPlayerById(id);
     if (direction == null) {

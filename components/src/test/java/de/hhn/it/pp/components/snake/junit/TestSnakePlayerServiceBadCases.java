@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //todo!!!
 @DisplayName("Test the SnakePlayerService with bad cases.")
-public class TestSnakeServiceBadCases {
+public class TestSnakePlayerServiceBadCases {
     private static final Logger logger =
             LoggerFactory.getLogger(de.hhn.it.pp.components.example.coffeemakerservice.junit.TestCoffeMakerServiceBadCases.class);
 
