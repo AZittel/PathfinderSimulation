@@ -1,131 +1,173 @@
 package de.hhn.it.pp.components.craftingservice.junit;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import de.hhn.it.pp.components.craftingservice.CraftingListener;
+import de.hhn.it.pp.components.craftingservice.CraftingPattern;
 import de.hhn.it.pp.components.craftingservice.CraftingService;
+import de.hhn.it.pp.components.craftingservice.CraftingServiceUsageDemo;
+import de.hhn.it.pp.components.craftingservice.Inventory;
+import de.hhn.it.pp.components.craftingservice.Item;
 import de.hhn.it.pp.components.craftingservice.exceptions.CraftingNotPossibleException;
+import de.hhn.it.pp.components.craftingservice.provider.Callback;
 import de.hhn.it.pp.components.craftingservice.provider.CraftingImplementation;
-import de.hhn.it.pp.components.craftingservice.provider.CraftingPattern;
-import de.hhn.it.pp.components.craftingservice.provider.Inventory;
-import de.hhn.it.pp.components.craftingservice.provider.Item;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * A jUnit test class which tests the bad cases of the CraftingService
+ * A jUnit test class which tests the bad cases of the CraftingService.
+ *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-05-01
+ * @version 2020-05-10
  */
 @DisplayName("Test the CraftingService with bad cases.")
 public class TestCraftingServiceBadCases {
-    CraftingService craftingService;
-    Inventory testInventory;
-    CraftingPattern craftedTestCookie;
+  CraftingService craftingService;
+  Inventory testInventory;
+  CraftingPattern tastyChocolateCookie;
 
-    @BeforeEach
-    void setup() throws IllegalParameterException {
-        // --- initialize Crafting Service and Inventory ---
-        craftingService = new CraftingImplementation();
-        testInventory = new Inventory(new ArrayList<Item>());
+  @BeforeEach
+  void setup() throws IllegalParameterException {
+    // initialize Crafting Service and Inventory
+    craftingService = new CraftingImplementation();
+    testInventory = new Inventory(new ArrayList<>());
 
-        // add some resources into the inventory
-        craftingService.add(testInventory, new Item("Test Recipe"));
+    // add some resources into the inventory
+    testInventory.add(new Item("Milk Chocolate"));
+    testInventory.add(new Item("Flour"));
 
-        // --- initialize a sample Crafting Pattern ---
-        // define name
-        String name = "TestPattern: Crafted Test Cookie";
-        // define crafting time
-        int craftingTime = 500;
-        // define needed items
-        ArrayList<Item> neededItems = new ArrayList<>();
-        neededItems.add(new Item("Test Recipe"));
-        neededItems.add(new Item("Test Flour"));
-        // define provided items
-        ArrayList<Item> providedItems = new ArrayList<>();
-        providedItems.add(new Item("Crafted Test Cookie"));
-        // create the crafting pattern
-        craftedTestCookie = new CraftingPattern(name, craftingTime, neededItems, providedItems);
-    }
+    // get a sample crafting pattern from the UsageDemo
+    tastyChocolateCookie = CraftingServiceUsageDemo.tastyChocolateCookie();
 
-    @Test
-    @DisplayName("add null referenced item into the inventory")
-    void testExceptionWhenAddingNullReference() throws IllegalParameterException {
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException
-                .class, () -> craftingService.add(testInventory, null));
-    }
+    // add the sample pattern to the crafting service
+    craftingService.addCraftingPattern(tastyChocolateCookie);
+  }
 
-    @Test
-    @DisplayName("remove null referenced item from inventory")
-    void testExceptionWhenRemovingNullReference() throws IllegalParameterException {
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException
-                .class, () -> craftingService.remove(testInventory, null));
-    }
+  @Test
+  @DisplayName("get null referenced crafting pattern ")
+  void testExceptionWhenGettingNullReferencedPattern() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class, () -> craftingService.getPattern(null));
+  }
 
-    @Test
-    @DisplayName("remove item from empty inventory")
-    void testExceptionWhenRemovingInEmptyInventory() throws IllegalParameterException {
-        // remove last remaining item to make the inventory empty
-        craftingService.remove(testInventory, new Item("Test Recipe"));
+  @Test
+  @DisplayName("get non existing crafting pattern ")
+  void testExceptionWhenGettingNonExistingPattern() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.getPattern("Non Existing Pattern"));
+  }
 
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException
-                .class, () -> craftingService.remove(testInventory, new Item("Test Recipe")));
-    }
+  @Test
+  @DisplayName("add null referenced pattern to the crafting service")
+  void testExceptionWhenAddingNullReferencedPattern() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.addCraftingPattern(null));
+  }
 
-    @Test
-    @DisplayName("remove item which doesn't exist in the inventory")
-    void testExceptionWhenRemovingNoExistingItem() throws IllegalParameterException {
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException
-                .class, () -> craftingService.remove(testInventory, new Item("Test Cookie")));
-    }
+  @Test
+  @DisplayName("remove null referenced pattern from the crafting service")
+  void testExceptionWhenRemovingNullReferencedPattern() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.removeCraftingPattern(null));
+  }
 
-    @Test
-    @DisplayName("craft null referenced crafting pattern")
-    void testExceptionWhenCraftingNullReference() throws CraftingNotPossibleException {
-        CraftingNotPossibleException craftingNotPossibleException = assertThrows(CraftingNotPossibleException
-                .class, () -> craftingService.craft(testInventory, null));
-    }
+  @Test
+  @DisplayName("remove non existing pattern from the crafting service")
+  void testExceptionWhenRemovingNonExistingPattern() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.removeCraftingPattern("Non Existing Pattern"));
+  }
 
-    @Test
-    @DisplayName("try to craft a pattern which doesn't imply the inventory")
-    void testExceptionWhenItemsDontMatchPattern() throws CraftingNotPossibleException {
-        CraftingNotPossibleException craftingNotPossibleException = assertThrows(CraftingNotPossibleException
-                .class, () -> craftingService.craft(testInventory, craftedTestCookie));
-    }
+  @Test
+  @DisplayName("remove pattern from empty crafting service list")
+  void testExceptionWhenRemovingPatternFromEmptyList() throws IllegalParameterException,
+      OperationNotSupportedException {
+    // remove last remaining pattern - list should be empty now
+    craftingService.removeCraftingPattern("Pattern: Tasty Chocolate Cookie");
 
-    @Test
-    @DisplayName("try to craft a pattern while another crafting process is ongoing")
-    void testExceptionWhenAnotherCraftingProcessOngoing() throws IllegalParameterException, InterruptedException,
-            CraftingNotPossibleException {
-        // add enough resources into the inventory so that both (same) patterns are theoretically craftable
-        craftingService.add(testInventory, new Item("Test Recipe"));
-        craftingService.add(testInventory, new Item("Test Flour"));
-        craftingService.add(testInventory, new Item("Test Flour"));
+    OperationNotSupportedException operationNotSupportedException = assertThrows(
+        OperationNotSupportedException.class,
+        () -> craftingService.removeCraftingPattern("Any Pattern"));
+  }
 
-        // craft the first pattern
-        craftingService.craft(testInventory, craftedTestCookie);
-        // immediately try to craft the next pattern while the first one is still crafting
-        CraftingNotPossibleException craftingNotPossibleException = assertThrows(CraftingNotPossibleException
-                .class, () -> craftingService.craft(testInventory, craftedTestCookie));
+  @Test
+  @DisplayName("craft null referenced crafting pattern")
+  void testExceptionWhenCraftingNullReference() {
+    CraftingNotPossibleException craftingNotPossibleException = assertThrows(
+        CraftingNotPossibleException.class,
+        () -> craftingService.craft(testInventory, null));
+  }
 
-        // wait until the first crafting thread has finished
-        CraftingImplementation.getCurrentThread().join();
-    }
+  @Test
+  @DisplayName("try to craft a pattern which doesn't imply the inventory")
+  void testExceptionWhenItemsDontMatchPattern() {
+    CraftingNotPossibleException craftingNotPossibleException = assertThrows(
+        CraftingNotPossibleException.class,
+        () -> craftingService.craft(testInventory, tastyChocolateCookie));
+  }
 
-    @Test
-    @DisplayName("try to initialize a CraftingStartedNotification with less than six letters")
-    void testExceptionWhenCraftingStartedNotificationMessageIsTooShort() throws IllegalParameterException {
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException
-                .class, () -> craftingService.craftingStartedNotification("start"));
-    }
+  @Test
+  @DisplayName("try to craft a pattern while another crafting process is ongoing")
+  void testExceptionWhenAnotherCraftingProcessOngoing() throws IllegalParameterException,
+      InterruptedException, CraftingNotPossibleException {
+    // add enough resources into the inventory
+    // so that both (same) patterns are theoretically craftable
+    testInventory.add(new Item("Egg"));
+    testInventory.add(new Item("Egg"));
+    testInventory.add(new Item("Milk Chocolate"));
+    testInventory.add(new Item("Flour"));
 
-    @Test
-    @DisplayName("try to initialize a CraftingEndedNotification with less than six letters")
-    void testExceptionWhenCraftingEndedNotificationMessageIsTooShort() throws IllegalParameterException {
-        IllegalParameterException illegalParameterException = assertThrows(IllegalParameterException
-                .class, () -> craftingService.craftingEndedNotification("end"));
-    }
+    // craft the first pattern
+    craftingService.craft(testInventory, tastyChocolateCookie);
+
+    // immediately try to craft the next pattern while the first one is still crafting
+    CraftingNotPossibleException craftingNotPossibleException = assertThrows(
+        CraftingNotPossibleException.class,
+        () -> craftingService.craft(testInventory, tastyChocolateCookie));
+
+    // wait until the first crafting thread has finished
+    CraftingImplementation.getCurrentThread().join();
+  }
+
+  @Test
+  @DisplayName("add a null referenced listener")
+  void testExceptionWhenAddingNullReferencedListener() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.addListener(null));
+  }
+
+  @Test
+  @DisplayName("remove null referenced listener")
+  void testExceptionWhenRemovingNullReferencedListener() {
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.removeListener(null));
+  }
+
+  @Test
+  @DisplayName("remove non existing listener")
+  void testExceptionWhenRemovingNonExistingListener() throws IllegalParameterException {
+    // add a listener for a crafting process
+    craftingService.addListener(CraftingImplementation.getCallbackNotificator());
+
+    // create another callback listener
+    CraftingListener anotherListener = new Callback();
+
+    // try to remove a listener from another crafting process which doesn't exist
+    IllegalParameterException illegalParameterException = assertThrows(
+        IllegalParameterException.class,
+        () -> craftingService.removeListener(anotherListener));
+  }
 }

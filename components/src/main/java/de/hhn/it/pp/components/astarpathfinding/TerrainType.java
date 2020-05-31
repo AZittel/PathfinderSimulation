@@ -4,14 +4,15 @@ package de.hhn.it.pp.components.astarpathfinding;
  * Enumeration for terrain types with a default obstacle factor.
  */
 public enum TerrainType {
-  DIRT(0),
-  GRASS(0.1),
-  SWAMP(0.4),
-  WATER(0.5),
-  LAVA(1);
+  DIRT(10.0),
+  GRASS(20.0),
+  SWAMP(40.0),
+  WATER(50.0),
+  LAVA(100);
 
   public static final double MIN_VALUE = 0;
-  public static final double MAX_VALUE = 1;
+  public static final double MAX_VALUE = 100;
+
 
   /**
    * The default obstacle factor.

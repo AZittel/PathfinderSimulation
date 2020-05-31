@@ -69,5 +69,6 @@ public interface PathfindingService {
    * @param modifier the new value for the terrain type modifier. The value must be between 0 and 1
    * @throws IllegalParameterException thrown if the value is not between 0 and 1
    */
-  void changeTerrainTypeFactor(TerrainType type, double modifier) throws IllegalParameterException;
+  void changeTerrainTypeModifier(TerrainType type, double modifier)
+    throws IllegalParameterException;
 }

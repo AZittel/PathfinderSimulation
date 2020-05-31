@@ -57,12 +57,16 @@ public class MapManager {
     }
 
     // Check if start and destination positions are still on the map
-    if (startCoordinates.getX() >= width || startCoordinates.getY() >= height) {
+    if (startCoordinates.getRow() >= width || startCoordinates.getCol() >= height) {
+      Position pos = startCoordinates;
       startCoordinates = null;
-      throw new PositionOutOfBounds("Start position out of new map boundaries", PositionType.START);
-    } else if (destinationCoordinates.getX() >= width || destinationCoordinates.getY() >= height) {
+      throw new PositionOutOfBounds(
+        "Start position out of new map boundaries | " + pos, PositionType.START);
+    } else if (destinationCoordinates.getRow() >= width || destinationCoordinates.getCol() >= height) {
+      Position pos = destinationCoordinates;
       destinationCoordinates = null;
-      throw new PositionOutOfBounds("Destination position out of new map boundaries",
+      throw new PositionOutOfBounds(
+        "Destination position out of new map boundaries | " + pos,
         PositionType.DESTINATION);
     }
 
@@ -70,7 +74,7 @@ public class MapManager {
     map = new Terrain[height][width];
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
-        map[row][col] = new Terrain(row, col, TerrainType.DIRT);
+        map[row][col] = new Terrain(new Position(row, col), TerrainType.DIRT);
       }
     }
   }
@@ -80,11 +84,14 @@ public class MapManager {
    *
    * @param type     the terrain type
    * @param position the position on the map
+   * @return the created terrain
    */
-  public void createTerrain(TerrainType type, Position position) throws PositionOutOfBounds {
+  public Terrain createTerrain(TerrainType type, Position position) throws PositionOutOfBounds {
     // Check map boundaries
     checkPositionInBounds(position);
-    map[position.getY()][position.getX()] = new Terrain(position.getY(), position.getX(), type);
+    Terrain terrain = new Terrain(position, type);
+    map[position.getRow()][position.getCol()] = terrain;
+    return terrain;
   }
 
   /**
@@ -94,14 +101,14 @@ public class MapManager {
    * @throws PositionOutOfBounds thrown when the position is not on the map
    */
   private void checkPositionInBounds(Position position) throws PositionOutOfBounds {
-    if (position.getX() < 0) {
+    if (position.getRow() < 0) {
       throw new PositionOutOfBounds("X cannot be lower than 0!", PositionType.DEFAULT);
-    } else if (position.getX() > getWidth() - 1) {
+    } else if (position.getRow() > getWidth() - 1) {
       throw new PositionOutOfBounds(String.format("X cannot be greater than %d!", getWidth() - 1),
         PositionType.DEFAULT);
-    } else if (position.getY() < 0) {
+    } else if (position.getCol() < 0) {
       throw new PositionOutOfBounds("Y cannot be lower than 0!", PositionType.DEFAULT);
-    } else if (position.getY() > getHeight() - 1) {
+    } else if (position.getCol() > getHeight() - 1) {
       throw new PositionOutOfBounds(String.format("Y cannot be greater than %d!", getHeight() - 1),
         PositionType.DEFAULT);
     }
@@ -119,9 +126,9 @@ public class MapManager {
     }
   }
 
-  public Terrain getTerrainAt(int row, int col) throws PositionOutOfBounds{
-    checkPositionInBounds(new Position(col, row));
-    return map[row][col];
+  public Terrain getTerrainAt(Position position) throws PositionOutOfBounds {
+    checkPositionInBounds(position);
+    return map[position.getRow()][position.getCol()];
   }
 
   public Terrain[][] getMap() {

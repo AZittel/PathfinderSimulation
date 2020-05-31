@@ -36,9 +36,9 @@ public class Terrain implements Cloneable {
   private Terrain() {
   }
 
-  public Terrain(int gridRow, int gridCol, TerrainType type) {
+  public Terrain(Position position, TerrainType type) {
     super();
-    this.position = new Position(gridRow, gridCol);
+    this.position = position;
     this.type = type;
     logger.trace("Terrain created: {}", this.toString());
   }
@@ -90,9 +90,12 @@ public class Terrain implements Cloneable {
 
   @Override
   public String toString() {
-    return type + " at " + position;
+    return type + " " + position;
   }
 
+  /**
+   * TODO java doc
+   */
   @Override
   public Object clone() throws CloneNotSupportedException {
 
@@ -101,8 +104,21 @@ public class Terrain implements Cloneable {
       cloned.setParent((Terrain) cloned.getParent().clone());
     }
     Position clonedPosition = cloned.getPosition();
-    cloned.setPosition(new Position(clonedPosition.getX(), clonedPosition.getY()));
+    cloned.setPosition(new Position(clonedPosition.getRow(), clonedPosition.getCol()));
 
     return cloned;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Terrain ter = (Terrain) obj;
+    return position.equals(ter.position) && h == ter.h && g == ter.g &&
+      type == ter.type;
   }
 }
