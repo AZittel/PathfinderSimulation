@@ -21,3 +21,6 @@ bin/
 
 # jenv specific files
 .java-version
+
+# Personal Information
+PersonalInformations.txt
