@@ -21,10 +21,12 @@ public class PathfindingInformationTest {
   @DisplayName("Creates a deep copy of the PathfindingInformation object.")
   public void clone_newClonedInformation() throws CloneNotSupportedException {
     PathfindingInformation information = new PathfindingInformation();
+    // Create list objects
     List<Terrain> specificPositions = new ArrayList<>();
     List<Terrain> visitedPositions = new ArrayList<>();
     List<Terrain> finalPathPositions = new ArrayList<>();
 
+    // Fill specificPositions list
     Terrain position1 = new Terrain(new Position(1, 1), TerrainType.WATER);
     Terrain position2 = new Terrain(new Position(2, 1), TerrainType.WATER);
     Terrain position3 = new Terrain(new Position(3, 1), TerrainType.WATER);
@@ -32,6 +34,7 @@ public class PathfindingInformationTest {
     specificPositions.add(position2);
     specificPositions.add(position3);
 
+    // Fill visitedPositions list
     Terrain position4 = new Terrain(new Position(2, 5), TerrainType.GRASS);
     Terrain position5 = new Terrain(new Position(2, 6), TerrainType.GRASS);
     Terrain position6 = new Terrain(new Position(3, 6), TerrainType.DIRT);
@@ -41,10 +44,12 @@ public class PathfindingInformationTest {
     visitedPositions.add(position6);
     visitedPositions.add(position7);
 
+    // Fill finalPathPositions list
     finalPathPositions.add(position5);
     finalPathPositions.add(position6);
     finalPathPositions.add(position7);
 
+    // Add lists to the PathfindingInformation
     information.setSpecificPositions(specificPositions);
     information.setVisitedPositions(visitedPositions);
     information.setFinalPathPositions(finalPathPositions);
