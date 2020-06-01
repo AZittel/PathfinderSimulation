@@ -7,6 +7,8 @@ package de.hhn.it.pp.components.spaceinvaders.provider;
 
 import de.hhn.it.pp.components.spaceinvaders.Position;
 
+//TODO: Das hier zuletzt weil wir von der UI aus zum Cotroller gehen.
+
 public class Player extends Position {
     int numLives;
     int numShutDowns = 0;
@@ -19,31 +21,9 @@ public class Player extends Position {
     /**
      * Player died
      */
-    void gameOver() {
-    }
+    void gameOver() {}
     /**
      * Player move up
      */
-    void playerMoveUp() {
-    }
-    /**
-     * Player move down
-     */
-    void playerMoveDown(){
-    }
-    /**
-     * Player move right
-     */
-    void playerMoveRight(){
-    }
-    /**
-     * Player move left
-     */
-    void playerMoveLeft(){
-    }
-    /**
-     * Player is shooting
-     */
-    void shot(){
-    }
+    void shot(){}
 }

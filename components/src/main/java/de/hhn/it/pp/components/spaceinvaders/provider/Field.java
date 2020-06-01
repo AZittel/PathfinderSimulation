@@ -9,6 +9,7 @@ public class Field {
     /**
      * creating hood in space
      */
-    void createSpace(){
+    void createField(){
+
     }
 }

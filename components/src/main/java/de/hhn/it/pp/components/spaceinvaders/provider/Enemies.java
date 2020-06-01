@@ -13,16 +13,6 @@ public class Enemies {
     void createAlien(){
     }
     /**
-     * creating the endboss
-     */
-    void createEndBoss(){
-    }
-    /**
-     * Enemies shooting back
-     */
-    void shootBack(){
-    }
-    /**
      * Enemies can move to their goal
      */
     void move(){
