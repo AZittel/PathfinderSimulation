@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
+import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
  * Representation of an object which holds information about pathfinding algorithms.
  */
 public class PathfindingInformation implements Cloneable {
+  private static final org.slf4j.Logger logger =
+      org.slf4j.LoggerFactory.getLogger(PathfindingInformation.class);
 
   /**
    * List of positions specific to algorithms.
@@ -60,6 +63,7 @@ public class PathfindingInformation implements Cloneable {
   }
 
   public void reset() {
+    logger.debug("reset: no params");
     specificPositions.clear();
     visitedPositions.clear();
     finalPathPositions.clear();
@@ -79,6 +83,7 @@ public class PathfindingInformation implements Cloneable {
 
   @Override
   public PathfindingInformation clone() throws CloneNotSupportedException {
+    logger.debug("clone: no params");
     PathfindingInformation cloned = (PathfindingInformation) super.clone();
     cloned.setSpecificPositions(this.cloneList(this.specificPositions));
     cloned.setVisitedPositions(this.cloneList(this.visitedPositions));

@@ -9,12 +9,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AStarPathfindingAlgorithm {
+  private static final org.slf4j.Logger logger =
+      org.slf4j.LoggerFactory.getLogger(AStarPathfindingAlgorithm.class);
 
   private ArrayList<PathfindingInformation> result = new ArrayList<>();
   private MapManager mapManager;
 
   /**
-   * Constructor
+   * Constructor for this class.
    *
    * @param mapManager holds all the information from the map
    */
@@ -22,8 +24,17 @@ public class AStarPathfindingAlgorithm {
     this.mapManager = mapManager;
   }
 
-  //TODO JavaDoc
+  /**
+   * Determines the shortest path from the start position to the destination position on the given
+   * map. The algorithm used for this search is an implementation of the A* algorithm. The
+   * approximation heuristics are calculated using the Manhattan Distance.
+   *
+   * @return If there is a shortest path then all states the algorithm has been through else an
+   *     empty list.
+   */
   public ArrayList<PathfindingInformation> findPath() {
+    logger.debug("findPath: no params");
+
     PathfindingInformation information = new PathfindingInformation();
     Position startCoordinates = mapManager.getStartCoordinates();
     Position destinationCoordinates = mapManager.getDestinationCoordinates();
@@ -40,10 +51,11 @@ public class AStarPathfindingAlgorithm {
       information.getVisitedPositions().add(currentTerrain);
 
       // Check whether the algorithm reached the destination cell
-      if (currentTerrain
-        .equals(map[destinationCoordinates.getRow()][destinationCoordinates.getCol()])) {
+      if (currentTerrain.equals(
+          map[destinationCoordinates.getRow()][destinationCoordinates.getCol()])) {
+        logger.debug("findPath: shortest path found");
         information.setFinalPathPositions(
-          tracePath(map[startCoordinates.getRow()][startCoordinates.getCol()], currentTerrain));
+            tracePath(map[startCoordinates.getRow()][startCoordinates.getCol()], currentTerrain));
         result.add(information);
         return result;
       }
@@ -51,21 +63,24 @@ public class AStarPathfindingAlgorithm {
       // Add neighbours to possible path if they are accessible i.e. no obstacle.
       for (Terrain neighbour : getNeighbours(currentTerrain)) {
         if (neighbour != null) {
-          if (neighbour.
-            getType().
-            getModifier() >= TerrainType.MAX_VALUE || information.getVisitedPositions().contains(neighbour)) {
+          if (neighbour.getType().getModifier() >= TerrainType.MAX_VALUE
+              || information.getVisitedPositions().contains(neighbour)) {
             continue;
           }
 
           // Update costs of the neighbour if a shorter path was found
-          int newCostToNeighbour = currentTerrain.getGCost() +
-            (int) ((getMDistance(currentTerrain, neighbour)) *
-            (1 + (currentTerrain.getType().getModifier())));
-          if (newCostToNeighbour < neighbour.getGCost() ||
-            !information.getSpecificPositions().contains(neighbour)) {
+          int newCostToNeighbour =
+              currentTerrain.getGCost()
+                  + (int)
+                      ((getMDistance(currentTerrain, neighbour))
+                          * (1 + (currentTerrain.getType().getModifier())));
+          if (newCostToNeighbour < neighbour.getGCost()
+              || !information.getSpecificPositions().contains(neighbour)) {
             neighbour.setGCost(newCostToNeighbour);
-            neighbour.setHCost(getMDistance(neighbour,
-              map[destinationCoordinates.getRow()][destinationCoordinates.getCol()]));
+            neighbour.setHCost(
+                getMDistance(
+                    neighbour,
+                    map[destinationCoordinates.getRow()][destinationCoordinates.getCol()]));
             neighbour.setParent(currentTerrain);
 
             if (!information.getSpecificPositions().contains(neighbour)) {
@@ -82,7 +97,7 @@ public class AStarPathfindingAlgorithm {
       }
     }
 
-    // TODO handle no valid path found
+    logger.debug("findPath: unable to find path");
     return new ArrayList<>();
   }
 
@@ -90,7 +105,7 @@ public class AStarPathfindingAlgorithm {
    * Backtrack the shortest path from the destination cell to the first cell after the start cell.
    *
    * @param startTerrain start point in the grid
-   * @param endTerrain   destination in the grid
+   * @param endTerrain destination in the grid
    * @return the final path.
    */
   private List<Terrain> tracePath(Terrain startTerrain, Terrain endTerrain) {
@@ -101,6 +116,7 @@ public class AStarPathfindingAlgorithm {
       path.add(currentTerrain);
       currentTerrain = currentTerrain.getParent();
     }
+
     Collections.reverse(path);
     return path;
   }
@@ -113,8 +129,8 @@ public class AStarPathfindingAlgorithm {
    * @return approximation distance between two cells
    */
   private int getMDistance(Terrain terrainA, Terrain terrainB) {
-    return Math.abs(terrainA.getPosition().getRow() - terrainB.getPosition().getRow()) +
-      Math.abs(terrainA.getPosition().getCol() - terrainB.getPosition().getCol());
+    return Math.abs(terrainA.getPosition().getRow() - terrainB.getPosition().getRow())
+        + Math.abs(terrainA.getPosition().getCol() - terrainB.getPosition().getCol());
   }
 
   /**
@@ -127,20 +143,21 @@ public class AStarPathfindingAlgorithm {
   private Terrain[] getNeighbours(Terrain terrain) {
     // We currently have a maximum of 4 neighbours, possibly even less.
     Terrain[] neighbours = new Terrain[4];
-    Terrain[][] map = mapManager.getMap(); //TODO NEIghbours check does not work properly
+    Terrain[][] map = mapManager.getMap();
+
     // Left neighbour
     if (terrain.getPosition().getCol() - 1 >= 0) {
-      neighbours[0] = map[terrain.getPosition().getRow() ][terrain.getPosition().getCol()- 1];
+      neighbours[0] = map[terrain.getPosition().getRow()][terrain.getPosition().getCol() - 1];
     }
 
     // Right neighbour
     if (terrain.getPosition().getCol() + 1 < map[terrain.getPosition().getRow()].length) {
-      neighbours[1] = map[terrain.getPosition().getRow() ][terrain.getPosition().getCol()+ 1];
+      neighbours[1] = map[terrain.getPosition().getRow()][terrain.getPosition().getCol() + 1];
     }
 
     // Top neighbour
     if (terrain.getPosition().getRow() - 1 >= 0) {
-      neighbours[2] = map[terrain.getPosition().getRow()- 1][terrain.getPosition().getCol() ];
+      neighbours[2] = map[terrain.getPosition().getRow() - 1][terrain.getPosition().getCol()];
     }
 
     // Bottom neighbour
@@ -159,7 +176,8 @@ public class AStarPathfindingAlgorithm {
   private Terrain getCellWithLowestFCost(PathfindingInformation information) {
     if (!information.getSpecificPositions().isEmpty()) {
       return information.getSpecificPositions().stream()
-        .min(Comparator.comparing(Terrain::calculateFCost)).get();
+          .min(Comparator.comparing(Terrain::calculateFCost))
+          .get();
     } else {
       return null;
     }

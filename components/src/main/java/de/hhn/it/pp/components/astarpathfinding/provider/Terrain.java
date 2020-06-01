@@ -40,7 +40,7 @@ public class Terrain implements Cloneable {
     super();
     this.position = position;
     this.type = type;
-    logger.trace("Terrain created: {}", this.toString());
+    logger.debug("Terrain created: {}", this.toString());
   }
 
   /**

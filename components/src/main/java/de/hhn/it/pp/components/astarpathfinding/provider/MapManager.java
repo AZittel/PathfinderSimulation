@@ -8,6 +8,9 @@ import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds.P
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 public class MapManager {
+  private static final org.slf4j.Logger logger =
+      org.slf4j.LoggerFactory.getLogger(MapManager.class);
+
   public static final int MAX_WIDTH = 50;
   public static final int MAX_HEIGHT = 50;
   public static final int MIN_WIDTH = 2;
@@ -25,6 +28,7 @@ public class MapManager {
   private Terrain[][] map;
 
   public MapManager() {
+    logger.info("constructor: no params");
     try {
       startCoordinates = DEFAULT_START_POSITION;
       destinationCoordinates = DEFAULT_DESTINATION_POSITION;
@@ -38,12 +42,13 @@ public class MapManager {
   /**
    * Creates the map with the given width and height.
    *
-   * @param width  the width of the map, must higher then 1
+   * @param width the width of the map, must higher then 1
    * @param height the height of the map, must higher then 1
    * @throws IllegalParameterException if either the width or the height is invalid
    */
   public void createMap(int width, int height)
-    throws IllegalParameterException, PositionOutOfBounds {
+      throws IllegalParameterException, PositionOutOfBounds {
+    logger.info("createMap: width = {}, height = {}", width, height);
     // Check minimum boundaries of the map
     if (width < MIN_WIDTH || height < MIN_HEIGHT) {
       throw new IllegalParameterException("Width or height cannot be lower than 2!");
@@ -51,9 +56,10 @@ public class MapManager {
 
     // Check maximum boundaries of the map
     if (width > MAX_WIDTH || height > MAX_HEIGHT) {
-      throw new IllegalParameterException(String
-        .format("Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
-          MAX_WIDTH, MAX_HEIGHT));
+      throw new IllegalParameterException(
+          String.format(
+              "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
+              MAX_WIDTH, MAX_HEIGHT));
     }
 
     // Check if start and destination positions are still on the map
@@ -61,13 +67,13 @@ public class MapManager {
       Position pos = startCoordinates;
       startCoordinates = null;
       throw new PositionOutOfBounds(
-        "Start position out of new map boundaries | " + pos, PositionType.START);
-    } else if (destinationCoordinates.getRow() >= width || destinationCoordinates.getCol() >= height) {
+          "Start position out of new map boundaries | " + pos, PositionType.START);
+    } else if (destinationCoordinates.getRow() >= width
+        || destinationCoordinates.getCol() >= height) {
       Position pos = destinationCoordinates;
       destinationCoordinates = null;
       throw new PositionOutOfBounds(
-        "Destination position out of new map boundaries | " + pos,
-        PositionType.DESTINATION);
+          "Destination position out of new map boundaries | " + pos, PositionType.DESTINATION);
     }
 
     // Create new map with grass terrain
@@ -77,16 +83,21 @@ public class MapManager {
         map[row][col] = new Terrain(new Position(row, col), TerrainType.DIRT);
       }
     }
+
+    logger.debug("createMap: map successfully created");
   }
 
   /**
    * Creates and places a terrain from the given type on the given position.
    *
-   * @param type     the terrain type
+   * @param type the terrain type
    * @param position the position on the map
    * @return the created terrain
    */
   public Terrain createTerrain(TerrainType type, Position position) throws PositionOutOfBounds {
+    // TODO: null check?
+    logger.debug("createTerrain: type = {}, position = {}", type, position.toString());
+
     // Check map boundaries
     checkPositionInBounds(position);
     Terrain terrain = new Terrain(position, type);
@@ -104,20 +115,19 @@ public class MapManager {
     if (position.getRow() < 0) {
       throw new PositionOutOfBounds("X cannot be lower than 0!", PositionType.DEFAULT);
     } else if (position.getRow() > getWidth() - 1) {
-      throw new PositionOutOfBounds(String.format("X cannot be greater than %d!", getWidth() - 1),
-        PositionType.DEFAULT);
+      throw new PositionOutOfBounds(
+          String.format("X cannot be greater than %d!", getWidth() - 1), PositionType.DEFAULT);
     } else if (position.getCol() < 0) {
       throw new PositionOutOfBounds("Y cannot be lower than 0!", PositionType.DEFAULT);
     } else if (position.getCol() > getHeight() - 1) {
-      throw new PositionOutOfBounds(String.format("Y cannot be greater than %d!", getHeight() - 1),
-        PositionType.DEFAULT);
+      throw new PositionOutOfBounds(
+          String.format("Y cannot be greater than %d!", getHeight() - 1), PositionType.DEFAULT);
     }
   }
 
-  /**
-   * Overwrites the map with a new empty map of the same size.
-   */
+  /** Overwrites the map with a new empty map of the same size. */
   public void reset() {
+    logger.debug("reset: no params");
     try {
       createMap(map[0].length, map.length);
     } catch (IllegalParameterException | PositionOutOfBounds e) {
@@ -127,6 +137,7 @@ public class MapManager {
   }
 
   public Terrain getTerrainAt(Position position) throws PositionOutOfBounds {
+    logger.debug("getTerrainAt: position = {}", position.toString());
     checkPositionInBounds(position);
     return map[position.getRow()][position.getCol()];
   }
@@ -148,14 +159,16 @@ public class MapManager {
   }
 
   public void setStartCoordinates(Position startCoordinates)
-    throws OccupiedPositionException, PositionOutOfBounds {
+      throws OccupiedPositionException, PositionOutOfBounds {
+    logger.debug("setStartCoordinates: startCoordinates = {}", startCoordinates.toString());
+
     // Check map boundaries
     checkPositionInBounds(startCoordinates);
 
     // Check occupied position
     if (getDestinationCoordinates().equals(startCoordinates)) {
       throw new OccupiedPositionException(
-        "The start point cannot be placed on the destination point");
+          "The start point cannot be placed on the destination point");
     }
     this.startCoordinates = startCoordinates;
   }
@@ -165,17 +178,19 @@ public class MapManager {
   }
 
   public void setDestinationCoordinates(Position destinationCoordinates)
-    throws OccupiedPositionException, PositionOutOfBounds {
+      throws OccupiedPositionException, PositionOutOfBounds {
+    logger.debug(
+        "setDestinationCoordinates: destinationCoordinates = {}",
+        destinationCoordinates.toString());
+
     // Check map boundaries
     checkPositionInBounds(destinationCoordinates);
 
     // Check occupied position
     if (getStartCoordinates().equals(destinationCoordinates)) {
       throw new OccupiedPositionException(
-        "The destination point cannot be placed on the start point");
+          "The destination point cannot be placed on the start point");
     }
     this.destinationCoordinates = destinationCoordinates;
   }
-
-
 }
