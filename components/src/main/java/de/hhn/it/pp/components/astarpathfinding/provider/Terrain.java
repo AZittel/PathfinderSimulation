@@ -1,9 +1,10 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
+import de.hhn.it.pp.components.astarpathfinding.IHeapItem;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 
-public class Terrain implements Cloneable {
+public class Terrain implements Cloneable, IHeapItem<Terrain> {
   private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Terrain.class);
 
   /**
@@ -32,6 +33,8 @@ public class Terrain implements Cloneable {
    * The neighbour with the lowest f value
    */
   private Terrain parent;
+
+  private int heapIndex;
 
   private Terrain() {
   }
@@ -120,5 +123,26 @@ public class Terrain implements Cloneable {
     Terrain ter = (Terrain) obj;
     return position.equals(ter.position) && h == ter.h && g == ter.g &&
       type == ter.type;
+  }
+
+  @Override
+  public int getHeapIndex() {
+    return heapIndex;
+  }
+
+  @Override
+  public void setHeapIndex(int heapIndex) {
+    this.heapIndex = heapIndex;
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    Terrain terrainToCompare = (Terrain) o;
+    int comparison = calculateFCost() - terrainToCompare.calculateFCost();
+    if (comparison == 0) {
+      comparison = h - terrainToCompare.h;
+    }
+    // In this case we want to return >0 if the cost is lower so reverse the comparison
+    return -comparison;
   }
 }

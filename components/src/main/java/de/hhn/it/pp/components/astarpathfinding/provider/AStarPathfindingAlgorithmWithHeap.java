@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
+import de.hhn.it.pp.components.astarpathfinding.PathfindingInformationWithHeap;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import java.util.ArrayList;
@@ -8,11 +9,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AStarPathfindingAlgorithm {
+public class AStarPathfindingAlgorithmWithHeap {
   private static final org.slf4j.Logger logger =
-      org.slf4j.LoggerFactory.getLogger(AStarPathfindingAlgorithm.class);
+      org.slf4j.LoggerFactory.getLogger(AStarPathfindingAlgorithmWithHeap.class);
 
-  private ArrayList<PathfindingInformation> result = new ArrayList<>();
+  private ArrayList<PathfindingInformationWithHeap> result = new ArrayList<>();
   private MapManager mapManager;
 
   /**
@@ -20,7 +21,7 @@ public class AStarPathfindingAlgorithm {
    *
    * @param mapManager holds all the information from the map
    */
-  public AStarPathfindingAlgorithm(MapManager mapManager) {
+  public AStarPathfindingAlgorithmWithHeap(MapManager mapManager) {
     this.mapManager = mapManager;
   }
 
@@ -32,25 +33,22 @@ public class AStarPathfindingAlgorithm {
    * @return If there is a shortest path then all states the algorithm has been through else an
    *     empty list.
    */
-  public ArrayList<PathfindingInformation> findPath() {
+  public ArrayList<PathfindingInformationWithHeap> findPath() {
     logger.debug("findPath: no params");
 
     // Benchmark time
     final long start = System.nanoTime();
 
-    PathfindingInformation information = new PathfindingInformation();
+    Terrain[][] map = mapManager.getMap();
+    PathfindingInformationWithHeap information = new PathfindingInformationWithHeap(map.length * map[0].length);
     Position startCoordinates = mapManager.getStartCoordinates();
     Position destinationCoordinates = mapManager.getDestinationCoordinates();
-    Terrain[][] map = mapManager.getMap();
 
     // Add the start cell to the open list
-    information.addSpecificPosition(map[startCoordinates.getRow()][startCoordinates.getCol()]);
+    information.getSpecificPositions().add(map[startCoordinates.getRow()][startCoordinates.getCol()]);
 
-    while (!information.getSpecificPositions().isEmpty()) {
-      Terrain currentTerrain = getCellWithLowestFCost(information);
-      assert currentTerrain != null;
-
-      information.getSpecificPositions().remove(currentTerrain);
+    while (information.getSpecificPositions().getItemCount() > 0) {
+      Terrain currentTerrain = information.getSpecificPositions().removeFirst();
       information.getVisitedPositions().add(currentTerrain);
 
       // Check whether the algorithm reached the destination cell
@@ -171,21 +169,6 @@ public class AStarPathfindingAlgorithm {
     }
 
     return neighbours;
-  }
-
-  /**
-   * Searches the list of open cells for the cell with the lowest f cost and returns it.
-   *
-   * @return cell with the lowest f cost.
-   */
-  private Terrain getCellWithLowestFCost(PathfindingInformation information) {
-    if (!information.getSpecificPositions().isEmpty()) {
-      return information.getSpecificPositions().stream()
-          .min(Comparator.comparing(Terrain::calculateFCost))
-          .get();
-    } else {
-      return null;
-    }
   }
 
   @Override
