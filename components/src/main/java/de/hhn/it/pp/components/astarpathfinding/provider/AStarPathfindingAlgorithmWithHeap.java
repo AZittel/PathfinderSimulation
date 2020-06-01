@@ -88,6 +88,9 @@ public class AStarPathfindingAlgorithmWithHeap {
 
             if (!information.getSpecificPositions().contains(neighbour)) {
               information.getSpecificPositions().add(neighbour);
+            } else {
+              // Update the neighbour
+              information.getSpecificPositions().updateItem(neighbour);
             }
           }
         }
