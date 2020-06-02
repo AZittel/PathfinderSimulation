@@ -53,6 +53,8 @@ public class FieldInformation {
         this.number = number;
     }
 
+    public void increaseNumber(){this.number = number + 1; }
+
     public void setIsHidden(boolean isHidden) {
         this.hidden = isHidden;
     }

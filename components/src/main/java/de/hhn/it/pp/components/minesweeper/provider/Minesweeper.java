@@ -38,6 +38,7 @@ public class Minesweeper implements MinesweeperService {
 
         }
     }
+
     /**
      *  resets the field and restarts the game with new bombs
      */
@@ -125,9 +126,13 @@ public class Minesweeper implements MinesweeperService {
     @Override
     public void setFixBombs() {
         fieldInformations[0][0].setBomb();
+        processNumbers(0, 0);
         fieldInformations[1][1].setBomb();
+        processNumbers(1, 1);
         fieldInformations[2][2].setBomb();
+        processNumbers(2, 2);
         fieldInformations[3][1].setBomb();
+        processNumbers(3, 1);
 
     }
     /**
@@ -141,8 +146,40 @@ public class Minesweeper implements MinesweeperService {
          * calculates the Points.
          */
 
-    public void calculatePoints(){
 
+    public void processNumbers(int x, int y){
+        if(x == 0 && y == heigth){
+            fieldInformations[x + 1][y].increaseNumber();
+            fieldInformations[x + 1][y - 1].increaseNumber();
+            fieldInformations[x][y - 1].increaseNumber();
+            turn(x + 1, y);
+            turn(x + 1, y - 1);
+            turn(x, y - 1);
+        }else if(x == width && y == heigth){
+            fieldInformations[x][y - 1].increaseNumber();
+            fieldInformations[x - 1][y - 1].increaseNumber();
+            fieldInformations[x - 1][y].increaseNumber();
+            turn(x, y - 1);
+            turn(x - 1, y - 1);
+            turn(x - 1, y);
+        }else if(x == width && y == 0){
+            turn(x, y + 1);
+            turn(x - 1, y + 1);
+            turn(x - 1, y);
+        }else if(x == width && y == 0){
+            turn(x, y + 1);
+            turn(x + 1, y + 1);
+            turn(x + 1, y);
+        }else{
+            turn(x, y + 1);
+            turn(x + 1, y + 1);
+            turn(x + 1, y);
+            turn(x + 1, y - 1);
+            turn(x, y - 1);
+            turn(x - 1, y - 1);
+            turn(x - 1, y);
+            turn(x - 1, y + 1);
+        }
     }
 
     /**
