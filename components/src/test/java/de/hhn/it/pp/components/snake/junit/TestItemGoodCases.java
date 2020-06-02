@@ -19,6 +19,8 @@ public class TestItemGoodCases {
     @BeforeEach
     void setup(){
         item = new OurSnakeItem(2);
+        item.setxPosition(xPos);
+        item.setyPosition(yPos);
     }
 
     @Test
@@ -27,10 +29,10 @@ public class TestItemGoodCases {
         assertEquals(2, item.getValue(), "Value should be 2");
     }
 
-    /**@Test
+    @Test
     @DisplayName("spawns item")
     void testSpawnItem(){
         assertEquals(12, item.getxPosition(), "item's xPosition is 12");
         assertEquals(13, item.getyPosition(), "item's yPosition is 13");
-    }*/
+    }
 }
