@@ -152,33 +152,31 @@ public class Minesweeper implements MinesweeperService {
             fieldInformations[x + 1][y].increaseNumber();
             fieldInformations[x + 1][y - 1].increaseNumber();
             fieldInformations[x][y - 1].increaseNumber();
-            turn(x + 1, y);
-            turn(x + 1, y - 1);
-            turn(x, y - 1);
+
         }else if(x == width && y == heigth){
             fieldInformations[x][y - 1].increaseNumber();
             fieldInformations[x - 1][y - 1].increaseNumber();
             fieldInformations[x - 1][y].increaseNumber();
-            turn(x, y - 1);
-            turn(x - 1, y - 1);
-            turn(x - 1, y);
+
         }else if(x == width && y == 0){
-            turn(x, y + 1);
-            turn(x - 1, y + 1);
-            turn(x - 1, y);
+            fieldInformations[x][y + 1].increaseNumber();
+            fieldInformations[x - 1][y + 1].increaseNumber();
+            fieldInformations[x - 1][y].increaseNumber();
+
         }else if(x == width && y == 0){
-            turn(x, y + 1);
-            turn(x + 1, y + 1);
-            turn(x + 1, y);
+            fieldInformations[x][y + 1].increaseNumber();
+            fieldInformations[x + 1][y + 1].increaseNumber();
+            fieldInformations[x + 1][y].increaseNumber();
+
         }else{
-            turn(x, y + 1);
-            turn(x + 1, y + 1);
-            turn(x + 1, y);
-            turn(x + 1, y - 1);
-            turn(x, y - 1);
-            turn(x - 1, y - 1);
-            turn(x - 1, y);
-            turn(x - 1, y + 1);
+            fieldInformations[x][y + 1].increaseNumber();
+            fieldInformations[x + 1][y + 1].increaseNumber();
+            fieldInformations[x + 1][y].increaseNumber();
+            fieldInformations[x + 1][y - 1].increaseNumber();
+            fieldInformations[x][y - 1].increaseNumber();
+            fieldInformations[x - 1][y - 1].increaseNumber();
+            fieldInformations[x - 1][y].increaseNumber();
+            fieldInformations[x - 1][y + 1].increaseNumber();
         }
     }
 
