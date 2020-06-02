@@ -1,15 +1,16 @@
 package de.hhn.it.pp.components.minesweeper;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
 import de.hhn.it.pp.components.minesweeper.provider.Minesweeper;
 
-import java.util.List;
 
 public class DemoMinesweeperUsage {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(DemoMinesweeperUsage.class);
 
-    public static void main(String[] args) throws InterruptedException, InvalidGameStateException {
+    public static void main(String[] args) throws InterruptedException, InvalidGameStateException, BooouuummmmException, IllegalParameterException {
         //Create the Interface from minesweeper.
         logger.info(">>> create minesweeperService");
         MinesweeperService minesweeperService = new Minesweeper();
@@ -39,14 +40,14 @@ public class DemoMinesweeperUsage {
 
         // Restarts the game.
         logger.info(">>> restart game");
-        minesweeperService.restart();
+        minesweeperService.restart(width,height);
         logger.info("" + minesweeperService);
 
         Thread.sleep(3000);
 
         // Starts the game.
         logger.info(">>> Start game");
-        minesweeperService.startGame();
+        minesweeperService.startGame(width,height,bombCount);
         logger.info("" + minesweeperService);
 
         Thread.sleep(3000);
@@ -69,8 +70,7 @@ public class DemoMinesweeperUsage {
 
         // set fix bombs.
         logger.info(">>> setFixBombs");
-        List<BombPosition> positions = null;
-        minesweeperService.setFixBombs(positions);
+        minesweeperService.setFixBombs();
         logger.info("" + minesweeperService);
 
         Thread.sleep(3000);
