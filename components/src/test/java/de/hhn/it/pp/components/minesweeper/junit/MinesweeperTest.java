@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MinesweeperTest {
     private static final org.slf4j.Logger logger =
@@ -111,5 +111,162 @@ public class MinesweeperTest {
 
 
         }
+        int[] numbers = new int[20];
+        int counter = 0;
+
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 4; j++){
+                numbers[counter] = minesweeper.getField()[j][i].getNumber();
+                counter++;
+            }
+        }
+        assertAll(
+                "Here we test our method processNumbers",
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[0],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[1],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[2],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[3],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[4],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[5],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                3,
+                                numbers[6],
+                                "There should be a 3"),
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[7],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[8],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[9],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[10],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                2,
+                                numbers[11],
+                                "There should be a 2"),
+                () ->
+                        assertEquals(
+                                0,
+                                numbers[12],
+                                "There should be a 0"),
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[13],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[14],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                1,
+                                numbers[15],
+                                "There should be a 1"),
+                () ->
+                        assertEquals(
+                                0,
+                                numbers[16],
+                                "There should be a 0"),
+                () ->
+                        assertEquals(
+                                0,
+                                numbers[17],
+                                "There should be a 0"),
+                () ->
+                        assertEquals(
+                                0,
+                                numbers[18],
+                                "There should be a 0"),
+                () ->
+                        assertEquals(
+                                0,
+                                numbers[19],
+                                "There should be a 0"));
+
+        minesweeper.turn(0,4);
+
+        assertAll(
+                "Test our turn method.",
+                () ->
+                        assertFalse(minesweeper.getField()[0][4].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[1][4].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[2][4].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[3][4].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[0][3].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[1][3].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[2][3].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[3][3].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[0][2].isHidden(), "Should be false"),
+                () ->
+                        assertFalse(minesweeper.getField()[1][2].isHidden(), "Should be false"),
+                () ->
+                        assertTrue(minesweeper.getField()[2][2].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[3][2].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[0][1].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[1][1].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[2][1].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[3][1].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[0][0].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[1][0].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[2][0].isHidden(), "Should be true"),
+                () ->
+                        assertTrue(minesweeper.getField()[3][0].isHidden(), "Should be true"));
     }
+
 }

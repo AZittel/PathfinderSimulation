@@ -83,30 +83,58 @@ public class Minesweeper implements MinesweeperService {
             for(int i = 0; i < width; i++){
                 for(int j = 0; j < heigth; j++){
                     fieldInformations[i][j].setIsHidden(false);
-                    return fieldInformations;
+
                 }
             }
+            return fieldInformations;
         }
-        if(fieldInformations[x][y].getNumber() != 0){
+        if(fieldInformations[x][y].isHidden() == false) {
+            return fieldInformations;
+        }else if(fieldInformations[x][y].getNumber() != 0){
             fieldInformations[x][y].setIsHidden(false);
             return fieldInformations;
         }else {
-            if(x == 0 && y == heigth){
-               turn(x + 1, y);
-               turn(x + 1, y - 1);
-               turn(x, y - 1);
-            }else if(x == width && y == heigth){
+            fieldInformations[x][y].setIsHidden(false);
+            if(x == 0 && y == heigth -1){
+                turn(x + 1, y);
+                turn(x + 1, y - 1);
+                turn(x, y - 1);
+            }else if(x == width -1 && y == heigth -1){
                 turn(x, y - 1);
                 turn(x - 1, y - 1);
                 turn(x - 1, y);
-            }else if(x == width && y == 0){
+            }else if(x == width -1 && y == 0){
                 turn(x, y + 1);
                 turn(x - 1, y + 1);
                 turn(x - 1, y);
-            }else if(x == width && y == 0){
+            }else if(x == 0 && y == 0){
                 turn(x, y + 1);
                 turn(x + 1, y + 1);
                 turn(x + 1, y);
+            }else if(x == 0) {
+                turn(x, y + 1);
+                turn(x + 1, y + 1);
+                turn(x + 1, y);
+                turn(x + 1, y - 1);
+                turn(x, y - 1);
+            }else if (y == 0) {
+                turn(x, y + 1);
+                turn(x + 1, y + 1);
+                turn(x + 1, y);
+                turn(x - 1, y);
+                turn(x - 1, y + 1);
+            }else if(x == width -1) {
+                turn(x, y + 1);
+                turn(x, y - 1);
+                turn(x - 1, y - 1);
+                turn(x - 1, y);
+                turn(x - 1, y + 1);
+            }else if (y == heigth -1) {
+                turn(x + 1, y);
+                turn(x + 1, y - 1);
+                turn(x, y - 1);
+                turn(x - 1, y - 1);
+                turn(x - 1, y);
             }else{
                 turn(x, y + 1);
                 turn(x + 1, y + 1);
@@ -147,38 +175,58 @@ public class Minesweeper implements MinesweeperService {
          */
 
 
-    public void processNumbers(int x, int y){
-        if(x == 0 && y == heigth){
-            fieldInformations[x + 1][y].increaseNumber();
-            fieldInformations[x + 1][y - 1].increaseNumber();
-            fieldInformations[x][y - 1].increaseNumber();
-
-        }else if(x == width && y == heigth){
-            fieldInformations[x][y - 1].increaseNumber();
-            fieldInformations[x - 1][y - 1].increaseNumber();
-            fieldInformations[x - 1][y].increaseNumber();
-
-        }else if(x == width && y == 0){
-            fieldInformations[x][y + 1].increaseNumber();
-            fieldInformations[x - 1][y + 1].increaseNumber();
-            fieldInformations[x - 1][y].increaseNumber();
-
-        }else if(x == width && y == 0){
-            fieldInformations[x][y + 1].increaseNumber();
-            fieldInformations[x + 1][y + 1].increaseNumber();
-            fieldInformations[x + 1][y].increaseNumber();
-
-        }else{
-            fieldInformations[x][y + 1].increaseNumber();
-            fieldInformations[x + 1][y + 1].increaseNumber();
-            fieldInformations[x + 1][y].increaseNumber();
-            fieldInformations[x + 1][y - 1].increaseNumber();
-            fieldInformations[x][y - 1].increaseNumber();
-            fieldInformations[x - 1][y - 1].increaseNumber();
-            fieldInformations[x - 1][y].increaseNumber();
-            fieldInformations[x - 1][y + 1].increaseNumber();
+        public void processNumbers(int x, int y){
+            if(x == 0 && y == heigth -1){
+                fieldInformations[x + 1][y].increaseNumber();
+                fieldInformations[x + 1][y - 1].increaseNumber();
+                fieldInformations[x][y - 1].increaseNumber();
+            }else if(x == width -1 && y == heigth -1){
+                fieldInformations[x][y - 1].increaseNumber();
+                fieldInformations[x - 1][y - 1].increaseNumber();
+                fieldInformations[x - 1][y].increaseNumber();
+            }else if(x == width -1 && y == 0){
+                fieldInformations[x][y + 1].increaseNumber();
+                fieldInformations[x - 1][y + 1].increaseNumber();
+                fieldInformations[x - 1][y].increaseNumber();
+            }else if(x == 0 && y == 0){
+                fieldInformations[x][y + 1].increaseNumber();
+                fieldInformations[x + 1][y + 1].increaseNumber();
+                fieldInformations[x + 1][y].increaseNumber();
+            }else if(x == 0) {
+                fieldInformations[x][y + 1].increaseNumber();
+                fieldInformations[x + 1][y + 1].increaseNumber();
+                fieldInformations[x + 1][y].increaseNumber();
+                fieldInformations[x + 1][y - 1].increaseNumber();
+                fieldInformations[x][y - 1].increaseNumber();
+            }else if (y == 0) {
+                fieldInformations[x][y + 1].increaseNumber();
+                fieldInformations[x + 1][y + 1].increaseNumber();
+                fieldInformations[x + 1][y].increaseNumber();
+                fieldInformations[x - 1][y].increaseNumber();
+                fieldInformations[x - 1][y + 1].increaseNumber();
+            }else if(x == width -1) {
+                fieldInformations[x][y + 1].increaseNumber();
+                fieldInformations[x][y - 1].increaseNumber();
+                fieldInformations[x - 1][y - 1].increaseNumber();
+                fieldInformations[x - 1][y].increaseNumber();
+                fieldInformations[x - 1][y + 1].increaseNumber();
+            }else if (y == heigth -1) {
+                fieldInformations[x + 1][y].increaseNumber();
+                fieldInformations[x + 1][y - 1].increaseNumber();
+                fieldInformations[x][y - 1].increaseNumber();
+                fieldInformations[x - 1][y - 1].increaseNumber();
+                fieldInformations[x - 1][y].increaseNumber();
+            }else{
+                fieldInformations[x][y + 1].increaseNumber();
+                fieldInformations[x + 1][y + 1].increaseNumber();
+                fieldInformations[x + 1][y].increaseNumber();
+                fieldInformations[x + 1][y - 1].increaseNumber();
+                fieldInformations[x][y - 1].increaseNumber();
+                fieldInformations[x - 1][y - 1].increaseNumber();
+                fieldInformations[x - 1][y].increaseNumber();
+                fieldInformations[x - 1][y + 1].increaseNumber();
+            }
         }
-    }
 
     /**
      * Sets the current Points.
