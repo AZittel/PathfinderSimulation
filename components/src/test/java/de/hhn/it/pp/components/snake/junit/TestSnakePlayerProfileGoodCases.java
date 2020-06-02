@@ -24,35 +24,35 @@ public class TestSnakePlayerProfileGoodCases {
         testProfile.setPlayerId(2);
     }
 
-    @Test
+    /**@Test
     @DisplayName("get the player's nickname")
     void testGetPlayerNickname(){
         assertEquals("walter45", testProfile.getPlayerNickname(), "Nickname should be walter45");
-    }
+    }*/
 
-    @Test
+    /**@Test
     @DisplayName("set new nickname")
     void testSetPlayerNickname() {
         testProfile.setPlayerNickname(newNickname);
         assertEquals("detlef2", testProfile.getPlayerNickname(), "nickname is set to detlef2");
     }
 
-    @Test
+    /**@Test
     @DisplayName("get the player's highscore")
     void testGetPlayerHighscore() {
         assertEquals(46, testProfile.getPlayerHighscore(), "highscore should be 46");
-    }
+    }*/
 
-    @Test
+    /**@Test
     @DisplayName("get current level")
     void testGetCurrentLevel() {
         assertEquals(1, testProfile.getCurrentLevel(), "current level is level 1");
-    }
+    }*/
 
-    @Test
+    /**@Test
     @DisplayName("get player id")
     void testGetPlayerId() {
         assertEquals(2, testProfile.getPlayerId(), "player's id is 2");
-    }
+    }*/
 }
 

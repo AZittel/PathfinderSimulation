@@ -31,13 +31,13 @@ public class TestSnakePlayerServiceBadCases {
         adminSnakePlayerService = ourSnakePlayerService;
     }
 
-    @Test
+    /**@Test
     @DisplayName("ask for a non existing Player")
     void testExceptionWhenRequestingNonExistentPlayer() {
         IllegalParameterException illegalParameterException = assertThrows(
                 IllegalParameterException.class,
                 () -> snakePlayerService.getSnakePlayerProfile(23));
-    }
+    }*/
 
 
 }
