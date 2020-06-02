@@ -26,7 +26,7 @@ public class SnakePlayerProfile {
   private int currentLevel;
 
   /** player's id. */
-  private static int playerId = 0;
+  private int playerId = 0;
 
   /** list for player id's. */
   private ArrayList<Integer> allIds = new ArrayList<>();
@@ -120,7 +120,7 @@ public class SnakePlayerProfile {
    *
    * @param playerId player's id
    */
-  public void setPlayerId(final int playerId) throws IllegalParameterException {
+  public void setPlayerId(int playerId) throws IllegalParameterException {
     logger.info("set player's id: {}", playerId);
     if (allIds.contains(playerId)) {
       throw new IllegalParameterException("playerId is already chosen, chose another one");
