@@ -80,4 +80,22 @@ public class OurSnakeItem {
   public int getyPosition() {
     return yPosition;
   }
+
+  /**
+   * Setter for xPosition
+   *
+   * @param xPos new x-Coordinate
+   */
+  public void setxPosition(int xPos) {
+    xPosition = xPos;
+  }
+
+  /**
+   * Setter for yPosition
+   *
+   * @param yPos new y-Coordinate
+   */
+  public void setyPosition(int yPos) {
+    yPosition = yPos;
+  }
 }
