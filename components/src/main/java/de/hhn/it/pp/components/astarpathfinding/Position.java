@@ -1,39 +1,53 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-/** A class to represent a position with two values */
+/**
+ * A class to represent a position with two values
+ */
 public class Position {
-  private int x;
-  private int y;
+  private int row;
+  private int col;
 
   /**
    * A representation of a coordinate
    *
-   * @param x the x coordinate
-   * @param y the y coordinate
+   * @param row the x coordinate
+   * @param col the y coordinate
    */
-  public Position(int x, int y) {
-    this.x = x;
-    this.y = y;
+  public Position(int row, int col) {
+    this.row = row;
+    this.col = col;
   }
 
-  public int getX() {
-    return x;
+  public int getRow() {
+    return row;
   }
 
-  public void setX(int x) {
-    this.x = x;
+  public void setRow(int row) {
+    this.row = row;
   }
 
-  public int getY() {
-    return y;
+  public int getCol() {
+    return col;
   }
 
-  public void setY(int y) {
-    this.y = y;
+  public void setCol(int col) {
+    this.col = col;
   }
 
   @Override
   public String toString() {
-    return "Position{" + "x=" + x + ", y=" + y + '}';
+    return "row=" + row + ", col=" + col;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Position pos = (Position) obj;
+    return getRow() == pos.getRow() && getCol() == pos.getCol();
   }
 }

@@ -2,7 +2,10 @@ package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
-import de.hhn.it.pp.components.astarpathfinding.provider.TerrainType;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DemoAStarUsage {
   private static final org.slf4j.Logger logger =
@@ -35,9 +38,8 @@ public class DemoAStarUsage {
 
     // Add Obstacles
     for (int y = 2; y <= 4; y++) {
-      logger.info(">>> add obstacle at: " + 3 + "|" + y);
-      Terrain terrain = new Terrain(3, y, TerrainType.WATER);
-      service.placeTerrain(terrain);
+      logger.info(">>> place terrain at: " + 3 + "|" + y);
+      service.placeTerrain(TerrainType.LAVA, new Position(y, 3));
     }
     logger.info("" + service);
 
@@ -45,17 +47,15 @@ public class DemoAStarUsage {
 
     // Start visualization
     logger.info(">>> visualization started");
-    service.startPathfinding();
+    List<PathfindingInformation> results = service.doPathfinding();
+    for(Terrain terrain : results.get(results.size()-1).getFinalPathPositions()){
+      System.out.print(terrain + " ");
+    }
+    System.out.println();
     logger.info("" + service);
 
     Thread.sleep(2500);
 
-    // End visualization
-    logger.info(">>> visualization stopped");
-    service.stopPathfinding();
-    logger.info("" + service);
-
-    Thread.sleep(1500);
 
     // Reset
     logger.info(">>> reset");
