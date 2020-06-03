@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public class OurSnakeItem {
+public class Item {
 
   /** OurSnakeItem's Logger. */
-  private static final Logger logger = LoggerFactory.getLogger(OurSnakeItem.class);
+  private static final Logger logger = LoggerFactory.getLogger(Item.class);
 
   /** Item's value.*/
   private int value;
@@ -28,7 +28,7 @@ public class OurSnakeItem {
    *
    * @param value Item's value
    */
-  public OurSnakeItem(int value) {
+  public Item(int value) {
     logger.info("Constructor: created item with value = {}", value);
     this.value = value;
   }
