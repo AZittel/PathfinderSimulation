@@ -87,6 +87,7 @@ public class OurSnakeGame implements SnakeGame {
         listeners.remove(listener);
     }
 
+    @Override
     public PlayerProfile getProfile() {
         return profile;
     }
