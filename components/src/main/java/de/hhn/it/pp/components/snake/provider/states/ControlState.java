@@ -10,7 +10,7 @@ public abstract class ControlState {
     protected State state;
     protected OurSnakeGame player;
 
-    public ControlState(OurSnakeGame player) {
+    protected ControlState(OurSnakeGame player) {
         logger.debug("ControlState - Constructor - " + this.getClass().getSimpleName());
         this.player = player;
     }
