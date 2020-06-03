@@ -34,16 +34,18 @@ public class TestAdminInterfaceGoodCases {
         this.profiles = profiles;
     }
 
-    @Test
+    //todo Tests
+
+    /**@Test
     @DisplayName("A new instance has no player.")
     public void testANewInstanceHasNoPlayers() {
         List<SnakePlayerProfile>
                 players = snakePlayerService.getAllSnakePlayerProfiles();
         assertNotNull(players);
         assertEquals(0, players.size(), "The list should be empty.");
-    }
+    /*}
 
-    @Test
+   /** @Test
     @DisplayName("Adding one player to the service results in one entry.")
     public void testAddOnePlayer() throws IllegalParameterException {
         SnakePlayerProfile descriptor = new SnakePlayerProfile("LongDongSilver");
@@ -66,5 +68,5 @@ public class TestAdminInterfaceGoodCases {
         adminSnakePlayerService.removeSnakePlayerProfile(players.get(0).getPlayerId());
         players = snakePlayerService.getAllSnakePlayerProfiles();
         assertEquals(0, players.size());
-        }
+        }*/
 }

@@ -21,6 +21,7 @@ public class TestSnakeGoodCases {
     @BeforeEach
     void setup() {
         Snake testSnake = new Snake(testProfile);
+        Snake.setIdCounter(2);
     }
 
     @Test
@@ -32,6 +33,7 @@ public class TestSnakeGoodCases {
     @Test
     @DisplayName("get Snake's profile")
     void testGetSnakeProfil() {
+        Snake testSnake = new Snake(testProfile);
         assertEquals(testProfile, testSnake.getProfile(), "Snake's profile is detlef23");
     }
 }

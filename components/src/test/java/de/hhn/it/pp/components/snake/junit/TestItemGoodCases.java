@@ -19,6 +19,8 @@ public class TestItemGoodCases {
     @BeforeEach
     void setup(){
         item = new OurSnakeItem(2);
+        item.setxPosition(xPos);
+        item.setyPosition(yPos);
     }
 
     @Test

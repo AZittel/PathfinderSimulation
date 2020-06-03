@@ -55,7 +55,7 @@ public class OurSnakeItem {
     if (xPos > OurSnakePlayerService.getWindowWidth()
             || yPos > OurSnakePlayerService.getWindowHeight()) {
       throw new IllegalParameterException("Coordinates are outside the playfield");
-    } else if (xPos < 0 || yPos < 0) {
+    } else if (xPos <= 0 || yPos <= 0) {
       throw new IllegalParameterException("Coordinates are too small");
     } else {
       xPosition = xPos;
@@ -79,5 +79,23 @@ public class OurSnakeItem {
    */
   public int getyPosition() {
     return yPosition;
+  }
+
+  /**
+   * Setter for xPosition
+   *
+   * @param xPos new x-Coordinate
+   */
+  public void setxPosition(int xPos) {
+    xPosition = xPos;
+  }
+
+  /**
+   * Setter for yPosition
+   *
+   * @param yPos new y-Coordinate
+   */
+  public void setyPosition(int yPos) {
+    yPosition = yPos;
   }
 }
