@@ -1,6 +1,6 @@
 package de.hhn.it.pp.components.snake.junit;
 
-import de.hhn.it.pp.components.snake.provider.Level;
+import de.hhn.it.pp.components.snake.provider.logic.Level;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

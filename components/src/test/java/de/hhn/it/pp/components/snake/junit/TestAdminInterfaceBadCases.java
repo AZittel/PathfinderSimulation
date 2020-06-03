@@ -1,6 +1,6 @@
 package de.hhn.it.pp.components.snake.junit;
 
-import de.hhn.it.pp.components.snake.PlayerProfile;
+import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;

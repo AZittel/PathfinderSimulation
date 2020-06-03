@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.PlayerProfile;
+import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

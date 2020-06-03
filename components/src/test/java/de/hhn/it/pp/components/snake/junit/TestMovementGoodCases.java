@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.snake.junit;
 
-import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.Movement;
+import de.hhn.it.pp.components.snake.provider.logic.Direction;
+import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

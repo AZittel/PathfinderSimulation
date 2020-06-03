@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.snake.junit;
 
-import de.hhn.it.pp.components.snake.PlayerProfile;
-import de.hhn.it.pp.components.snake.provider.SnakeGame;
+import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
+import de.hhn.it.pp.components.snake.provider.logic.SnakeGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
