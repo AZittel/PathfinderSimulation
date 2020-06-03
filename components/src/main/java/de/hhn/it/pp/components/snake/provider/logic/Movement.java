@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.snake;
+package de.hhn.it.pp.components.snake.provider.logic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
