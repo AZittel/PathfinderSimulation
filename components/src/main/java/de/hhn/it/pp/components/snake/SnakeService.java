@@ -2,6 +2,7 @@ package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.logic.Direction;
+import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 
 import java.util.List;
@@ -28,6 +29,24 @@ public interface SnakeService {
    * @throws IllegalParameterException if the player does not exist
    */
   PlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException;
+
+  /**
+   * Adds a listener to get updates on the state of the player.
+   *
+   * @param id id of the player
+   * @param listener object implementing the listener interface
+   * @throws IllegalParameterException if either the nickname does not exist or the listener is a
+   *     null reference.
+   */
+  void addCallback(int id, SnakeListener listener) throws IllegalParameterException;
+
+  /**
+   * Removes a listener.
+   *
+   * @param id id of the player
+   * @param listener listener to be removed
+   */
+  void removeCallback(int id, SnakeListener listener) throws IllegalParameterException;
 
   /**
    * Starts the game snake for the player.
@@ -61,5 +80,5 @@ public interface SnakeService {
    *
    * @throws IllegalParameterException if the given key is invalid
    */
-  void moveSnake(int id, Direction direction) throws IllegalParameterException;
+  void moveSnake(int id, Movement direction) throws IllegalParameterException;
 }

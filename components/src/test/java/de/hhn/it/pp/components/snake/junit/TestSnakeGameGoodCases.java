@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
-import de.hhn.it.pp.components.snake.provider.logic.SnakeGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Tests the Snakeclass with good cases")
 public class TestSnakeGameGoodCases {
-
+/**
     private static final Logger logger = LoggerFactory.getLogger(TestSnakeGameGoodCases.class);
     private PlayerProfile testProfile = new PlayerProfile("detleft23");
     private int testIdCounter = 2;
@@ -36,4 +35,5 @@ public class TestSnakeGameGoodCases {
         SnakeGame testSnakeGame = new SnakeGame(testProfile);
         assertEquals(testProfile, testSnakeGame.getProfile(), "Snake's profile is detlef23");
     }
+    */
 }

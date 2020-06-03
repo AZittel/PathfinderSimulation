@@ -2,7 +2,9 @@ package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
+import de.hhn.it.pp.components.snake.SnakeListener;
 import de.hhn.it.pp.components.snake.provider.logic.Direction;
+import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 
@@ -11,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.hhn.it.pp.components.snake.provider.logic.SnakeGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +36,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   private static int windowWidth;
 
   /** Current dircetion of the snake. */
-  private Direction currentDirection;
+  private Movement currentDirection;
 
   public OurSnakeService() {
     logger.info("Constructor");
@@ -87,6 +88,34 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   }
 
   /**
+   * Adds a listener to get updates on the state of the player.
+   *
+   * @param id id of the player
+   * @param listener object implementing the listener interface
+   * @throws IllegalParameterException if either the nickname does not exist or the listener is a
+   *     null reference.
+   */
+  @Override
+  public void addCallback(int id, SnakeListener listener) throws IllegalParameterException {
+    logger.info("addCallback: id = {}, listener = {}", id, listener);
+    SnakeGame player = getPlayerById(id);
+    player.addCallback(listener);
+  }
+
+  /**
+   * Removes a listener.
+   *
+   * @param id id of the player
+   * @param listener listener to be removed
+   */
+  @Override
+  public void removeCallback(int id, SnakeListener listener) throws IllegalParameterException {
+    logger.info("removeCallback: id = {}, listener = {}");
+    SnakeGame player = getPlayerById(id);
+    player.removeCallback(listener);
+  }
+
+  /**
    * Starts the game snake for the player.
    *
    * @param id id of the active player
@@ -133,7 +162,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   }
 
   @Override
-  public void moveSnake(int id, Direction direction) throws IllegalParameterException {
+  public void moveSnake(int id, Movement direction) throws IllegalParameterException {
     logger.info("usedKey: id = {}, direction = {}", id, direction);
     SnakeGame player = getPlayerById(id);
     if (direction == null) {
@@ -156,7 +185,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     CheckingHelper.assertThatIsNotNull(profile, "descriptor");
     CheckingHelper.assertThatIsReadableString(profile.getPlayerNickname(), "nickname");
 
-    SnakeGame player = new SnakeGame(profile);
+    OurSnakeGame player = new OurSnakeGame(profile);
     allPlayersProfiles.put(player.getProfile().getPlayerId(), player);
   }
 

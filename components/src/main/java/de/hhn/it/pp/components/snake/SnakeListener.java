@@ -1,9 +1,7 @@
 package de.hhn.it.pp.components.snake;
 
-import de.hhn.it.pp.components.snake.provider.logic.SnakeGameState;
+import de.hhn.it.pp.components.snake.provider.logic.State;
 
 public interface SnakeListener {
-
-    void newSnakeGameState(SnakeGameState gameState);
-
+    void newState(State state);
 }

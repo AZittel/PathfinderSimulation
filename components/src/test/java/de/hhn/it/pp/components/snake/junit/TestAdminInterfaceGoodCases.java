@@ -3,7 +3,6 @@ package de.hhn.it.pp.components.snake.junit;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
-import de.hhn.it.pp.components.snake.provider.logic.SnakeGame;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,10 +19,10 @@ public class TestAdminInterfaceGoodCases {
     SnakeService snakeService;
     AdminSnakeService adminSnakeService;
     List<PlayerProfile> profiles;
-
+/**
     @BeforeEach
     void setup (List<PlayerProfile> profiles) {
-        SnakeGame.setIdCounter(0);
+        OurSnakeGame.setIdCounter(0);
         OurSnakeService ourSnakePlayerService = new OurSnakeService();
         snakeService = ourSnakePlayerService;
         adminSnakeService = ourSnakePlayerService;
@@ -32,7 +31,7 @@ public class TestAdminInterfaceGoodCases {
 
     //todo Tests
 
-    /**@Test
+    @Test
     @DisplayName("A new instance has no player.")
     public void testANewInstanceHasNoPlayers() {
         List<SnakePlayerProfile>

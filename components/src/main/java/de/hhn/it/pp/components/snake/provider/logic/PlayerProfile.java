@@ -28,6 +28,9 @@ public class PlayerProfile {
   /** player's id. */
   private int playerId = 0;
 
+  /** players's state*/
+  private State currentState;
+
   /** list for player id's. */
   private ArrayList<Integer> allIds = new ArrayList<>();
 
@@ -127,6 +130,22 @@ public class PlayerProfile {
     } else {
       this.playerId = playerId;
     }
+  }
+
+  /**
+   * Getter for the current state.
+   * @return the current state
+   */
+  public State getCurrentState() {
+    return currentState;
+  }
+
+  /**
+   * Setter for the new current state.
+   * @param currentState new current state
+   */
+  public void setCurrentState(State currentState) {
+    this.currentState = currentState;
   }
 
   /**
