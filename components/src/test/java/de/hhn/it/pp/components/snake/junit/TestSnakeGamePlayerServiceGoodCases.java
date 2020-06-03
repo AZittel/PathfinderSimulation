@@ -1,42 +1,38 @@
 package de.hhn.it.pp.components.snake.junit;
 
-import de.hhn.it.pp.components.snake.Direction;
 import de.hhn.it.pp.components.snake.Movement;
-import de.hhn.it.pp.components.snake.SnakePlayerProfile;
-import de.hhn.it.pp.components.snake.SnakePlayerService;
+import de.hhn.it.pp.components.snake.PlayerProfile;
+import de.hhn.it.pp.components.snake.SnakeService;
 import de.hhn.it.pp.components.snake.provider.AdminSnakePlayerService;
-import de.hhn.it.pp.components.snake.provider.OurSnakeLevel;
-import de.hhn.it.pp.components.snake.provider.OurSnakePlayerService;
+import de.hhn.it.pp.components.snake.provider.Level;
+import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DisplayName("Test the SnakeService with good cases.")
-public class TestSnakePlayerServiceGoodCases {
+public class TestSnakeGamePlayerServiceGoodCases {
     private static final Logger logger =
-            LoggerFactory.getLogger(TestSnakePlayerServiceGoodCases.class);
+            LoggerFactory.getLogger(TestSnakeGamePlayerServiceGoodCases.class);
 
-    SnakePlayerService snakePlayerService;
+    SnakeService snakeService;
     AdminSnakePlayerService adminSnakePlayerService;
-    SnakePlayerProfile snakePlayerProfile;
-    OurSnakeLevel ourSnakeLevel;
-    OurSnakePlayerService ourSnakePlayerService;
+    PlayerProfile playerProfile;
+    Level level;
+    OurSnakeService ourSnakePlayerService;
     Movement movement;
 
     @BeforeEach
-    void setup(List<SnakePlayerProfile> profiles) throws IllegalParameterException {
-        OurSnakePlayerService ourSnakePlayerService = new OurSnakePlayerService();
-        snakePlayerService = ourSnakePlayerService;
+    void setup(List<PlayerProfile> profiles) throws IllegalParameterException {
+        OurSnakeService ourSnakePlayerService = new OurSnakeService();
+        snakeService = ourSnakePlayerService;
         adminSnakePlayerService = ourSnakePlayerService;
 
-        for (SnakePlayerProfile profile : profiles) {
+        for (PlayerProfile profile : profiles) {
             adminSnakePlayerService.addSnakePlayerProfile(profile);
         }
     }
