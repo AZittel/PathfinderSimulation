@@ -37,7 +37,7 @@ public class TestAdminInterfaceBadCases {
 
     @Test
     @DisplayName("Test bad creation with null reference as nickname in descriptor")
-    public void testCreatePlayerWithDescriptorWithNullLocation() {
+    public void testCreatePlayerWithDescriptorWithNullLocation() throws IllegalParameterException {
         PlayerProfile descriptor = new PlayerProfile(null);
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
                 () -> adminSnakeService.addSnakePlayerProfile(descriptor));
@@ -45,7 +45,7 @@ public class TestAdminInterfaceBadCases {
 
     @Test
     @DisplayName("Test bad creation with empty string as nickname in descriptor")
-    public void testCreatePlayerWithDescriptorWithEmptyStringLocation() {
+    public void testCreatePlayerWithDescriptorWithEmptyStringLocation() throws IllegalParameterException {
         PlayerProfile descriptor = new PlayerProfile("");
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
                 () -> adminSnakeService.addSnakePlayerProfile(descriptor));
@@ -53,7 +53,7 @@ public class TestAdminInterfaceBadCases {
 
     @Test
     @DisplayName("Test bad creation with just white space as location in descriptor")
-    public void testCreatePlayerWithDescriptorWithWhitespaceLocation() {
+    public void testCreatePlayerWithDescriptorWithWhitespaceLocation() throws IllegalParameterException {
         PlayerProfile descriptor = new PlayerProfile("  ");
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
                 () -> adminSnakeService.addSnakePlayerProfile(descriptor));
