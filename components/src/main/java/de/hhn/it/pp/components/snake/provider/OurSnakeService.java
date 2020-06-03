@@ -2,14 +2,16 @@ package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
-import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.PlayerProfile;
+import de.hhn.it.pp.components.snake.provider.logic.Direction;
+import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import de.hhn.it.pp.components.snake.provider.logic.SnakeGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
