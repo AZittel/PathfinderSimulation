@@ -12,11 +12,19 @@ tasks.withType(JavaCompile) {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+repositories {
+    // repository for database driver
+    mavenCentral()
+}
 
 dependencies {
     // logging with slf4j
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.24'
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+    // database driver for sqlite
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.30.1'
+
     // use JUnit 5
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
