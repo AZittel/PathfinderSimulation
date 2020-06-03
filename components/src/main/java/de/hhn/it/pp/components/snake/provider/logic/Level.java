@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.snake.provider;
+package de.hhn.it.pp.components.snake.provider.logic;
 
 import java.util.ArrayList;
 import org.slf4j.Logger;
