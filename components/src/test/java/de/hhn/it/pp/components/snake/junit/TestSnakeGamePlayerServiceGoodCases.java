@@ -4,7 +4,7 @@ import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
-import de.hhn.it.pp.components.snake.provider.logic.Level;
+import de.hhn.it.pp.components.snake.provider.logic.Map;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ public class TestSnakeGamePlayerServiceGoodCases {
     SnakeService snakeService;
     AdminSnakeService adminSnakeService;
     PlayerProfile playerProfile;
-    Level level;
+    Map map;
     OurSnakeService ourSnakePlayerService;
     Movement movement;
 
