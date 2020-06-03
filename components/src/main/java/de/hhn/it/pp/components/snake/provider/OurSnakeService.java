@@ -110,7 +110,7 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
    */
   @Override
   public void removeCallback(int id, SnakeListener listener) throws IllegalParameterException {
-    logger.info("removeCallback: id = {}, listener = {}");
+    logger.info("removeCallback: id = {}, listener = {}", id, listener);
     SnakeGame player = getPlayerById(id);
     player.removeCallback(listener);
   }
