@@ -1,6 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class PathfindingInformationWithHeap implements Cloneable {
    */
   private List<Terrain> finalPathPositions = new ArrayList<>();
 
-  public PathfindingInformationWithHeap(int maxHeapSize) {
+  public PathfindingInformationWithHeap(int maxHeapSize) throws IllegalParameterException {
     this.specificPositions = new Heap<Terrain>(maxHeapSize);
   }
 
@@ -62,33 +63,41 @@ public class PathfindingInformationWithHeap implements Cloneable {
     this.specificPositions.add(specificPosition);
   }
 
+  /**
+   * Resets the heap and lists for this information object.
+   */
   public void reset() {
     logger.debug("reset: no params");
-    int maxSize = specificPositions.items.length;
-    specificPositions = new Heap<>(maxSize);
+    try {
+      int maxSize = specificPositions.items.length;
+      specificPositions = new Heap<Terrain>(maxSize);
+    } catch (IllegalParameterException e) {
+      // This case should never happen due to map size minimum
+      e.printStackTrace();
+    }
     visitedPositions.clear();
     finalPathPositions.clear();
-  }
-
-  private List<Terrain> cloneList(List<Terrain> list) {
-    List<Terrain> newList = new ArrayList<>();
-    for (Terrain t : list) {
-      try {
-        newList.add((Terrain) t.clone());
-      } catch (CloneNotSupportedException e) {
-        e.printStackTrace();
-      }
-    }
-    return newList;
   }
 
   @Override
   public PathfindingInformationWithHeap clone() throws CloneNotSupportedException {
     logger.debug("clone: no params");
     PathfindingInformationWithHeap cloned = (PathfindingInformationWithHeap) super.clone();
-//    cloned.setSpecificPositions(this.cloneList(this.specificPositions));
+    try {
+      cloned.setSpecificPositions(new Heap<Terrain>(this.specificPositions));
+    } catch (IllegalParameterException e) {
+      e.printStackTrace();
+    }
     cloned.setVisitedPositions(this.cloneList(this.visitedPositions));
     cloned.setFinalPathPositions(this.cloneList(this.finalPathPositions));
     return cloned;
+  }
+
+  private List<Terrain> cloneList(List<Terrain> list) {
+    List<Terrain> newList = new ArrayList<>();
+    for (Terrain t : list) {
+      newList.add(new Terrain(t));
+    }
+    return newList;
   }
 }

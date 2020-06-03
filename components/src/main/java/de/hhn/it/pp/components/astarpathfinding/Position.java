@@ -1,14 +1,14 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 /**
- * A class to represent a position with two values
+ * A class to represent a position with two values.
  */
 public class Position {
   private int row;
   private int col;
 
   /**
-   * A representation of a coordinate
+   * A representation of a coordinate.
    *
    * @param row the x coordinate
    * @param col the y coordinate

@@ -1,13 +1,35 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
-public class Heap<T extends IHeapItem<T>> {
+public class Heap<T extends IHeapItem<? super T>> {
   T[] items;
   int currentItemCount;
 
-  public Heap(int maxHeapSize) {
+  /**
+   * Class constructor. Declares a new array of items with the given max heap size.
+   *
+   * @throws IllegalParameterException thrown when the max heap size is lower then 1
+   */
+  @SuppressWarnings(value = "unchecked")
+  public Heap(int maxHeapSize) throws IllegalParameterException {
+    if (maxHeapSize <= 0) {
+      throw new IllegalParameterException("Heap size cannot be lower than 1!");
+    }
     items = (T[]) new IHeapItem[maxHeapSize];
+  }
+
+  /**
+   * Copy constructor for heap objects. This constructor takes an heap object and creates a copy of
+   * this object.
+   *
+   * @param heapToBeCopied heap to be copied
+   * @throws IllegalParameterException thrown when the max heap size is lower then 1
+   */
+  public Heap(Heap<T> heapToBeCopied) throws IllegalParameterException {
+    this(heapToBeCopied.items.length);
+    this.items = heapToBeCopied.items.clone();
+    this.currentItemCount = heapToBeCopied.getItemCount();
   }
 
   /**
@@ -79,7 +101,7 @@ public class Heap<T extends IHeapItem<T>> {
     while (true) {
       int childIdxLeft = item.getHeapIndex() * 2 + 1;
       int childIdxRight = item.getHeapIndex() * 2 + 2;
-      int swapIdx = 0;
+      int swapIdx;
 
       if (childIdxLeft < currentItemCount) {
         swapIdx = childIdxLeft;

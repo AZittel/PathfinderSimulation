@@ -1,8 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
-import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformationWithHeap;
-import de.hhn.it.pp.components.astarpathfinding.PathfindingService;
 import de.hhn.it.pp.components.astarpathfinding.PathfindingServiceWithHeap;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
@@ -13,20 +11,20 @@ import java.util.List;
 
 public final class PathfinderWithHeap implements PathfindingServiceWithHeap {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(PathfinderWithHeap.class);
+      org.slf4j.LoggerFactory.getLogger(PathfinderWithHeap.class);
 
   private MapManager mapManager = new MapManager();
 
   @Override
   public void createMap(int width, int height)
-    throws IllegalParameterException, PositionOutOfBounds {
+      throws IllegalParameterException, PositionOutOfBounds {
     logger.info("createMap: width = {} height = {}", width, height);
     mapManager.createMap(width, height);
   }
 
   @Override
   public void setStartPoint(Position position)
-    throws PositionOutOfBounds, OccupiedPositionException {
+      throws PositionOutOfBounds, OccupiedPositionException {
     logger.info("setStartPoint: position = {}", position.toString());
     mapManager.setStartCoordinates(position);
   }
@@ -44,7 +42,7 @@ public final class PathfinderWithHeap implements PathfindingServiceWithHeap {
   }
 
   @Override
-  public List<PathfindingInformationWithHeap> doPathfinding() {
+  public List<PathfindingInformationWithHeap> doPathfinding() throws IllegalParameterException {
     logger.info("doPathfinding: no params");
     return new AStarPathfindingAlgorithmWithHeap(mapManager).findPath();
   }
@@ -60,17 +58,19 @@ public final class PathfinderWithHeap implements PathfindingServiceWithHeap {
 
   @Override
   public void changeTerrainTypeModifier(TerrainType type, double modifier)
-    throws IllegalParameterException {
+      throws IllegalParameterException {
     logger.info("changeTerrainTypeFactor: type = {}, modifier = {} ", type, modifier);
     // Check the range of the modifier
     if (modifier < TerrainType.MIN_VALUE) {
-      throw new IllegalParameterException(String
-        .format("Invalid modifier value! Modifier must not be lower than %f!",
-          TerrainType.MIN_VALUE));
+      throw new IllegalParameterException(
+          String.format(
+              "Invalid modifier value! Modifier must not be lower than %f!",
+              TerrainType.MIN_VALUE));
     } else if (modifier > TerrainType.MAX_VALUE) {
-      throw new IllegalParameterException(String
-        .format("Invalid modifier value! Modifier must not be greater than %f!",
-          TerrainType.MAX_VALUE));
+      throw new IllegalParameterException(
+          String.format(
+              "Invalid modifier value! Modifier must not be greater than %f!",
+              TerrainType.MAX_VALUE));
     }
     type.setModifier(modifier);
   }

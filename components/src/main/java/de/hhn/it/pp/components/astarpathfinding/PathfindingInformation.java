@@ -72,11 +72,7 @@ public class PathfindingInformation implements Cloneable {
   private List<Terrain> cloneList(List<Terrain> list) {
     List<Terrain> newList = new ArrayList<>();
     for (Terrain t : list) {
-      try {
-        newList.add((Terrain) t.clone());
-      } catch (CloneNotSupportedException e) {
-        e.printStackTrace();
-      }
+      newList.add(new Terrain(t));
     }
     return newList;
   }

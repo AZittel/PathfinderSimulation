@@ -50,7 +50,7 @@ public class TerrainTest {
   public void clone_successful() throws CloneNotSupportedException, PositionOutOfBounds {
     Position pos = new Position(5, 5);
     Terrain terrain = testMapManager.getTerrainAt(pos);
-    Terrain clonedTerrain = (Terrain) terrain.clone();
+    Terrain clonedTerrain = new Terrain(terrain);
 
     assertNotSame(terrain, clonedTerrain, "The two terrains should not be the same object");
     assertEquals(terrain, clonedTerrain, "The two terrains should be equal");

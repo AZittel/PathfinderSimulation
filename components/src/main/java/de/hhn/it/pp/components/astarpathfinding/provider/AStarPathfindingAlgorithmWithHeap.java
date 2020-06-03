@@ -1,12 +1,11 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
-import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformationWithHeap;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class AStarPathfindingAlgorithmWithHeap {
@@ -33,19 +32,22 @@ public class AStarPathfindingAlgorithmWithHeap {
    * @return If there is a shortest path then all states the algorithm has been through else an
    *     empty list.
    */
-  public ArrayList<PathfindingInformationWithHeap> findPath() {
+  public ArrayList<PathfindingInformationWithHeap> findPath() throws IllegalParameterException {
     logger.debug("findPath: no params");
 
     // Benchmark time
     final long start = System.nanoTime();
 
     Terrain[][] map = mapManager.getMap();
-    PathfindingInformationWithHeap information = new PathfindingInformationWithHeap(map.length * map[0].length);
+    PathfindingInformationWithHeap information =
+        new PathfindingInformationWithHeap(map.length * map[0].length);
     Position startCoordinates = mapManager.getStartCoordinates();
     Position destinationCoordinates = mapManager.getDestinationCoordinates();
 
     // Add the start cell to the open list
-    information.getSpecificPositions().add(map[startCoordinates.getRow()][startCoordinates.getCol()]);
+    information
+        .getSpecificPositions()
+        .add(map[startCoordinates.getRow()][startCoordinates.getCol()]);
 
     while (information.getSpecificPositions().getItemCount() > 0) {
       Terrain currentTerrain = information.getSpecificPositions().removeFirst();

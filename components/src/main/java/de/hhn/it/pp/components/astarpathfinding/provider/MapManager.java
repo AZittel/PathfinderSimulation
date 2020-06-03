@@ -27,6 +27,7 @@ public class MapManager {
 
   private Terrain[][] map;
 
+  /** Constructor of the MapManager class. */
   public MapManager() {
     logger.info("constructor: no params");
     try {
@@ -136,6 +137,13 @@ public class MapManager {
     }
   }
 
+  /**
+   * Returns the terrain at a given position.
+   *
+   * @param position the position to look at
+   * @return the terrain at this position
+   * @throws PositionOutOfBounds thrown if the given position is out of bounds
+   */
   public Terrain getTerrainAt(Position position) throws PositionOutOfBounds {
     logger.debug("getTerrainAt: position = {}", position.toString());
     checkPositionInBounds(position);
@@ -158,6 +166,14 @@ public class MapManager {
     return startCoordinates;
   }
 
+  /**
+   * Places the start coordinate on the given position.
+   *
+   * @param startCoordinates the desired start position
+   * @throws OccupiedPositionException thrown if the position is already blocked by the destination
+   *     position
+   * @throws PositionOutOfBounds thrown if the given position is out of bounds
+   */
   public void setStartCoordinates(Position startCoordinates)
       throws OccupiedPositionException, PositionOutOfBounds {
     logger.debug("setStartCoordinates: startCoordinates = {}", startCoordinates.toString());
@@ -177,6 +193,14 @@ public class MapManager {
     return destinationCoordinates;
   }
 
+  /**
+   * Places the destination coordinate on the given position.
+   *
+   * @param destinationCoordinates the desired destination position
+   * @throws OccupiedPositionException thrown if the position is already blocked by the start
+   *     position
+   * @throws PositionOutOfBounds thrown if the given position is out of bounds
+   */
   public void setDestinationCoordinates(Position destinationCoordinates)
       throws OccupiedPositionException, PositionOutOfBounds {
     logger.debug(
