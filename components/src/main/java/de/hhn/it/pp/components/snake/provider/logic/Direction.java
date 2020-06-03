@@ -1,4 +1,4 @@
-package de.hhn.it.pp.components.snake;
+package de.hhn.it.pp.components.snake.provider.logic;
 
 /**
  * Enum class for all the directions the snake can go.
