@@ -57,7 +57,12 @@ public class Terrain implements IHeapItem<Terrain> {
     this.gCost = terrainToBeCopied.getGCost();
     this.hCost = terrainToBeCopied.getHCost();
     if (terrainToBeCopied.getParent() != null) {
-      this.parent = new Terrain(terrainToBeCopied.getParent());
+      Terrain parent = terrainToBeCopied.getParent();
+      Terrain newParent = new Terrain(parent.getPosition(), parent.getType());
+      newParent.setGCost(parent.getGCost());
+      newParent.setHCost(parent.getHCost());
+      newParent.setHeapIndex(parent.getHeapIndex());
+      this.parent = newParent;
     }
     this.heapIndex = terrainToBeCopied.getHeapIndex();
   }

@@ -84,8 +84,9 @@ public class PathfindingInformationWithHeap implements Cloneable {
     logger.debug("clone: no params");
     PathfindingInformationWithHeap cloned = (PathfindingInformationWithHeap) super.clone();
     try {
-      cloned.setSpecificPositions(new Heap<Terrain>(this.specificPositions));
+      cloned.setSpecificPositions(new Heap<>(this.specificPositions));
     } catch (IllegalParameterException e) {
+      // Should never happen
       e.printStackTrace();
     }
     cloned.setVisitedPositions(this.cloneList(this.visitedPositions));
