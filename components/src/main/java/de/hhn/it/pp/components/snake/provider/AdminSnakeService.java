@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.PlayerProfile;
+import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 
 /**
  * Admin interface to the OurSnakeService to add / remove a Player to / from the service.
