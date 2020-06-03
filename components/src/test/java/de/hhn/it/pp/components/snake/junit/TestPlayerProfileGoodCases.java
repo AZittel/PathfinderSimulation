@@ -2,6 +2,8 @@ package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
+import de.hhn.it.pp.components.snake.provider.logic.State;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,22 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestPlayerProfileGoodCases {
     private static final Logger logger = LoggerFactory.getLogger(TestPlayerProfileGoodCases.class);
     private String newNickname = "detlef2";
+    private PlayerProfile testProfile;
+    private State testState;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IllegalParameterException {
         PlayerProfile testProfile = new PlayerProfile("walter45");
     }
 
     @Test
     @DisplayName("get the player's nickname")
-    void testGetPlayerNickname(){
+    void testGetPlayerNickname() throws IllegalParameterException {
         PlayerProfile testProfile  = new PlayerProfile("walter45");
         assertEquals("walter45", testProfile.getPlayerNickname(), "Nickname should be walter45");
     }
 
     @Test
     @DisplayName("set new nickname")
-    void testSetPlayerNickname() {
+    void testSetPlayerNickname() throws IllegalParameterException {
         PlayerProfile testProfile  = new PlayerProfile("walter45");
         testProfile.setPlayerNickname(newNickname);
         assertEquals("detlef2", testProfile.getPlayerNickname(), "nickname is set to detlef2");
@@ -37,7 +41,7 @@ public class TestPlayerProfileGoodCases {
 
     @Test
     @DisplayName("get the player's highscore")
-    void testGetPlayerHighscore() {
+    void testGetPlayerHighscore() throws IllegalParameterException {
         PlayerProfile testProfile  = new PlayerProfile("walter45");
         testProfile.setPlayerHighscore(46);
         assertEquals(46, testProfile.getPlayerHighscore(), "highscore should be 46");
@@ -45,7 +49,7 @@ public class TestPlayerProfileGoodCases {
 
     @Test
     @DisplayName("get current level")
-    void testGetCurrentLevel() {
+    void testGetCurrentLevel() throws IllegalParameterException {
         PlayerProfile testProfile  = new PlayerProfile("walter45");
         testProfile.setCurrentLevel(1);
         assertEquals(1, testProfile.getCurrentLevel(), "current level is level 1");
@@ -55,8 +59,15 @@ public class TestPlayerProfileGoodCases {
     @DisplayName("get player id")
     void testGetPlayerId() throws IllegalParameterException {
         PlayerProfile testProfile  = new PlayerProfile("walter45");
-        testProfile.setPlayerId(2);
-        assertEquals(2, testProfile.getPlayerId(), "player's id is 2");
+        assertEquals(testProfile.getPlayerId(), testProfile.getPlayerId(), "player's id is 1");
+    }
+
+    @Test
+    @DisplayName("get current state")
+    void testGetCurrentState() throws IllegalParameterException {
+        PlayerProfile testProfile = new PlayerProfile("keks23");
+        testProfile.setCurrentState(testState);
+        assertEquals(testState, testProfile.getCurrentState(), "current state should be our teststate");
     }
 }
 
