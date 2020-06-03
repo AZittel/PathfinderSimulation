@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public class OurSnakeService implements SnakeService, AdminSnakePlayerService {
+public class OurSnakeService implements SnakeService, AdminSnakeService {
 
   /** OurSnakePlayerService's Logger. */
   private static final Logger logger = LoggerFactory.getLogger(OurSnakeService.class);

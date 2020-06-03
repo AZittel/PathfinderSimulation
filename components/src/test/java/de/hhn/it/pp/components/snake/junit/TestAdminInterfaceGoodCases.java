@@ -2,7 +2,7 @@ package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.snake.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
-import de.hhn.it.pp.components.snake.provider.AdminSnakePlayerService;
+import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
 import de.hhn.it.pp.components.snake.provider.SnakeGame;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ public class TestAdminInterfaceGoodCases {
             LoggerFactory.getLogger(TestAdminInterfaceGoodCases.class);
 
     SnakeService snakeService;
-    AdminSnakePlayerService adminSnakePlayerService;
+    AdminSnakeService adminSnakeService;
     List<PlayerProfile> profiles;
 
     @BeforeEach
@@ -26,7 +26,7 @@ public class TestAdminInterfaceGoodCases {
         SnakeGame.setIdCounter(0);
         OurSnakeService ourSnakePlayerService = new OurSnakeService();
         snakeService = ourSnakePlayerService;
-        adminSnakePlayerService = ourSnakePlayerService;
+        adminSnakeService = ourSnakePlayerService;
         this.profiles = profiles;
     }
 

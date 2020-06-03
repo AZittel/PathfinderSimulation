@@ -2,7 +2,7 @@ package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.snake.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
-import de.hhn.it.pp.components.snake.provider.AdminSnakePlayerService;
+import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +21,13 @@ public class TestSnakeGamePlayerServiceBadCases {
             LoggerFactory.getLogger(TestSnakeGamePlayerServiceBadCases.class);
 
     SnakeService snakeService;
-    AdminSnakePlayerService adminSnakePlayerService;
+    AdminSnakeService adminSnakeService;
 
     @BeforeEach
     void setup(List<PlayerProfile> descriptors) throws IllegalParameterException {
         OurSnakeService ourSnakePlayerService = new OurSnakeService();
         snakeService = ourSnakePlayerService;
-        adminSnakePlayerService = ourSnakePlayerService;
+        adminSnakeService = ourSnakePlayerService;
     }
 
     /**@Test

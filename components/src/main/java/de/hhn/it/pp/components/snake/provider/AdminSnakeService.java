@@ -8,7 +8,7 @@ import de.hhn.it.pp.components.snake.PlayerProfile;
  *
  * @author Sören Greiner, Karen Hofele
  */
-public interface AdminSnakePlayerService {
+public interface AdminSnakeService {
   /**
    * Adds a new player profile to the game.
    *

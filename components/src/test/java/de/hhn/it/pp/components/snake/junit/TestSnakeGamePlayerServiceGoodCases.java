@@ -3,7 +3,7 @@ package de.hhn.it.pp.components.snake.junit;
 import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.snake.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
-import de.hhn.it.pp.components.snake.provider.AdminSnakePlayerService;
+import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
 import de.hhn.it.pp.components.snake.provider.Level;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
@@ -20,7 +20,7 @@ public class TestSnakeGamePlayerServiceGoodCases {
             LoggerFactory.getLogger(TestSnakeGamePlayerServiceGoodCases.class);
 
     SnakeService snakeService;
-    AdminSnakePlayerService adminSnakePlayerService;
+    AdminSnakeService adminSnakeService;
     PlayerProfile playerProfile;
     Level level;
     OurSnakeService ourSnakePlayerService;
@@ -30,10 +30,10 @@ public class TestSnakeGamePlayerServiceGoodCases {
     void setup(List<PlayerProfile> profiles) throws IllegalParameterException {
         OurSnakeService ourSnakePlayerService = new OurSnakeService();
         snakeService = ourSnakePlayerService;
-        adminSnakePlayerService = ourSnakePlayerService;
+        adminSnakeService = ourSnakePlayerService;
 
         for (PlayerProfile profile : profiles) {
-            adminSnakePlayerService.addSnakePlayerProfile(profile);
+            adminSnakeService.addSnakePlayerProfile(profile);
         }
     }
 

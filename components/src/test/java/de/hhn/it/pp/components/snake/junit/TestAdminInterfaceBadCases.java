@@ -2,7 +2,7 @@ package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.snake.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
-import de.hhn.it.pp.components.snake.provider.AdminSnakePlayerService;
+import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
 import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,20 +19,20 @@ public class TestAdminInterfaceBadCases {
         LoggerFactory.getLogger(TestAdminInterfaceBadCases.class);
 
     SnakeService snakeService;
-    AdminSnakePlayerService adminSnakePlayerService;
+    AdminSnakeService adminSnakeService;
 
     @BeforeEach
     void setup() {
         OurSnakeService ourSnakePlayerService = new OurSnakeService();
         snakeService = ourSnakePlayerService;
-        adminSnakePlayerService = ourSnakePlayerService;
+        adminSnakeService = ourSnakePlayerService;
     }
 
     @Test
     @DisplayName("Test bad creation of maker with null reference as descriptor")
     public void testCreatePlayerWithNullReference() throws IllegalParameterException {
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
-                () -> adminSnakePlayerService.addSnakePlayerProfile(null));
+                () -> adminSnakeService.addSnakePlayerProfile(null));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TestAdminInterfaceBadCases {
     public void testCreatePlayerWithDescriptorWithNullLocation() {
         PlayerProfile descriptor = new PlayerProfile(null);
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
-                () -> adminSnakePlayerService.addSnakePlayerProfile(descriptor));
+                () -> adminSnakeService.addSnakePlayerProfile(descriptor));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class TestAdminInterfaceBadCases {
     public void testCreatePlayerWithDescriptorWithEmptyStringLocation() {
         PlayerProfile descriptor = new PlayerProfile("");
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
-                () -> adminSnakePlayerService.addSnakePlayerProfile(descriptor));
+                () -> adminSnakeService.addSnakePlayerProfile(descriptor));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class TestAdminInterfaceBadCases {
     public void testCreatePlayerWithDescriptorWithWhitespaceLocation() {
         PlayerProfile descriptor = new PlayerProfile("  ");
         IllegalParameterException exception = assertThrows(IllegalParameterException.class,
-                () -> adminSnakePlayerService.addSnakePlayerProfile(descriptor));
+                () -> adminSnakeService.addSnakePlayerProfile(descriptor));
     }
 
     @Test
@@ -64,6 +64,6 @@ public class TestAdminInterfaceBadCases {
     void testExceptionWhenRemovingNonExistentSnakePlayer() {
         IllegalParameterException illegalParameterException = assertThrows(
                 IllegalParameterException.class,
-                () -> adminSnakePlayerService.removeSnakePlayerProfile(123456));
+                () -> adminSnakeService.removeSnakePlayerProfile(123456));
     }
 }
