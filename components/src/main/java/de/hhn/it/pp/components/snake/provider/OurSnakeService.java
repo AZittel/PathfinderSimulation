@@ -4,7 +4,7 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
 import de.hhn.it.pp.components.snake.Direction;
 import de.hhn.it.pp.components.snake.PlayerProfile;
-import de.hhn.it.pp.components.snake.SnakePlayerService;
+import de.hhn.it.pp.components.snake.SnakeService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlayerService {
+public class OurSnakeService implements SnakeService, AdminSnakePlayerService {
 
   /** OurSnakePlayerService's Logger. */
-  private static final Logger logger = LoggerFactory.getLogger(OurSnakePlayerService.class);
+  private static final Logger logger = LoggerFactory.getLogger(OurSnakeService.class);
 
   /** Map for all player profiles. */
   private Map<Integer, SnakeGame> allPlayersProfiles;
@@ -35,7 +35,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   /** Current dircetion of the snake. */
   private Direction currentDirection;
 
-  public OurSnakePlayerService() {
+  public OurSnakeService() {
     logger.info("Constructor");
     allPlayersProfiles = new HashMap<>();
   }
