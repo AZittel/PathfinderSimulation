@@ -1,10 +1,9 @@
 package de.hhn.it.pp.components.snake.junit;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.SnakePlayerProfile;
+import de.hhn.it.pp.components.snake.PlayerProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Tests SnakePlayerProfile with bad cases")
-public class TestSnakePlayerProfileBadCases {
+public class TestPlayerProfileBadCases {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestSnakePlayerProfileBadCases.class);
-    private SnakePlayerProfile testProfile;
+    private static final Logger logger = LoggerFactory.getLogger(TestPlayerProfileBadCases.class);
+    private PlayerProfile testProfile;
     private int playerId = 1;
 
     @BeforeEach
     void setup() throws IllegalParameterException {
-        SnakePlayerProfile testProfile = new SnakePlayerProfile("walter456");
+        PlayerProfile testProfile = new PlayerProfile("walter456");
         testProfile.setPlayerId(playerId);
     }
 
