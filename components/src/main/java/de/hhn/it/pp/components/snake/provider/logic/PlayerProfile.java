@@ -26,7 +26,9 @@ public class PlayerProfile {
   private int currentLevel;
 
   /** player's id. */
-  private int playerId = 0;
+  private int playerId;
+
+  private static int counter = 0;
 
   /** players's state*/
   private State currentState;
@@ -39,12 +41,12 @@ public class PlayerProfile {
    *
    * @param nickname nickname of the current player.
    */
-  public PlayerProfile(final String nickname) {
+  public PlayerProfile(String nickname) {
     logger.info("Constructor - {}", nickname);
     this.nickname = nickname;
     playerHighscore = 0;
     currentLevel = 1;
-    playerId++;
+    playerId = counter++;
     allIds.add(playerId);
   }
 
@@ -123,12 +125,12 @@ public class PlayerProfile {
    *
    * @param playerId player's id
    */
-  public void setPlayerId(int playerId) throws IllegalParameterException {
+  public void setPlayerId() throws IllegalParameterException {
     logger.info("set player's id: {}", playerId);
     if (allIds.contains(playerId)) {
       throw new IllegalParameterException("playerId is already chosen, chose another one");
     } else {
-      this.playerId = playerId;
+      playerId = counter++;
     }
   }
 
