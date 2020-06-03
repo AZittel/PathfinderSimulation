@@ -10,11 +10,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sören Greiner, Karen Hofele
  */
-public class SnakePlayerProfile {
+public class PlayerProfile {
 
   /** SnakePlayerProfile's logger. */
   private static Logger logger =
-            LoggerFactory.getLogger(SnakePlayerProfile.class);
+            LoggerFactory.getLogger(PlayerProfile.class);
 
   /** player's nickname. */
   private String nickname;
@@ -36,7 +36,7 @@ public class SnakePlayerProfile {
    *
    * @param nickname nickname of the current player.
    */
-  public SnakePlayerProfile(final String nickname) {
+  public PlayerProfile(final String nickname) {
     logger.info("Constructor - {}", nickname);
     this.nickname = nickname;
     playerHighscore = 0;
