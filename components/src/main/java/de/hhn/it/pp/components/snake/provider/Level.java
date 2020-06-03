@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public class OurSnakeLevel {
+public class Level {
 
   /** OurSnakeLevel's Logger. */
-  private static final Logger logger = LoggerFactory.getLogger(OurSnakeLevel.class);
+  private static final Logger logger = LoggerFactory.getLogger(Level.class);
 
   /** Id of the level. */
   private int levelId;
@@ -21,7 +21,7 @@ public class OurSnakeLevel {
   private int neededHighscore;
 
   /** List of all levels. */
-  private ArrayList<OurSnakeLevel> allLevels = new ArrayList<>();
+  private ArrayList<Level> allLevels = new ArrayList<>();
 
   /**
    * Constructor of OurSnakeLevel.
@@ -29,7 +29,7 @@ public class OurSnakeLevel {
    * @param levelId level's id
    * @param neededHighscore highscore that is required for the next level
    */
-  public OurSnakeLevel(int levelId, int neededHighscore) {
+  public Level(int levelId, int neededHighscore) {
     logger.info("Constructor: created level with id {} and needed highscore {}",
             levelId, neededHighscore);
     this.levelId = levelId;

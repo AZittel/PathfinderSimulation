@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public class OurSnakeItem {
+public class Item {
 
   /** OurSnakeItem's Logger. */
-  private static final Logger logger = LoggerFactory.getLogger(OurSnakeItem.class);
+  private static final Logger logger = LoggerFactory.getLogger(Item.class);
 
   /** Item's value.*/
   private int value;
@@ -28,7 +28,7 @@ public class OurSnakeItem {
    *
    * @param value Item's value
    */
-  public OurSnakeItem(int value) {
+  public Item(int value) {
     logger.info("Constructor: created item with value = {}", value);
     this.value = value;
   }
@@ -52,10 +52,10 @@ public class OurSnakeItem {
    */
   public void spawn(int xPos, int yPos) throws IllegalParameterException {
     logger.info("spawned item at pos={} {}", xPos, yPos);
-    if (xPos > OurSnakePlayerService.getWindowWidth()
-            || yPos > OurSnakePlayerService.getWindowHeight()) {
+    if (xPos > OurSnakeService.getWindowWidth()
+            || yPos > OurSnakeService.getWindowHeight()) {
       throw new IllegalParameterException("Coordinates are outside the playfield");
-    } else if (xPos < 0 || yPos < 0) {
+    } else if (xPos <= 0 || yPos <= 0) {
       throw new IllegalParameterException("Coordinates are too small");
     } else {
       xPosition = xPos;
@@ -79,5 +79,23 @@ public class OurSnakeItem {
    */
   public int getyPosition() {
     return yPosition;
+  }
+
+  /**
+   * Setter for xPosition
+   *
+   * @param xPos new x-Coordinate
+   */
+  public void setxPosition(int xPos) {
+    xPosition = xPos;
+  }
+
+  /**
+   * Setter for yPosition
+   *
+   * @param yPos new y-Coordinate
+   */
+  public void setyPosition(int yPos) {
+    yPosition = yPos;
   }
 }
