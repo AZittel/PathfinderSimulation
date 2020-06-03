@@ -1,6 +1,7 @@
-package de.hhn.it.pp.components.snake.provider;
+package de.hhn.it.pp.components.snake.provider.logic;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
