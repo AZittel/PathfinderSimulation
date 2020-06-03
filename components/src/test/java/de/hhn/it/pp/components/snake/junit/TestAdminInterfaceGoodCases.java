@@ -46,8 +46,8 @@ public class TestAdminInterfaceGoodCases {
     @Test
     @DisplayName("Adding one player to the service results in one entry.")
     public void testAddOnePlayer() throws IllegalParameterException {
-        SnakePlayerProfile descriptor = new SnakePlayerProfile("LongDongSilver");
-        adminSnakePlayerService.addSnakePlayerProfile(descriptor);
+        SnakePlayerProfile profile = new SnakePlayerProfile("LongDongSilver");
+        adminSnakePlayerService.addSnakePlayerProfile(profile);
         List<SnakePlayerProfile> players = snakePlayerService.getAllSnakePlayerProfiles();
         SnakePlayerProfile profile1 = players.get(0);
         assertAll(
@@ -59,8 +59,8 @@ public class TestAdminInterfaceGoodCases {
     @Test
     @DisplayName("adds and remove one player and check the result")
     public void testRemovePlayer() throws IllegalParameterException {
-        SnakePlayerProfile descriptor = new SnakePlayerProfile("LongDongSilver");
-        adminSnakePlayerService.addSnakePlayerProfile(descriptor);
+        SnakePlayerProfile profile = new SnakePlayerProfile("LongDongSilver");
+        adminSnakePlayerService.addSnakePlayerProfile(profile);
         List<SnakePlayerProfile> players = snakePlayerService.getAllSnakePlayerProfiles();
         SnakePlayerProfile descriptor1 = players.get(0);
         adminSnakePlayerService.removeSnakePlayerProfile(players.get(0).getPlayerId());
