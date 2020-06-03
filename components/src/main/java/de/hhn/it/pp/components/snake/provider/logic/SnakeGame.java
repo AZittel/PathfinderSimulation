@@ -1,7 +1,5 @@
-package de.hhn.it.pp.components.snake.provider;
+package de.hhn.it.pp.components.snake.provider.logic;
 
-import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.PlayerProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
