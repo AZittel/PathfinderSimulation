@@ -135,20 +135,6 @@ public class TestCraftingServiceGoodCases {
   @Test
   @DisplayName("craft a pattern which implies the inventory")
   void testSuccessfulCraftingProcess() throws CraftingNotPossibleException, InterruptedException {
-    // compare items before crafting
-    // items in each list should be identical
-    assertAll(
-        () -> assertEquals(expectedItemsBeforeTestingOperations.get(0).getName(),
-            testInventory.getItems().get(0).getName(),
-            "First item should be 'Egg'"),
-        () -> assertEquals(expectedItemsBeforeTestingOperations.get(1).getName(),
-            testInventory.getItems().get(1).getName(),
-            "Second item should be 'Milk Chocolate'"),
-        () -> assertEquals(expectedItemsBeforeTestingOperations.get(2).getName(),
-            testInventory.getItems().get(2).getName(),
-            "Third item should be 'Flour'")
-    );
-
     // craft the sample pattern
     craftingService.craft(testInventory, tastyChocolateCookie);
 
