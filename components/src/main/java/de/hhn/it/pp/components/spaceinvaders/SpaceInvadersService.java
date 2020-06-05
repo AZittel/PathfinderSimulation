@@ -7,6 +7,7 @@ package de.hhn.it.pp.components.spaceinvaders;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,19 +61,22 @@ public interface SpaceInvadersService {
     void addHighScore(List<String> highscoreList);
 
     /**
+     * @return
      */
-    List<HighScoreEntry> getHighscoreList();
+    ArrayList getHighscoreList();
 
     /**
      */
-    Position getPositionPlayer() throws IllegalArgumentException;
+   Position getPositionPlayer() throws IllegalArgumentException;
 
     /**
      */
-    List<Position> getPositionEnemies() throws IllegalArgumentException;
+    void getPositionEnemies() throws IllegalArgumentException;
 
     /**
      *  Resets the Game.
      */
     void restart();
+
+    int collection();
 }

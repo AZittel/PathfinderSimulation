@@ -8,13 +8,15 @@ package de.hhn.it.pp.components.spaceinvaders.provider;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.spaceinvaders.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpaceInvaders implements SpaceInvadersService {
 
+
+
     @Override
     public void createField(int width, int height) throws IllegalParameterException {
-
     }
 
     @Override
@@ -27,6 +29,10 @@ public class SpaceInvaders implements SpaceInvadersService {
 
     }
 
+    public void collection(Enemies aliens){
+
+    }
+
     @Override
     public void movement(int xPosition, int yPosition) throws IllegalArgumentException {
 
@@ -36,7 +42,12 @@ public class SpaceInvaders implements SpaceInvadersService {
     public void shooting() {
 
     }
+    public void moveAlien(){
+    }
 
+    public int shutDown(){
+     return 0;
+    }
     @Override
     public void addListener(InvaderListener listener) throws IllegalParameterException {
 
@@ -53,7 +64,7 @@ public class SpaceInvaders implements SpaceInvadersService {
     }
 
     @Override
-    public List<HighScoreEntry> getHighscoreList() {
+    public ArrayList getHighscoreList() {
         return null;
     }
 
@@ -64,12 +75,21 @@ public class SpaceInvaders implements SpaceInvadersService {
 
 
     @Override
-    public List<Position> getPositionEnemies() throws IllegalArgumentException {
-        return null;
+    public void getPositionEnemies() throws IllegalArgumentException {
     }
 
     @Override
     public void restart() {
 
     }
+    public boolean gameOver() {
+        return false;
+    }
+
+    @Override
+    public int collection() {
+        return 0;
+    }
+
+    public int numOfLives(){return 0;}
 }

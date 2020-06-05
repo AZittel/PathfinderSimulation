@@ -25,5 +25,5 @@ public class Player extends Position {
     /**
      * Player move up
      */
-    void shot(){}
+    void shoot(){}
 }
