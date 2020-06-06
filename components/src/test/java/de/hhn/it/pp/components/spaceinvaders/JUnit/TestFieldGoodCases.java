@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-public class FieldTest {
+public class TestFieldGoodCases {
     SpaceInvaders spaceInvaders = new SpaceInvaders();
-    Field spaceInvadersField;
+    Field spaceInvadersField = new Field();
 
     //erzeuge ein neues Feld mit 50/50
-    public FieldTest() throws IllegalParameterException {
+    public TestFieldGoodCases() throws IllegalParameterException {
         spaceInvaders.createField(50,50);
     }
 

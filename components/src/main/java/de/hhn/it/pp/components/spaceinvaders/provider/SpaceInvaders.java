@@ -29,7 +29,7 @@ public class SpaceInvaders implements SpaceInvadersService {
 
     }
 
-    public void collection(Enemies aliens){
+    public void collection(Enemy aliens){
 
     }
 

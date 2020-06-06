@@ -10,12 +10,17 @@ import de.hhn.it.pp.components.spaceinvaders.EnemyType;
 
 import java.util.ArrayList;
 
-public class Enemies {
-    ArrayList<Enemies> aliens = new ArrayList<>();
+public class Enemy {
+    ArrayList<Enemy> aliens = new ArrayList<>();
+    int x;
+    int y;
+    int speed;
 
 
-
-    public Enemies(int x, int y, EnemyType standard, int speed) {
+    public Enemy(int x, int y, EnemyType standard, int speed) {
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
     }
 
 
@@ -35,10 +40,15 @@ public class Enemies {
      * Enemies can move to their goal
      */
     public void moveAlien(){
+        x--;
     }
 
     void shutDown(){
 
+    }
+
+    public int getX() {
+        return x;
     }
 
 }

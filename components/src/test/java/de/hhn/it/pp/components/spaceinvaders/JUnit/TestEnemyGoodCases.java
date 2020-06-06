@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.spaceinvaders.JUnit;
-import de.hhn.it.pp.components.spaceinvaders.provider.Enemies;
+import de.hhn.it.pp.components.spaceinvaders.provider.Enemy;
+import de.hhn.it.pp.components.spaceinvaders.provider.Player;
 import de.hhn.it.pp.components.spaceinvaders.provider.SpaceInvaders;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Enemy Class Test -Bad Case")
 
-public class EnemyTest {
+public class TestEnemyGoodCases {
     SpaceInvaders spaceInvaders = new SpaceInvaders();
-    ArrayList<Enemies> aliens = new ArrayList<>();
+    ArrayList<Enemy> aliens = new ArrayList<>();
     int shutdown = 0;
     
     @BeforeEach
     void setup(){
 
         for(int i = 0; i <20; i++) {
-            Enemies enemy = new Enemies(100*i, 100*i, STANDARD, 30);
+            Enemy enemy = new Enemy(100*i, 100*i, STANDARD, 30);
             aliens.add(enemy);
         }
 
@@ -32,16 +33,17 @@ public class EnemyTest {
     void createEnemiesTest(){
         // Erwartet eine Arraylist mit der Größe von 20 (Aliens)
         int a = spaceInvaders.collection();
-        assertEquals(aliens.size(), a, "size should be 20");
-    } //TODO Winkler : is das so in Ordnung?
+        assertEquals(20, aliens.size(), "size should be 20");
+    }
 
 
     @Test
     @DisplayName("Direction Test - Aliens")
     void moveTest()throws IllegalArgumentException{
-        Enemies before = aliens.get(0);
-        spaceInvaders.moveAlien();
-        Enemies after = aliens.get(0);
+        int before = aliens.get(1).getX();
+        Enemy enemy = aliens.get(1);
+        enemy.moveAlien();
+        int after = aliens.get(1).getX();
         boolean test = before != after;
         assertTrue(test, "Movement of Aliens");
     }
