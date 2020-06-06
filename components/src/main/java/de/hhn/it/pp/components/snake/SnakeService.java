@@ -9,13 +9,13 @@ import java.util.List;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public interface SnakePlayerService {
+public interface SnakeService {
   /**
    * Returns a list of registered players from snake.
    *
    * @return List of registered players.
    */
-  List<SnakePlayerProfile> getAllSnakePlayerProfiles();
+  List<PlayerProfile> getAllSnakePlayerProfiles();
 
   /**
    * Returns the description of the player with the chosen player id.
@@ -24,7 +24,7 @@ public interface SnakePlayerService {
    * @return description of the players highscores and games
    * @throws IllegalParameterException if the player does not exist
    */
-  SnakePlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException;
+  PlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException;
 
   /**
    * Starts the game snake for the player.

@@ -1,8 +1,8 @@
 package de.hhn.it.pp.components.minesweeper;
 
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.minesweeper.exceptions.BooouuummmmException;
 import de.hhn.it.pp.components.minesweeper.exceptions.InvalidGameStateException;
-
-import java.util.List;
 
 /**
  * This Interface is an Interface for the Game MineSweeper that shows all the
@@ -17,7 +17,7 @@ public interface MinesweeperService {
      * @throws IllegalArgumentException  if the width or height is invalid.
      * @throws InvalidGameStateException is thrown if the game is already running.
      */
-    void createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException;
+    void createField(int width, int height) throws IllegalArgumentException, InvalidGameStateException, IllegalParameterException;
 
     /**
      * Sets the bombs on the field.
@@ -31,12 +31,12 @@ public interface MinesweeperService {
     /**
      * Resets the Game.
      */
-    void restart() throws InvalidGameStateException;
+    FieldInformation[][] restart(int width, int height) throws InvalidGameStateException, IllegalArgumentException, IllegalParameterException;
 
     /**
      * Starts the Game.
      */
-    void startGame() throws InvalidGameStateException;
+    void startGame(int width, int height, int bombCount) throws InvalidGameStateException, IllegalParameterException;
 
     /**
      * Closes the Game.
@@ -48,23 +48,29 @@ public interface MinesweeperService {
      * @param x x-Pos of the clicked field.
      * @param y y-Pos of the clicked field.
      */
-    List<FieldInformation> turn(int x, int y);
+    FieldInformation[][] turn(int x, int y) throws BooouuummmmException;
 
     /**
      * Sets the bombs which are used to test our program and to see if the program gets the bombs location.
      */
-    void setFixBombs(List<BombPosition> positions);
+    void setFixBombs();
 
 
     /**
      * Getter for getting bombs.
      */
-    List<BombPosition> getBombs();
+    BombPosition[] getBombs();
 
     /**
      * @return returns the current Points.
      */
     int getPoints();
+
+    /**
+     *
+     * @return the Field.
+     */
+    FieldInformation[][] getField();
 
 }
 

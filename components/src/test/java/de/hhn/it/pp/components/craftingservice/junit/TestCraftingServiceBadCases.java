@@ -53,14 +53,14 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("get null referenced crafting pattern ")
   void testExceptionWhenGettingNullReferencedPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class, () -> craftingService.getPattern(null));
   }
 
   @Test
   @DisplayName("get non existing crafting pattern ")
   void testExceptionWhenGettingNonExistingPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.getPattern("Non Existing Pattern"));
   }
@@ -68,7 +68,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("add null referenced pattern to the crafting service")
   void testExceptionWhenAddingNullReferencedPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.addCraftingPattern(null));
   }
@@ -76,7 +76,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("remove null referenced pattern from the crafting service")
   void testExceptionWhenRemovingNullReferencedPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.removeCraftingPattern(null));
   }
@@ -84,7 +84,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("remove non existing pattern from the crafting service")
   void testExceptionWhenRemovingNonExistingPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.removeCraftingPattern("Non Existing Pattern"));
   }
@@ -95,8 +95,8 @@ public class TestCraftingServiceBadCases {
       OperationNotSupportedException {
     // remove last remaining pattern - list should be empty now
     craftingService.removeCraftingPattern("Pattern: Tasty Chocolate Cookie");
-
-    OperationNotSupportedException operationNotSupportedException = assertThrows(
+    
+    assertThrows(
         OperationNotSupportedException.class,
         () -> craftingService.removeCraftingPattern("Any Pattern"));
   }
@@ -104,7 +104,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("craft null referenced crafting pattern")
   void testExceptionWhenCraftingNullReference() {
-    CraftingNotPossibleException craftingNotPossibleException = assertThrows(
+    assertThrows(
         CraftingNotPossibleException.class,
         () -> craftingService.craft(testInventory, null));
   }
@@ -112,7 +112,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("try to craft a pattern which doesn't imply the inventory")
   void testExceptionWhenItemsDontMatchPattern() {
-    CraftingNotPossibleException craftingNotPossibleException = assertThrows(
+    assertThrows(
         CraftingNotPossibleException.class,
         () -> craftingService.craft(testInventory, tastyChocolateCookie));
   }
@@ -132,7 +132,7 @@ public class TestCraftingServiceBadCases {
     craftingService.craft(testInventory, tastyChocolateCookie);
 
     // immediately try to craft the next pattern while the first one is still crafting
-    CraftingNotPossibleException craftingNotPossibleException = assertThrows(
+    assertThrows(
         CraftingNotPossibleException.class,
         () -> craftingService.craft(testInventory, tastyChocolateCookie));
 
@@ -143,7 +143,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("add a null referenced listener")
   void testExceptionWhenAddingNullReferencedListener() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.addListener(null));
   }
@@ -151,7 +151,7 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("remove null referenced listener")
   void testExceptionWhenRemovingNullReferencedListener() {
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.removeListener(null));
   }
@@ -166,7 +166,7 @@ public class TestCraftingServiceBadCases {
     CraftingListener anotherListener = new Callback();
 
     // try to remove a listener from another crafting process which doesn't exist
-    IllegalParameterException illegalParameterException = assertThrows(
+    assertThrows(
         IllegalParameterException.class,
         () -> craftingService.removeListener(anotherListener));
   }

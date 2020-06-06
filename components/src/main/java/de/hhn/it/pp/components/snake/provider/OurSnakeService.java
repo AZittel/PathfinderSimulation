@@ -3,8 +3,8 @@ package de.hhn.it.pp.components.snake.provider;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
 import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.SnakePlayerProfile;
-import de.hhn.it.pp.components.snake.SnakePlayerService;
+import de.hhn.it.pp.components.snake.PlayerProfile;
+import de.hhn.it.pp.components.snake.SnakeService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,13 +18,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author Karen Hofele, Sören Greiner
  */
-public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlayerService {
+public class OurSnakeService implements SnakeService, AdminSnakePlayerService {
 
   /** OurSnakePlayerService's Logger. */
-  private static final Logger logger = LoggerFactory.getLogger(OurSnakePlayerService.class);
+  private static final Logger logger = LoggerFactory.getLogger(OurSnakeService.class);
 
   /** Map for all player profiles. */
-  private Map<Integer, Snake> allPlayersProfiles;
+  private Map<Integer, SnakeGame> allPlayersProfiles;
 
   /** window's height. */
   private static int windowHeight;
@@ -35,7 +35,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   /** Current dircetion of the snake. */
   private Direction currentDirection;
 
-  public OurSnakePlayerService() {
+  public OurSnakeService() {
     logger.info("Constructor");
     allPlayersProfiles = new HashMap<>();
   }
@@ -47,7 +47,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @return returns the chosen player
    * @throws IllegalParameterException if the chosen player id is not used
    */
-  private Snake getPlayerById(int id)throws IllegalParameterException {
+  private SnakeGame getPlayerById(int id)throws IllegalParameterException {
     logger.info("getPlayerByNickname: id = {}", id);
     if (!allPlayersProfiles.containsKey(id)) {
       throw new IllegalParameterException("Player with id " + id + " does not exist.");
@@ -61,10 +61,10 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @return List of registered players.
    */
   @Override
-  public List<SnakePlayerProfile> getAllSnakePlayerProfiles() {
+  public List<PlayerProfile> getAllSnakePlayerProfiles() {
     logger.info("getSnakePlayers: no params");
-    List<SnakePlayerProfile> results = new ArrayList<>();
-    for (Snake player : allPlayersProfiles.values()) {
+    List<PlayerProfile> results = new ArrayList<>();
+    for (SnakeGame player : allPlayersProfiles.values()) {
       results.add(player.getProfile());
     }
     return results;
@@ -78,9 +78,9 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @throws IllegalParameterException if the player does not exist
    */
   @Override
-  public SnakePlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException {
+  public PlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException {
     logger.info("getSnakePlayer: id = {}", id);
-    Snake player = getPlayerById(id);
+    SnakeGame player = getPlayerById(id);
     return player.getProfile();
   }
 
@@ -95,7 +95,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   @Override
   public void startGame(int id, int winHeight, int winWidth) throws IllegalParameterException {
     logger.info("startGame: id = {}", id);
-    Snake player = getPlayerById(id);
+    SnakeGame player = getPlayerById(id);
     windowHeight = winHeight;
     windowWidth = winWidth;
     player.startGame();
@@ -111,7 +111,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   @Override
   public void switchLevel(int id, int highscore) throws IllegalParameterException {
     logger.info("switchLevel: id = {}", id);
-    Snake player = getPlayerById(id);
+    SnakeGame player = getPlayerById(id);
     player.switchLevel();
   }
 
@@ -125,7 +125,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   @Override
   public void endGame(int id) throws IllegalParameterException {
     logger.info("endGame: id = {}", id);
-    Snake player = getPlayerById(id);
+    SnakeGame player = getPlayerById(id);
     player.endGame();
     //todo Exception werfen
   }
@@ -133,7 +133,7 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
   @Override
   public void moveSnake(int id, Direction direction) throws IllegalParameterException {
     logger.info("usedKey: id = {}, direction = {}", id, direction);
-    Snake player = getPlayerById(id);
+    SnakeGame player = getPlayerById(id);
     if (direction == null) {
       throw new IllegalParameterException("Direction is a null reference.");
     }
@@ -149,12 +149,12 @@ public class OurSnakePlayerService implements SnakePlayerService, AdminSnakePlay
    * @throws IllegalParameterException if the descriptor is a null reference or incomplete.
    */
   @Override
-  public void addSnakePlayerProfile(SnakePlayerProfile profile) throws IllegalParameterException {
+  public void addSnakePlayerProfile(PlayerProfile profile) throws IllegalParameterException {
     logger.info("addSnakePlayer: descriptor = {}", profile);
     CheckingHelper.assertThatIsNotNull(profile, "descriptor");
     CheckingHelper.assertThatIsReadableString(profile.getPlayerNickname(), "nickname");
 
-    Snake player = new Snake(profile);
+    SnakeGame player = new SnakeGame(profile);
     allPlayersProfiles.put(player.getProfile().getPlayerId(), player);
   }
 
