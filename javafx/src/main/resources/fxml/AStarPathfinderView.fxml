@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.AStarPathfinderView">
+   <children>
+      <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+          <AnchorPane prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="50.0" prefWidth="800.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Create new Map" />
+                        <Button mnemonicParsing="false" text="Reset Map" />
+                        <Button mnemonicParsing="false" text="Start visualisation" />
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <GridPane prefHeight="40.0" prefWidth="407.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="203.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="99.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="68.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Obstacle" />
+                              <Label prefHeight="17.0" prefWidth="82.0" text="Cost modifier" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
+                              <Slider GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

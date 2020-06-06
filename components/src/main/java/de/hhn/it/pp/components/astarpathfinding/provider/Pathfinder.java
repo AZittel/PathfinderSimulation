@@ -11,20 +11,20 @@ import java.util.List;
 
 public final class Pathfinder implements PathfindingService {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(Pathfinder.class);
+      org.slf4j.LoggerFactory.getLogger(Pathfinder.class);
 
   private MapManager mapManager = new MapManager();
 
   @Override
   public void createMap(int width, int height)
-    throws IllegalParameterException, PositionOutOfBounds {
+      throws PositionOutOfBounds {
     logger.info("createMap: width = {} height = {}", width, height);
     mapManager.createMap(width, height);
   }
 
   @Override
   public void setStartPoint(Position position)
-    throws PositionOutOfBounds, OccupiedPositionException {
+      throws PositionOutOfBounds, OccupiedPositionException {
     logger.info("setStartPoint: position = {}", position.toString());
     mapManager.setStartCoordinates(position);
   }
@@ -42,7 +42,7 @@ public final class Pathfinder implements PathfindingService {
   }
 
   @Override
-  public List<PathfindingInformation> doPathfinding() {
+  public List<PathfindingInformation> doPathfinding() throws IllegalParameterException {
     logger.info("doPathfinding: no params");
     return new AStarPathfindingAlgorithm(mapManager).findPath();
   }
@@ -58,17 +58,19 @@ public final class Pathfinder implements PathfindingService {
 
   @Override
   public void changeTerrainTypeModifier(TerrainType type, double modifier)
-    throws IllegalParameterException {
+      throws IllegalParameterException {
     logger.info("changeTerrainTypeFactor: type = {}, modifier = {} ", type, modifier);
     // Check the range of the modifier
     if (modifier < TerrainType.MIN_VALUE) {
-      throw new IllegalParameterException(String
-        .format("Invalid modifier value! Modifier must not be lower than %f!",
-          TerrainType.MIN_VALUE));
+      throw new IllegalParameterException(
+          String.format(
+              "Invalid modifier value! Modifier must not be lower than %f!",
+              TerrainType.MIN_VALUE));
     } else if (modifier > TerrainType.MAX_VALUE) {
-      throw new IllegalParameterException(String
-        .format("Invalid modifier value! Modifier must not be greater than %f!",
-          TerrainType.MAX_VALUE));
+      throw new IllegalParameterException(
+          String.format(
+              "Invalid modifier value! Modifier must not be greater than %f!",
+              TerrainType.MAX_VALUE));
     }
     type.setModifier(modifier);
   }
