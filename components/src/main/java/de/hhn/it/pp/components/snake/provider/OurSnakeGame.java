@@ -24,7 +24,7 @@ public class OurSnakeGame implements SnakeGame {
      * @param profile Descriptor with basic facts about the Snake to be created
      */
     public OurSnakeGame (PlayerProfile profile) {
-        logger.debug("Constructor - {}", profile);
+        logger.info("Constructor - {}", profile);
         listeners = new ArrayList<>();
         this.profile = profile;
         //this.profile.setPlayerId(idCounter++);
