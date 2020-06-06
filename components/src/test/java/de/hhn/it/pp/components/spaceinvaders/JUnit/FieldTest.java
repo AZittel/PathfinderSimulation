@@ -17,7 +17,6 @@ public class FieldTest {
         spaceInvaders.createField(50,50);
     }
 
-    //TODO richtig?
     @Test
     @DisplayName("Test of field creation")
     void createFieldTest(){

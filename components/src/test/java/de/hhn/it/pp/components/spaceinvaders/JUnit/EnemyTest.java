@@ -1,6 +1,4 @@
 package de.hhn.it.pp.components.spaceinvaders.JUnit;
-import de.hhn.it.pp.components.snake.Direction;
-import de.hhn.it.pp.components.snake.Movement;
 import de.hhn.it.pp.components.spaceinvaders.provider.Enemies;
 import de.hhn.it.pp.components.spaceinvaders.provider.SpaceInvaders;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +9,7 @@ import static de.hhn.it.pp.components.spaceinvaders.EnemyType.STANDARD;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@DisplayName("Énemy Class Test -Bad Case")
+@DisplayName("Enemy Class Test -Bad Case")
 
 public class EnemyTest {
     SpaceInvaders spaceInvaders = new SpaceInvaders();
@@ -20,6 +18,7 @@ public class EnemyTest {
     
     @BeforeEach
     void setup(){
+
         for(int i = 0; i <20; i++) {
             Enemies enemy = new Enemies(100*i, 100*i, STANDARD, 30);
             aliens.add(enemy);
@@ -34,7 +33,7 @@ public class EnemyTest {
         // Erwartet eine Arraylist mit der Größe von 20 (Aliens)
         int a = spaceInvaders.collection();
         assertEquals(aliens.size(), a, "size should be 20");
-    }
+    } //TODO Winkler : is das so in Ordnung?
 
 
     @Test

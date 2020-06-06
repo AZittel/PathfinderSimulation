@@ -1,14 +1,13 @@
 package de.hhn.it.pp.components.spaceinvaders.JUnit;
-
 import de.hhn.it.pp.components.spaceinvaders.Position;
 import de.hhn.it.pp.components.spaceinvaders.provider.SpaceInvaders;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest{
     SpaceInvaders spaceInvaders = new SpaceInvaders();
+
 
     @Test
     void movementTest(){
@@ -20,14 +19,13 @@ public class PlayerTest{
     }
     @Test
     void gameOverTest(){
-        boolean benis = false;
+        boolean gameStatus = false;
         int numOfLives = spaceInvaders.numOfLives();
         int arrayAliens = spaceInvaders.collection();
         if(numOfLives == 0 || arrayAliens == 0){
-            benis= true;
+            gameStatus= true;
         }
-        boolean game = spaceInvaders.gameOver();
-        assertEquals(benis, game ,"Test for Status of the game");
+        assertTrue(gameStatus, "Test for Status of the game");
 
     }
     //TODO darko mach mal mein boi :D

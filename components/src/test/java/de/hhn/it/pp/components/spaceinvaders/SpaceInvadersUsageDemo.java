@@ -14,7 +14,7 @@ public class SpaceInvadersUsageDemo {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(SpaceInvadersUsageDemo.class);
 
-    public static void main(String[] args) throws InterruptedException, IllegalParameterException, GameOverException, IllegalArgumentException {
+    public static void main(String[] args) throws InterruptedException, IllegalParameterException, IllegalArgumentException {
         //Create the service
         logger.info("create SpaceInvaderService");
         SpaceInvadersService spaceInvadersService = new SpaceInvaders();
