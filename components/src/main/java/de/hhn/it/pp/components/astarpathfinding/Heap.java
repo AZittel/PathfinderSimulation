@@ -3,8 +3,8 @@ package de.hhn.it.pp.components.astarpathfinding;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 public class Heap<T extends IHeapItem<? super T>> {
-  T[] items;
-  int currentItemCount;
+  private T[] items;
+  private int currentItemCount;
 
   /**
    * Class constructor. Declares a new array of items with the given max heap size.
@@ -137,4 +137,9 @@ public class Heap<T extends IHeapItem<? super T>> {
     item1.setHeapIndex(item2.getHeapIndex());
     item2.setHeapIndex(item1Index);
   }
+
+  public T[] getItems(){
+    return items;
+  }
+
 }

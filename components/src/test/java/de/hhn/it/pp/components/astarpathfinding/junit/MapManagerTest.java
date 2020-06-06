@@ -94,9 +94,9 @@ public class MapManagerTest {
           "Unsuccessfully create a new terrain map with width and height being lower than the minimum "
               + "values")
       public void createMap_belowMinimumValues()
-          throws IllegalParameterException, PositionOutOfBounds {
+          throws PositionOutOfBounds {
         assertThrows(
-            IllegalParameterException.class,
+          PositionOutOfBounds.class,
             () -> testMapManager.createMap(MapManager.MIN_WIDTH - 1, MapManager.MIN_HEIGHT - 1));
       }
 
@@ -105,9 +105,9 @@ public class MapManagerTest {
           "Unsuccessfully create a new terrain map with width and height being higher than the maximum "
               + "values")
       public void createMap_aboveMaximumValues()
-          throws IllegalParameterException, PositionOutOfBounds {
+          throws PositionOutOfBounds {
         assertThrows(
-            IllegalParameterException.class,
+          PositionOutOfBounds.class,
             () -> testMapManager.createMap(MapManager.MAX_WIDTH + 1, MapManager.MAX_HEIGHT + 1));
       }
 

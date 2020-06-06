@@ -1,7 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
-import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
 import java.util.List;
 
 public class DemoAStarUsage {
@@ -50,6 +49,7 @@ public class DemoAStarUsage {
     List<PathfindingInformation> results = service.doPathfinding();
     Thread.sleep(1000);
     logger.info("Shortest path found: " +  results.get(results.size() - 1).getFinalPathPositions().toString());
+    logger.info("Total algorithm states: " + results.size());
 
     Thread.sleep(1000);
 

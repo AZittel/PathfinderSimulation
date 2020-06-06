@@ -1,11 +1,11 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
+
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds.PositionType;
-import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 public class MapManager {
   private static final org.slf4j.Logger logger =
@@ -34,7 +34,7 @@ public class MapManager {
       startCoordinates = DEFAULT_START_POSITION;
       destinationCoordinates = DEFAULT_DESTINATION_POSITION;
       createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    } catch (IllegalParameterException | PositionOutOfBounds e) {
+    } catch (PositionOutOfBounds e) {
       // Do nothing, because this case should never happen
       e.printStackTrace();
     }
@@ -45,19 +45,19 @@ public class MapManager {
    *
    * @param width the width of the map, must higher then 1
    * @param height the height of the map, must higher then 1
-   * @throws IllegalParameterException if either the width or the height is invalid
+   * @throws PositionOutOfBounds if either the width or the height is invalid
    */
   public void createMap(int width, int height)
-      throws IllegalParameterException, PositionOutOfBounds {
+      throws PositionOutOfBounds {
     logger.info("createMap: width = {}, height = {}", width, height);
     // Check minimum boundaries of the map
     if (width < MIN_WIDTH || height < MIN_HEIGHT) {
-      throw new IllegalParameterException("Width or height cannot be lower than 2!");
+      throw new PositionOutOfBounds("Width or height cannot be lower than 2!");
     }
 
     // Check maximum boundaries of the map
     if (width > MAX_WIDTH || height > MAX_HEIGHT) {
-      throw new IllegalParameterException(
+      throw new PositionOutOfBounds(
           String.format(
               "Width or height exceeded max value! Maximum width is %d. Maximum height is %d.",
               MAX_WIDTH, MAX_HEIGHT));
@@ -131,7 +131,7 @@ public class MapManager {
     logger.debug("reset: no params");
     try {
       createMap(map[0].length, map.length);
-    } catch (IllegalParameterException | PositionOutOfBounds e) {
+    } catch (PositionOutOfBounds e) {
       // Do nothing, because this case should never happen
       e.printStackTrace();
     }

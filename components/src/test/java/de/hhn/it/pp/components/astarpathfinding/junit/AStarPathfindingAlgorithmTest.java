@@ -56,12 +56,12 @@ public class AStarPathfindingAlgorithmTest {
       List<Terrain> expectedPath = new ArrayList<>();
 
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(0, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(0, 4)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(0, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 6)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 4)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 5)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 5)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
 
       assertFalse(finalPath.isEmpty());
@@ -82,7 +82,7 @@ public class AStarPathfindingAlgorithmTest {
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 3)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 4)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 6)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
       assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
@@ -106,12 +106,12 @@ public class AStarPathfindingAlgorithmTest {
 
       List<Terrain> expectedPath = new ArrayList<>();
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(0, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(0, 4)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(0, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 6)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 4)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 5)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 5)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
 
       printMapWithFinalPath(finalPath);
@@ -123,10 +123,10 @@ public class AStarPathfindingAlgorithmTest {
       finalPath = result.get(result.size() - 1).getFinalPathPositions();
       expectedPath.clear();
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 4)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(1, 6)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 4)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
       printMapWithFinalPath(finalPath);
 
@@ -141,7 +141,7 @@ public class AStarPathfindingAlgorithmTest {
     @Test
     @DisplayName("Try doPathfinding with no result")
     public void doPathfinding_startAndEndPosition_surroundedWithObstacle()
-        throws OccupiedPositionException, PositionOutOfBounds {
+      throws OccupiedPositionException, PositionOutOfBounds, IllegalParameterException {
       Position start = new Position(2, 2);
       testMapManager.setStartCoordinates(start);
       Position end = new Position(2, 6);

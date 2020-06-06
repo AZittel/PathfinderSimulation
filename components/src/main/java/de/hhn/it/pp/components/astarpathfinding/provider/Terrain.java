@@ -43,7 +43,7 @@ public class Terrain implements IHeapItem<Terrain> {
     super();
     this.position = position;
     this.type = type;
-    logger.debug("Terrain created: {}", this.toString());
+//    logger.debug("Terrain created: {}", this.toString());
   }
 
   /**

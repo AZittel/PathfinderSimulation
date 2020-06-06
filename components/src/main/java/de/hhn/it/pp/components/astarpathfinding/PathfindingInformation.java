@@ -1,7 +1,7 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
-import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
+import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class PathfindingInformation implements Cloneable {
   /**
    * List of positions specific to algorithms.
    */
-  private List<Terrain> specificPositions = new ArrayList<>();
+  private Heap<Terrain> specificPositions;
 
   /**
    * List of positions a pathfinding algorithm did visit.
@@ -27,14 +27,15 @@ public class PathfindingInformation implements Cloneable {
    */
   private List<Terrain> finalPathPositions = new ArrayList<>();
 
-  public PathfindingInformation() {
+  public PathfindingInformation(int maxHeapSize) throws IllegalParameterException {
+    this.specificPositions = new Heap<Terrain>(maxHeapSize);
   }
 
-  public List<Terrain> getSpecificPositions() {
+  public Heap<Terrain> getSpecificPositions() {
     return specificPositions;
   }
 
-  public void setSpecificPositions(List<Terrain> specificPositions) {
+  public void setSpecificPositions(Heap<Terrain> specificPositions) {
     this.specificPositions = specificPositions;
   }
 
@@ -62,11 +63,35 @@ public class PathfindingInformation implements Cloneable {
     this.specificPositions.add(specificPosition);
   }
 
+  /**
+   * Resets the heap and lists for this information object.
+   */
   public void reset() {
     logger.debug("reset: no params");
-    specificPositions.clear();
+    try {
+      int maxSize = specificPositions.getItems().length;
+      specificPositions = new Heap<Terrain>(maxSize);
+    } catch (IllegalParameterException e) {
+      // This case should never happen due to map size minimum
+      e.printStackTrace();
+    }
     visitedPositions.clear();
     finalPathPositions.clear();
+  }
+
+  @Override
+  public PathfindingInformation clone() throws CloneNotSupportedException {
+    logger.debug("clone: no params");
+    PathfindingInformation cloned = (PathfindingInformation) super.clone();
+    try {
+      cloned.setSpecificPositions(new Heap<>(this.specificPositions));
+    } catch (IllegalParameterException e) {
+      // Should never happen
+      e.printStackTrace();
+    }
+    cloned.setVisitedPositions(this.cloneList(this.visitedPositions));
+    cloned.setFinalPathPositions(this.cloneList(this.finalPathPositions));
+    return cloned;
   }
 
   private List<Terrain> cloneList(List<Terrain> list) {
@@ -75,15 +100,5 @@ public class PathfindingInformation implements Cloneable {
       newList.add(new Terrain(t));
     }
     return newList;
-  }
-
-  @Override
-  public PathfindingInformation clone() throws CloneNotSupportedException {
-    logger.debug("clone: no params");
-    PathfindingInformation cloned = (PathfindingInformation) super.clone();
-    cloned.setSpecificPositions(this.cloneList(this.specificPositions));
-    cloned.setVisitedPositions(this.cloneList(this.visitedPositions));
-    cloned.setFinalPathPositions(this.cloneList(this.finalPathPositions));
-    return cloned;
   }
 }
