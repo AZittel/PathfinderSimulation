@@ -63,8 +63,10 @@ public class Snake {
                 break;
             case LEFT:
                 snakeHead.setHeadXPosition(snakeHead.getHeadXPosition() -1);
+                break;
             case RIGHT:
                 snakeHead.setHeadXPosition(snakeHead.getHeadXPosition() +1);
+                break;
     }
 
     }
