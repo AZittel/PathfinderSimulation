@@ -2,8 +2,8 @@ package de.hhn.it.pp.components.snake.provider.logic;
 
 public class SnakeTail {
 
-    private int tailXPosition;
-    private int tailYPosition;
+    public int tailXPosition;
+    public int tailYPosition;
     private boolean wait = true;
 
     public SnakeTail (int x, int y) {
