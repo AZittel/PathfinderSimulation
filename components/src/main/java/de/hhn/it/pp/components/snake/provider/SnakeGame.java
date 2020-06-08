@@ -5,6 +5,7 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.SnakeListener;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 
+//todo javadoc
 public interface SnakeGame {
     void startGame() throws IllegalStateException;
 
