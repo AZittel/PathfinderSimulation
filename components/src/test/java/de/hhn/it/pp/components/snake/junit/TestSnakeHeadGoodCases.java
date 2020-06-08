@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("Tests the snakehead class with good cases")
 public class TestSnakeHeadGoodCases {
     private int testXCoordinate = 20;
-    private int testYCoordinate = 20;
+    private int testYCoordinate = 15;
     private SnakeHead testHead;
 
     @BeforeEach
@@ -37,7 +37,7 @@ public class TestSnakeHeadGoodCases {
     @DisplayName("get the y-coordinate")
     void testGetHeadYPosition() {
         testHead = new SnakeHead(testXCoordinate, testYCoordinate);
-        assertEquals(20, testHead.getHeadYPosition(), "y-coordinate should be 20");
+        assertEquals(15, testHead.getHeadYPosition(), "y-coordinate should be 20");
     }
 
     @Test
