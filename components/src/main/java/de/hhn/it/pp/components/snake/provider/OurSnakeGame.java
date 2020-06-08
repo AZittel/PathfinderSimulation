@@ -2,7 +2,6 @@ package de.hhn.it.pp.components.snake.provider;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.SnakeListener;
-import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.provider.states.ControlState;
 
@@ -61,11 +60,6 @@ public class OurSnakeGame implements SnakeGame {
 
 
     @Override
-    public void move(Movement direction) throws IllegalParameterException, IllegalStateException {
-        controlState.onMove();
-    }
-
-    @Override
     public void addCallback(SnakeListener listener) throws IllegalParameterException {
         if (listener == null) {
             throw new IllegalParameterException("Listener was null reference.");
@@ -108,6 +102,10 @@ public class OurSnakeGame implements SnakeGame {
         notifyListeners(controlState);
     }
 
+    /**
+     *
+     * @param controlState
+     */
     private void notifyListeners(ControlState controlState) {
         for (SnakeListener listener : listeners) {
             listener.newState(controlState.getState());
