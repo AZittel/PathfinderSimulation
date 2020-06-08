@@ -1,6 +1,5 @@
 package de.hhn.it.pp.components.snake.junit;
 
-import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 import de.hhn.it.pp.components.snake.provider.AdminSnakeService;
@@ -24,7 +23,6 @@ public class TestSnakeGamePlayerServiceGoodCases {
     PlayerProfile playerProfile;
     Map map;
     OurSnakeService ourSnakePlayerService;
-    Movement movement;
 
     @BeforeEach
     void setup(List<PlayerProfile> profiles) throws IllegalParameterException {
@@ -74,6 +72,7 @@ public class TestSnakeGamePlayerServiceGoodCases {
         );
     }*/
 
+    //method can be deleted
     /**@Test
     @DisplayName("Moves up and checks result")
     void movesTheSnake() throws IllegalParameterException{
