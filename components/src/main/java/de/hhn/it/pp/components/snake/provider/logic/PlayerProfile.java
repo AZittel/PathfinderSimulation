@@ -30,7 +30,7 @@ public class PlayerProfile {
 
   private static int counter = 0;
 
-  /** players's state*/
+  /** players's state. */
   private State currentState;
 
   /** list for player id's. */
@@ -122,8 +122,6 @@ public class PlayerProfile {
 
   /**
    * Setter for player's id.
-   *
-   * @param playerId player's id
    */
   public void setPlayerId() throws IllegalParameterException {
     logger.info("set player's id: {}", playerId);
