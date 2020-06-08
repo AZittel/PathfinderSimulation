@@ -39,4 +39,28 @@ public class TestSnakeHeadGoodCases {
         testHead = new SnakeHead(testXCoordinate, testYCoordinate);
         assertEquals(20, testHead.getHeadYPosition(), "y-coordinate should be 20");
     }
+
+    @Test
+    @DisplayName("set the direction")
+    void testSetHeadDirection() {
+        testHead = new SnakeHead(testXCoordinate, testYCoordinate);
+        testHead.setHeadDirection(Direction.DOWN);
+        assertEquals(Direction.DOWN, testHead.getHeadDirection(), "Direction should be DOWN");
+    }
+
+    @Test
+    @DisplayName("set the x-coordinate")
+    void testSetHeadXPosition() {
+        testHead = new SnakeHead(testXCoordinate, testYCoordinate);
+        testHead.setHeadXPosition(35);
+        assertEquals(35, testHead.getHeadXPosition(), "x-coordinate should be 35");
+    }
+
+    @Test
+    @DisplayName("set the y-coordinate")
+    void testSetHeadYPosition() {
+        testHead = new SnakeHead(testXCoordinate, testYCoordinate);
+        testHead.setHeadYPosition(35);
+        assertEquals(35, testHead.getHeadYPosition(), "x-coordinate should be 35");
+    }
 }
