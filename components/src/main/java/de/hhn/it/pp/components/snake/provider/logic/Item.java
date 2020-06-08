@@ -83,7 +83,7 @@ public class Item {
   }
 
   /**
-   * Setter for xPosition
+   * Setter for xPosition.
    *
    * @param xPos new x-Coordinate
    */
@@ -92,7 +92,7 @@ public class Item {
   }
 
   /**
-   * Setter for yPosition
+   * Setter for yPosition.
    *
    * @param yPos new y-Coordinate
    */
