@@ -8,6 +8,9 @@ import de.hhn.it.pp.components.snake.provider.states.ControlState;
 import java.util.ArrayList;
 import java.util.List;
 
+//todo javadoc
+//todo logging
+
 public class OurSnakeGame implements SnakeGame {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(OurSnakeGame.class);
