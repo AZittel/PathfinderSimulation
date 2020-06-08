@@ -53,7 +53,7 @@ public class Map {
    * @param id Id of the level that should load.
    */
   public void load(int id){
-      //todo implementieren, wenn mehrere Levels eingebaut werden!
+      //todo implementieren, wenn mehrere Levels eingebaut werden! --> switch case
       //todo logger
   }
 
