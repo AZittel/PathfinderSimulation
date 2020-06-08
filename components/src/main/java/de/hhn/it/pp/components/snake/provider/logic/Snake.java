@@ -63,8 +63,6 @@ public class Snake {
         allTails.get(0).setTailXPosition(snakeHead.getHeadXPosition());
         allTails.get(0).setTailYPosition(snakeHead.getHeadYPosition());
       }
-
-
     }
     //move head
     switch (snakeHead.getHeadDirection()) {
