@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 //todo javadoc
 //todo logging
+// todo not sure if needed
 
 public class OurSnakeGame implements SnakeGame {
   private static final Logger logger = LoggerFactory.getLogger(OurSnakeGame.class);

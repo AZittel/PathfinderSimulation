@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+//todo not testable right now
+
 @DisplayName("Test the SnakeService with good cases.")
 public class TestSnakeGamePlayerServiceGoodCases {
     private static final Logger logger =

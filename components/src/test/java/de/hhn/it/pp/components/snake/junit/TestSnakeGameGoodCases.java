@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// todo not sure if needed
+
 @DisplayName("Tests the Snakegameclass with good cases")
 public class TestSnakeGameGoodCases {
 

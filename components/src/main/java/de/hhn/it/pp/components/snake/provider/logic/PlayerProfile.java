@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// todo nice to have not right now!!!
+
 /**
  * Class for player profiles.
  *

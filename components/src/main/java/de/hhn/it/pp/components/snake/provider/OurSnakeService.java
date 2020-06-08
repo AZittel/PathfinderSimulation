@@ -25,12 +25,6 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   /** Map for all player profiles. */
   private Map<Integer, SnakeGame> allPlayersProfiles;
 
-  /** window's height. */
-  private static int windowHeight;
-
-  /** window's width. */
-  private static int windowWidth;
-
   public OurSnakeService() {
     logger.info("Constructor");
     allPlayersProfiles = new HashMap<>();
@@ -111,47 +105,12 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
   /**
    * Starts the game snake for the player.
    *
-   * @param id id of the active player
-   * @param winHeight windowheight
-   * @param winWidth windowwidth
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
   @Override
-  public void startGame(int id, int winHeight, int winWidth) throws IllegalParameterException {
-    logger.info("startGame: id = {}", id);
-    SnakeGame player = getPlayerById(id);
-    windowHeight = winHeight;
-    windowWidth = winWidth;
-    player.startGame();
-  }
+  public void startGame() throws IllegalParameterException {
 
-  /**
-   * Switches the Current Level.
-   *
-   * @param id id of the player which level get switched
-   * @param highscore highscore that must be achieved to start the next level
-   * @throws IllegalParameterException if the highscore or level is invalid.
-   */
-  @Override
-  public void switchLevel(int id, int highscore) throws IllegalParameterException {
-    logger.info("switchLevel: id = {}", id);
-    SnakeGame player = getPlayerById(id);
-    player.switchLevel();
-  }
-
-  /**
-   * Ends the game of the current player when he Collided/Solved the last Level or
-   * closed the Game.
-   *
-   * @param id id of the player
-   * @throws IllegalParameterException
-   */
-  @Override
-  public void endGame(int id) throws IllegalParameterException {
-    logger.info("endGame: id = {}", id);
-    SnakeGame player = getPlayerById(id);
-    player.endGame();
-    //todo Exception werfen
+  startGame();
   }
 
   // Methods for the AdminSnakePlayerService
@@ -185,25 +144,5 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
       throw new IllegalParameterException("player with nickname " + id + " not regestered.");
     }
     allPlayersProfiles.remove(id);
-  }
-
-  /**
-   * Getter for windowheight.
-   *
-   * @return windowheight
-   */
-  public static int getWindowHeight() {
-    logger.info("window height: {}", windowHeight);
-    return windowHeight;
-  }
-
-  /**
-   * Getter for windowwidth.
-   *
-   * @return windowidth
-   */
-  public static int getWindowWidth() {
-    logger.info("window width: {}", windowWidth);
-    return windowWidth;
   }
 }

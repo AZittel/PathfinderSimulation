@@ -3,6 +3,8 @@ package de.hhn.it.pp.components.snake.provider.states;
 import de.hhn.it.pp.components.snake.provider.OurSnakeGame;
 import de.hhn.it.pp.components.snake.provider.logic.State;
 
+// todo not sure if needed
+
 public abstract class ControlState {
     private static final org.slf4j.Logger logger =
             org.slf4j.LoggerFactory.getLogger(ControlState.class);

@@ -48,27 +48,7 @@ public interface SnakeService {
   /**
    * Starts the game snake for the player.
    *
-   * @param id id of the active player
-   * @param winHeight windowheight
-   * @param winWidth windowwidth
    * @throws IllegalParameterException if the nickname is too long or already chosen.
    */
-  void startGame(int id, int winHeight, int winWidth) throws IllegalParameterException;
-
-  /**
-   * Switches the Current Level.
-   *
-   * @param id level that should be run
-   * @param highscore highscore that must be achieved to start the next level
-   * @throws IllegalParameterException if the highscore or level is invalid.
-   */
-  void switchLevel(int id, int highscore) throws IllegalParameterException;
-
-  /**
-   * Ends the game of Snake.
-   *
-   * @param id id of the player
-   * @throws IllegalParameterException if the chosen id isn't playing
-   */
-  void endGame(int id) throws  IllegalParameterException;
+  void startGame() throws IllegalParameterException;
 }

@@ -14,7 +14,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//todo!!!
+//todo not testable right now
+
 @DisplayName("Test the SnakePlayerService with bad cases.")
 public class TestSnakeGamePlayerServiceBadCases {
     private static final Logger logger =

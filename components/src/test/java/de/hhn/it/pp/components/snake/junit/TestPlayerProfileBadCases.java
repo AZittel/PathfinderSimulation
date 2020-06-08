@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// todo nice to have no right now!!!
+
 @DisplayName("Tests PlayerProfile with bad cases")
 public class TestPlayerProfileBadCases {
 

@@ -12,6 +12,8 @@ import org.junit.platform.commons.logging.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// todo nice to have no right now!!!
+
 @DisplayName("Tests the SnakePlayerProfile class with good cases")
 public class TestPlayerProfileGoodCases {
     private static final Logger logger = LoggerFactory.getLogger(TestPlayerProfileGoodCases.class);
