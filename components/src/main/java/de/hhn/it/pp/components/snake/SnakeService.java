@@ -1,8 +1,6 @@
 package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.provider.logic.Direction;
-import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 
 import java.util.List;
@@ -74,11 +72,4 @@ public interface SnakeService {
    * @throws IllegalParameterException if the chosen id isn't playing
    */
   void endGame(int id) throws  IllegalParameterException;
-
-  /**
-   * Moves in chosen direction.
-   *
-   * @throws IllegalParameterException if the given key is invalid
-   */
-  void moveSnake(int id, Movement direction) throws IllegalParameterException;
 }
