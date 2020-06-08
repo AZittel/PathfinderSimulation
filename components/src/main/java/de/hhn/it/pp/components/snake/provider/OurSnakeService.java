@@ -4,7 +4,6 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.helper.CheckingHelper;
 import de.hhn.it.pp.components.snake.SnakeListener;
 import de.hhn.it.pp.components.snake.provider.logic.Direction;
-import de.hhn.it.pp.components.snake.provider.logic.Movement;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
 import de.hhn.it.pp.components.snake.SnakeService;
 
@@ -34,9 +33,6 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
 
   /** window's width. */
   private static int windowWidth;
-
-  /** Current dircetion of the snake. */
-  private Movement currentDirection;
 
   public OurSnakeService() {
     logger.info("Constructor");
@@ -159,16 +155,6 @@ public class OurSnakeService implements SnakeService, AdminSnakeService {
     SnakeGame player = getPlayerById(id);
     player.endGame();
     //todo Exception werfen
-  }
-
-  @Override
-  public void moveSnake(int id, Movement direction) throws IllegalParameterException {
-    logger.info("usedKey: id = {}, direction = {}", id, direction);
-    SnakeGame player = getPlayerById(id);
-    if (direction == null) {
-      throw new IllegalParameterException("Direction is a null reference.");
-    }
-    player.move(direction);
   }
 
   // Methods for the AdminSnakePlayerService
