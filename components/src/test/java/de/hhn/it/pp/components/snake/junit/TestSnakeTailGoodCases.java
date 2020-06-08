@@ -4,7 +4,7 @@ import de.hhn.it.pp.components.snake.provider.logic.SnakeTail;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Tests the snaketail class with good cases")
 public class TestSnakeTailGoodCases {
@@ -38,5 +38,20 @@ public class TestSnakeTailGoodCases {
         testTail = new SnakeTail(15, 20);
         testTail.setTailYPosition(15);
         assertEquals(15, testTail.getTailYPosition(), "x-coordinate should be 15");
+    }
+
+    @Test
+    @DisplayName("get wait")
+    void testGetWait() {
+        testTail = new SnakeTail(15, 20);
+        assertEquals(true, testTail.isWait(),"wait should be true");
+    }
+
+    @Test
+    @DisplayName("set wait")
+    void testSetWait() {
+        testTail = new SnakeTail(15, 20);
+        testTail.setWait(false);
+        assertEquals(false, testTail.isWait(), "wait should be false");
     }
 }
