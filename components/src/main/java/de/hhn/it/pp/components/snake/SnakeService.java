@@ -1,8 +1,6 @@
 package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
-import java.util.List;
 
 /**
  * This SnakePlayerService is an interface for a running instance of the game snake,
@@ -11,21 +9,6 @@ import java.util.List;
  * @author Karen Hofele, Sören Greiner
  */
 public interface SnakeService {
-  /**
-   * Returns a list of registered players from snake.
-   *
-   * @return List of registered players.
-   */
-  List<PlayerProfile> getAllSnakePlayerProfiles();
-
-  /**
-   * Returns the description of the player with the chosen player id.
-   *
-   * @param id id of the player.
-   * @return description of the players highscores and games
-   * @throws IllegalParameterException if the player does not exist
-   */
-  PlayerProfile getSnakePlayerProfile(int id) throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the state of the player.
@@ -34,7 +17,7 @@ public interface SnakeService {
    * @param listener object implementing the listener interface
    * @throws IllegalParameterException if either the nickname does not exist or the listener is a
    *     null reference.
-   */
+   *
   void addCallback(int id, SnakeListener listener) throws IllegalParameterException;
 
   /**
@@ -42,9 +25,9 @@ public interface SnakeService {
    *
    * @param id id of the player
    * @param listener listener to be removed
-   */
+   *
   void removeCallback(int id, SnakeListener listener) throws IllegalParameterException;
-
+*/
   /**
    * Starts the game snake for the player.
    *
