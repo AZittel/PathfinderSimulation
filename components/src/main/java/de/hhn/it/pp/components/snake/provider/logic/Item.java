@@ -52,16 +52,6 @@ public class Item {
    * @throws IllegalParameterException if the coordinates are outside the playfield
    */
   public void spawn(int xPos, int yPos) throws IllegalParameterException {
-    logger.info("spawned item at pos={} {}", xPos, yPos);
-    if (xPos > OurSnakeService.getWindowWidth()
-            || yPos > OurSnakeService.getWindowHeight()) {
-      throw new IllegalParameterException("Coordinates are outside the playfield");
-    } else if (xPos <= 0 || yPos <= 0) {
-      throw new IllegalParameterException("Coordinates are too small");
-    } else {
-      xPosition = xPos;
-      yPosition = yPos;
-    }
   }
 
   /**
