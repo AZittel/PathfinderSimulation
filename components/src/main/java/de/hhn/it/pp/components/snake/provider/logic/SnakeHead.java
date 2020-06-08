@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 public class SnakeHead {
 
   /** Snakehead's logger. */
-  private static final Logger logger = (Logger) LoggerFactory.getLogger(SnakeHead.class);
+  private static final Logger logger = LoggerFactory.getLogger(SnakeHead.class);
 
   /** Snakehead's direction at the beginning. */
-  Direction headDirection = Direction.UP;
+  private Direction headDirection = Direction.UP;
 
   /** Snakehead's x-Position. */
   private int headXPosition;
