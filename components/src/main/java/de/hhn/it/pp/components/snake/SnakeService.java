@@ -2,7 +2,6 @@ package de.hhn.it.pp.components.snake;
 
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.snake.provider.logic.PlayerProfile;
-
 import java.util.List;
 
 /**
