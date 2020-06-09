@@ -55,11 +55,10 @@ public class Main extends Application {
     addModule("CoffeeMakerService");
 
     //under development
-    //addModule("ApiView"); <- throws and exception when running "Main"
+    //addModule("ApiView"); <- throws an exception when running "Main"
 
     // crafting service
     addModule("CraftingService");
-
   }
 
   @Override
