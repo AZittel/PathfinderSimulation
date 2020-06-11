@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Tests the item class with good cases")
-public class TestItemGoodCases {
-    private static final Logger logger = LoggerFactory.getLogger(TestItemGoodCases.class);
+public class TestItem {
+    private static final Logger logger = LoggerFactory.getLogger(TestItem.class);
     private Item item;
     private int xPos = 12;
     private int yPos = 13;
