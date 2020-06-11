@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.craftingservice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,7 +9,7 @@ import java.util.List;
  * Right now there are 3 different patterns(small weapons, large weapons, enchanted weapons).
  *
  * @author Philipp Alessandrini, Oliver Koch
- * @version 2020-05-01
+ * @version 2020-06-11
  */
 public class CraftingPattern {
   private String name;
@@ -36,21 +37,50 @@ public class CraftingPattern {
    * Print the needed items and the provided weapon of the crafting pattern object to the console.
    */
   public void printCraftingPattern() {
-    System.out.println("--- " + this.getName() + " ---");
+    System.out.println("--- " + this.toString() + " ---");
     System.out.println("Needed item/s: ");
     for (Item neededItem : this.getNeededItems()) {
-      System.out.println("- " + neededItem.getName());
+      System.out.println("- " + neededItem.toString());
     }
     System.out.println("Provided item/s: ");
     for (Item providedItem : this.getProvidedItems()) {
-      System.out.println("- " + providedItem.getName());
+      System.out.println("- " + providedItem.toString());
     }
   }
-
-  public String getName() {
-    return name;
+  
+  /**
+   * Checks if the pattern can be crafted.
+   * @return true, if craftable | false, if not
+   */
+  public boolean isCraftable(Inventory inventory) {
+    // helper list
+    ArrayList<Item> usedItems = new ArrayList<>();
+    // identical list to the inventory (to let the original inventory-list untouched)
+    ArrayList<Item> inventoryItems = new ArrayList<>(inventory.getItems());
+    
+    // check if the inventory matches the crafting pattern
+    for (int i = 0; i < this.getNeededItems().size(); i++) {
+      for (int j = 0; j < inventoryItems.size(); j++) {
+        if (this.getNeededItems().get(i).toString()
+                .equals(inventoryItems.get(j).toString())) {
+          usedItems.add(inventoryItems.get(j));
+          inventoryItems.remove(inventoryItems.get(j));
+          j = inventoryItems.size();
+        }
+      }
+    }
+    // if the pattern implies the inventory: return true
+    if (this.getNeededItems().size() == usedItems.size()) {
+      inventoryItems.addAll(usedItems);
+      usedItems.clear();
+      return true;
+    } else { // if not return false
+      inventoryItems.addAll(usedItems);
+      usedItems.clear();
+      return false;
+    }
   }
-
+  
   public int getCraftingTime() {
     return craftingTime;
   }
@@ -61,5 +91,10 @@ public class CraftingPattern {
 
   public List<Item> getProvidedItems() {
     return providedItems;
+  }
+  
+  @Override
+  public String toString() {
+    return name;
   }
 }
