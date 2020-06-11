@@ -19,8 +19,8 @@ public class TestItem {
     @BeforeEach
     void setup(){
         item = new Item(2);
-        item.setxPosition(xPos);
-        item.setyPosition(yPos);
+        item.setXPosition(xPos);
+        item.setYPosition(yPos);
     }
 
     @Test
@@ -29,8 +29,15 @@ public class TestItem {
         assertEquals(2, item.getValue(), "Value should be 2");
     }
 
-    /**@Test
-    @DisplayName("spawns item")
-    void testSpawnItem(){
-    }*/
+    @Test
+    @DisplayName("get x-Position")
+    void testGetXPosition() {
+        assertEquals(12, item.getXPosition(), "x-Position should be 12");
+    }
+
+    @Test
+    @DisplayName("get y-Position")
+    void testGetYPosition() {
+        assertEquals(13, item.getYPosition(), "Y-Position should be 13");
+    }
 }
