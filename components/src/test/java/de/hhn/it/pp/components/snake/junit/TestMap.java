@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @DisplayName("Tests the level class with good cases")
-public class TestMapGoodCases {
-    private static final Logger logger = LoggerFactory.getLogger(TestMapGoodCases.class);
+public class TestMap {
+    private static final Logger logger = LoggerFactory.getLogger(TestMap.class);
     private Map testMap;
 
     @BeforeEach
