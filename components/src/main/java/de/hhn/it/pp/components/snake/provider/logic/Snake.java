@@ -18,10 +18,19 @@ public class Snake {
   public static boolean waitToMove = false;
 
   /** Snake's head with start coordinates. */
-  private static SnakeHead snakeHead = new SnakeHead(15, 15);
+  protected static SnakeHead snakeHead = new SnakeHead(15, 15);
 
   /** ArrayList for all tails of the snake. */
   public static ArrayList<SnakeTail> allTails = new ArrayList<>();
+
+  /** Collectible item. */
+  public static Item collectibleItem = new Item(1);
+
+  /** Score. */
+  public static int score = 0;
+
+  /** Highscore. */
+  public static int highscore = 0;
 
   /**
    * Adds a tail to the snake.
