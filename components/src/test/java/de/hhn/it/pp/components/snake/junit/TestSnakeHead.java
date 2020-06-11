@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Tests the snakehead class with good cases")
-public class TestSnakeHeadGoodCases {
+public class TestSnakeHead {
     private int testXCoordinate = 20;
     private int testYCoordinate = 15;
     private SnakeHead testHead;
