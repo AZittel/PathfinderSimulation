@@ -17,15 +17,15 @@ public class Collision {
 
 
 
-        public static void collideWithItem () {
-            if (Snake.snakeHead.getHeadXPosition() == Snake.collectibleItem.getXPosition() && Snake.snakeHead.getHeadYPosition() == Snake.collectibleItem.getYPosition()) {
-                Snake.collectibleItem.reset();
-                Snake.addTail();
-                Snake.score += Snake.collectibleItem.getValue();
-                if(Snake.score > Snake.highscore) {
+    public static void collideWithItem () {
+        if (Snake.snakeHead.getHeadXPosition() == Snake.collectibleItem.getXPosition() && Snake.snakeHead.getHeadYPosition() == Snake.collectibleItem.getYPosition()) {
+            Snake.collectibleItem.reset();
+            Snake.addTail();
+            Snake.score += Snake.collectibleItem.getValue();
+            if(Snake.score > Snake.highscore) {
                     Snake.highscore = Snake.score;
-                }
             }
         }
     }
+}
 
