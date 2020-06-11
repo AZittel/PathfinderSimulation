@@ -18,7 +18,7 @@ public class Collision {
 
 
         public static void collideWithItem () {
-            if (Snake.snakeHead.getHeadXPosition() == Snake.collectibleItem.getxPosition() && Snake.snakeHead.getHeadYPosition() == Snake.collectibleItem.getyPosition()) {
+            if (Snake.snakeHead.getHeadXPosition() == Snake.collectibleItem.getXPosition() && Snake.snakeHead.getHeadYPosition() == Snake.collectibleItem.getYPosition()) {
                 Snake.collectibleItem.reset();
                 Snake.addTail();
                 Snake.score += Snake.collectibleItem.getValue();
