@@ -19,7 +19,7 @@ import java.util.Map;
  * Contains everything which is needed to craft new objects.
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-05-09
+ * @version 2020-06-11
  */
 public class CraftingImplementation implements CraftingService {
   private static final org.slf4j.Logger logger =
@@ -47,7 +47,7 @@ public class CraftingImplementation implements CraftingService {
     if (pattern == null) {
       throw new IllegalParameterException("Crafting pattern was null reference!\n");
     }
-    craftingPatterns.put(pattern.getName(), pattern);
+    craftingPatterns.put(pattern.toString(), pattern);
     logger.info("addCraftingPattern: pattern = {}", pattern);
   }
 
@@ -101,8 +101,8 @@ public class CraftingImplementation implements CraftingService {
     // check if the inventory matches the crafting pattern
     for (int i = 0; i < craftingPattern.getNeededItems().size(); i++) {
       for (int j = 0; j < inventory.getItems().size(); j++) {
-        if (craftingPattern.getNeededItems().get(i).getName()
-            .equals(inventory.getItems().get(j).getName())) {
+        if (craftingPattern.getNeededItems().get(i).toString()
+            .equals(inventory.getItems().get(j).toString())) {
           usedItems.add(inventory.getItems().get(j));
           try {
             inventory.remove(inventory.getItems().get(j));
@@ -133,7 +133,7 @@ public class CraftingImplementation implements CraftingService {
     } else { // if not: throw exception
       inventory.getItems().addAll(usedItems);
       throw new CraftingNotPossibleException("Items in inventory don't match '"
-          + craftingPattern.getName() + "'!\n");
+          + craftingPattern.toString() + "'!\n");
     }
   }
 

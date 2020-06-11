@@ -4,7 +4,7 @@ package de.hhn.it.pp.components.craftingservice;
  * A class for various items.
  *
  * @author Philipp Alessandrini, Oliver Koch
- * @version 2020-05-01
+ * @version 2020-06-11
  */
 public class Item {
   private String name;
@@ -17,8 +17,9 @@ public class Item {
   public Item(String name) {
     this.name = name;
   }
-
-  public String getName() {
+  
+  @Override
+  public String toString() {
     return name;
   }
 }

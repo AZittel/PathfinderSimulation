@@ -148,11 +148,11 @@ public class TestCraftingServiceGoodCases {
 
     // items in each list should be identical
     assertAll(
-        () -> assertEquals(expectedItemsAfterCrafting.get(0).getName(),
-            testInventory.getItems().get(0).getName(),
+        () -> assertEquals(expectedItemsAfterCrafting.get(0).toString(),
+            testInventory.getItems().get(0).toString(),
             "First item should be 'Tasty Chocolate Cookie'"),
-        () -> assertEquals(expectedItemsAfterCrafting.get(1).getName(),
-            testInventory.getItems().get(1).getName(),
+        () -> assertEquals(expectedItemsAfterCrafting.get(1).toString(),
+            testInventory.getItems().get(1).toString(),
             "Second item should be 'Baking Powder'")
     );
   }

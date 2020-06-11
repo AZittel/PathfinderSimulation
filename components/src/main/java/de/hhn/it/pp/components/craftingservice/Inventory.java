@@ -10,7 +10,7 @@ import java.util.List;
  * to enable the feature for craftable items.
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-05-09
+ * @version 2020-06-11
  */
 public class Inventory {
   private static final org.slf4j.Logger logger =
@@ -56,14 +56,14 @@ public class Inventory {
       throw new OperationNotSupportedException("Inventory is empty!\n");
     }
     for (Item inventoryItem : items) {
-      if (inventoryItem.getName().equals(item.getName())) {
+      if (inventoryItem.toString().equals(item.toString())) {
         items.remove(inventoryItem);
         logger.info("remove: item = {}", item);
         return;
       }
     }
     throw new IllegalParameterException(
-        "'" + item.getName() + "' doesn't exist in the inventory!\n");
+        "'" + item.toString() + "' doesn't exist in the inventory!\n");
   }
 
   /**
@@ -72,7 +72,7 @@ public class Inventory {
   public void printInventory() {
     System.out.println("Items in inventory: ");
     for (Item inventoryItem : items) {
-      System.out.println("- " + inventoryItem.getName());
+      System.out.println("- " + inventoryItem.toString());
     }
   }
 
