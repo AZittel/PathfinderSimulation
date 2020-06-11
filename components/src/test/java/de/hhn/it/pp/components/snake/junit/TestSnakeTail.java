@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Tests the snaketail class with good cases")
-public class TestSnakeTailGoodCases {
+public class TestSnakeTail {
 
     private SnakeTail testTail;
 
