@@ -5,6 +5,8 @@ import de.hhn.it.pp.components.snake.provider.OurSnakeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Creates items that can be collected by the snake.
  *
@@ -32,6 +34,17 @@ public class Item {
   public Item(int value) {
     logger.info("Constructor: created item with value = {}", value);
     this.value = value;
+    // get random position for item
+    this.xPosition = ThreadLocalRandom.current().nextInt(0, 15);
+    this.yPosition = ThreadLocalRandom.current().nextInt(0, 15);
+  }
+
+  /**
+   * Resets item when collected
+   */
+  public void reset() {
+    this.xPosition = ThreadLocalRandom.current().nextInt(0, 15);
+    this.yPosition = ThreadLocalRandom.current().nextInt(0, 15);
   }
 
   /**
@@ -42,16 +55,6 @@ public class Item {
   public int getValue() {
     logger.info("item's value = {}", value);
     return value;
-  }
-
-  /**
-   * Spawns an item.
-   *
-   * @param xPos x-coordinate of the spawnplace
-   * @param yPos y-coordinate of the spawnplace
-   * @throws IllegalParameterException if the coordinates are outside the playfield
-   */
-  public void spawn(int xPos, int yPos) throws IllegalParameterException {
   }
 
   /**
