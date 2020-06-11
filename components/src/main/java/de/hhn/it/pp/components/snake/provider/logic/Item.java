@@ -62,7 +62,7 @@ public class Item {
    *
    * @return xPosition
    */
-  public int getxPosition() {
+  public int getXPosition() {
     return xPosition;
   }
 
@@ -71,7 +71,7 @@ public class Item {
    *
    * @return yPosition
    */
-  public int getyPosition() {
+  public int getYPosition() {
     return yPosition;
   }
 
@@ -80,7 +80,7 @@ public class Item {
    *
    * @param xPos new x-Coordinate
    */
-  public void setxPosition(int xPos) {
+  public void setXPosition(int xPos) {
     xPosition = xPos;
   }
 
@@ -89,7 +89,7 @@ public class Item {
    *
    * @param yPos new y-Coordinate
    */
-  public void setyPosition(int yPos) {
+  public void setYPosition(int yPos) {
     yPosition = yPos;
   }
 }
