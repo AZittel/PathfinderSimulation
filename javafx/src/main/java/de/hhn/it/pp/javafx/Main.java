@@ -59,6 +59,9 @@ public class Main extends Application {
 
     // crafting service
     addModule("CraftingService");
+
+    // astar pathfinder
+    addModule("AStarPathfinder");
   }
 
   @Override
