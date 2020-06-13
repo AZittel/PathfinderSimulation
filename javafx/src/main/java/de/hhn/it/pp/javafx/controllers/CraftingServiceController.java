@@ -4,6 +4,7 @@ import de.hhn.it.pp.components.craftingservice.CraftingPattern;
 import de.hhn.it.pp.components.craftingservice.CraftingService;
 import de.hhn.it.pp.components.craftingservice.Inventory;
 import de.hhn.it.pp.components.craftingservice.Item;
+import de.hhn.it.pp.components.craftingservice.exceptions.CraftingNotPossibleException;
 import de.hhn.it.pp.components.craftingservice.provider.CraftingImplementation;
 import de.hhn.it.pp.components.craftingservice.provider.CraftingPatternManager;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
@@ -15,6 +16,7 @@ import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,7 +27,7 @@ import javafx.scene.paint.Color;
  * Controller class of the UI-Elements.
  *
  * @author Olver Koch, Philipp Alessandrini
- * @version 2020-06-11
+ * @version 2020-06-13
  */
 public class CraftingServiceController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
@@ -39,6 +41,8 @@ public class CraftingServiceController extends Controller implements Initializab
   @FXML
   Button removeBtn;
   @FXML
+  Button craftBtn;
+  @FXML
   ComboBox<Item> itemComboBox;
   @FXML
   ComboBox<CraftingPattern> patternComboBox;
@@ -50,10 +54,12 @@ public class CraftingServiceController extends Controller implements Initializab
   Label isCraftingExecutableLbl;
   @FXML
   Label craftingTimeLbl;
-  
+  @FXML
+  ProgressBar progressBar;
+
   private CraftingService craftingService;
   private Inventory inventory;
-  
+
   /**
    * Constructor which implements all UI-Elements.
    */
@@ -61,23 +67,25 @@ public class CraftingServiceController extends Controller implements Initializab
     itemTableView = new TableView<>();
     addBtn = new Button();
     removeBtn = new Button();
+    craftBtn = new Button();
     itemComboBox = new ComboBox<>();
     patternComboBox = new ComboBox<>();
     neededItemsListView = new ListView<>();
     providedItemsListView = new ListView<>();
     isCraftingExecutableLbl = new Label();
     craftingTimeLbl = new Label();
-    
+    progressBar = new ProgressBar();
+
     craftingService = new CraftingImplementation();
     inventory = new Inventory(FXCollections.observableArrayList());
   }
-  
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     initComboBoxItems();
     initComboBoxPatterns();
   }
-  
+
   /**
    * Defines actions when pressing the add - button.
    * @param event the mouse click
@@ -91,14 +99,14 @@ public class CraftingServiceController extends Controller implements Initializab
     }
     nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().toString()));
     itemTableView.setItems((ObservableList<Item>) inventory.getItems());
-    
+
     // check if chosen pattern can be crafted
     checkCraftable();
   }
-  
+
   /**
    * Defines actions when pressing the remove - button.
-   * @param event the mouse clock
+   * @param event the mouse click
    */
   public void onRemove(ActionEvent event) {
     // remove the selected row
@@ -108,11 +116,55 @@ public class CraftingServiceController extends Controller implements Initializab
       e.getMessage();
     }
     itemTableView.setItems((ObservableList<Item>) inventory.getItems());
-    
+
     // check if chosen pattern can be crafted
     checkCraftable();
   }
-  
+
+  /**
+   * Defines actions when pressing the craft - button.
+   * @param event the mouse click
+   */
+  public void onCraft(ActionEvent event) {
+    // show the user that there is an ongoing crafting process
+    craftBtn.setOpacity(0.4);
+    craftBtn.setDisable(true);
+    isCraftingExecutableLbl.setTextFill(Color.BLUE);
+    isCraftingExecutableLbl.setText("Crafting is ongoing");
+    // a task-thread that observes the crafting process
+    Task<Void> task = new Task<>() {
+      @Override
+      public Void call() throws Exception {
+        try {
+          // start crafting
+          craftingService.craft(inventory, patternComboBox.getValue());
+          // update progress bar according to the crafting time
+          for (int i = 0; i < (patternComboBox.getValue().getCraftingTime() / 100); i++) {
+            Thread.sleep(100);
+            updateProgress(i + 1,
+                patternComboBox.getValue().getCraftingTime() / 100);
+          }
+          CraftingImplementation.getCurrentThread().join();
+        } catch (CraftingNotPossibleException e) {
+          e.getMessage();
+        }
+        return null;
+      }
+    };
+    // after the crafting process is complete
+    task.setOnSucceeded(e -> {
+      itemTableView.setItems((ObservableList<Item>) inventory.getItems());
+      checkCraftable();
+      // inform the user that the crafting process has finished
+      craftingEndedInfo(patternComboBox.getValue());
+      // reset the progress bar
+      progressBar.progressProperty().unbind();
+      progressBar.setProgress(0);
+    });
+    progressBar.progressProperty().bind(task.progressProperty());
+    new Thread(task).start();
+  }
+
   /**
    * Defines actions when choosing a pattern from the 'patternComboBox'.
    * @param event the mouse click
@@ -123,7 +175,7 @@ public class CraftingServiceController extends Controller implements Initializab
                                      patternComboBox.getValue().getNeededItems());
     providedItemsListView.setItems((ObservableList<Item>)
                                      patternComboBox.getValue().getProvidedItems());
-    
+
     // get crafting time of the chosen pattern
     DecimalFormat df = new DecimalFormat("#.00");
     craftingTimeLbl.setText("Crafting time: "
@@ -134,14 +186,18 @@ public class CraftingServiceController extends Controller implements Initializab
     // check if chosen pattern can be crafted
     checkCraftable();
   }
-  
+
   private void checkCraftable() {
     // check if chosen pattern can be crafted
     try {
       if (patternComboBox.getValue().isCraftable(inventory)) {
+        craftBtn.setOpacity(1.0);
+        craftBtn.setDisable(false);
         isCraftingExecutableLbl.setTextFill(Color.GREEN);
         isCraftingExecutableLbl.setText("Crafting is executable");
       } else {
+        craftBtn.setOpacity(0.4);
+        craftBtn.setDisable(true);
         isCraftingExecutableLbl.setTextFill(Color.RED);
         isCraftingExecutableLbl.setText("Crafting is not executable");
       }
@@ -149,7 +205,7 @@ public class CraftingServiceController extends Controller implements Initializab
       // ignore exception
     }
   }
-  
+
   private void initComboBoxItems() {
     // add items to the ComboBox
     itemComboBox.setItems(FXCollections.observableArrayList(
@@ -163,7 +219,7 @@ public class CraftingServiceController extends Controller implements Initializab
         new Item("Milk Chocolate")
     ));
   }
-  
+
   private void initComboBoxPatterns() {
     // initialize crafting patterns
     CraftingPatternManager patternManager = new CraftingPatternManager();
@@ -196,5 +252,13 @@ public class CraftingServiceController extends Controller implements Initializab
     } catch (IllegalParameterException e) {
       e.getMessage();
     }
+  }
+
+  private void craftingEndedInfo(CraftingPattern craftedPattern) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Crafting has ended");
+    alert.setHeaderText(null);
+    alert.setContentText("'" + craftedPattern.toString() + "' successfully crafted!");
+    alert.showAndWait();
   }
 }
