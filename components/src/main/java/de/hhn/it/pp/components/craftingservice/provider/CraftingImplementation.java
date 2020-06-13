@@ -96,7 +96,6 @@ public class CraftingImplementation implements CraftingService {
     if (inventory == null || craftingPattern == null) {
       throw new CraftingNotPossibleException("Inventory or Crafting Pattern was null reference!\n");
     }
-    craftingPattern.printCraftingPattern();
     ArrayList<Item> usedItems = new ArrayList<>();
     // check if the inventory matches the crafting pattern
     for (int i = 0; i < craftingPattern.getNeededItems().size(); i++) {
