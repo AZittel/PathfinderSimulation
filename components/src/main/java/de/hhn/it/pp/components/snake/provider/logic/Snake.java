@@ -89,4 +89,22 @@ public class Snake {
         break;
     }
   }
+
+  /**
+   * Getter for score.
+   *
+   * @return score
+   */
+  public static int getScore() {
+    return score;
+  }
+
+  /**
+   * Setter for score.
+   *
+   * @param score "new" score
+   */
+  public static void setScore(int score) {
+    Snake.score = score;
+  }
 }
