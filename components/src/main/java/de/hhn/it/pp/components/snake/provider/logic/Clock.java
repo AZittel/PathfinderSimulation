@@ -1,15 +1,24 @@
 package de.hhn.it.pp.components.snake.provider.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Clock extends Thread {
 
-    //todo logger
-    //todo javadoc
     //muss noch in main gestartet werden! start();
 
+    /** Variable for running the Gameclock. */
     public static boolean running = true;
 
+    /** Clock's Logger. */
+    public static final Logger logger = LoggerFactory.getLogger(Clock.class);
+
+    /**
+     * Runs the Gameclock
+     */
     @Override
     public void run() {
+        logger.info("gameclock is running");
         while(running) {
             try {
                 sleep(200);
