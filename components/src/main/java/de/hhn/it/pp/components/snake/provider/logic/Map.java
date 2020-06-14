@@ -55,6 +55,7 @@ public class Map {
   public void load(int id){
       //todo implementieren, wenn mehrere Levels eingebaut werden! --> switch case
       //todo logger
+      //todo umbenennen in switchLevel o.Ä.
   }
 
   /**
