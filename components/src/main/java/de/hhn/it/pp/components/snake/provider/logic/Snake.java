@@ -11,25 +11,39 @@ import org.slf4j.LoggerFactory;
  */
 public class Snake {
 
-  /** Snake's Logger. */
+  /**
+   * Snake's Logger.
+   */
   private static final Logger logger = LoggerFactory.getLogger(Snake.class);
 
-  /** Variable waits for new direction for head, needed for key handler. */
+  /**
+   * Variable waits for new direction for head, needed for key handler.
+   */
   public static boolean waitToMove = false;
 
-  /** Snake's head with start coordinates. */
+  /**
+   * Snake's head with start coordinates.
+   */
   protected static SnakeHead snakeHead = new SnakeHead(15, 15);
 
-  /** ArrayList for all tails of the snake. */
+  /**
+   * ArrayList for all tails of the snake.
+   */
   public static ArrayList<SnakeTail> allTails = new ArrayList<>();
 
-  /** Collectible item. */
+  /**
+   * Collectible item.
+   */
   public static Item collectibleItem = new Item(1);
 
-  /** Score. */
+  /**
+   * Score.
+   */
   public static int score = 0;
 
-  /** Highscore. */
+  /**
+   * Highscore.
+   */
   public static int highscore = 0;
 
   /**
@@ -97,14 +111,5 @@ public class Snake {
    */
   public static int getScore() {
     return score;
-  }
-
-  /**
-   * Setter for score.
-   *
-   * @param score "new" score
-   */
-  public static void setScore(int score) {
-    Snake.score = score;
   }
 }
