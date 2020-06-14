@@ -1,11 +1,8 @@
 package de.hhn.it.pp.components.snake.provider.logic;
 
-import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.components.snake.provider.OurSnakeService;
+import java.util.concurrent.ThreadLocalRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Creates items that can be collected by the snake.
@@ -40,7 +37,7 @@ public class Item {
   }
 
   /**
-   * Resets item when collected
+   * Resets item when collected.
    */
   public void reset() {
     this.xPosition = ThreadLocalRandom.current().nextInt(0, 15);
