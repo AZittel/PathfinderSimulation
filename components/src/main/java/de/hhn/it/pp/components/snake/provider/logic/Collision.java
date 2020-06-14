@@ -7,7 +7,7 @@ public class Collision {
 
 
     public static boolean collideWithSnake() {
-        for (int i = 0; i <= Snake.allTails.size(); i++) {
+        for (int i = 0; i < Snake.allTails.size(); i++) {
             if (Snake.snakeHead.getHeadXPosition() == Snake.allTails.get(i).getTailXPosition() && Snake.snakeHead.getHeadYPosition() == Snake.allTails.get(i).getTailYPosition() && !Snake.allTails.get(i).isWait()) {
                 return true;
             }
