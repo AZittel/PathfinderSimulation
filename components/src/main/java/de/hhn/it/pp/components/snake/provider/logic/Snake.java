@@ -24,7 +24,7 @@ public class Snake {
   /**
    * Snake's head with start coordinates.
    */
-  protected static SnakeHead snakeHead = new SnakeHead(15, 15);
+  public static SnakeHead snakeHead = new SnakeHead(15, 15);
 
   /**
    * ArrayList for all tails of the snake.
