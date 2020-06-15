@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="370.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhn.it.pp.javafx.snake.Menue">
+   <children>
+      <ImageView fitHeight="415.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Menu.png" />
+         </image></ImageView>
+      <Button layoutX="238.0" layoutY="124.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" style="-fx-background-color: lightgreen;" text="Start Game" textFill="#1b9026">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="238.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" style="-fx-background-color: lightgreen;" text="Highscore" textFill="#1b9026" />
+      <Button layoutX="238.0" layoutY="252.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" style="-fx-background-color: lightgreen;" text="Exit" textFill="#1b9026" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="21.0" prefHeight="110.0" prefWidth="315.0" text="Snake" textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS" size="79.0" />
+         </font>
+         <textFill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0" startX="1.0" startY="0.4666666666666666">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.09320175647735596" green="0.6710526347160339" blue="0.20877192914485931" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>
