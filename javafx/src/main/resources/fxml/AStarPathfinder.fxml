@@ -18,7 +18,7 @@
                   </Label>
                </children>
             </Pane>
-            <SplitPane dividerPositions="0.16201117318435754" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.1027190332326284" orientation="VERTICAL">
               <items>
                 <AnchorPane prefHeight="82.0">
                      <children>
@@ -52,7 +52,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                <AnchorPane />
+                <AnchorPane fx:id="mapContainer" prefHeight="590.0" prefWidth="880.0" />
               </items>
             </SplitPane>
          </children>
