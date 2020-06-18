@@ -13,13 +13,13 @@ public class CellLabel extends Label {
   private static final org.slf4j.Logger logger =
     org.slf4j.LoggerFactory.getLogger(CellLabel.class);
 
-  private static final int CELL_SIZE = 30;
+  public static final int CELL_SIZE = 29;
 
-  private final Color DIRT_COLOR = Color.rgb(150, 80, 40);
-  private final Color GRASS_COLOR = Color.rgb(90, 150, 40);
-  private final Color SWAMP_COLOR = Color.rgb(40, 150, 110);
-  private final Color WATER_COLOR = Color.rgb(40, 120, 150);
-  private final Color LAVA_COLOR = Color.rgb(235, 95, 30);
+  public static final Color DIRT_COLOR = Color.rgb(150, 80, 40);
+  public static final Color GRASS_COLOR = Color.rgb(90, 150, 40);
+  public static final Color SWAMP_COLOR = Color.rgb(40, 150, 110);
+  public static final Color WATER_COLOR = Color.rgb(40, 120, 150);
+  public static final Color LAVA_COLOR = Color.rgb(235, 95, 30);
 
   private final static Insets INSETS = new Insets(2);
 
@@ -43,29 +43,12 @@ public class CellLabel extends Label {
 
   public void setType(TerrainType type) {
     this.type = type;
-    switch (type) {
-      case DIRT:
-        setBackground(new Background(new BackgroundFill(DIRT_COLOR,
-          CornerRadii.EMPTY, INSETS)));
-        break;
-      case GRASS:
-        setBackground(new Background(new BackgroundFill(GRASS_COLOR,
-          CornerRadii.EMPTY, INSETS)));
-        break;
-      case SWAMP:
-        setBackground(new Background(new BackgroundFill(SWAMP_COLOR,
-          CornerRadii.EMPTY, INSETS)));
-        break;
-      case WATER:
-        setBackground(new Background(new BackgroundFill(WATER_COLOR,
-          CornerRadii.EMPTY, INSETS)));
-        break;
-      case LAVA:
-        setBackground(new Background(new BackgroundFill(LAVA_COLOR,
-          CornerRadii.EMPTY, INSETS)));
-        break;
-
-      default:
+    Color color = AStarPathfinderController.TERRAIN_COLOR.get(type);
+    if(color != null){
+      setBackground(new Background(new BackgroundFill(color,
+        CornerRadii.EMPTY, INSETS)));
+    } else {
+       // TODO: Meldung an den Nutzer
     }
   }
 

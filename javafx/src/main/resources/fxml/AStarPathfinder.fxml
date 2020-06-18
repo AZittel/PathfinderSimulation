@@ -18,7 +18,7 @@
                   </Label>
                </children>
             </Pane>
-            <SplitPane dividerPositions="0.1027190332326284" orientation="VERTICAL">
+            <SplitPane fx:id="splitPane" dividerPositions="0.11651917404129794" orientation="VERTICAL">
               <items>
                 <AnchorPane prefHeight="82.0">
                      <children>
@@ -27,22 +27,24 @@
                               <Button fx:id="createNewMapButton" alignment="CENTER" mnemonicParsing="false" onAction="#onCreateNewMap" text="Create new Map" />
                               <Button fx:id="resetMapButton" mnemonicParsing="false" onAction="#onResetMap" text="Reset Map" />
                               <Button fx:id="startVisualizationButton" mnemonicParsing="false" onAction="#onStartVisualization" text="Start visualisation" />
-                              <GridPane prefHeight="40.0" prefWidth="407.0">
+                              <GridPane prefHeight="39.0" prefWidth="407.0">
                                 <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="203.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="99.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="68.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="193.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="42.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="124.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="68.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Obstacle" />
-                                    <Label prefHeight="17.0" prefWidth="82.0" text="Cost modifier" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                                    <ComboBox fx:id="obstacleComboBox" onAction="#onSelectObstacle" prefWidth="150.0" GridPane.rowIndex="1" />
-                                    <Slider fx:id="costSlider" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label fx:id="costLabel" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Obstacle" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" />
+                                    <Label prefHeight="17.0" prefWidth="82.0" text="Cost modifier" GridPane.columnIndex="2" GridPane.columnSpan="2" />
+                                    <ComboBox fx:id="obstacleComboBox" onAction="#onSelectObstacle" prefWidth="150.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                    <Slider fx:id="costSlider" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label fx:id="costLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label fx:id="obstacleColorLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="29.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
@@ -52,7 +54,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                <AnchorPane fx:id="mapContainer" prefHeight="590.0" prefWidth="880.0" />
+                  <HBox fx:id="mapContainer" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="880.0" />
               </items>
             </SplitPane>
          </children>

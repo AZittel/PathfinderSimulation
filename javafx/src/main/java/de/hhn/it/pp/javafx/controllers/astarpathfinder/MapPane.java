@@ -6,12 +6,11 @@ import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import java.util.List;
 import javafx.geometry.Insets;
-import javafx.scene.control.Cell;
+import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 
@@ -23,13 +22,10 @@ public class MapPane extends FlowPane {
 
 
   public MapPane(int width, int height) {
-    setPrefHeight(590);
-    setPrefWidth(880);
-    setBackground(new Background(new BackgroundFill(Color.rgb(150, 150, 150),
-      CornerRadii.EMPTY, Insets.EMPTY)));
+    setPrefHeight(height * CellLabel.CELL_SIZE);
+    setPrefWidth(width * CellLabel.CELL_SIZE);
     createMap(width, height);
-
-
+    setAlignment(Pos.CENTER);
   }
 
 

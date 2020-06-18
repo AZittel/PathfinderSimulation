@@ -11,8 +11,8 @@ public class MapManager {
   private static final org.slf4j.Logger logger =
       org.slf4j.LoggerFactory.getLogger(MapManager.class);
 
-  public static final int MAX_WIDTH = 50;
-  public static final int MAX_HEIGHT = 50;
+  public static final int MAX_WIDTH = 30;
+  public static final int MAX_HEIGHT = 20;
   public static final int MIN_WIDTH = 2;
   public static final int MIN_HEIGHT = 2;
 

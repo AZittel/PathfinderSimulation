@@ -9,17 +9,24 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.javafx.controllers.Controller;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public class AStarPathfinderController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
@@ -34,10 +41,26 @@ public class AStarPathfinderController extends Controller implements Initializab
   @FXML
   public Label costLabel;
   @FXML
-  public AnchorPane mapContainer;
+  public HBox mapContainer;
+  @FXML
+  public SplitPane splitPane;
+  @FXML
+  public Label obstacleColorLabel;
 
   private Pathfinder pathfinder;
-  private MapPane mapPane;
+  private final MapPane mapPane;
+
+  public static final Map<TerrainType, Color> TERRAIN_COLOR;
+
+  static {
+    TERRAIN_COLOR = Map.of(
+      TerrainType.DIRT, CellLabel.DIRT_COLOR,
+      TerrainType.GRASS, CellLabel.GRASS_COLOR,
+      TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
+      TerrainType.WATER, CellLabel.WATER_COLOR,
+      TerrainType.LAVA, CellLabel.LAVA_COLOR);
+  }
+
 
   public AStarPathfinderController() {
     pathfinder = new Pathfinder();
@@ -54,13 +77,22 @@ public class AStarPathfinderController extends Controller implements Initializab
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    //Assign mapPane to mapContainer
+
+    // Add Background color to mapContainer
+    mapContainer.setBackground(new Background(new BackgroundFill(Color.rgb(150, 150, 150),
+      CornerRadii.EMPTY, Insets.EMPTY)));
+
+    // Assign mapPane to mapContainer
     mapContainer.getChildren().add(mapPane);
 
 
     // Assign terrain types to obstacleComboBox
     obstacleComboBox.getItems().setAll(TerrainType.values());
     obstacleComboBox.setValue(TerrainType.DIRT);
+
+    //Add Dirt Color to coloLabel
+    obstacleColorLabel.setBackground(new Background(new BackgroundFill(CellLabel.DIRT_COLOR,
+      CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Initialize cost label
     costLabel.setText(String.valueOf((int) TerrainType.DIRT.getModifier()));
@@ -89,10 +121,9 @@ public class AStarPathfinderController extends Controller implements Initializab
   public void onCreateNewMap(ActionEvent actionEvent) {
     // TODO: Open popup dialog where the user can enter the new map size
     try {
-      pathfinder.createMap(10,10);
-      mapPane.createMap(10,10);
-    }
-    catch(PositionOutOfBounds e){
+      pathfinder.createMap(10, 10);
+      mapPane.createMap(10, 10);
+    } catch (PositionOutOfBounds e) {
       //TODO: Dialog das map erstellung nicht geklappt hat
     }
   }
@@ -120,7 +151,16 @@ public class AStarPathfinderController extends Controller implements Initializab
         TerrainType type = (TerrainType) comboBox.getSelectionModel().getSelectedItem();
         costSlider.setValue(type.getModifier());
         costLabel.setText(String.valueOf((int) type.getModifier()));
+        Color color = AStarPathfinderController.TERRAIN_COLOR.get(type);
+        if (color != null) {
+          obstacleColorLabel.setBackground(new Background(new BackgroundFill(color,
+            CornerRadii.EMPTY, Insets.EMPTY)));
+        } else {
+          // TODO: Meldung an den Nutzer
+        }
       }
     }
   }
+
+
 }
