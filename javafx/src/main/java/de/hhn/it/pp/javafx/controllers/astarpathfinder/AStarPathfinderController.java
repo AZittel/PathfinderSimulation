@@ -10,6 +10,7 @@ import de.hhn.it.pp.javafx.controllers.Controller;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,6 +28,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
 
 public class AStarPathfinderController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
@@ -119,13 +121,17 @@ public class AStarPathfinderController extends Controller implements Initializab
   }
 
   public void onCreateNewMap(ActionEvent actionEvent) {
-    // TODO: Open popup dialog where the user can enter the new map size
-    try {
-      pathfinder.createMap(10, 10);
-      mapPane.createMap(10, 10);
-    } catch (PositionOutOfBounds e) {
-      //TODO: Dialog das map erstellung nicht geklappt hat
-    }
+    CreateMapDialog dialog = new CreateMapDialog();
+    Optional<Pair<String, String>> result = dialog.showAndWait();
+
+    result.ifPresent(widthAndHeight -> {
+      try {
+        pathfinder.createMap(Integer.parseInt(widthAndHeight.getKey()), Integer.parseInt(widthAndHeight.getValue()));
+        mapPane.createMap(Integer.parseInt(widthAndHeight.getKey()), Integer.parseInt(widthAndHeight.getValue()));
+      } catch (PositionOutOfBounds e) {
+        //TODO: Dialog das map erstellung nicht geklappt hat
+      }
+    });
   }
 
   public void onResetMap(ActionEvent actionEvent) {
