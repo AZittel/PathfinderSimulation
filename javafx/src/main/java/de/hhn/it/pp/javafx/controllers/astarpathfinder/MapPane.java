@@ -9,12 +9,10 @@ import javafx.scene.layout.FlowPane;
 public class MapPane extends FlowPane {
   private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MapPane.class);
 
-  CellLabel[][] map;
+  private CellLabel[][] map;
 
   public MapPane(int width, int height) {
     createMap(width, height);
-    //    setBorder(new Border(new BorderStroke(Color.BLACK,
-    //        BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
   }
 
   public void reset() {

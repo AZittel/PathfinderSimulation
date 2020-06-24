@@ -1,8 +1,8 @@
 package de.hhn.it.pp.javafx.controllers.astarpathfinder;
 
-
-
+import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
+import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import java.util.regex.Pattern;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -12,11 +12,15 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
 public class CreateMapDialog extends Dialog<Pair<String, String>> {
 
-  public CreateMapDialog() {
+  private TextField widthField;
+  private TextField heightField;
+
+  public CreateMapDialog(Pathfinder pathfinder, MapPane mapPane) {
     setTitle("Create Map Dialog");
     setHeaderText("Choose the map size");
 
@@ -29,43 +33,102 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
     grid.setVgap(10);
     grid.setPadding(new Insets(20, 150, 10, 10));
 
-    TextField widthField = new TextField();
+    widthField = new TextField();
     widthField.setPromptText("max " + MapManager.MAX_WIDTH);
-    TextField heightField = new TextField();
+    heightField = new TextField();
     heightField.setPromptText("max " + MapManager.MAX_HEIGHT);
+
+    Label widthErrorLabel =
+        new Label(
+            String.format(
+                "The width must be between %d and %d", MapManager.MIN_WIDTH, MapManager.MAX_WIDTH));
+    widthErrorLabel.setTextFill(Color.RED);
+    widthErrorLabel.setVisible(false);
+    Label heightErrorLabel =
+        new Label(
+            String.format(
+                "The height must be between %d and %d",
+                MapManager.MIN_HEIGHT, MapManager.MAX_HEIGHT));
+    heightErrorLabel.setTextFill(Color.RED);
+    heightErrorLabel.setVisible(false);
 
     grid.add(new Label("Width:"), 0, 0);
     grid.add(widthField, 1, 0);
     grid.add(new Label("Height:"), 0, 1);
     grid.add(heightField, 1, 1);
+    grid.add(widthErrorLabel, 2, 0);
+    grid.add(heightErrorLabel, 2, 1);
 
     // Enable/Disable login button depending on whether a username was entered.
     Node createButton = getDialogPane().lookupButton(createButtonType);
     createButton.setDisable(true);
 
     // Do some validation for width textField
-    widthField.textProperty().addListener((observable, oldValue, newValue) -> {
-      createButton.setDisable(checkTextFields(newValue, heightField.getText()));
-    });
+    widthField
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              onValueChange(heightField, widthErrorLabel, createButton, newValue);
+            });
 
     // Do some validation for height textField
-    heightField.textProperty().addListener((observable, oldValue, newValue) -> {
-      createButton.setDisable(checkTextFields(newValue, widthField.getText()));
-    });
+    heightField
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              onValueChange(widthField, heightErrorLabel, createButton, newValue);
+            });
 
     getDialogPane().setContent(grid);
 
-    // Convert the result to a username-password-pair when the login button is clicked.
-    setResultConverter(dialogButton -> {
-      if (dialogButton == createButtonType) {
-        return new Pair<>(widthField.getText(), heightField.getText());
-      }
-      return null;
-    });
+    // Try to create the map when the create button is clicked.
+    setResultConverter(
+        dialogButton -> {
+          if (dialogButton == createButtonType) {
+            try {
+              pathfinder.createMap(
+                  Integer.parseInt(widthField.getText()), Integer.parseInt(heightField.getText()));
+              mapPane.createMap(
+                  Integer.parseInt(widthField.getText()), Integer.parseInt(heightField.getText()));
+            } catch (PositionOutOfBounds e) {
+              e.printStackTrace();
+            }
+          }
+
+          return null;
+        });
   }
 
-  private boolean checkTextFields(String text1, String text2) {
-    final String pattern = "^\\d+$";
-    return !Pattern.matches(pattern, text1) || !Pattern.matches(pattern, text2);
+  private void onValueChange(
+      TextField textField, Label errorLabel, Node createButton, String newValue) {
+    boolean isValidNumber = false;
+    try {
+      int value = Integer.parseInt(newValue);
+      int min = 0, max = 0;
+
+      if (textField.equals(heightField)) {
+        min = MapManager.MIN_WIDTH;
+        max = MapManager.MAX_WIDTH;
+      } else {
+        min = MapManager.MIN_HEIGHT;
+        max = MapManager.MAX_HEIGHT;
+      }
+
+      if (value < min || value > max) {
+        errorLabel.setVisible(true);
+      } else {
+        isValidNumber = true;
+        errorLabel.setVisible(false);
+      }
+    } catch (NumberFormatException e) {
+      errorLabel.setVisible(true);
+    }
+
+    createButton.setDisable(
+        !checkTextInput(newValue) || !checkTextInput(textField.getText()) || !isValidNumber);
+  }
+
+  private boolean checkTextInput(String text) {
+    return Pattern.matches("^\\d+$", text);
   }
 }

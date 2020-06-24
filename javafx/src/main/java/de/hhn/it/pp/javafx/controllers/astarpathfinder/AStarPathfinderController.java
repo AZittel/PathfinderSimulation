@@ -2,7 +2,6 @@ package de.hhn.it.pp.javafx.controllers.astarpathfinder;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
-import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
@@ -10,7 +9,6 @@ import de.hhn.it.pp.javafx.controllers.Controller;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,28 +25,19 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.util.Pair;
 
 public class AStarPathfinderController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
+      org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
 
-  @FXML
-  public Button createNewMapButton;
-  @FXML
-  public ComboBox<TerrainType> obstacleComboBox;
-  @FXML
-  public Slider costSlider;
-  @FXML
-  public Label costLabel;
-  @FXML
-  public FlowPane mapContainer;
-  @FXML
-  public SplitPane splitPane;
-  @FXML
-  public Label obstacleColorLabel;
+  @FXML public Button createNewMapButton;
+  @FXML public ComboBox<TerrainType> obstacleComboBox;
+  @FXML public Slider costSlider;
+  @FXML public Label costLabel;
+  @FXML public FlowPane mapContainer;
+  @FXML public SplitPane splitPane;
+  @FXML public Label obstacleColorLabel;
 
   private Pathfinder pathfinder;
   private final MapPane mapPane;
@@ -56,14 +45,14 @@ public class AStarPathfinderController extends Controller implements Initializab
   public static final Map<TerrainType, Color> TERRAIN_COLOR;
 
   static {
-    TERRAIN_COLOR = Map.of(
-      TerrainType.DIRT, CellLabel.DIRT_COLOR,
-      TerrainType.GRASS, CellLabel.GRASS_COLOR,
-      TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
-      TerrainType.WATER, CellLabel.WATER_COLOR,
-      TerrainType.LAVA, CellLabel.LAVA_COLOR);
+    TERRAIN_COLOR =
+        Map.of(
+            TerrainType.DIRT, CellLabel.DIRT_COLOR,
+            TerrainType.GRASS, CellLabel.GRASS_COLOR,
+            TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
+            TerrainType.WATER, CellLabel.WATER_COLOR,
+            TerrainType.LAVA, CellLabel.LAVA_COLOR);
   }
-
 
   public AStarPathfinderController() {
     pathfinder = new Pathfinder();
@@ -74,28 +63,27 @@ public class AStarPathfinderController extends Controller implements Initializab
    * Called to initialize a controller after its root element has been completely processed.
    *
    * @param url The location used to resolve relative paths for the root object, or <tt>null</tt> if
-   * the location is not known.
+   *     the location is not known.
    * @param resourceBundle The resources used to localize the root object, or <tt>null</tt> if
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
     // Add Background color to mapContainer
-    mapContainer.setBackground(new Background(new BackgroundFill(Color.rgb(150, 150, 150),
-      CornerRadii.EMPTY, Insets.EMPTY)));
+    mapContainer.setBackground(
+        new Background(
+            new BackgroundFill(Color.rgb(150, 150, 150), CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Assign mapPane to mapContainer
     mapContainer.getChildren().add(mapPane);
-
 
     // Assign terrain types to obstacleComboBox
     obstacleComboBox.getItems().setAll(TerrainType.values());
     obstacleComboBox.setValue(TerrainType.DIRT);
 
-    //Add Dirt Color to coloLabel
-    obstacleColorLabel.setBackground(new Background(new BackgroundFill(CellLabel.DIRT_COLOR,
-      CornerRadii.EMPTY, Insets.EMPTY)));
+    // Add Dirt Color to coloLabel
+    obstacleColorLabel.setBackground(
+        new Background(new BackgroundFill(CellLabel.DIRT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Initialize cost label
     costLabel.setText(String.valueOf((int) TerrainType.DIRT.getModifier()));
@@ -103,43 +91,35 @@ public class AStarPathfinderController extends Controller implements Initializab
     // Add listener to the cost slider
     costSlider.setValue(TerrainType.DIRT.getModifier());
     costSlider
-      .valueProperty()
-      .addListener(
-        new ChangeListener<Number>() {
-          public void changed(
-            ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
-            try {
-              pathfinder.changeTerrainTypeModifier(
-                obstacleComboBox.getSelectionModel().getSelectedItem(),
-                newValue.doubleValue());
-              costLabel.setText(String.valueOf(newValue.intValue()));
-            } catch (IllegalParameterException e) {
-              // TODO: Handle error
-              e.printStackTrace();
-            }
-          }
-        });
+        .valueProperty()
+        .addListener(
+            new ChangeListener<Number>() {
+              public void changed(
+                  ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                try {
+                  pathfinder.changeTerrainTypeModifier(
+                      obstacleComboBox.getSelectionModel().getSelectedItem(),
+                      newValue.doubleValue());
+                  costLabel.setText(String.valueOf(newValue.intValue()));
+                } catch (IllegalParameterException e) {
+                  // TODO: Handle error
+                  e.printStackTrace();
+                }
+              }
+            });
   }
 
   public void onCreateNewMap(ActionEvent actionEvent) {
-    CreateMapDialog dialog = new CreateMapDialog();
-    Optional<Pair<String, String>> result = dialog.showAndWait();
-
-    result.ifPresent(widthAndHeight -> {
-      try {
-        pathfinder.createMap(Integer.parseInt(widthAndHeight.getKey()), Integer.parseInt(widthAndHeight.getValue()));
-        mapPane.createMap(Integer.parseInt(widthAndHeight.getKey()), Integer.parseInt(widthAndHeight.getValue()));
-      } catch (PositionOutOfBounds e) {
-        e.printStackTrace();
-        //TODO: Dialog das map erstellung nicht geklappt hat
-      }
-    });
+    CreateMapDialog dialog = new CreateMapDialog(pathfinder, mapPane);
+    dialog.showAndWait();
   }
 
   public void onResetMap(ActionEvent actionEvent) {
-    // TODO: Implement method
     pathfinder.reset();
     mapPane.reset();
+    // Reset cost label and slider
+    costLabel.setText(String.valueOf((int) obstacleComboBox.getSelectionModel().getSelectedItem().getModifier()));
+    costSlider.setValue(obstacleComboBox.getSelectionModel().getSelectedItem().getModifier());
   }
 
   public void onStartVisualization(ActionEvent actionEvent) {
@@ -161,14 +141,12 @@ public class AStarPathfinderController extends Controller implements Initializab
         costLabel.setText(String.valueOf((int) type.getModifier()));
         Color color = AStarPathfinderController.TERRAIN_COLOR.get(type);
         if (color != null) {
-          obstacleColorLabel.setBackground(new Background(new BackgroundFill(color,
-            CornerRadii.EMPTY, Insets.EMPTY)));
+          obstacleColorLabel.setBackground(
+              new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
         } else {
           // TODO: Meldung an den Nutzer
         }
       }
     }
   }
-
-
 }
