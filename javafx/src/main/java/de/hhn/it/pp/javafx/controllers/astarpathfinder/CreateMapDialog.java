@@ -17,7 +17,6 @@ import javafx.util.Pair;
 public class CreateMapDialog extends Dialog<Pair<String, String>> {
 
   public CreateMapDialog() {
-
     setTitle("Create Map Dialog");
     setHeaderText("Choose the map size");
 
@@ -46,12 +45,12 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
 
     // Do some validation for width textField
     widthField.textProperty().addListener((observable, oldValue, newValue) -> {
-      createButton.setDisable(!Pattern.matches("^\\d*$", newValue));
+      createButton.setDisable(checkTextFields(newValue, heightField.getText()));
     });
 
     // Do some validation for height textField
     heightField.textProperty().addListener((observable, oldValue, newValue) -> {
-      createButton.setDisable(!Pattern.matches("^\\d*$", newValue));
+      createButton.setDisable(checkTextFields(newValue, widthField.getText()));
     });
 
     getDialogPane().setContent(grid);
@@ -63,5 +62,10 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
       }
       return null;
     });
+  }
+
+  private boolean checkTextFields(String text1, String text2) {
+    final String pattern = "^\\d+$";
+    return !Pattern.matches(pattern, text1) || !Pattern.matches(pattern, text2);
   }
 }

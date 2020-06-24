@@ -13,7 +13,7 @@ public class CellLabel extends Label {
   private static final org.slf4j.Logger logger =
     org.slf4j.LoggerFactory.getLogger(CellLabel.class);
 
-  public static final int CELL_SIZE = 29;
+  public static final int CELL_SIZE = 30;
 
   public static final Color DIRT_COLOR = Color.rgb(150, 80, 40);
   public static final Color GRASS_COLOR = Color.rgb(90, 150, 40);
@@ -21,7 +21,7 @@ public class CellLabel extends Label {
   public static final Color WATER_COLOR = Color.rgb(40, 120, 150);
   public static final Color LAVA_COLOR = Color.rgb(235, 95, 30);
 
-  private final static Insets INSETS = new Insets(2);
+  public final static Insets INSETS = new Insets(2);
 
   private Position position;
   private TerrainType type;

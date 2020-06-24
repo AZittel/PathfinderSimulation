@@ -18,7 +18,7 @@
                   </Label>
                </children>
             </Pane>
-            <SplitPane fx:id="splitPane" dividerPositions="0.11651917404129794" orientation="VERTICAL">
+            <SplitPane fx:id="splitPane" dividerPositions="0.5" orientation="VERTICAL">
               <items>
                 <AnchorPane prefHeight="82.0">
                      <children>
@@ -54,7 +54,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <HBox fx:id="mapContainer" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="880.0" />
+                  <FlowPane fx:id="mapContainer" alignment="TOP_CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="880.0" SplitPane.resizableWithParent="false" />
               </items>
             </SplitPane>
          </children>

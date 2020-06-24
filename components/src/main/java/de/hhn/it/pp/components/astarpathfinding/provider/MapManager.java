@@ -1,6 +1,5 @@
 package de.hhn.it.pp.components.astarpathfinding.provider;
 
-
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
@@ -11,8 +10,8 @@ public class MapManager {
   private static final org.slf4j.Logger logger =
       org.slf4j.LoggerFactory.getLogger(MapManager.class);
 
-  public static final int MAX_WIDTH = 30;
-  public static final int MAX_HEIGHT = 20;
+  public static final int MAX_WIDTH = 29;
+  public static final int MAX_HEIGHT = 18;
   public static final int MIN_WIDTH = 2;
   public static final int MIN_HEIGHT = 2;
 
@@ -47,8 +46,7 @@ public class MapManager {
    * @param height the height of the map, must higher then 1
    * @throws PositionOutOfBounds if either the width or the height is invalid
    */
-  public void createMap(int width, int height)
-      throws PositionOutOfBounds {
+  public void createMap(int width, int height) throws PositionOutOfBounds {
     logger.info("createMap: width = {}, height = {}", width, height);
     // Check minimum boundaries of the map
     if (width < MIN_WIDTH || height < MIN_HEIGHT) {
@@ -63,19 +61,9 @@ public class MapManager {
               MAX_WIDTH, MAX_HEIGHT));
     }
 
-    // Check if start and destination positions are still on the map
-    if (startCoordinates.getRow() >= width || startCoordinates.getCol() >= height) {
-      Position pos = startCoordinates;
-      startCoordinates = null;
-      throw new PositionOutOfBounds(
-          "Start position out of new map boundaries | " + pos, PositionType.START);
-    } else if (destinationCoordinates.getRow() >= width
-        || destinationCoordinates.getCol() >= height) {
-      Position pos = destinationCoordinates;
-      destinationCoordinates = null;
-      throw new PositionOutOfBounds(
-          "Destination position out of new map boundaries | " + pos, PositionType.DESTINATION);
-    }
+    // Set new start and destination coordinates
+    startCoordinates = new Position((int) Math.ceil(height / 2f), 0);
+    destinationCoordinates = new Position((int) Math.ceil(height / 2f), width - 1);
 
     // Create new map with grass terrain
     map = new Terrain[height][width];
@@ -96,7 +84,6 @@ public class MapManager {
    * @return the created terrain
    */
   public Terrain createTerrain(TerrainType type, Position position) throws PositionOutOfBounds {
-    // TODO: null check?
     logger.debug("createTerrain: type = {}, position = {}", type, position.toString());
 
     // Check map boundaries

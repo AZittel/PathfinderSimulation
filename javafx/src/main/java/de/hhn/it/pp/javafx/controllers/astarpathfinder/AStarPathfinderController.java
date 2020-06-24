@@ -26,6 +26,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
@@ -43,7 +44,7 @@ public class AStarPathfinderController extends Controller implements Initializab
   @FXML
   public Label costLabel;
   @FXML
-  public HBox mapContainer;
+  public FlowPane mapContainer;
   @FXML
   public SplitPane splitPane;
   @FXML
@@ -129,6 +130,7 @@ public class AStarPathfinderController extends Controller implements Initializab
         pathfinder.createMap(Integer.parseInt(widthAndHeight.getKey()), Integer.parseInt(widthAndHeight.getValue()));
         mapPane.createMap(Integer.parseInt(widthAndHeight.getKey()), Integer.parseInt(widthAndHeight.getValue()));
       } catch (PositionOutOfBounds e) {
+        e.printStackTrace();
         //TODO: Dialog das map erstellung nicht geklappt hat
       }
     });
