@@ -124,6 +124,7 @@ public class AStarPathfindingAlgorithm {
       path.add(currentTerrain);
       currentTerrain = currentTerrain.getParent();
     }
+    path.add(startTerrain);
 
     Collections.reverse(path);
     return path;

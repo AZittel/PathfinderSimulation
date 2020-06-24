@@ -18,8 +18,10 @@ public class MapManager {
   public static final int DEFAULT_WIDTH = 10;
   public static final int DEFAULT_HEIGHT = 10;
 
-  public static final Position DEFAULT_START_POSITION = new Position(0, 0);
-  public static final Position DEFAULT_DESTINATION_POSITION = new Position(9, 9);
+  public static final Position DEFAULT_START_POSITION =
+      new Position((int) Math.ceil(DEFAULT_HEIGHT / 2f) - 1, 0);
+  public static final Position DEFAULT_DESTINATION_POSITION =
+      new Position((int) Math.ceil(DEFAULT_HEIGHT / 2f) - 1, DEFAULT_WIDTH - 1);
 
   private Position startCoordinates;
   private Position destinationCoordinates;
@@ -62,8 +64,8 @@ public class MapManager {
     }
 
     // Set new start and destination coordinates
-    startCoordinates = new Position((int) Math.ceil(height / 2f), 0);
-    destinationCoordinates = new Position((int) Math.ceil(height / 2f), width - 1);
+    startCoordinates = new Position((int) Math.ceil(height / 2f) - 1, 0);
+    destinationCoordinates = new Position((int) Math.ceil(height / 2f) - 1, width - 1);
 
     // Create new map with grass terrain
     map = new Terrain[height][width];
@@ -102,14 +104,14 @@ public class MapManager {
   private void checkPositionInBounds(Position position) throws PositionOutOfBounds {
     if (position.getRow() < 0) {
       throw new PositionOutOfBounds("X cannot be lower than 0!", PositionType.DEFAULT);
-    } else if (position.getRow() > getWidth() - 1) {
+    } else if (position.getRow() > getHeight() - 1) {
       throw new PositionOutOfBounds(
-          String.format("X cannot be greater than %d!", getWidth() - 1), PositionType.DEFAULT);
+          String.format("X cannot be greater than %d!", getHeight() - 1), PositionType.DEFAULT);
     } else if (position.getCol() < 0) {
       throw new PositionOutOfBounds("Y cannot be lower than 0!", PositionType.DEFAULT);
-    } else if (position.getCol() > getHeight() - 1) {
+    } else if (position.getCol() > getWidth() - 1) {
       throw new PositionOutOfBounds(
-          String.format("Y cannot be greater than %d!", getHeight() - 1), PositionType.DEFAULT);
+          String.format("Y cannot be greater than %d!", getWidth() - 1), PositionType.DEFAULT);
     }
   }
 

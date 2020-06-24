@@ -110,27 +110,6 @@ public class MapManagerTest {
           PositionOutOfBounds.class,
             () -> testMapManager.createMap(MapManager.MAX_WIDTH + 1, MapManager.MAX_HEIGHT + 1));
       }
-
-      @Test
-      @DisplayName(
-          "Unsuccessfully create a new terrain map where the startPosition would be out of bounds")
-      public void createMap_startPositionOutOfBounds()
-          throws IllegalParameterException, PositionOutOfBounds, OccupiedPositionException {
-        testMapManager.setStartCoordinates(new Position(9, 8));
-        PositionOutOfBounds exception =
-            assertThrows(PositionOutOfBounds.class, () -> testMapManager.createMap(5, 5));
-        assertEquals(PositionType.START, exception.getPositionType());
-      }
-
-      @Test
-      @DisplayName(
-          "Unsuccessfully create a new terrain map where the destinationPosition would be out of bounds")
-      public void createMap_destinationPositionOutOfBounds()
-          throws IllegalParameterException, PositionOutOfBounds {
-        PositionOutOfBounds exception =
-            assertThrows(PositionOutOfBounds.class, () -> testMapManager.createMap(5, 5));
-        assertEquals(PositionType.DESTINATION, exception.getPositionType());
-      }
     }
   }
 
@@ -212,18 +191,13 @@ public class MapManagerTest {
         throws PositionOutOfBounds, IllegalParameterException, OccupiedPositionException {
       // Create a map with a new width and height
       int width = 20;
-      int height = 20;
+      int height = 18;
       testMapManager.createMap(width, height);
       // Set new terrain on the map
       testMapManager.createTerrain(TerrainType.LAVA, new Position(0, 0));
       testMapManager.createTerrain(
           TerrainType.LAVA,
-          new Position(testMapManager.getWidth() - 1, testMapManager.getHeight() - 1));
-      // Set start and destination position
-      Position newStartPosition = new Position(5, 5);
-      testMapManager.setStartCoordinates(newStartPosition);
-      Position newDestinationPosition = new Position(15, 15);
-      testMapManager.setDestinationCoordinates(newDestinationPosition);
+          new Position(testMapManager.getHeight() - 1, testMapManager.getWidth() - 1));
 
       testMapManager.reset();
       Terrain[][] map = testMapManager.getMap();
@@ -233,18 +207,7 @@ public class MapManagerTest {
                   height, map.length, String.format("The map height should be %d.", height)),
           () ->
               assertEquals(
-                  width, map[0].length, String.format("The map width should be %d.", width)),
-          () ->
-              assertEquals(
-                  newStartPosition,
-                  testMapManager.getStartCoordinates(),
-                  String.format("The start point should be %s.", newStartPosition.toString())),
-          () ->
-              assertEquals(
-                  newDestinationPosition,
-                  testMapManager.getDestinationCoordinates(),
-                  String.format(
-                      "The destination point should be %s.", newDestinationPosition.toString())));
+                  width, map[0].length, String.format("The map width should be %d.", width)));
       for (int i = 0; i < map.length - 1; i++) {
         for (int j = 0; j < map[0].length - 1; j++) {
           assertEquals(TerrainType.DIRT, map[i][j].getType(), "The terrain type should be dirt.");

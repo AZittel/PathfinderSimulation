@@ -55,83 +55,86 @@ public class AStarPathfindingAlgorithmTest {
 
       List<Terrain> expectedPath = new ArrayList<>();
 
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 0)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 1)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 2)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 3)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 4)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 5)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
 
       assertFalse(finalPath.isEmpty());
-      assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
+      assertEquals(expectedPath, finalPath, "The 1. expected path is not the same as the actual path");
 
-      Terrain terrain4 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 3));
-      Terrain terrain5 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 4));
-      Terrain terrain6 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 5));
-      Terrain terrain7 = testMapManager.createTerrain(TerrainType.WATER, new Position(1, 6));
+      testMapManager.createTerrain(TerrainType.WATER, new Position(0, 3));
+      testMapManager.createTerrain(TerrainType.WATER, new Position(1, 3));
+      testMapManager.createTerrain(TerrainType.WATER, new Position(2, 3));
+      testMapManager.createTerrain(TerrainType.WATER, new Position(3, 3));
+      testMapManager.createTerrain(TerrainType.WATER, new Position(4, 3));
 
       result = algorithm.findPath();
       finalPath = result.get(result.size() - 1).getFinalPathPositions();
       printMapWithFinalPath(finalPath);
 
       expectedPath.clear();
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 0)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 1)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 2)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 2)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(5, 2)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(5, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(5, 4)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 4)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(4, 6)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
-      assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
+      assertEquals(expectedPath, finalPath, "The 2. expected path is not the same as the actual path");
     }
 
     @Test
     @DisplayName("Influence pathfinding with changed modifiers")
     public void doPathfinding_changedTerrainTypeModifier_GoodResult()
         throws OccupiedPositionException, PositionOutOfBounds, IllegalParameterException {
-      Position start = new Position(2, 2);
-      testMapManager.setStartCoordinates(start);
-      Position end = new Position(2, 6);
-      testMapManager.setDestinationCoordinates(end);
       testMapManager.createMap(7, 7);
-      Terrain terrain2 = testMapManager.createTerrain(TerrainType.SWAMP, new Position(1, 4));
-      Terrain terrain1 = testMapManager.createTerrain(TerrainType.LAVA, new Position(2, 4));
-      Terrain terrain3 = testMapManager.createTerrain(TerrainType.SWAMP, new Position(3, 4));
+      testMapManager.createTerrain(TerrainType.SWAMP, new Position(1, 4));
+      testMapManager.createTerrain(TerrainType.LAVA, new Position(2, 4));
+      testMapManager.createTerrain(TerrainType.SWAMP, new Position(3, 4));
 
       ArrayList<PathfindingInformation> result = algorithm.findPath();
       List<Terrain> finalPath = result.get(result.size() - 1).getFinalPathPositions();
 
       List<Terrain> expectedPath = new ArrayList<>();
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 0)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 1)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 2)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 3)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 4)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(4, 5)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 5)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
 
       printMapWithFinalPath(finalPath);
       assertFalse(finalPath.isEmpty());
-      assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
+      assertEquals(expectedPath, finalPath, "The 1. expected path is not the same as the actual path");
 
       TerrainType.SWAMP.setModifier(20.0);
       result = algorithm.findPath();
       finalPath = result.get(result.size() - 1).getFinalPathPositions();
       expectedPath.clear();
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 3)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 0)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 1)));
+      expectedPath.add(testMapManager.getTerrainAt(new Position(3, 2)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 3)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 4)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 5)));
       expectedPath.add(testMapManager.getTerrainAt(new Position(3, 6)));
-      expectedPath.add(testMapManager.getTerrainAt(new Position(2, 6)));
       printMapWithFinalPath(finalPath);
 
       assertFalse(finalPath.isEmpty());
-      assertEquals(expectedPath, finalPath, "The expected path is not the same as the actual path");
+      assertEquals(expectedPath, finalPath, "The 2. expected path is not the same as the actual path");
     }
   }
 
@@ -142,10 +145,9 @@ public class AStarPathfindingAlgorithmTest {
     @DisplayName("Try doPathfinding with no result")
     public void doPathfinding_startAndEndPosition_surroundedWithObstacle()
       throws OccupiedPositionException, PositionOutOfBounds, IllegalParameterException {
+      // Set start point
       Position start = new Position(2, 2);
       testMapManager.setStartCoordinates(start);
-      Position end = new Position(2, 6);
-      testMapManager.setDestinationCoordinates(end);
 
       // Start point surrounded with lava
       Terrain terrain2 = testMapManager.createTerrain(TerrainType.LAVA, new Position(1, 2));
@@ -154,10 +156,14 @@ public class AStarPathfindingAlgorithmTest {
       Terrain terrain4 = testMapManager.createTerrain(TerrainType.LAVA, new Position(3, 2));
 
       ArrayList<PathfindingInformation> result = algorithm.findPath();
-      assertTrue(result.isEmpty());
+      assertTrue(result.isEmpty(), "There should not be a path from the start position");
 
       // Reset map
       testMapManager.reset();
+
+      // Set end point
+      Position end = new Position(2, 6);
+      testMapManager.setDestinationCoordinates(end);
 
       // End point surrounded with lava
       terrain2 = testMapManager.createTerrain(TerrainType.LAVA, new Position(1, 6));
@@ -166,7 +172,7 @@ public class AStarPathfindingAlgorithmTest {
       terrain4 = testMapManager.createTerrain(TerrainType.LAVA, new Position(2, 5));
 
       result = algorithm.findPath();
-      assertTrue(result.isEmpty());
+      assertTrue(result.isEmpty(), "There should not be a path to the end position");
     }
   }
 
