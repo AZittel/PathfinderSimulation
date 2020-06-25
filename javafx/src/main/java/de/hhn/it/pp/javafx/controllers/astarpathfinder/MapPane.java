@@ -3,15 +3,17 @@ package de.hhn.it.pp.javafx.controllers.astarpathfinder;
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
-import java.awt.TextField;
 import java.util.List;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.FlowPane;
 
 public class MapPane extends FlowPane {
+
   private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MapPane.class);
   private static CellLabel selectedCell;
 
@@ -50,8 +52,73 @@ public class MapPane extends FlowPane {
           cell.setDestinationPoint(true);
         }
 
+        cell.setOnDragDetected(new EventHandler<MouseEvent>() {
+          public void handle(MouseEvent event) {
+            // drag was detected, start a drag-and-drop gesture allow any transfer mode
+            Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
+            if (cell.isStartPoint() || cell.isDestinationPoint()) {
+              selectedCell = cell;
+            }
+            // Put a string on a dragboard
+            ClipboardContent content = new ClipboardContent();
+            content.putString(cell.getText());
+            db.setContent(content);
 
+            event.consume();
+          }
+        });
 
+        cell.setOnDragOver(new EventHandler<DragEvent>() {
+          public void handle(DragEvent event) {
+            CellLabel source = (CellLabel) event.getGestureSource();
+            // data is dragged over the target
+            // accept it only if it is not dragged from the same node
+            // and if it has a string data
+            if (source != cell &&
+                event.getDragboard().hasString()) {
+              if ((source.isStartPoint() && !cell.isDestinationPoint()) ||
+                  (source.isDestinationPoint() && !cell.isStartPoint())) {
+                //  allow for moving
+                event.acceptTransferModes(TransferMode.ANY);
+              }
+            }
+            event.consume();
+          }
+        });
+
+        cell.setOnDragDropped(new EventHandler<DragEvent>() {
+          public void handle(DragEvent event) {
+            System.out.println("Drag Dropped");
+            CellLabel source = (CellLabel) event.getGestureSource();
+            // data dropped
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasString()) {
+              if (source != null && !cell.equals(source)) {
+                // Start and destination
+                if (source.isStartPoint()) {
+                  controller.setStartPoint(source, cell);
+                } else if (source.isDestinationPoint()) {
+                  controller.setDestinationPoint(source, cell);
+                }
+              }
+              success = true;
+            }
+            // let the source know whether the string was successfully
+            // transferred and used
+            event.setDropCompleted(success);
+
+            event.consume();
+          }
+        });
+
+    /*    cell.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+
+          }
+        });*/
+/*
         cell.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent mouseEvent) {
@@ -75,7 +142,8 @@ public class MapPane extends FlowPane {
               }
             }
           }
-        });
+        });*/
+
         getChildren().add(cell);
 
       }
