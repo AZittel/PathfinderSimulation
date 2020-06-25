@@ -2,6 +2,8 @@ package de.hhn.it.pp.javafx.controllers.astarpathfinder;
 
 import de.hhn.it.pp.components.astarpathfinding.PathfindingInformation;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.OccupiedPositionException;
+import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
@@ -29,41 +31,49 @@ import javafx.scene.paint.Color;
 
 public class AStarPathfinderController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
-      org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
+    org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
 
-  @FXML public Button createNewMapButton;
-  @FXML public ComboBox<TerrainType> obstacleComboBox;
-  @FXML public Slider costSlider;
-  @FXML public Label costLabel;
-  @FXML public FlowPane mapContainer;
-  @FXML public SplitPane splitPane;
-  @FXML public Label obstacleColorLabel;
+  @FXML
+  public Button createNewMapButton;
+  @FXML
+  public ComboBox<TerrainType> obstacleComboBox;
+  @FXML
+  public Slider costSlider;
+  @FXML
+  public Label costLabel;
+  @FXML
+  public FlowPane mapContainer;
+  @FXML
+  public SplitPane splitPane;
+  @FXML
+  public Label obstacleColorLabel;
 
   private Pathfinder pathfinder;
   private final MapPane mapPane;
+
 
   public static final Map<TerrainType, Color> TERRAIN_COLOR;
 
   static {
     TERRAIN_COLOR =
-        Map.of(
-            TerrainType.DIRT, CellLabel.DIRT_COLOR,
-            TerrainType.GRASS, CellLabel.GRASS_COLOR,
-            TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
-            TerrainType.WATER, CellLabel.WATER_COLOR,
-            TerrainType.LAVA, CellLabel.LAVA_COLOR);
+      Map.of(
+        TerrainType.DIRT, CellLabel.DIRT_COLOR,
+        TerrainType.GRASS, CellLabel.GRASS_COLOR,
+        TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
+        TerrainType.WATER, CellLabel.WATER_COLOR,
+        TerrainType.LAVA, CellLabel.LAVA_COLOR);
   }
 
   public AStarPathfinderController() {
     pathfinder = new Pathfinder();
-    mapPane = new MapPane(MapManager.DEFAULT_WIDTH, MapManager.DEFAULT_HEIGHT);
+    mapPane = new MapPane(MapManager.DEFAULT_WIDTH, MapManager.DEFAULT_HEIGHT, this);
   }
 
   /**
    * Called to initialize a controller after its root element has been completely processed.
    *
    * @param url The location used to resolve relative paths for the root object, or <tt>null</tt> if
-   *     the location is not known.
+   * the location is not known.
    * @param resourceBundle The resources used to localize the root object, or <tt>null</tt> if
    */
   @Override
@@ -71,8 +81,8 @@ public class AStarPathfinderController extends Controller implements Initializab
 
     // Add Background color to mapContainer
     mapContainer.setBackground(
-        new Background(
-            new BackgroundFill(Color.rgb(150, 150, 150), CornerRadii.EMPTY, Insets.EMPTY)));
+      new Background(
+        new BackgroundFill(Color.rgb(150, 150, 150), CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Assign mapPane to mapContainer
     mapContainer.getChildren().add(mapPane);
@@ -83,7 +93,7 @@ public class AStarPathfinderController extends Controller implements Initializab
 
     // Add Dirt Color to coloLabel
     obstacleColorLabel.setBackground(
-        new Background(new BackgroundFill(CellLabel.DIRT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
+      new Background(new BackgroundFill(CellLabel.DIRT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Initialize cost label
     costLabel.setText(String.valueOf((int) TerrainType.DIRT.getModifier()));
@@ -91,22 +101,22 @@ public class AStarPathfinderController extends Controller implements Initializab
     // Add listener to the cost slider
     costSlider.setValue(TerrainType.DIRT.getModifier());
     costSlider
-        .valueProperty()
-        .addListener(
-            new ChangeListener<Number>() {
-              public void changed(
-                  ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
-                try {
-                  pathfinder.changeTerrainTypeModifier(
-                      obstacleComboBox.getSelectionModel().getSelectedItem(),
-                      newValue.doubleValue());
-                  costLabel.setText(String.valueOf(newValue.intValue()));
-                } catch (IllegalParameterException e) {
-                  // TODO: Handle error
-                  e.printStackTrace();
-                }
-              }
-            });
+      .valueProperty()
+      .addListener(
+        new ChangeListener<Number>() {
+          public void changed(
+            ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+            try {
+              pathfinder.changeTerrainTypeModifier(
+                obstacleComboBox.getSelectionModel().getSelectedItem(),
+                newValue.doubleValue());
+              costLabel.setText(String.valueOf(newValue.intValue()));
+            } catch (IllegalParameterException e) {
+              // TODO: Handle error
+              e.printStackTrace();
+            }
+          }
+        });
   }
 
   public void onCreateNewMap(ActionEvent actionEvent) {
@@ -142,11 +152,39 @@ public class AStarPathfinderController extends Controller implements Initializab
         Color color = AStarPathfinderController.TERRAIN_COLOR.get(type);
         if (color != null) {
           obstacleColorLabel.setBackground(
-              new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+            new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
         } else {
           // TODO: Meldung an den Nutzer
         }
       }
     }
   }
+
+  public void setStartPoint(CellLabel oldPoint, CellLabel newPoint) {
+    try {
+      pathfinder.setStartPoint(newPoint.getPosition());
+      newPoint.setStartPoint(true);
+      oldPoint.setStartPoint(false);
+    } catch (OccupiedPositionException e) {
+        //TODO: Maybe do something
+    } catch (PositionOutOfBounds positionOutOfBounds) {
+        // should not happen
+        positionOutOfBounds.printStackTrace();
+    }
+  }
+
+  public void setDestinationPoint(CellLabel oldPoint, CellLabel newPoint) {
+    try {
+      pathfinder.setEndPoint(newPoint.getPosition());
+      newPoint.setDestinationPoint(true);
+      oldPoint.setDestinationPoint(false);
+    } catch (OccupiedPositionException e) {
+      //TODO: Maybe do something
+    } catch (PositionOutOfBounds positionOutOfBounds) {
+      // should not happen
+      positionOutOfBounds.printStackTrace();
+    }
+
+  }
 }
+

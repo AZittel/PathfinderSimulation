@@ -2,8 +2,14 @@ package de.hhn.it.pp.javafx.controllers.astarpathfinder;
 
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
+import java.awt.event.MouseMotionListener;
+import java.io.InputStream;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -28,12 +34,29 @@ public class CellLabel extends Label {
   private boolean isStartPoint;
   private boolean isDestinationPoint;
 
+  private static ImageView startIcon;
+  private static ImageView destinationIcon;
+
+
+
+  {
+    // Image Source
+    InputStream input = getClass().getResourceAsStream("/AStarPathfinder/image/start.png");
+    Image image = new Image(input);
+    startIcon = new ImageView(image);
+    input = getClass().getResourceAsStream("/AStarPathfinder/image/ziel.png");
+    image = new Image(input);
+    destinationIcon = new ImageView(image);
+  }
+
 
   public CellLabel(Position position, TerrainType type) {
     super();
     this.position = position;
     this.setPrefSize(CELL_SIZE, CELL_SIZE);
     setType(type);
+
+
 
   }
 
@@ -56,15 +79,29 @@ public class CellLabel extends Label {
     return isStartPoint;
   }
 
-  public void setStartPoint(boolean startPoint) {
-    isStartPoint = startPoint;
-  }
-
   public boolean isDestinationPoint() {
     return isDestinationPoint;
   }
 
+  public void setStartPoint(boolean startPoint) {
+    isStartPoint = startPoint;
+    if(startPoint){
+      this.setGraphic(startIcon);
+    } else {
+      this.setGraphic(null);
+    }
+  }
+
   public void setDestinationPoint(boolean destinationPoint) {
     isDestinationPoint = destinationPoint;
+    if(destinationPoint){
+      this.setGraphic(destinationIcon);
+    } else {
+      this.setGraphic(null);
+    }
+  }
+
+  public Position getPosition() {
+    return position;
   }
 }
