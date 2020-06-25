@@ -186,5 +186,18 @@ public class AStarPathfinderController extends Controller implements Initializab
     }
 
   }
+
+  public void setTerrain(CellLabel cell) {
+    TerrainType selectedTerrainType = obstacleComboBox.getSelectionModel().getSelectedItem();
+    if(!cell.getType().equals(selectedTerrainType)){
+      try {
+        pathfinder.placeTerrain(selectedTerrainType, cell.getPosition());
+        cell.setType(selectedTerrainType);
+      } catch (PositionOutOfBounds positionOutOfBounds) {
+        //TODO: Error handling
+        positionOutOfBounds.printStackTrace();
+      }
+    }
+  }
 }
 

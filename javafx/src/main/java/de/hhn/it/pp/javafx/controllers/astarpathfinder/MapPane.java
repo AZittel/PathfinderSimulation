@@ -21,6 +21,7 @@ public class MapPane extends FlowPane {
 
   private AStarPathfinderController controller;
 
+  private boolean obstaclePlaceMode;
 
   public MapPane(int width, int height, AStarPathfinderController controller) {
     this.controller = controller;
@@ -52,102 +53,99 @@ public class MapPane extends FlowPane {
           cell.setDestinationPoint(true);
         }
 
-        cell.setOnDragDetected(new EventHandler<MouseEvent>() {
-          public void handle(MouseEvent event) {
-            // drag was detected, start a drag-and-drop gesture allow any transfer mode
-            Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
-            if (cell.isStartPoint() || cell.isDestinationPoint()) {
-              selectedCell = cell;
-            }
-            // Put a string on a dragboard
-            ClipboardContent content = new ClipboardContent();
-            content.putString(cell.getText());
-            db.setContent(content);
-
-            event.consume();
-          }
-        });
-
-        cell.setOnDragOver(new EventHandler<DragEvent>() {
-          public void handle(DragEvent event) {
-            CellLabel source = (CellLabel) event.getGestureSource();
-            // data is dragged over the target
-            // accept it only if it is not dragged from the same node
-            // and if it has a string data
-            if (source != cell &&
-                event.getDragboard().hasString()) {
-              if ((source.isStartPoint() && !cell.isDestinationPoint()) ||
-                  (source.isDestinationPoint() && !cell.isStartPoint())) {
-                //  allow for moving
-                event.acceptTransferModes(TransferMode.ANY);
-              }
-            }
-            event.consume();
-          }
-        });
-
-        cell.setOnDragDropped(new EventHandler<DragEvent>() {
-          public void handle(DragEvent event) {
-            System.out.println("Drag Dropped");
-            CellLabel source = (CellLabel) event.getGestureSource();
-            // data dropped
-            Dragboard db = event.getDragboard();
-            boolean success = false;
-            if (db.hasString()) {
-              if (source != null && !cell.equals(source)) {
-                // Start and destination
-                if (source.isStartPoint()) {
-                  controller.setStartPoint(source, cell);
-                } else if (source.isDestinationPoint()) {
-                  controller.setDestinationPoint(source, cell);
-                }
-              }
-              success = true;
-            }
-            // let the source know whether the string was successfully
-            // transferred and used
-            event.setDropCompleted(success);
-
-            event.consume();
-          }
-        });
-
-    /*    cell.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-
-          }
-        });*/
-/*
-        cell.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-            if (cell.isStartPoint() || cell.isDestinationPoint()) {
-              selectedCell = cell;
-              System.out.println("Cell selected");
-            }
-          }
-        });
-        cell.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-            if (selectedCell != null && !cell.equals(selectedCell)) {
-              //Start and destionation
-              if (selectedCell.isStartPoint()) {
-                controller.setStartPoint(selectedCell, cell);
-                cell.setStartPoint(true);
-              } else if(selectedCell.isDestinationPoint()){
-                controller.setDestinationPoint(selectedCell, cell);
-                cell.setDestinationPoint(true);
-              }
-            }
-          }
-        });*/
-
+        addEventHandler(cell);
         getChildren().add(cell);
-
       }
     }
     logger.info("createMap: map successfully created");
+  }
+
+  private void addEventHandler(CellLabel cell) {
+    cell.setOnDragDetected(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent event) {
+        // drag was detected, start a drag-and-drop gesture allow any transfer mode
+        if (cell.isStartPoint() || cell.isDestinationPoint()) {
+          Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
+          selectedCell = cell;
+          // Put a string on a dragboard
+          ClipboardContent content = new ClipboardContent();
+          content.putString(cell.getText());
+          db.setContent(content);
+        }
+        event.consume();
+      }
+    });
+
+    cell.setOnDragOver(new EventHandler<DragEvent>() {
+      @Override
+      public void handle(DragEvent event) {
+        CellLabel source = (CellLabel) event.getGestureSource();
+        // data is dragged over the target
+        if (source != cell &&
+          event.getDragboard().hasString()) {
+          if ((source.isStartPoint() && !cell.isDestinationPoint()) ||
+            (source.isDestinationPoint() && !cell.isStartPoint())) {
+            //  allow for moving
+            event.acceptTransferModes(TransferMode.ANY);
+          }
+        }
+        event.consume();
+      }
+    });
+
+    cell.setOnDragDropped(new EventHandler<DragEvent>() {
+      @Override
+      public void handle(DragEvent event) {
+        CellLabel source = (CellLabel) event.getGestureSource();
+        // data dropped
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasString()) {
+          if (source != null && !cell.equals(source)) {
+            // Start and destination
+            if (source.isStartPoint()) {
+              controller.setStartPoint(source, cell);
+            } else if (source.isDestinationPoint()) {
+              controller.setDestinationPoint(source, cell);
+            }
+          }
+          success = true;
+        }
+        event.setDropCompleted(success);
+        event.consume();
+      }
+    });
+
+    cell.setOnMouseEntered(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent mouseEvent) {
+        if (obstaclePlaceMode) {
+          setTerrain((CellLabel) mouseEvent.getSource());
+        }
+      }
+    });
+
+    cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent mouseEvent) {
+        if (!cell.isStartPoint() && !cell.isDestinationPoint()) {
+          obstaclePlaceMode = !obstaclePlaceMode;
+          controller.setTerrain((CellLabel) mouseEvent.getSource());
+        }
+      }
+    });
+  }
+
+  public void setObstaclePlaceMode(boolean obstaclePlaceMode) {
+    this.obstaclePlaceMode = obstaclePlaceMode;
+  }
+
+  public boolean isObstaclePlaceMode() {
+    return obstaclePlaceMode;
+  }
+
+  public void setTerrain(CellLabel source) {
+    controller.setTerrain(source);
   }
 }

@@ -206,4 +206,6 @@ public class MapManager {
     }
     this.destinationCoordinates = destinationCoordinates;
   }
+
+
 }

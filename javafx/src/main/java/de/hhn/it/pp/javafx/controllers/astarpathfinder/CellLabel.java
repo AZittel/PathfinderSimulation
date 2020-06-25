@@ -2,14 +2,11 @@ package de.hhn.it.pp.javafx.controllers.astarpathfinder;
 
 import de.hhn.it.pp.components.astarpathfinding.Position;
 import de.hhn.it.pp.components.astarpathfinding.TerrainType;
-import java.awt.event.MouseMotionListener;
 import java.io.InputStream;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -37,8 +34,6 @@ public class CellLabel extends Label {
   private static ImageView startIcon;
   private static ImageView destinationIcon;
 
-
-
   {
     // Image Source
     InputStream input = getClass().getResourceAsStream("/AStarPathfinder/image/start.png");
@@ -55,9 +50,6 @@ public class CellLabel extends Label {
     this.position = position;
     this.setPrefSize(CELL_SIZE, CELL_SIZE);
     setType(type);
-
-
-
   }
 
   public TerrainType getType() {
@@ -67,11 +59,11 @@ public class CellLabel extends Label {
   public void setType(TerrainType type) {
     this.type = type;
     Color color = AStarPathfinderController.TERRAIN_COLOR.get(type);
-    if(color != null){
+    if (color != null) {
       setBackground(new Background(new BackgroundFill(color,
         CornerRadii.EMPTY, INSETS)));
     } else {
-       // TODO: Meldung an den Nutzer
+      // TODO: Meldung an den Nutzer
     }
   }
 
@@ -85,7 +77,7 @@ public class CellLabel extends Label {
 
   public void setStartPoint(boolean startPoint) {
     isStartPoint = startPoint;
-    if(startPoint){
+    if (startPoint) {
       this.setGraphic(startIcon);
     } else {
       this.setGraphic(null);
@@ -94,7 +86,7 @@ public class CellLabel extends Label {
 
   public void setDestinationPoint(boolean destinationPoint) {
     isDestinationPoint = destinationPoint;
-    if(destinationPoint){
+    if (destinationPoint) {
       this.setGraphic(destinationIcon);
     } else {
       this.setGraphic(null);
@@ -104,4 +96,5 @@ public class CellLabel extends Label {
   public Position getPosition() {
     return position;
   }
+
 }
