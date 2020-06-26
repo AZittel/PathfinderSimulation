@@ -31,37 +31,29 @@ import javafx.scene.paint.Color;
 
 public class AStarPathfinderController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
-    org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
+      org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
 
-  @FXML
-  public Button createNewMapButton;
-  @FXML
-  public ComboBox<TerrainType> obstacleComboBox;
-  @FXML
-  public Slider costSlider;
-  @FXML
-  public Label costLabel;
-  @FXML
-  public FlowPane mapContainer;
-  @FXML
-  public SplitPane splitPane;
-  @FXML
-  public Label obstacleColorLabel;
+  @FXML public Button createNewMapButton;
+  @FXML public ComboBox<TerrainType> obstacleComboBox;
+  @FXML public Slider costSlider;
+  @FXML public Label costLabel;
+  @FXML public FlowPane mapContainer;
+  @FXML public SplitPane splitPane;
+  @FXML public Label obstacleColorLabel;
 
   private Pathfinder pathfinder;
   private final MapPane mapPane;
-
 
   public static final Map<TerrainType, Color> TERRAIN_COLOR;
 
   static {
     TERRAIN_COLOR =
-      Map.of(
-        TerrainType.DIRT, CellLabel.DIRT_COLOR,
-        TerrainType.GRASS, CellLabel.GRASS_COLOR,
-        TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
-        TerrainType.WATER, CellLabel.WATER_COLOR,
-        TerrainType.LAVA, CellLabel.LAVA_COLOR);
+        Map.of(
+            TerrainType.DIRT, CellLabel.DIRT_COLOR,
+            TerrainType.GRASS, CellLabel.GRASS_COLOR,
+            TerrainType.SWAMP, CellLabel.SWAMP_COLOR,
+            TerrainType.WATER, CellLabel.WATER_COLOR,
+            TerrainType.LAVA, CellLabel.LAVA_COLOR);
   }
 
   public AStarPathfinderController() {
@@ -73,7 +65,7 @@ public class AStarPathfinderController extends Controller implements Initializab
    * Called to initialize a controller after its root element has been completely processed.
    *
    * @param url The location used to resolve relative paths for the root object, or <tt>null</tt> if
-   * the location is not known.
+   *     the location is not known.
    * @param resourceBundle The resources used to localize the root object, or <tt>null</tt> if
    */
   @Override
@@ -81,8 +73,8 @@ public class AStarPathfinderController extends Controller implements Initializab
 
     // Add Background color to mapContainer
     mapContainer.setBackground(
-      new Background(
-        new BackgroundFill(Color.rgb(150, 150, 150), CornerRadii.EMPTY, Insets.EMPTY)));
+        new Background(
+            new BackgroundFill(Color.rgb(150, 150, 150), CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Assign mapPane to mapContainer
     mapContainer.getChildren().add(mapPane);
@@ -93,7 +85,7 @@ public class AStarPathfinderController extends Controller implements Initializab
 
     // Add Dirt Color to coloLabel
     obstacleColorLabel.setBackground(
-      new Background(new BackgroundFill(CellLabel.DIRT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
+        new Background(new BackgroundFill(CellLabel.DIRT_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
 
     // Initialize cost label
     costLabel.setText(String.valueOf((int) TerrainType.DIRT.getModifier()));
@@ -101,37 +93,55 @@ public class AStarPathfinderController extends Controller implements Initializab
     // Add listener to the cost slider
     costSlider.setValue(TerrainType.DIRT.getModifier());
     costSlider
-      .valueProperty()
-      .addListener(
-        new ChangeListener<Number>() {
-          public void changed(
-            ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
-            try {
-              pathfinder.changeTerrainTypeModifier(
-                obstacleComboBox.getSelectionModel().getSelectedItem(),
-                newValue.doubleValue());
-              costLabel.setText(String.valueOf(newValue.intValue()));
-            } catch (IllegalParameterException e) {
-              // TODO: Handle error
-              e.printStackTrace();
-            }
-          }
-        });
+        .valueProperty()
+        .addListener(
+            new ChangeListener<Number>() {
+              public void changed(
+                  ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                try {
+                  pathfinder.changeTerrainTypeModifier(
+                      obstacleComboBox.getSelectionModel().getSelectedItem(),
+                      newValue.doubleValue());
+                  costLabel.setText(String.valueOf(newValue.intValue()));
+                } catch (IllegalParameterException e) {
+                  // TODO: Handle error
+                  e.printStackTrace();
+                }
+              }
+            });
   }
 
+  /**
+   * Called when the create map button was clicked. A dialog will be opened.
+   *
+   * @param actionEvent the action event
+   */
   public void onCreateNewMap(ActionEvent actionEvent) {
     CreateMapDialog dialog = new CreateMapDialog(pathfinder, mapPane);
     dialog.showAndWait();
   }
 
+  /**
+   * Called when the reset button was clicked. A call the the backends reset method will be done.
+   * The ui will be set to the default values.
+   *
+   * @param actionEvent the action event
+   */
   public void onResetMap(ActionEvent actionEvent) {
     pathfinder.reset();
     mapPane.reset();
     // Reset cost label and slider
-    costLabel.setText(String.valueOf((int) obstacleComboBox.getSelectionModel().getSelectedItem().getModifier()));
+    costLabel.setText(
+        String.valueOf((int) obstacleComboBox.getSelectionModel().getSelectedItem().getModifier()));
     costSlider.setValue(obstacleComboBox.getSelectionModel().getSelectedItem().getModifier());
   }
 
+  /**
+   * Called when the start visualization button was clicked. Triggers the pathfinding algorithm and
+   * fetches the result. The result will be displayed on the current map.
+   *
+   * @param actionEvent the action event
+   */
   public void onStartVisualization(ActionEvent actionEvent) {
     try {
       List<PathfindingInformation> result = pathfinder.doPathfinding();
@@ -142,6 +152,12 @@ public class AStarPathfinderController extends Controller implements Initializab
     }
   }
 
+  /**
+   * Called when a new terrain type is selected in the comboBox. The model and the ui elements which
+   * show the types cost will be updated.
+   *
+   * @param actionEvent the action event
+   */
   public void onSelectObstacle(ActionEvent actionEvent) {
     if (actionEvent.getSource() instanceof ComboBox) {
       ComboBox<?> comboBox = (ComboBox<?>) actionEvent.getSource();
@@ -152,52 +168,65 @@ public class AStarPathfinderController extends Controller implements Initializab
         Color color = AStarPathfinderController.TERRAIN_COLOR.get(type);
         if (color != null) {
           obstacleColorLabel.setBackground(
-            new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-        } else {
-          // TODO: Meldung an den Nutzer
+              new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
         }
       }
     }
   }
 
+  /**
+   * Sets the new start point.
+   *
+   * @param oldPoint the old start point
+   * @param newPoint the new start point
+   */
   public void setStartPoint(CellLabel oldPoint, CellLabel newPoint) {
     try {
       pathfinder.setStartPoint(newPoint.getPosition());
       newPoint.setStartPoint(true);
       oldPoint.setStartPoint(false);
     } catch (OccupiedPositionException e) {
-        //TODO: Maybe do something
-    } catch (PositionOutOfBounds positionOutOfBounds) {
-        // should not happen
-        positionOutOfBounds.printStackTrace();
-    }
-  }
-
-  public void setDestinationPoint(CellLabel oldPoint, CellLabel newPoint) {
-    try {
-      pathfinder.setEndPoint(newPoint.getPosition());
-      newPoint.setDestinationPoint(true);
-      oldPoint.setDestinationPoint(false);
-    } catch (OccupiedPositionException e) {
-      //TODO: Maybe do something
+      // TODO: Maybe do something
     } catch (PositionOutOfBounds positionOutOfBounds) {
       // should not happen
       positionOutOfBounds.printStackTrace();
     }
-
   }
 
+  /**
+   * Sets the new end point.
+   *
+   * @param oldPoint the old end point
+   * @param newPoint the new end point
+   */
+  public void setEndPoint(CellLabel oldPoint, CellLabel newPoint) {
+    try {
+      pathfinder.setEndPoint(newPoint.getPosition());
+      newPoint.setEndPoint(true);
+      oldPoint.setEndPoint(false);
+    } catch (OccupiedPositionException e) {
+      // TODO: Maybe do something
+    } catch (PositionOutOfBounds positionOutOfBounds) {
+      // should not happen
+      positionOutOfBounds.printStackTrace();
+    }
+  }
+
+  /**
+   * Places a new terrain on the map. Only if the terrain type is different from the previous one.
+   *
+   * @param cell the cell which should be changed
+   */
   public void setTerrain(CellLabel cell) {
     TerrainType selectedTerrainType = obstacleComboBox.getSelectionModel().getSelectedItem();
-    if(!cell.getType().equals(selectedTerrainType)){
+    if (!cell.getType().equals(selectedTerrainType)) {
       try {
         pathfinder.placeTerrain(selectedTerrainType, cell.getPosition());
         cell.setType(selectedTerrainType);
       } catch (PositionOutOfBounds positionOutOfBounds) {
-        //TODO: Error handling
+        // TODO: Error handling
         positionOutOfBounds.printStackTrace();
       }
     }
   }
 }
-

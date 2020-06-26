@@ -20,14 +20,20 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
   private TextField widthField;
   private TextField heightField;
 
+  /**
+   * Creates a new map creation dialog.
+   *
+   * @param pathfinder the pathfinder interface implementation
+   * @param mapPane the current map
+   */
   public CreateMapDialog(Pathfinder pathfinder, MapPane mapPane) {
     setTitle("Create Map Dialog");
     setHeaderText("Choose the map size");
 
+    // Create the ui elements
     ButtonType createButtonType = new ButtonType("Create", ButtonData.OK_DONE);
     getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
 
-    // Create the width and height labels and fields.
     GridPane grid = new GridPane();
     grid.setHgap(10);
     grid.setVgap(10);
@@ -59,7 +65,6 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
     grid.add(widthErrorLabel, 2, 0);
     grid.add(heightErrorLabel, 2, 1);
 
-    // Enable/Disable login button depending on whether a username was entered.
     Node createButton = getDialogPane().lookupButton(createButtonType);
     createButton.setDisable(true);
 
@@ -67,17 +72,15 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
     widthField
         .textProperty()
         .addListener(
-            (observable, oldValue, newValue) -> {
-              onValueChange(heightField, widthErrorLabel, createButton, newValue);
-            });
+            (observable, oldValue, newValue) ->
+                onValueChange(heightField, widthErrorLabel, createButton, newValue));
 
     // Do some validation for height textField
     heightField
         .textProperty()
         .addListener(
-            (observable, oldValue, newValue) -> {
-              onValueChange(widthField, heightErrorLabel, createButton, newValue);
-            });
+            (observable, oldValue, newValue) ->
+                onValueChange(widthField, heightErrorLabel, createButton, newValue));
 
     getDialogPane().setContent(grid);
 
@@ -104,7 +107,8 @@ public class CreateMapDialog extends Dialog<Pair<String, String>> {
     boolean isValidNumber = false;
     try {
       int value = Integer.parseInt(newValue);
-      int min = 0, max = 0;
+      int min;
+      int max;
 
       if (textField.equals(heightField)) {
         min = MapManager.MIN_WIDTH;

@@ -67,7 +67,12 @@ public class Heap<T extends IHeapItem<? super T>> {
    * @return true if the item is in the heap false if not
    */
   public boolean contains(T item) {
-    return items[item.getHeapIndex()].equals(item);
+    T itemInHeap = items[item.getHeapIndex()];
+    if (itemInHeap != null) {
+      return itemInHeap.equals(item);
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -138,8 +143,7 @@ public class Heap<T extends IHeapItem<? super T>> {
     item2.setHeapIndex(item1Index);
   }
 
-  public T[] getItems(){
+  public T[] getItems() {
     return items;
   }
-
 }
