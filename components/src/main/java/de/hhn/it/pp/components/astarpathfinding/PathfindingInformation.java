@@ -81,7 +81,6 @@ public class PathfindingInformation implements Cloneable {
 
   @Override
   public PathfindingInformation clone() throws CloneNotSupportedException {
-    logger.debug("clone: no params");
     PathfindingInformation cloned = (PathfindingInformation) super.clone();
     try {
       cloned.setSpecificPositions(new Heap<>(this.specificPositions));
