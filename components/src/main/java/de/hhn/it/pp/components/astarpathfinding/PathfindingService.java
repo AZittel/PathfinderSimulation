@@ -74,4 +74,11 @@ public interface PathfindingService {
    */
   void changeTerrainTypeModifier(TerrainType type, double modifier)
       throws IllegalParameterException;
+
+  /**
+   * Enables or disables the diagonal pathing option for the algorithm.
+   *
+   * @param enabled whether the option is enabled
+   */
+  void setDiagonalPathing(boolean enabled);
 }

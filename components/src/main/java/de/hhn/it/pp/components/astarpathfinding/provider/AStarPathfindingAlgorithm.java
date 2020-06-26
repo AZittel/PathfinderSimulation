@@ -10,18 +10,21 @@ import java.util.List;
 
 public class AStarPathfindingAlgorithm {
   private static final org.slf4j.Logger logger =
-      org.slf4j.LoggerFactory.getLogger(AStarPathfindingAlgorithm.class);
+    org.slf4j.LoggerFactory.getLogger(AStarPathfindingAlgorithm.class);
 
-  private ArrayList<PathfindingInformation> result = new ArrayList<>();
-  private MapManager mapManager;
+  private final ArrayList<PathfindingInformation> result = new ArrayList<>();
+  private final MapManager mapManager;
+  private final boolean diagonalPathing;
+
 
   /**
    * Constructor for this class.
    *
    * @param mapManager holds all the information from the map
    */
-  public AStarPathfindingAlgorithm(MapManager mapManager) {
+  public AStarPathfindingAlgorithm(MapManager mapManager, boolean diagonalPathing) {
     this.mapManager = mapManager;
+    this.diagonalPathing = diagonalPathing;
   }
 
   /**
@@ -30,7 +33,7 @@ public class AStarPathfindingAlgorithm {
    * approximation heuristics are calculated using the Manhattan Distance.
    *
    * @return If there is a shortest path then all states the algorithm has been through else an
-   *     empty list.
+   * empty list.
    */
   public ArrayList<PathfindingInformation> findPath() throws IllegalParameterException {
     logger.debug("findPath: no params");
@@ -40,14 +43,14 @@ public class AStarPathfindingAlgorithm {
 
     Terrain[][] map = mapManager.getMap();
     PathfindingInformation information =
-        new PathfindingInformation(map.length * map[0].length);
+      new PathfindingInformation(map.length * map[0].length);
     Position startCoordinates = mapManager.getStartCoordinates();
     Position destinationCoordinates = mapManager.getDestinationCoordinates();
 
     // Add the start cell to the open list
     information
-        .getSpecificPositions()
-        .add(map[startCoordinates.getRow()][startCoordinates.getCol()]);
+      .getSpecificPositions()
+      .add(map[startCoordinates.getRow()][startCoordinates.getCol()]);
 
     while (information.getSpecificPositions().getItemCount() > 0) {
       Terrain currentTerrain = information.getSpecificPositions().removeFirst();
@@ -55,12 +58,12 @@ public class AStarPathfindingAlgorithm {
 
       // Check whether the algorithm reached the destination cell
       if (currentTerrain.equals(
-          map[destinationCoordinates.getRow()][destinationCoordinates.getCol()])) {
+        map[destinationCoordinates.getRow()][destinationCoordinates.getCol()])) {
         final long end = System.nanoTime();
         logger.debug("Pathfinding took " + (end - start) / 1000000 + " ms");
         logger.debug("findPath: shortest path found");
         information.setFinalPathPositions(
-            tracePath(map[startCoordinates.getRow()][startCoordinates.getCol()], currentTerrain));
+          tracePath(map[startCoordinates.getRow()][startCoordinates.getCol()], currentTerrain));
         result.add(information);
         return result;
       }
@@ -69,23 +72,23 @@ public class AStarPathfindingAlgorithm {
       for (Terrain neighbour : getNeighbours(currentTerrain)) {
         if (neighbour != null) {
           if (neighbour.getType().getModifier() >= TerrainType.MAX_VALUE
-              || information.getVisitedPositions().contains(neighbour)) {
+            || information.getVisitedPositions().contains(neighbour)) {
             continue;
           }
 
           // Update costs of the neighbour if a shorter path was found
           int newCostToNeighbour =
-              currentTerrain.getGCost()
-                  + (int)
-                      ((getMDistance(currentTerrain, neighbour))
-                          * (1 + (currentTerrain.getType().getModifier())));
+            currentTerrain.getGCost()
+              + (int)
+              ((getMDistance(currentTerrain, neighbour))
+                * (1 + (currentTerrain.getType().getModifier())));
           if (newCostToNeighbour < neighbour.getGCost()
-              || !information.getSpecificPositions().contains(neighbour)) {
+            || !information.getSpecificPositions().contains(neighbour)) {
             neighbour.setGCost(newCostToNeighbour);
             neighbour.setHCost(
-                getMDistance(
-                    neighbour,
-                    map[destinationCoordinates.getRow()][destinationCoordinates.getCol()]));
+              getMDistance(
+                neighbour,
+                map[destinationCoordinates.getRow()][destinationCoordinates.getCol()]));
             neighbour.setParent(currentTerrain);
 
             if (!information.getSpecificPositions().contains(neighbour)) {
@@ -139,12 +142,13 @@ public class AStarPathfindingAlgorithm {
    */
   private int getMDistance(Terrain terrainA, Terrain terrainB) {
     return Math.abs(terrainA.getPosition().getRow() - terrainB.getPosition().getRow())
-        + Math.abs(terrainA.getPosition().getCol() - terrainB.getPosition().getCol());
+      + Math.abs(terrainA.getPosition().getCol() - terrainB.getPosition().getCol());
   }
 
   /**
    * Looks for all available horizontal and vertical neighbours of the given cell in the grid and
-   * returns them as an array of cells.
+   * returns them as an array of cells. If diagonal pathing is enabled,
+   * diagonal neighbours are considered.
    *
    * @param terrain the cell from which the neighbours are to be determined
    * @return an array of cells which are neighbours of the given cell
@@ -174,6 +178,38 @@ public class AStarPathfindingAlgorithm {
       neighbours[3] = map[terrain.getPosition().getRow() + 1][terrain.getPosition().getCol()];
     }
 
+    if (diagonalPathing) {
+      Terrain[] tmp = new Terrain[8];
+      for (int i = 0; i < neighbours.length; i++) {
+        if (neighbours[i] != null) {
+          tmp[i] = neighbours[i];
+        }
+      }
+
+      //Diagonal neighbours
+      // Top left
+      if (terrain.getPosition().getCol() - 1 >= 0 && terrain.getPosition().getRow() - 1 >= 0) {
+        tmp[4] = map[terrain.getPosition().getRow() - 1][terrain.getPosition().getCol() - 1];
+      }
+
+      // Top right
+      if (terrain.getPosition().getCol() + 1 < map[0].length
+        && terrain.getPosition().getRow() - 1 >= 0) {
+        tmp[5] = map[terrain.getPosition().getRow() - 1][terrain.getPosition().getCol() + 1];
+      }
+
+      // Bottom left
+      if (terrain.getPosition().getCol() - 1 >= 0 && terrain.getPosition().getRow() + 1 < map.length) {
+        tmp[6] = map[terrain.getPosition().getRow() + 1][terrain.getPosition().getCol() - 1];
+      }
+
+      // Bottom right
+      if (terrain.getPosition().getCol() + 1 < map[0].length
+        && terrain.getPosition().getRow() + 1 < map.length) {
+        tmp[7] = map[terrain.getPosition().getRow() + 1][terrain.getPosition().getCol() + 1];
+      }
+      neighbours = tmp;
+    }
     return neighbours;
   }
 

@@ -13,7 +13,8 @@ public final class Pathfinder implements PathfindingService {
   private static final org.slf4j.Logger logger =
       org.slf4j.LoggerFactory.getLogger(Pathfinder.class);
 
-  private MapManager mapManager = new MapManager();
+  private final MapManager mapManager = new MapManager();
+  private boolean diagonalPathing;
 
   @Override
   public void createMap(int width, int height)
@@ -44,7 +45,7 @@ public final class Pathfinder implements PathfindingService {
   @Override
   public List<PathfindingInformation> doPathfinding() throws IllegalParameterException {
     logger.info("doPathfinding: no params");
-    return new AStarPathfindingAlgorithm(mapManager).findPath();
+    return new AStarPathfindingAlgorithm(mapManager, diagonalPathing).findPath();
   }
 
   @Override
@@ -73,6 +74,11 @@ public final class Pathfinder implements PathfindingService {
               TerrainType.MAX_VALUE));
     }
     type.setModifier(modifier);
+  }
+
+  @Override
+  public void setDiagonalPathing(boolean enabled) {
+    this.diagonalPathing = enabled;
   }
 
   @Override

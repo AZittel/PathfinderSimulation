@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -40,6 +41,7 @@ public class AStarPathfinderController extends Controller implements Initializab
   @FXML public FlowPane mapContainer;
   @FXML public SplitPane splitPane;
   @FXML public Label obstacleColorLabel;
+  @FXML public CheckBox diagonalPathingCheckbox;
 
   private Pathfinder pathfinder;
   private final MapPane mapPane;
@@ -228,5 +230,14 @@ public class AStarPathfinderController extends Controller implements Initializab
         positionOutOfBounds.printStackTrace();
       }
     }
+  }
+
+  /**
+   * Enables or disabled diagonal pathing.
+   *
+   * @param actionEvent event
+   */
+  public void onCheck(ActionEvent actionEvent) {
+    pathfinder.setDiagonalPathing(diagonalPathingCheckbox.isSelected());
   }
 }

@@ -30,7 +30,8 @@ public class AStarPathfindingAlgorithmTest {
   @BeforeEach
   void setup() {
     testMapManager = new MapManager();
-    algorithm = new AStarPathfindingAlgorithm(testMapManager);
+
+    algorithm = new AStarPathfindingAlgorithm(testMapManager, false);
   }
 
   @Nested
