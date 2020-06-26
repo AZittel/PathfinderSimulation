@@ -18,7 +18,7 @@ public interface PathfindingService {
    * @param height the height of the map, must higher then 0
    * @throws IllegalParameterException if either the width or the height is invalid
    * @throws PositionOutOfBounds if the start or destination position would be out of bounds after
-   * creating the new map
+   *     creating the new map
    */
   void createMap(int width, int height) throws PositionOutOfBounds;
 
@@ -54,8 +54,8 @@ public interface PathfindingService {
    *
    * @return the list of all pathfinding algorithm calculations
    * @throws IllegalParameterException thrown if the mapsize or the total number of terrain on the
-   * map is less then 1. This should never be the case due to the minimum restriction in
-   * the @{@link de.hhn.it.pp.components.astarpathfinding.provider.MapManager} class.
+   *     map is less then 1. This should never be the case due to the minimum restriction in
+   *     the @{@link de.hhn.it.pp.components.astarpathfinding.provider.MapManager} class.
    */
   List<PathfindingInformation> doPathfinding() throws IllegalParameterException;
 
@@ -73,5 +73,5 @@ public interface PathfindingService {
    * @throws IllegalParameterException thrown if the value is not between 0 and 1
    */
   void changeTerrainTypeModifier(TerrainType type, double modifier)
-    throws IllegalParameterException;
+      throws IllegalParameterException;
 }

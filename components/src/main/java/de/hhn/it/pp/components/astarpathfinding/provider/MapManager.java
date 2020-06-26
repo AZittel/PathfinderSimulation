@@ -32,8 +32,6 @@ public class MapManager {
   public MapManager() {
     logger.info("constructor: no params");
     try {
-//      startCoordinates = DEFAULT_START_POSITION;
-//      destinationCoordinates = DEFAULT_DESTINATION_POSITION;
       createMap(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     } catch (PositionOutOfBounds e) {
       // Do nothing, because this case should never happen
