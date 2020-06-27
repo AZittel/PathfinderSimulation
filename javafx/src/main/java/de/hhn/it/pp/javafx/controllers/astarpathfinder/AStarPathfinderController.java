@@ -46,6 +46,9 @@ public class AStarPathfinderController extends Controller implements Initializab
   private Pathfinder pathfinder;
   private final MapPane mapPane;
 
+  /**
+   * Map table for TerrainType and their Color.
+   */
   public static final Map<TerrainType, Color> TERRAIN_COLOR;
 
   static {
@@ -58,9 +61,13 @@ public class AStarPathfinderController extends Controller implements Initializab
             TerrainType.LAVA, CellLabel.LAVA_COLOR);
   }
 
+  /**
+   * Constructor for the Javafx AStarPathfinderController.
+   */
   public AStarPathfinderController() {
     pathfinder = new Pathfinder();
     mapPane = new MapPane(MapManager.DEFAULT_WIDTH, MapManager.DEFAULT_HEIGHT, this);
+    logger.debug("AStarPathfinderController has been created");
   }
 
   /**
@@ -97,20 +104,17 @@ public class AStarPathfinderController extends Controller implements Initializab
     costSlider
         .valueProperty()
         .addListener(
-            new ChangeListener<Number>() {
-              public void changed(
-                  ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
-                try {
-                  pathfinder.changeTerrainTypeModifier(
-                      obstacleComboBox.getSelectionModel().getSelectedItem(),
-                      newValue.doubleValue());
-                  costLabel.setText(String.valueOf(newValue.intValue()));
-                } catch (IllegalParameterException e) {
-                  // TODO: Handle error
-                  e.printStackTrace();
-                }
-              }
-            });
+          (ov, oldValue, newValue) -> {
+            try {
+              pathfinder.changeTerrainTypeModifier(
+                  obstacleComboBox.getSelectionModel().getSelectedItem(),
+                  newValue.doubleValue());
+              costLabel.setText(String.valueOf(newValue.intValue()));
+            } catch (IllegalParameterException e) {
+              logger.debug("The value for the terrainTypeModifier was too low or too high");
+              e.printStackTrace();
+            }
+          });
   }
 
   /**
@@ -149,7 +153,6 @@ public class AStarPathfinderController extends Controller implements Initializab
       List<PathfindingInformation> result = pathfinder.doPathfinding();
       mapPane.showPath(result);
     } catch (IllegalParameterException e) {
-      // TODO: Handle error
       e.printStackTrace();
     }
   }
@@ -188,9 +191,8 @@ public class AStarPathfinderController extends Controller implements Initializab
       newPoint.setStartPoint(true);
       oldPoint.setStartPoint(false);
     } catch (OccupiedPositionException e) {
-      // TODO: Maybe do something
+      logger.info("The start point cannot be placed on the end point");
     } catch (PositionOutOfBounds positionOutOfBounds) {
-      // should not happen
       positionOutOfBounds.printStackTrace();
     }
   }
@@ -207,9 +209,8 @@ public class AStarPathfinderController extends Controller implements Initializab
       newPoint.setEndPoint(true);
       oldPoint.setEndPoint(false);
     } catch (OccupiedPositionException e) {
-      // TODO: Maybe do something
+      logger.info("The end point cannot be placed on the start point");
     } catch (PositionOutOfBounds positionOutOfBounds) {
-      // should not happen
       positionOutOfBounds.printStackTrace();
     }
   }
@@ -226,7 +227,6 @@ public class AStarPathfinderController extends Controller implements Initializab
         pathfinder.placeTerrain(selectedTerrainType, cell.getPosition());
         cell.setType(selectedTerrainType);
       } catch (PositionOutOfBounds positionOutOfBounds) {
-        // TODO: Error handling
         positionOutOfBounds.printStackTrace();
       }
     }

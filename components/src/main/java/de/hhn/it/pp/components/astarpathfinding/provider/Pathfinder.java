@@ -83,6 +83,6 @@ public final class Pathfinder implements PathfindingService {
 
   @Override
   public String toString() {
-    return "Pathfinder"; // TODO:
+    return "Pathfinder";
   }
 }
