@@ -34,7 +34,7 @@ public class Inventory {
    */
   public void add(Item item) throws IllegalParameterException {
     if (item == null) {
-      throw new IllegalParameterException("Item was null reference!\n");
+      throw new IllegalParameterException("Item was null reference!");
     }
     items.add(item);
     logger.info("add: item = {}", item);
@@ -50,10 +50,10 @@ public class Inventory {
    */
   public void remove(Item item) throws IllegalParameterException, OperationNotSupportedException {
     if (item == null) {
-      throw new IllegalParameterException("Item was null reference!\n");
+      throw new IllegalParameterException("Item was null reference!");
     }
     if (items.size() == 0) {
-      throw new OperationNotSupportedException("Inventory is empty!\n");
+      throw new OperationNotSupportedException("Inventory is empty!");
     }
     for (Item inventoryItem : items) {
       if (inventoryItem.toString().equals(item.toString())) {
@@ -63,7 +63,7 @@ public class Inventory {
       }
     }
     throw new IllegalParameterException(
-        "'" + item.toString() + "' doesn't exist in the inventory!\n");
+        "'" + item.toString() + "' doesn't exist in the inventory!");
   }
 
   /**

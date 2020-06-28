@@ -95,7 +95,7 @@ public class CraftingServiceController extends Controller implements Initializab
     try {
       inventory.add(itemComboBox.getValue());
     } catch (IllegalParameterException e) {
-      e.getMessage();
+      logger.error(e.getMessage());
     }
     nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().toString()));
     itemTableView.setItems((ObservableList<Item>) inventory.getItems());
@@ -113,7 +113,7 @@ public class CraftingServiceController extends Controller implements Initializab
     try {
       inventory.remove(itemTableView.getSelectionModel().getSelectedItem());
     } catch (IllegalParameterException | OperationNotSupportedException e) {
-      e.getMessage();
+      logger.error(e.getMessage());
     }
     itemTableView.setItems((ObservableList<Item>) inventory.getItems());
 
@@ -131,7 +131,7 @@ public class CraftingServiceController extends Controller implements Initializab
     craftBtn.setDisable(true);
     isCraftingExecutableLbl.setTextFill(Color.BLUE);
     isCraftingExecutableLbl.setText("Crafting is ongoing");
-    // a task-thread that observes the crafting process
+    // a task-thread that observes the crafting process for the progress bar
     Task<Void> task = new Task<>() {
       @Override
       public Void call() throws Exception {
@@ -139,14 +139,14 @@ public class CraftingServiceController extends Controller implements Initializab
           // start crafting
           craftingService.craft(inventory, patternComboBox.getValue());
           // update progress bar according to the crafting time
-          for (int i = 0; i < (patternComboBox.getValue().getCraftingTime() / 100); i++) {
+          for (int i = 1; i <= (patternComboBox.getValue().getCraftingTime() / 100); i++) {
             Thread.sleep(100);
             updateProgress(i + 1,
                 patternComboBox.getValue().getCraftingTime() / 100);
           }
           CraftingImplementation.getCurrentThread().join();
         } catch (CraftingNotPossibleException e) {
-          e.getMessage();
+          logger.error(e.getMessage());
         }
         return null;
       }
@@ -237,7 +237,7 @@ public class CraftingServiceController extends Controller implements Initializab
       craftingService.addCraftingPattern(patternManager.createEndlessTastyChocolateCookies(
           FXCollections.observableArrayList(), FXCollections.observableArrayList()));
     } catch (IllegalParameterException e) {
-      e.getMessage();
+      raiseExceptionToUi(e, "error in 'addCraftingPattern'");
     }
     // add patterns to the ComboBox
     try {
@@ -250,7 +250,7 @@ public class CraftingServiceController extends Controller implements Initializab
           craftingService.getPattern("Pattern: Endless Tasty Chocolate Cookies")
       ));
     } catch (IllegalParameterException e) {
-      e.getMessage();
+      raiseExceptionToUi(e, "error in 'setItems' on pattern combo box");
     }
   }
 
@@ -259,6 +259,14 @@ public class CraftingServiceController extends Controller implements Initializab
     alert.setTitle("Crafting has ended");
     alert.setHeaderText(null);
     alert.setContentText("'" + craftedPattern.toString() + "' successfully crafted!");
+    alert.show();
+  }
+  
+  private void raiseExceptionToUi(final Exception e, final String header) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText(header);
+    alert.setContentText(e.getMessage());
     alert.showAndWait();
   }
 }

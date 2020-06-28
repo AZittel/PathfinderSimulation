@@ -45,7 +45,7 @@ public class CraftingImplementation implements CraftingService {
   @Override
   public void addCraftingPattern(CraftingPattern pattern) throws IllegalParameterException {
     if (pattern == null) {
-      throw new IllegalParameterException("Crafting pattern was null reference!\n");
+      throw new IllegalParameterException("Crafting pattern was null reference!");
     }
     craftingPatterns.put(pattern.toString(), pattern);
     logger.info("addCraftingPattern: pattern = {}", pattern);
@@ -55,13 +55,13 @@ public class CraftingImplementation implements CraftingService {
   public void removeCraftingPattern(String patternName) throws IllegalParameterException,
                                                                    OperationNotSupportedException {
     if (patternName == null) {
-      throw new IllegalParameterException("Pattern-name was null reference!\n");
+      throw new IllegalParameterException("Pattern-name was null reference!");
     }
     if (craftingPatterns.isEmpty()) {
-      throw new OperationNotSupportedException("There are no patterns to remove!\n");
+      throw new OperationNotSupportedException("There are no patterns to remove!");
     }
     if (craftingPatterns.get(patternName) == null) {
-      throw new IllegalParameterException("'" + patternName + "' doesn't exist!\n");
+      throw new IllegalParameterException("'" + patternName + "' doesn't exist!");
     } else {
       craftingPatterns.remove(patternName);
       logger.info("removeCraftingPattern: patternName = {}", patternName);
@@ -77,10 +77,10 @@ public class CraftingImplementation implements CraftingService {
   public CraftingPattern getPattern(String patternName) throws IllegalParameterException {
     logger.info("getPattern: patternName = {}", patternName);
     if (patternName == null) {
-      throw new IllegalParameterException("Pattern-name was null reference!\n");
+      throw new IllegalParameterException("Pattern-name was null reference!");
     }
     if (craftingPatterns.get(patternName) == null) {
-      throw new IllegalParameterException("'" + patternName + "' doesn't exist!\n");
+      throw new IllegalParameterException("'" + patternName + "' doesn't exist!");
     } else {
       return craftingPatterns.get(patternName);
     }
@@ -91,10 +91,10 @@ public class CraftingImplementation implements CraftingService {
       throws CraftingNotPossibleException {
     logger.info("craft: inventory = {}, craftingPattern = {}", inventory, craftingPattern);
     if (craftingActive) {
-      throw new CraftingNotPossibleException("An item is already being crafted!\n");
+      throw new CraftingNotPossibleException("An item is already being crafted!");
     }
     if (inventory == null || craftingPattern == null) {
-      throw new CraftingNotPossibleException("Inventory or Crafting Pattern was null reference!\n");
+      throw new CraftingNotPossibleException("Inventory or Crafting Pattern was null reference!");
     }
     // check if the inventory matches the crafting pattern
     if (craftingPattern.isCraftable(inventory)) {
@@ -128,7 +128,7 @@ public class CraftingImplementation implements CraftingService {
       currentThread = craftingThread;
     } else { // if not: throw exception
       throw new CraftingNotPossibleException("Items in inventory don't match '"
-                                                 + craftingPattern.toString() + "'!\n");
+                                                 + craftingPattern.toString() + "'!");
     }
   }
   
@@ -136,7 +136,7 @@ public class CraftingImplementation implements CraftingService {
   public void addListener(CraftingListener listener) throws IllegalParameterException {
     logger.info("addListener: listener = {}", listener);
     if (listener == null) {
-      throw new IllegalParameterException("Listener was null reference!\n");
+      throw new IllegalParameterException("Listener was null reference!");
     }
     CraftingImplementation.listener = listener;
   }
@@ -145,7 +145,7 @@ public class CraftingImplementation implements CraftingService {
   public void removeListener(CraftingListener listener) throws IllegalParameterException {
     logger.info("removeListener: listener = {}", listener);
     if (listener == null) {
-      throw new IllegalParameterException("Listener was null reference!\n");
+      throw new IllegalParameterException("Listener was null reference!");
     }
     if (listener != CraftingImplementation.listener) {
       throw new IllegalParameterException("Listener can't be found!");
