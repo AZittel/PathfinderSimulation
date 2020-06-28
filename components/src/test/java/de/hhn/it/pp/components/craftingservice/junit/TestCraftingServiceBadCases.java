@@ -115,7 +115,8 @@ public class TestCraftingServiceBadCases {
   @Test
   @DisplayName("try to craft a pattern while another crafting process is ongoing")
   void testExceptionWhenAnotherCraftingProcessOngoing() throws IllegalParameterException,
-                                                                   InterruptedException, CraftingNotPossibleException {
+                                                                   InterruptedException,
+                                                                   CraftingNotPossibleException {
     // add enough resources into the inventory
     // so that both (same) patterns are theoretically craftable
     testInventory.add(new Item("Test Item 1"));
