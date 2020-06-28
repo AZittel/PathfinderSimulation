@@ -2,6 +2,7 @@ package de.hhn.it.pp.components.craftingservice;
 
 import de.hhn.it.pp.components.craftingservice.exceptions.CraftingNotPossibleException;
 import de.hhn.it.pp.components.craftingservice.provider.CraftingImplementation;
+import de.hhn.it.pp.components.craftingservice.provider.CraftingPatternManager;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
 
@@ -16,56 +17,7 @@ import java.util.ArrayList;
 
 public class CraftingServiceUsageDemo {
   private static final org.slf4j.Logger logger =
-      org.slf4j.LoggerFactory.getLogger(CraftingServiceUsageDemo.class);
-
-  /**
-   * Initializes a sample crafting pattern.
-   *
-   * @return the initialized and usable crafting pattern
-   */
-  public static CraftingPattern largeIronSword() {
-    // define name
-    final String name = "Pattern: Large Iron Sword";
-    // define crafting time
-    final int craftingTime = 2500;
-    // define needed items
-    ArrayList<Item> neededItems = new ArrayList<>();
-    neededItems.add(new Item("Small Wood Plank"));
-    neededItems.add(new Item("Medium Iron Bar"));
-    neededItems.add(new Item("Medium Iron Bar"));
-    // define provided items
-    ArrayList<Item> providedItems = new ArrayList<>();
-    providedItems.add(new Item("Large Iron Sword"));
-    providedItems.add(new Item("Hot Ash"));
-    providedItems.add(new Item("Hot Ash"));
-
-    // create and return complete pattern
-    return new CraftingPattern(name, craftingTime, neededItems, providedItems);
-  }
-
-  /**
-   * Initializes another sample crafting pattern.
-   *
-   * @return the initialized and usable crafting pattern
-   */
-  public static CraftingPattern tastyChocolateCookie() {
-    // define name
-    final String name = "Pattern: Tasty Chocolate Cookie";
-    // define crafting time
-    final int craftingTime = 250;
-    // define needed items
-    ArrayList<Item> neededItems = new ArrayList<>();
-    neededItems.add(new Item("Egg"));
-    neededItems.add(new Item("Flour"));
-    neededItems.add(new Item("Milk Chocolate"));
-    // define provided items
-    ArrayList<Item> providedItems = new ArrayList<>();
-    providedItems.add(new Item("Tasty Chocolate Cookie"));
-    providedItems.add(new Item("Baking Powder"));
-
-    // create and return complete pattern
-    return new CraftingPattern(name, craftingTime, neededItems, providedItems);
-  }
+          org.slf4j.LoggerFactory.getLogger(CraftingServiceUsageDemo.class);
 
   /**
    * Main - Method.
@@ -77,12 +29,16 @@ public class CraftingServiceUsageDemo {
     CraftingService service = new CraftingImplementation();
     // create an inventory
     Inventory demoInventory = new Inventory(new ArrayList<>());
+    // create the manager class for the specific patterns
+    CraftingPatternManager patternManager = new CraftingPatternManager();
 
     // add crafting patterns and resources
     try {
       // add two sample crafting pattern to the crafting service
-      service.addCraftingPattern(largeIronSword());
-      service.addCraftingPattern(tastyChocolateCookie());
+      service.addCraftingPattern(patternManager.createLargeIronSword(new ArrayList<>(),
+              new ArrayList<>()));
+      service.addCraftingPattern(patternManager.createTastyChocolateCookie(new ArrayList<>(),
+              new ArrayList<>()));
       // add some sample resources into the inventory
       demoInventory.add(new Item("Small Wood Plank"));
       demoInventory.add(new Item("Medium Iron Bar"));
