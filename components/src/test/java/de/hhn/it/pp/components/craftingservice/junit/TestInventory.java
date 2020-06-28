@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
  * A jUnit test class which tests the Inventory.
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-05-15
+ * @version 2020-06-27
  */
 @DisplayName("Test the inventory.")
 public class TestInventory {
@@ -35,34 +35,30 @@ public class TestInventory {
   @Test
   @DisplayName("add null referenced item into the inventory")
   void testExceptionWhenGettingNullReferencedPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
-        IllegalParameterException.class, () -> testInventory.add(null));
+    assertThrows(IllegalParameterException.class, () -> testInventory.add(null));
   }
 
   @Test
   @DisplayName("remove null referenced item")
   void testExceptionWhenGettingNonExistingPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
-        IllegalParameterException.class, () -> testInventory.remove(null));
+    assertThrows(IllegalParameterException.class, () -> testInventory.remove(null));
   }
 
   @Test
   @DisplayName("remove from empty inventory")
   void testExceptionWhenAddingNullReferencedPattern() throws IllegalParameterException,
-      OperationNotSupportedException {
+          OperationNotSupportedException {
     // remove last item to empty the inventory
     testInventory.remove(new Item("Fiery Sword"));
 
-    OperationNotSupportedException operationNotSupportedException = assertThrows(
-        OperationNotSupportedException.class,
-        () -> testInventory.remove(new Item("Non Existing Item")));
+    assertThrows(OperationNotSupportedException.class,
+            () -> testInventory.remove(new Item("Non Existing Item")));
   }
 
   @Test
   @DisplayName("remove non existing item")
   void testExceptionWhenRemovingNullReferencedPattern() {
-    IllegalParameterException illegalParameterException = assertThrows(
-        IllegalParameterException.class,
-        () -> testInventory.remove(new Item("Non Existing Item")));
+    assertThrows(IllegalParameterException.class,
+            () -> testInventory.remove(new Item("Non Existing Item")));
   }
 }
