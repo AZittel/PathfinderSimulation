@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class CraftingServiceUsageDemo {
   private static final org.slf4j.Logger logger =
-          org.slf4j.LoggerFactory.getLogger(CraftingServiceUsageDemo.class);
-
+      org.slf4j.LoggerFactory.getLogger(CraftingServiceUsageDemo.class);
+  
   /**
    * Main - Method.
    *
@@ -31,14 +31,14 @@ public class CraftingServiceUsageDemo {
     Inventory demoInventory = new Inventory(new ArrayList<>());
     // create the manager class for the specific patterns
     CraftingPatternManager patternManager = new CraftingPatternManager();
-
+    
     // add crafting patterns and resources
     try {
       // add two sample crafting pattern to the crafting service
       service.addCraftingPattern(patternManager.createLargeIronSword(new ArrayList<>(),
-              new ArrayList<>()));
+          new ArrayList<>()));
       service.addCraftingPattern(patternManager.createTastyChocolateCookie(new ArrayList<>(),
-              new ArrayList<>()));
+          new ArrayList<>()));
       // add some sample resources into the inventory
       demoInventory.add(new Item("Small Wood Plank"));
       demoInventory.add(new Item("Medium Iron Bar"));
@@ -47,48 +47,48 @@ public class CraftingServiceUsageDemo {
     } catch (IllegalParameterException e) {
       logger.error(e.getMessage());
     }
-
+    
     // print the inventory first
     demoInventory.printInventory();
-
+    
     // try to delete one 'Medium Iron Bar' from the inventory - this should work
     try {
       demoInventory.remove(new Item("Medium Iron Bar"));
     } catch (IllegalParameterException | OperationNotSupportedException e) {
       logger.error(e.getMessage());
     }
-
+    
     // print updated inventory
     demoInventory.printInventory();
-
+    
     // try to craft a 'Large Iron Sword' - this should also work
     try {
       service.craft(demoInventory, service.getPattern("Pattern: Large Iron Sword"));
     } catch (CraftingNotPossibleException | IllegalParameterException e) {
       logger.error(e.getMessage());
     }
-
+    
     // wait until the crafting process is done
     try {
       CraftingImplementation.getCurrentThread().join();
     } catch (InterruptedException | NullPointerException e) {
       e.printStackTrace();
     }
-
+    
     // print updated inventory first
     demoInventory.printInventory();
-
+    
     // show all crafting patterns
     System.out.println("Available Crafting Patterns: ");
     System.out.println(service.getPatternNames().toString());
-
+    
     // try to delete a crafting pattern - this should work
     try {
       service.removeCraftingPattern("Pattern: Large Iron Sword");
     } catch (IllegalParameterException | OperationNotSupportedException e) {
       logger.error(e.getMessage());
     }
-
+    
     // show again all crafting patterns
     System.out.println("Available Crafting Patterns: ");
     System.out.println(service.getPatternNames().toString());

@@ -7,10 +7,10 @@ package de.hhn.it.pp.components.craftingservice.exceptions;
  * @version 2020-06-28
  */
 public class NoActiveListenerException extends Exception {
-
-    /**
-     * If there is no active listener.
-     */
-    public NoActiveListenerException() {
-    }
+  
+  /**
+   * If there is no active listener.
+   */
+  public NoActiveListenerException() {
+  }
 }

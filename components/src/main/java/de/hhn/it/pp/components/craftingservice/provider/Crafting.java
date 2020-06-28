@@ -14,7 +14,7 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 public class Crafting extends CraftingImplementation implements Runnable {
   private Inventory inventory;
   private CraftingPattern craftingPattern;
-
+  
   /**
    * Constructor of the Crafting class.
    *
@@ -25,7 +25,7 @@ public class Crafting extends CraftingImplementation implements Runnable {
     this.inventory = inventory;
     this.craftingPattern = craftingPattern;
   }
-
+  
   @Override
   public void run() {
     // wait some time (crafting time)

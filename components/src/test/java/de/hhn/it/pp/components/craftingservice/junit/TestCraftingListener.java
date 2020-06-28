@@ -36,7 +36,7 @@ public class TestCraftingListener {
   // create the manager class for the specific patterns
   CraftingPatternManager patternManager = new CraftingPatternManager();
   CraftingPattern testPattern;
-
+  
   @BeforeEach
   void setup() throws IllegalParameterException {
     // initialization
@@ -44,52 +44,52 @@ public class TestCraftingListener {
     craftingService = new CraftingImplementation();
     testInventory = new Inventory(new ArrayList<>());
     patternManager = new CraftingPatternManager();
-
+    
     // add some resources into the inventory
     testInventory.add(new Item("Test Item 1"));
     testInventory.add(new Item("Test Item 1"));
     testInventory.add(new Item("Test Item 2"));
-
+    
     // get a sample crafting pattern from the UsageDemo
     testPattern = patternManager.createTestPattern(new ArrayList<>(), new ArrayList<>());
-
+    
     // add the sample pattern to the crafting service
     craftingService.addCraftingPattern(testPattern);
   }
-
+  
   @Test
   @DisplayName("'craftingStartedNotification' with null referenced crafting pattern")
   void testExceptionWhenNullReferencedStartingNotification() {
     assertThrows(IllegalParameterException.class,
-            () -> callbackMechanism.craftingStartedNotification(null));
+        () -> callbackMechanism.craftingStartedNotification(null));
   }
-
+  
   @Test
   @DisplayName("'craftingEndedNotification' with null referenced crafting pattern")
   void testExceptionWhenNullReferencedEndingNotification() {
     assertThrows(IllegalParameterException.class,
-            () -> callbackMechanism.craftingEndedNotification(null));
+        () -> callbackMechanism.craftingEndedNotification(null));
   }
-
+  
   @Test
   @DisplayName("test the callback notification mechanism during a crafting process")
   void testCallbackNotificationDuringCrafting() throws CraftingNotPossibleException,
-          InterruptedException,
-          NoActiveListenerException {
+                                                           InterruptedException,
+                                                           NoActiveListenerException {
     // there should be no listener at the beginning
     assertThrows(NoActiveListenerException.class, CraftingImplementation::getListener);
-
+    
     // craft the sample pattern
     craftingService.craft(testInventory, testPattern);
-
+    
     // now there should be an active listener for this crafting process
     assertEquals(CraftingImplementation.getCallbackNotificator(),
-            CraftingImplementation.getListener(),
-            "There should be a callback listener currently'");
-
+        CraftingImplementation.getListener(),
+        "There should be a callback listener currently'");
+    
     // wait until crafting is done
     CraftingImplementation.getCurrentThread().join();
-
+    
     // there should be no listener again
     assertThrows(NoActiveListenerException.class, CraftingImplementation::getListener);
   }

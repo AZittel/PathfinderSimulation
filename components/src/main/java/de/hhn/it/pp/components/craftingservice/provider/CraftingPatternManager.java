@@ -13,10 +13,11 @@ import java.util.List;
  */
 public class CraftingPatternManager {
   private static final org.slf4j.Logger logger =
-          org.slf4j.LoggerFactory.getLogger(CraftingPatternManager.class);
-
+      org.slf4j.LoggerFactory.getLogger(CraftingPatternManager.class);
+  
   /**
    * Pattern: Large Iron Sword.
+   *
    * @return the pattern
    */
   public CraftingPattern createLargeIronSword(List<Item> neededItems, List<Item> providedItems) {
@@ -32,14 +33,15 @@ public class CraftingPatternManager {
     providedItems.add(new Item("Large Iron Sword"));
     providedItems.add(new Item("Hot Ash"));
     providedItems.add(new Item("Hot Ash"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);
   }
-
+  
   /**
    * Pattern: Small Magical Wand.
+   *
    * @return the pattern
    */
   public CraftingPattern createSmallMagicalWand(List<Item> neededItems, List<Item> providedItems) {
@@ -53,14 +55,15 @@ public class CraftingPatternManager {
     // define provided items
     providedItems.add(new Item("Small Magical Wand"));
     providedItems.add(new Item("Consumed Essence"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);
   }
-
+  
   /**
    * Pattern: Wooden Axe.
+   *
    * @return the pattern
    */
   public CraftingPattern createWoodenAxe(List<Item> neededItems, List<Item> providedItems) {
@@ -75,14 +78,15 @@ public class CraftingPatternManager {
     // define provided items
     providedItems.add(new Item("Wooden Axe"));
     providedItems.add(new Item("Hot Ash"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);
   }
-
+  
   /**
    * Pattern: Fiery Sword.
+   *
    * @return the pattern
    */
   public CraftingPattern createFierySword(List<Item> neededItems, List<Item> providedItems) {
@@ -98,14 +102,15 @@ public class CraftingPatternManager {
     // define provided items
     providedItems.add(new Item("Fiery Sword"));
     providedItems.add(new Item("Consumed Essence"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);
   }
-
+  
   /**
    * Pattern: Tasty Chocolate Cookie.
+   *
    * @return the pattern
    */
   public CraftingPattern createTastyChocolateCookie(List<Item> neededItems,
@@ -121,14 +126,15 @@ public class CraftingPatternManager {
     // define provided items
     providedItems.add(new Item("Tasty Chocolate Cookie"));
     providedItems.add(new Item("Baking Powder"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);
   }
-
+  
   /**
    * Pattern: Endless Tasty Chocolate Cookies.
+   *
    * @return the pattern
    */
   public CraftingPattern createEndlessTastyChocolateCookies(List<Item> neededItems,
@@ -144,14 +150,15 @@ public class CraftingPatternManager {
     // define provided items
     providedItems.add(new Item("Endless Tasty Chocolate Cookies"));
     providedItems.add(new Item("Consumed Essence"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);
   }
-
+  
   /**
    * Pattern: Test Pattern.
+   *
    * @return the pattern
    */
   public CraftingPattern createTestPattern(List<Item> neededItems, List<Item> providedItems) {
@@ -166,7 +173,7 @@ public class CraftingPatternManager {
     // define provided items
     providedItems.add(new Item("Test Pattern"));
     providedItems.add(new Item("Test Remains"));
-
+    
     // log and return complete pattern
     logger.debug("create: '{}'", name);
     return new CraftingPattern(name, craftingTime, neededItems, providedItems);

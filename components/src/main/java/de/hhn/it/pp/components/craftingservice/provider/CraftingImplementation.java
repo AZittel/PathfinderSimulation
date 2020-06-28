@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class CraftingImplementation implements CraftingService {
   private static final org.slf4j.Logger logger =
-          org.slf4j.LoggerFactory.getLogger(CraftingImplementation.class);
+      org.slf4j.LoggerFactory.getLogger(CraftingImplementation.class);
   // stores all crafting patterns
   private Map<String, CraftingPattern> craftingPatterns;
   // initialize the callback notificator
@@ -34,14 +34,14 @@ public class CraftingImplementation implements CraftingService {
   private static boolean craftingActive;
   // no list for Threads needed because implementation allows only 1 Crafting - Thread at a time
   private static Thread currentThread;
-
+  
   /**
    * The standard constructor for the implementation of the CraftingService.
    */
   public CraftingImplementation() {
     craftingPatterns = new HashMap<>();
   }
-
+  
   @Override
   public void addCraftingPattern(CraftingPattern pattern) throws IllegalParameterException {
     if (pattern == null) {
@@ -50,10 +50,10 @@ public class CraftingImplementation implements CraftingService {
     craftingPatterns.put(pattern.toString(), pattern);
     logger.info("addCraftingPattern: pattern = {}", pattern);
   }
-
+  
   @Override
   public void removeCraftingPattern(String patternName) throws IllegalParameterException,
-          OperationNotSupportedException {
+                                                                   OperationNotSupportedException {
     if (patternName == null) {
       throw new IllegalParameterException("Pattern-name was null reference!\n");
     }
@@ -67,12 +67,12 @@ public class CraftingImplementation implements CraftingService {
       logger.info("removeCraftingPattern: patternName = {}", patternName);
     }
   }
-
+  
   @Override
   public List<String> getPatternNames() {
     return new ArrayList<>(craftingPatterns.keySet());
   }
-
+  
   @Override
   public CraftingPattern getPattern(String patternName) throws IllegalParameterException {
     logger.info("getPattern: patternName = {}", patternName);
@@ -85,10 +85,10 @@ public class CraftingImplementation implements CraftingService {
       return craftingPatterns.get(patternName);
     }
   }
-
+  
   @Override
   public void craft(Inventory inventory, CraftingPattern craftingPattern)
-          throws CraftingNotPossibleException {
+      throws CraftingNotPossibleException {
     logger.info("craft: inventory = {}, craftingPattern = {}", inventory, craftingPattern);
     if (craftingActive) {
       throw new CraftingNotPossibleException("An item is already being crafted!\n");
@@ -128,10 +128,10 @@ public class CraftingImplementation implements CraftingService {
       currentThread = craftingThread;
     } else { // if not: throw exception
       throw new CraftingNotPossibleException("Items in inventory don't match '"
-              + craftingPattern.toString() + "'!\n");
+                                                 + craftingPattern.toString() + "'!\n");
     }
   }
-
+  
   @Override
   public void addListener(CraftingListener listener) throws IllegalParameterException {
     logger.info("addListener: listener = {}", listener);
@@ -140,7 +140,7 @@ public class CraftingImplementation implements CraftingService {
     }
     CraftingImplementation.listener = listener;
   }
-
+  
   @Override
   public void removeListener(CraftingListener listener) throws IllegalParameterException {
     logger.info("removeListener: listener = {}", listener);
@@ -152,9 +152,10 @@ public class CraftingImplementation implements CraftingService {
     }
     CraftingImplementation.listener = null;
   }
-
+  
   /**
    * Gets the current crafting listener, if there is one.
+   *
    * @return the current crafting listener
    * @throws NoActiveListenerException if listener = null
    */
@@ -164,15 +165,15 @@ public class CraftingImplementation implements CraftingService {
     }
     return listener;
   }
-
+  
   public static CraftingListener getCallbackNotificator() {
     return callbackNotificator;
   }
-
+  
   public static Thread getCurrentThread() {
     return currentThread;
   }
-
+  
   public static void setCraftingActive(boolean crafting) {
     craftingActive = crafting;
   }

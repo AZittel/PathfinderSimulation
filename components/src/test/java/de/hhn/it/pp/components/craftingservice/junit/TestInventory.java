@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test the inventory.")
 public class TestInventory {
   Inventory testInventory;
-
+  
   @BeforeEach
   void setup() throws IllegalParameterException {
     // initialize Inventory
@@ -31,34 +31,34 @@ public class TestInventory {
     // add some resources into the inventory
     testInventory.add(new Item("Fiery Sword"));
   }
-
+  
   @Test
   @DisplayName("add null referenced item into the inventory")
   void testExceptionWhenGettingNullReferencedPattern() {
     assertThrows(IllegalParameterException.class, () -> testInventory.add(null));
   }
-
+  
   @Test
   @DisplayName("remove null referenced item")
   void testExceptionWhenGettingNonExistingPattern() {
     assertThrows(IllegalParameterException.class, () -> testInventory.remove(null));
   }
-
+  
   @Test
   @DisplayName("remove from empty inventory")
   void testExceptionWhenAddingNullReferencedPattern() throws IllegalParameterException,
-          OperationNotSupportedException {
+                                                                 OperationNotSupportedException {
     // remove last item to empty the inventory
     testInventory.remove(new Item("Fiery Sword"));
-
+    
     assertThrows(OperationNotSupportedException.class,
-            () -> testInventory.remove(new Item("Non Existing Item")));
+        () -> testInventory.remove(new Item("Non Existing Item")));
   }
-
+  
   @Test
   @DisplayName("remove non existing item")
   void testExceptionWhenRemovingNullReferencedPattern() {
     assertThrows(IllegalParameterException.class,
-            () -> testInventory.remove(new Item("Non Existing Item")));
+        () -> testInventory.remove(new Item("Non Existing Item")));
   }
 }
