@@ -2,6 +2,7 @@ package de.hhn.it.pp.components.craftingservice.provider;
 
 import de.hhn.it.pp.components.craftingservice.CraftingPattern;
 import de.hhn.it.pp.components.craftingservice.Inventory;
+import de.hhn.it.pp.components.craftingservice.exceptions.NoActiveListenerException;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
 
 /**
@@ -45,7 +46,7 @@ public class Crafting extends CraftingImplementation implements Runnable {
     try {
       getListener().craftingEndedNotification(craftingPattern);
       removeListener(getCallbackNotificator());
-    } catch (IllegalParameterException e) {
+    } catch (IllegalParameterException | NoActiveListenerException e) {
       System.err.println(e.getMessage() + "\n");
     }
     CraftingImplementation.setCraftingActive(false);
