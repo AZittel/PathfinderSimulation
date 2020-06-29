@@ -8,11 +8,12 @@ import de.hhn.it.pp.components.craftingservice.exceptions.CraftingNotPossibleExc
 import de.hhn.it.pp.components.craftingservice.provider.CraftingImplementation;
 import de.hhn.it.pp.components.craftingservice.provider.CraftingPatternManager;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
+import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
+
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
-import de.hhn.it.pp.components.exceptions.OperationNotSupportedException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,14 +21,24 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+
 
 /**
  * Controller class of the UI-Elements.
  *
  * @author Olver Koch, Philipp Alessandrini
- * @version 2020-06-13
+ * @version 2020-06-29
  */
 public class CraftingServiceController extends Controller implements Initializable {
   private static final org.slf4j.Logger logger =
@@ -88,9 +99,8 @@ public class CraftingServiceController extends Controller implements Initializab
 
   /**
    * Defines actions when pressing the add - button.
-   * @param event the mouse click
    */
-  public void onAdd(ActionEvent event) {
+  public void onAdd() {
     // add the focused item from the 'itemComboBox' in the inventory
     try {
       inventory.add(itemComboBox.getValue());
@@ -106,9 +116,8 @@ public class CraftingServiceController extends Controller implements Initializab
 
   /**
    * Defines actions when pressing the remove - button.
-   * @param event the mouse click
    */
-  public void onRemove(ActionEvent event) {
+  public void onRemove() {
     // remove the selected row
     try {
       inventory.remove(itemTableView.getSelectionModel().getSelectedItem());
@@ -123,9 +132,8 @@ public class CraftingServiceController extends Controller implements Initializab
 
   /**
    * Defines actions when pressing the craft - button.
-   * @param event the mouse click
    */
-  public void onCraft(ActionEvent event) {
+  public void onCraft() {
     // show the user that there is an ongoing crafting process
     craftBtn.setOpacity(0.4);
     craftBtn.setDisable(true);
@@ -167,26 +175,62 @@ public class CraftingServiceController extends Controller implements Initializab
 
   /**
    * Defines actions when choosing a pattern from the 'patternComboBox'.
+   *
    * @param event the mouse click
    */
-  public void onChoosePattern(ActionEvent event) {
-    // update needed and provided items for the chosen pattern
-    neededItemsListView.setItems((ObservableList<Item>)
-                                     patternComboBox.getValue().getNeededItems());
-    providedItemsListView.setItems((ObservableList<Item>)
-                                     patternComboBox.getValue().getProvidedItems());
-
-    // get crafting time of the chosen pattern
-    DecimalFormat df = new DecimalFormat("#.00");
-    craftingTimeLbl.setText("Crafting time: "
-                                + df.format(
-                                    (float) patternComboBox.getValue().getCraftingTime()
-                                        / 1000)
-                                + " seconds");
-    // check if chosen pattern can be crafted
-    checkCraftable();
+  public void onChooseComboBox(ActionEvent event) {
+    // log selected combo box value
+    if (((Control) event.getSource()).getId().equals("patternComboBox")) {
+      logger.info("choose pattern: {}, neededItems = {}, providedItems = {}, craftingTime = {}",
+          patternComboBox.getValue(), patternComboBox.getValue().getNeededItems(),
+          patternComboBox.getValue().getProvidedItems(),
+          patternComboBox.getValue().getCraftingTime());
+      // update needed and provided items for the chosen pattern
+      neededItemsListView.setItems((ObservableList<Item>)
+                                       patternComboBox.getValue().getNeededItems());
+      providedItemsListView.setItems((ObservableList<Item>)
+                                         patternComboBox.getValue().getProvidedItems());
+  
+      // get crafting time of the chosen pattern
+      DecimalFormat df = new DecimalFormat("#.00");
+      craftingTimeLbl.setText("Crafting time: "
+                                  + df.format(
+          (float) patternComboBox.getValue().getCraftingTime()
+              / 1000)
+                                  + " seconds");
+      // check if chosen pattern can be crafted
+      checkCraftable();
+    } else if (((Control) event.getSource()).getId().equals("itemComboBox")) {
+      logger.info("choose item: {}", itemComboBox.getValue());
+    } else {
+      logger.error("clicked combo box doesn't exist");
+    }
   }
-
+  
+  /**
+   * Defines actions when clicking on an item in the existing table and list views.
+   *
+   * @param arg0 the mouse click
+   */
+  public void onMouseClickedTableListView(MouseEvent arg0) {
+    // log selected item
+    switch (((Control) arg0.getSource()).getId()) {
+      case "itemTableView":
+        logger.info("clicked on item: {}", itemTableView.getSelectionModel().getSelectedItem());
+        break;
+      case  "neededItemsListView":
+        logger.info("clicked on item: {}",
+            neededItemsListView.getSelectionModel().getSelectedItem());
+        break;
+      case "providedItemsListView":
+        logger.info("clicked on item: {}",
+            providedItemsListView.getSelectionModel().getSelectedItem());
+        break;
+      default:
+        logger.error("clicked list doesn't exist");
+    }
+  }
+  
   private void checkCraftable() {
     // check if chosen pattern can be crafted
     try {

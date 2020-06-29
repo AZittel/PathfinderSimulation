@@ -10,7 +10,7 @@ import java.util.List;
  * to enable the feature for craftable items.
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-06-11
+ * @version 2020-06-29
  */
 public class Inventory {
   private static final org.slf4j.Logger logger =
@@ -33,11 +33,11 @@ public class Inventory {
    * @throws IllegalParameterException if null referenced item
    */
   public void add(Item item) throws IllegalParameterException {
+    logger.info("add: item = {}", item);
     if (item == null) {
       throw new IllegalParameterException("Item was null reference!");
     }
     items.add(item);
-    logger.info("add: item = {}", item);
   }
 
   /**
@@ -49,6 +49,7 @@ public class Inventory {
    * @throws OperationNotSupportedException if the inventory is empty
    */
   public void remove(Item item) throws IllegalParameterException, OperationNotSupportedException {
+    logger.info("remove: item = {}", item);
     if (item == null) {
       throw new IllegalParameterException("Item was null reference!");
     }
@@ -58,7 +59,6 @@ public class Inventory {
     for (Item inventoryItem : items) {
       if (inventoryItem.toString().equals(item.toString())) {
         items.remove(inventoryItem);
-        logger.info("remove: item = {}", item);
         return;
       }
     }

@@ -9,7 +9,7 @@ import de.hhn.it.pp.components.exceptions.IllegalParameterException;
  * The crafting process which works independent from the rest of the program as an own Thread.
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-05-09
+ * @version 2020-06-29
  */
 public class Crafting extends CraftingImplementation implements Runnable {
   private Inventory inventory;
@@ -39,7 +39,7 @@ public class Crafting extends CraftingImplementation implements Runnable {
       try {
         inventory.add(craftingPattern.getProvidedItems().get(i));
       } catch (IllegalParameterException e) {
-        System.err.println(e.getMessage() + "\n");
+        System.err.println(e.getMessage());
       }
     }
     // crafting process has ended (callback notification)
@@ -47,7 +47,7 @@ public class Crafting extends CraftingImplementation implements Runnable {
       getListener().craftingEndedNotification(craftingPattern);
       removeListener(getCallbackNotificator());
     } catch (IllegalParameterException | NoActiveListenerException e) {
-      System.err.println(e.getMessage() + "\n");
+      System.err.println(e.getMessage());
     }
     CraftingImplementation.setCraftingActive(false);
   }

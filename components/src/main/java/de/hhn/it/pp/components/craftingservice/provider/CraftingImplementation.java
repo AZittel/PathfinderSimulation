@@ -19,7 +19,7 @@ import java.util.Map;
  * Contains everything which is needed to craft new objects.
  *
  * @author Oliver Koch, Philipp Alessandrini
- * @version 2020-06-27
+ * @version 2020-06-29
  */
 public class CraftingImplementation implements CraftingService {
   private static final org.slf4j.Logger logger =
@@ -44,16 +44,17 @@ public class CraftingImplementation implements CraftingService {
   
   @Override
   public void addCraftingPattern(CraftingPattern pattern) throws IllegalParameterException {
+    logger.info("addCraftingPattern: pattern = {}", pattern);
     if (pattern == null) {
       throw new IllegalParameterException("Crafting pattern was null reference!");
     }
     craftingPatterns.put(pattern.toString(), pattern);
-    logger.info("addCraftingPattern: pattern = {}", pattern);
   }
   
   @Override
   public void removeCraftingPattern(String patternName) throws IllegalParameterException,
                                                                    OperationNotSupportedException {
+    logger.info("removeCraftingPattern: patternName = {}", patternName);
     if (patternName == null) {
       throw new IllegalParameterException("Pattern-name was null reference!");
     }
@@ -64,12 +65,12 @@ public class CraftingImplementation implements CraftingService {
       throw new IllegalParameterException("'" + patternName + "' doesn't exist!");
     } else {
       craftingPatterns.remove(patternName);
-      logger.info("removeCraftingPattern: patternName = {}", patternName);
     }
   }
   
   @Override
   public List<String> getPatternNames() {
+    logger.debug("getPatternNames");
     return new ArrayList<>(craftingPatterns.keySet());
   }
   
