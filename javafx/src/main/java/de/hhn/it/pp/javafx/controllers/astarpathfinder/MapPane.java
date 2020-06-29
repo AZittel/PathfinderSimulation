@@ -6,6 +6,7 @@ import de.hhn.it.pp.components.astarpathfinding.TerrainType;
 import de.hhn.it.pp.components.astarpathfinding.provider.Terrain;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.Cursor;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -152,6 +153,7 @@ public class MapPane extends FlowPane {
         mouseEvent -> {
           if (!cell.isStartPoint() && !cell.isEndPoint()) {
             obstaclePlaceMode = !obstaclePlaceMode;
+            setCursor(obstaclePlaceMode ? Cursor.CROSSHAIR : Cursor.DEFAULT);
             controller.setTerrain((CellLabel) mouseEvent.getSource());
           }
         });

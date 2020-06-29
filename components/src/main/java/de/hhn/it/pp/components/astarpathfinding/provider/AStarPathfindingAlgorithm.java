@@ -215,7 +215,6 @@ public class AStarPathfindingAlgorithm {
 
   @Override
   public String toString() {
-    // TODO
-    return super.toString();
+    return String.format("Diagonal pathing enabled: %b;", diagonalPathing);
   }
 }
