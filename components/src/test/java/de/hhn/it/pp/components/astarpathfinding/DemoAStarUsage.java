@@ -1,5 +1,6 @@
 package de.hhn.it.pp.components.astarpathfinding;
 
+import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class DemoAStarUsage {
 
     // Create a 20x20 map
     logger.info(">>> create a new 20x20 map");
-    service.createMap(20, 20);
+    service.createMap(MapManager.MAX_WIDTH, MapManager.MAX_HEIGHT);
     logger.info("" + service);
 
     Thread.sleep(500);
