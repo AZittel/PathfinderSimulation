@@ -7,13 +7,10 @@ import de.hhn.it.pp.components.astarpathfinding.exceptions.PositionOutOfBounds;
 import de.hhn.it.pp.components.astarpathfinding.provider.MapManager;
 import de.hhn.it.pp.components.astarpathfinding.provider.Pathfinder;
 import de.hhn.it.pp.components.exceptions.IllegalParameterException;
-import de.hhn.it.pp.javafx.controllers.Controller;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,18 +27,27 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
-public class AStarPathfinderController extends Controller implements Initializable {
+public class AStarPathfinderController implements Initializable {
+
   private static final org.slf4j.Logger logger =
       org.slf4j.LoggerFactory.getLogger(AStarPathfinderController.class);
 
-  @FXML public Button createNewMapButton;
-  @FXML public ComboBox<TerrainType> obstacleComboBox;
-  @FXML public Slider costSlider;
-  @FXML public Label costLabel;
-  @FXML public FlowPane mapContainer;
-  @FXML public SplitPane splitPane;
-  @FXML public Label obstacleColorLabel;
-  @FXML public CheckBox diagonalPathingCheckbox;
+  @FXML
+  public Button createNewMapButton;
+  @FXML
+  public ComboBox<TerrainType> obstacleComboBox;
+  @FXML
+  public Slider costSlider;
+  @FXML
+  public Label costLabel;
+  @FXML
+  public FlowPane mapContainer;
+  @FXML
+  public SplitPane splitPane;
+  @FXML
+  public Label obstacleColorLabel;
+  @FXML
+  public CheckBox diagonalPathingCheckbox;
 
   private Pathfinder pathfinder;
   private final MapPane mapPane;
@@ -73,8 +79,8 @@ public class AStarPathfinderController extends Controller implements Initializab
   /**
    * Called to initialize a controller after its root element has been completely processed.
    *
-   * @param url The location used to resolve relative paths for the root object, or <tt>null</tt> if
-   *     the location is not known.
+   * @param url            The location used to resolve relative paths for the root object, or
+   *                       <tt>null</tt> if the location is not known.
    * @param resourceBundle The resources used to localize the root object, or <tt>null</tt> if
    */
   @Override
@@ -104,17 +110,17 @@ public class AStarPathfinderController extends Controller implements Initializab
     costSlider
         .valueProperty()
         .addListener(
-          (ov, oldValue, newValue) -> {
-            try {
-              pathfinder.changeTerrainTypeModifier(
-                  obstacleComboBox.getSelectionModel().getSelectedItem(),
-                  newValue.doubleValue());
-              costLabel.setText(String.valueOf(newValue.intValue()));
-            } catch (IllegalParameterException e) {
-              logger.debug("The value for the terrainTypeModifier was too low or too high");
-              e.printStackTrace();
-            }
-          });
+            (ov, oldValue, newValue) -> {
+              try {
+                pathfinder.changeTerrainTypeModifier(
+                    obstacleComboBox.getSelectionModel().getSelectedItem(),
+                    newValue.doubleValue());
+                costLabel.setText(String.valueOf(newValue.intValue()));
+              } catch (IllegalParameterException e) {
+                logger.debug("The value for the terrainTypeModifier was too low or too high");
+                e.printStackTrace();
+              }
+            });
   }
 
   /**
