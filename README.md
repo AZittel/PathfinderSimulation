@@ -25,6 +25,10 @@ For the implementation for the pathfinding we used the A* algorithm.
 
 <p>Obstacles can be distributed on the map to make it more difficult to find the path.</p>
 
+
+https://user-images.githubusercontent.com/49877767/115766165-ed3d1000-a3a7-11eb-828c-60cde842c835.mp4
+
+
 ![Test](./screenshots/pathfindingMapDiagonal.png)
 
 <p>The individual obstacles can also be customized to adapt the overcoming of the obstacle</p>
