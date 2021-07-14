@@ -24,7 +24,8 @@ For the implementation for the pathfinding we used the A* algorithm.
 </p>
 
 <p>Obstacles can be distributed on the map to make it more difficult to find the path.</p>
-[![]](https://www.youtube.com/watch?v=WESDAVMAVrU)
+
+<iframe width="1902" height="808" src="https://www.youtube.com/embed/WESDAVMAVrU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 https://user-images.githubusercontent.com/49877767/115766165-ed3d1000-a3a7-11eb-828c-60cde842c835.mp4
 
