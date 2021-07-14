@@ -25,7 +25,8 @@ For the implementation for the pathfinding we used the A* algorithm.
 
 <p>Obstacles can be distributed on the map to make it more difficult to find the path.</p>
 
-[![Demo](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/pathfindingMapDiagonal.png)](https://www.youtube.com/watch?v=WESDAVMAVrU)
+[![Demo](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/pathfindingMapDiagonal.png)](https://youtu.be/WESDAVMAVrU{target="blank"})
+
 
 https://user-images.githubusercontent.com/49877767/115766165-ed3d1000-a3a7-11eb-828c-60cde842c835.mp4
 
