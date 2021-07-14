@@ -29,8 +29,8 @@ For the implementation for the pathfinding we used the A* algorithm.
 https://user-images.githubusercontent.com/49877767/115766165-ed3d1000-a3a7-11eb-828c-60cde842c835.mp4
 
 
-![Test](./screenshots/pathfindingMapDiagonal.png)
+![Test](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/pathfindingMapDiagonal.png)
 
 <p>The individual obstacles can also be customized to adapt the overcoming of the obstacle</p>
 
-![Test](./screenshots/differentObstacles.png)
+![Test](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/differentObstacles.png)
