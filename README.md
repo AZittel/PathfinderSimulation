@@ -1,6 +1,11 @@
 # Pathfinder Simulation
 
-Implementation of the A* algorithm created with javafx. 
+Implementation of the A* pathfinding algorithm devloped with java and javafx. 
+
+## Motivation
+
+Through a subject in my studies we were assigned to develop a component with Java in the backend and Javafx in the frontend and to integrate it into an existing framework. A fellow student and I decided to display the A* pathfinding algorithm visually inside the component.
+
 
 ## Demo
 
