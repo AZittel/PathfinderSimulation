@@ -6,11 +6,9 @@ Implementation of the A* pathfinding algorithm devloped with java and javafx.
 
 Through a subject in my studies we were assigned to develop a component with Java in the backend and Javafx in the frontend and to integrate it into an existing framework. A fellow student and I decided to display the A* pathfinding algorithm visually inside the component.
 
-## Team
+## Recognition
 
 [@Noakle](https://github.com/Noakle)
-
-[@Monogenesis](https://github.com/Monogenesis) 
 
 ## Demo
 
