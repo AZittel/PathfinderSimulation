@@ -14,7 +14,8 @@ Through a subject in my studies we were assigned to develop a component with Jav
 
 Youtube: https://www.youtube.com/watch?v=WESDAVMAVrU
 [![Demo](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/video_demo.png)](https://youtu.be/WESDAVMAVrU)
-## What I have learned
+
+## Lessons Learned
 <ul>
 <li>Pair programming</li>
 <li>Expanding my Java knowledge</li>
