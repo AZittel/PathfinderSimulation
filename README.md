@@ -28,7 +28,7 @@ Youtube: https://www.youtube.com/watch?v=WESDAVMAVrU
 <p>Obstacles can be distributed on the map to make it more difficult to find the path.</p>
 
 
-![Test](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/pathfindingMapDiagonal.png)
+![diagonal](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/pathfindingMapDiagonal.png)
 
 
-![Test](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/differentObstacles.png)
+![obstacle](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/differentObstacles.png)
