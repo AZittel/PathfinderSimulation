@@ -13,7 +13,6 @@ Through a subject in my studies we were assigned to develop a component with Jav
 ## Demo
 
 Youtube: https://www.youtube.com/watch?v=WESDAVMAVrU
-[![Demo](https://raw.githubusercontent.com/Monogenesis/Pathfinder-Simulation/main/screenshots/video_demo.png)](https://youtu.be/WESDAVMAVrU)
 
 ## Lessons Learned
 <ul>
